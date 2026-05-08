@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 模型信息看板</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="workspace">
+      <header class="site-header">
+        <div>
+          <p class="eyebrow">AI Intelligence Board</p>
+          <h1>AI 模型信息看板</h1>
+        </div>
+        <nav class="tabs" aria-label="看板栏目">
+          <button class="tab is-active" type="button" data-tab="news">每日重点新闻</button>
+          <button class="tab" type="button" data-tab="weekly">每周重点新闻</button>
+          <button class="tab" type="button" data-tab="pricing">模型价格对比</button>
+          <button class="tab" type="button" data-tab="price-chart">价格趋势图</button>
+        </nav>
+      </header>
+
+      <section class="tab-panel" id="pricing" aria-label="模型价格对比">
+        <div class="app-shell">
+          <section class="timeline-pane" aria-label="模型发布时间轴">
+            <header class="topbar">
+              <div>
+                <p class="eyebrow">Model Release Timeline</p>
+                <h2>模型发布时间轴</h2>
+              </div>
+              <div class="count-card">
+                <span id="eventCount">0</span>
+                <small>条发布</small>
+              </div>
+            </header>
+
+            <form class="filters" id="filters">
+              <label class="search-field">
+                <span>筛选</span>
+                <input id="searchInput" type="search" placeholder="搜索公司 / 模型 / 年份" autocomplete="off" />
+              </label>
+
+              <div class="chip-group" aria-label="按公司筛选">
+                <button class="chip is-active" type="button" data-company="all">全部</button>
+                <button class="chip" type="button" data-company="OpenAI">OpenAI</button>
+                <button class="chip" type="button" data-company="Anthropic">Anthropic</button>
+                <button class="chip" type="button" data-company="xAI">Grok</button>
+                <button class="chip" type="button" data-company="Google">Google</button>
+                <button class="chip" type="button" data-company="豆包">豆包</button>
+                <button class="chip" type="button" data-company="千问">千问</button>
+                <button class="chip" type="button" data-company="腾讯">腾讯</button>
+                <button class="chip" type="button" data-company="DeepSeek">DeepSeek</button>
+              </div>
+            </form>
+
+            <div class="timeline-scroll" id="timeline" tabindex="0" aria-live="polite"></div>
+          </section>
+
+          <aside class="price-pane" aria-label="模型价格对比区域">
+            <div class="price-board">
+              <header class="price-header">
+                <div>
+                  <p class="eyebrow">LLM API Pricing</p>
+                  <h2>大模型价格对比</h2>
+                </div>
+                <div class="currency-controls">
+                  <label>
+                    <span>币种</span>
+                    <select id="currencySelect">
+                      <option value="USD">USD</option>
+                      <option value="RMB">RMB</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>汇率</span>
+                    <input id="fxRate" type="number" min="0" step="0.01" value="7.20" />
+                  </label>
+                </div>
+              </header>
+
+              <p class="price-note">单位：每 1M tokens。表格统一支持 USD/RMB；人民币官方价会按当前汇率折算，实际结算仍以各厂商官网币种与计费规则为准。</p>
+
+              <div class="price-table-wrap">
+                <table class="price-table">
+                  <thead>
+                    <tr>
+                      <th>所属公司</th>
+                      <th>模型</th>
+                      <th>发布时间</th>
+                      <th>输入</th>
+                      <th>缓存命中</th>
+                      <th>输出</th>
+                      <th>备注</th>
+                    </tr>
+                  </thead>
+                  <tbody id="priceTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="price-chart" aria-label="价格趋势图">
+        <section class="price-visual price-visual-large" aria-label="价格趋势图">
+          <header class="chart-page-header">
+            <div>
+              <p class="eyebrow">Interactive Price Map</p>
+              <h2>模型价格趋势图</h2>
+            </div>
+            <fieldset class="metric-toggle" aria-label="价格指标">
+              <legend>指标</legend>
+              <label><input type="radio" name="priceMetric" value="input" checked />输入</label>
+              <label><input type="radio" name="priceMetric" value="output" />输出</label>
+            </fieldset>
+          </header>
+
+          <p class="chart-hint">拖拽图表平移；按住 Ctrl/⌘ 滚轮缩放；点击公司筛选，点击散点查看公司、模型与价格。</p>
+
+          <div class="price-chart-card">
+            <div class="chart-control-layer">
+              <div class="chart-company-chips" id="chartCompanyChips" aria-label="按公司筛选价格图"></div>
+              <button class="chart-reset" id="chartResetView" type="button">重置视图</button>
+            </div>
+            <svg id="priceChart" viewBox="0 0 860 300" role="img" aria-label="不同厂商模型价格发布时间散点图"></svg>
+            <article class="chart-tooltip" id="chartTooltip" hidden></article>
+          </div>
+          <p class="chart-meta" id="priceChartMeta"></p>
+        </section>
+      </section>
+
+      <section class="tab-panel is-active" id="news" aria-label="每日重点新闻">
+        <div class="content-grid">
+          <article class="feature-board news-board">
+            <div class="news-date-card">
+              <span>今日重点新闻</span>
+              <strong>2026-05-08</strong>
+              <small>时间窗口：2026-05-07 10:26 至 2026-05-08 10:26 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>今天的重点集中在实时语音模型、AI 健康订阅、安全产品机制，以及中国头部模型公司的融资估值。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">模型侧</span>
+                </div>
+                <h3>OpenAI 发布三款实时语音模型，把推理、翻译、转写拆成独立 API 能力</h3>
+                <p>OpenAI 在 5 月 7 日推出 <code>GPT-Realtime-2</code>、<code>GPT-Realtime-Translate</code> 和 <code>GPT-Realtime-Whisper</code>。这不是单纯升级语音接口，而是把实时语音推理、同声传译、低延迟转写分别产品化，开发者可以按客服、会议、导览、跨语言沟通等场景拆分调用。</p>
+                <p><code>GPT-Realtime-2</code> 主打 GPT-5 级语音推理、工具调用、打断恢复和 128K 上下文；Translate 支持 70+ 输入语言到 13 种输出语言；Whisper 面向流式字幕和实时转写。关键影响是语音 Agent 的竞争会从“能说话”转向“能边说边做事，并且能按分钟或 token 算清成本”。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>OpenAI</dd></div>
+                  <div><dt>模型</dt><dd>GPT-Realtime-2 / Translate / Whisper</dd></div>
+                  <div><dt>关键信息</dt><dd>128K 上下文；70+ 输入语言；Realtime API 可用</dd></div>
+                </dl>
+                <a href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>ChatGPT 上线 Trusted Contact，把安全机制从弹窗提示延伸到现实联系人</h3>
+                <p>OpenAI 开始逐步推出 <code>Trusted Contact</code>，成年用户可以预先指定一位可信联系人。当系统和人工审核判断用户可能存在严重自伤风险时，ChatGPT 会鼓励用户联系对方，并可能向联系人发送有限通知。</p>
+                <p>这条更新的重点不是“多了一个设置项”，而是 AI 助手开始承担更明确的线下转介责任。随着用户把 ChatGPT 用在倾诉、陪伴和私密场景，平台安全设计会从拒答和危机热线提示，逐步走向更重的信任链条和现实世界支持。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>OpenAI</dd></div>
+                  <div><dt>对象</dt><dd>18+ 用户；韩国为 19+</dd></div>
+                  <div><dt>机制</dt><dd>用户授权、联系人接受邀请、严重风险下人工复核后通知</dd></div>
+                </dl>
+                <a href="https://openai.com/index/introducing-trusted-contact-in-chatgpt/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>Google 把 Fitbit App 重构成 Google Health，并让 Gemini 驱动的健康教练全球上线</h3>
+                <p>Google 在 5 月 7 日发布 Google Health app、Google Health Coach 和 Google Health 总览。新的 Google Health app 将接管 Fitbit app，并整合穿戴设备、Health Connect、Apple Health 以及部分美国医疗记录数据。</p>
+                <p>Google Health Coach 是 Gemini 驱动的个性化健康教练，覆盖训练建议、睡眠分析、健康记录摘要和 24/7 指导。这个动作说明 Google 正把 AI 助手推进到长期、高数据黏性、订阅可能性更强的垂直场景，而不是只停留在通用问答。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>Google</dd></div>
+                  <div><dt>上线</dt><dd>2026-05-19 开始推送</dd></div>
+                  <div><dt>场景</dt><dd>运动、睡眠、医疗记录摘要、个性化健康计划</dd></div>
+                </dl>
+                <a href="https://blog.google/products-and-platforms/products/google-health/google-health-coach/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>OpenAI 实时语音模型直接公布单价，语音能力开始形成独立收入曲线</h3>
+                <p>OpenAI 对三类语音模型采用不同定价：<code>GPT-Realtime-2</code> 按音频 token 收费，Translate 和 Whisper 按分钟收费。这意味着 OpenAI 不再把语音当作文本模型的附属能力，而是把实时推理、翻译、转写拆成可单独计费的产品线。</p>
+                <p>这对开发者很重要：会议转写、客服翻译、电话 Agent、现场导览等场景可以按分钟估算成本；而高推理语音 Agent 则保留 token 计费弹性。语音产品后续会更快进入“单位分钟毛利”和“任务完成率”的竞争。</p>
+                <dl class="news-facts">
+                  <div><dt>Realtime-2</dt><dd>$32/1M 音频输入 token；$64/1M 音频输出 token</dd></div>
+                  <div><dt>Translate</dt><dd>$0.034/分钟</dd></div>
+                  <div><dt>Whisper</dt><dd>$0.017/分钟</dd></div>
+                </dl>
+                <a href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>Google Health Coach 定价 9.99 美元/月，AI 健康教练进入可验证订阅模型</h3>
+                <p>Google Health Coach 将作为 <code>Google Health Premium</code> 的一部分在 5 月 19 日全球上线，价格为 <code>9.99 美元/月</code>。健康教练是天然适合订阅制的 AI 场景，因为用户需要持续训练、睡眠、营养和健康记录解释，而不是一次性问答。</p>
+                <p>如果 Google 后续能证明用户愿意为 AI 健康建议长期付费，这会给“硬件 + 数据 + 模型 + 订阅”的组合打开新的 ARPU 空间。真正值得跟踪的是上线后的付费渗透、留存和设备绑定率。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>Google</dd></div>
+                  <div><dt>产品</dt><dd>Google Health Premium / Health Coach</dd></div>
+                  <div><dt>价格</dt><dd>$9.99/月</dd></div>
+                </dl>
+                <a href="https://blog.google/products-and-platforms/products/google-health/google-health-coach/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">06</span>
+                  <span class="news-tag">融资估值</span>
+                </div>
+                <h3>月之暗面新融资后估值突破 200 亿美元，收入能力开始成为中国模型公司估值锚</h3>
+                <p>联合早报 5 月 7 日报道，月之暗面完成约 <code>20 亿美元</code> 新融资，投后估值突破 <code>200 亿美元</code>。本轮由美团龙珠领投，水木资本、中国移动、CPE 源峰等参投；美团龙珠代表向彭博确认参与本轮融资。</p>
+                <p>更值得关注的是商业化数字：报道援引华峰资本口径称，月之暗面过去半年累计融资超过 <code>39 亿美元</code>，2026 年 4 月 ARR 已超过 <code>2 亿美元</code>。这仍属于顾问方/媒体报道口径，不是公司正式财报，但如果后续被更多信源确认，中国头部模型公司的估值逻辑会从“技术稀缺”进一步转向“融资能力 + 收入兑现”。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>月之暗面 / Moonshot AI</dd></div>
+                  <div><dt>融资</dt><dd>约 $20 亿</dd></div>
+                  <div><dt>估值</dt><dd>投后超过 $200 亿</dd></div>
+                  <div><dt>ARR</dt><dd>2026 年 4 月超过 $2 亿，媒体/顾问方口径</dd></div>
+                </dl>
+                <a href="https://www.zaobao.com.sg/news/china/story20260507-9011686" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>今天的主线不是某一个模型单点爆发，而是 AI 能力继续向高频真实场景下沉：语音 Agent 开始形成清晰计费，健康教练进入订阅验证，安全机制开始连接现实联系人。融资侧则显示中国头部模型公司正在把收入数字和估值叙事绑定得更紧。</p>
+              <p>后续建议跟踪三件事：OpenAI 是否补充语音模型更完整 benchmark；Google Health Coach 上线后的付费与留存；月之暗面融资和 ARR 是否获得公司或更多一级信源确认。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
+              <strong>2026-05-07</strong>
+              <small>时间窗口：2026-05-06 10:21 至 2026-05-07 10:21 CST</small>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>Anthropic 接入 SpaceXAI Colossus 1，全量算力合作直指 Claude 容量瓶颈</h3>
+                <p>xAI 在 5 月 6 日宣布，SpaceXAI 与 Anthropic 签署算力合作协议，向 Anthropic 开放 <code>Colossus 1</code>。官方给出的硬信息包括：Colossus 1 拥有超过 <code>220,000</code> 张 NVIDIA GPU，覆盖 H100、H200 和 GB200，Anthropic 将把新增算力直接用于改善 Claude Pro 与 Claude Max 订阅用户的容量表现。</p>
+                <p>这条新闻的关键不是“又一笔 GPU 合同”，而是 Anthropic 正在补最现实的商业短板：高峰期容量、Claude Code 等高算力产品的稳定供给，以及企业客户对 SLA 的信任。模型竞争已经从单纯能力，外溢到推理供给、订阅体验和基础设施掌控力。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>SpaceXAI / xAI / Anthropic</dd></div>
+                  <div><dt>资源</dt><dd>Colossus 1；220,000+ NVIDIA GPU</dd></div>
+                  <div><dt>影响</dt><dd>改善 Claude Pro、Claude Max 容量表现</dd></div>
+                </dl>
+                <a href="https://x.ai/news/anthropic-compute-partnership" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>OpenAI 发布 B2B Signals，把企业 AI 使用深度做成指标产品</h3>
+                <p>OpenAI 在 5 月 6 日发布 <code>B2B Signals</code>，用聚合企业数据解释“企业到底有没有把 AI 用深”。官方给出的第一批指标称，前沿企业每名员工调用的 intelligence 已达到典型企业的 <code>3.5x</code>，前沿企业在 Codex 上的人均消息量达到典型企业的 <code>16x</code>。</p>
+                <p>这不是新模型，而是一套企业市场叙事工具。OpenAI 试图把采购讨论从“买了多少 seat”推进到“AI 是否真正进入复杂、可委派、跨系统的生产流程”。这些数字来自 OpenAI 自有聚合数据，不是第三方行业调查，但很适合观察 OpenAI 如何定义企业 AI 成熟度。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>OpenAI</dd></div>
+                  <div><dt>指标</dt><dd>前沿企业 intelligence per worker 为典型企业 3.5x</dd></div>
+                  <div><dt>Codex</dt><dd>前沿企业人均消息量为典型企业 16x</dd></div>
+                </dl>
+                <a href="https://openai.com/index/introducing-b2b-signals/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>当日判断</h3>
+              <p>5 月 7 日的主线是“供给侧和落地指标”：Anthropic 补算力，OpenAI 补企业采用解释框架。头部厂商已经不只比模型名，而是在争夺容量、企业工作流深度和 CIO/CTO 的采购话语权。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
+              <strong>2026-05-06</strong>
+              <small>时间窗口：2026-05-05 10:18 至 2026-05-06 10:18 CST</small>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">模型侧</span>
+                </div>
+                <h3>OpenAI 发布 GPT-5.5 Instant，把“更懂你”的默认助手推到全量用户</h3>
+                <p>OpenAI 在 5 月 5 日发布 <code>GPT-5.5 Instant</code>，并开始面向全部 ChatGPT 用户上线，同时作为 API 中 <code>chat-latest</code> 的最新默认模型提供。它不是单纯冲榜模型，而是把长期记忆、连接应用内容和用户写作偏好更深地嵌入默认回答体验。</p>
+                <p>这次升级的重点是“默认助手更像长期协作者”：更少重复确认，更能利用用户背景，更贴近日常工作文风。ChatGPT 不同订阅层上下文长度仍有分层：Free 为 16K，Plus 为 32K，Pro 为 128K，这说明 OpenAI 继续用上下文容量区分套餐价值。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>OpenAI</dd></div>
+                  <div><dt>模型</dt><dd>GPT-5.5 Instant</dd></div>
+                  <div><dt>可用性</dt><dd>ChatGPT 全量用户；API chat-latest</dd></div>
+                </dl>
+                <a href="https://openai.com/index/gpt-5-5-instant/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>ChatGPT 新增 Memory Sources，让用户看到回答用了哪些记忆和资料</h3>
+                <p>OpenAI 与 GPT-5.5 Instant 同步上线 <code>Memory Sources</code>，让用户能看到回答从哪些已存记忆、历史聊天、文件或连接应用中抽取背景信息。这个入口把“模型为什么这样回答”的证据路径显式化了一部分。</p>
+                <p>这对个性化 AI 很关键：记忆越强，用户越需要知道它记住了什么、用了什么、哪里可以纠错。Memory Sources 让记忆从隐性底层能力变成可审查的交互界面，也更适合企业和高敏感场景的信任建设。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>OpenAI</dd></div>
+                  <div><dt>产品</dt><dd>ChatGPT Memory Sources</dd></div>
+                  <div><dt>价值</dt><dd>提升个性化回答的可解释性和可控性</dd></div>
+                </dl>
+                <a href="https://openai.com/index/gpt-5-5-instant/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>OpenAI 推出 ChatGPT Ads Manager，对话流量开始成为可规模化广告库存</h3>
+                <p>OpenAI 在 5 月 5 日发布新的 ChatGPT 广告购买方式，广告主可以通过 <code>Ads Manager</code> 自助创建广告，支持 CPC 竞价，首批市场包括美国、加拿大、英国和澳大利亚。投放位覆盖推荐、搜索及相关对话场景。</p>
+                <p>这件事的意义远大于多一个广告后台。ChatGPT 的商业化主线从订阅和 API 扩展到“高意图对话流量”，如果自助投放跑通，AI 助手会更像新的搜索广告媒体。但广告负载、推荐公正性和用户信任会成为后续核心风险点。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>OpenAI</dd></div>
+                  <div><dt>计费</dt><dd>CPC</dd></div>
+                  <div><dt>市场</dt><dd>美国、加拿大、英国、澳大利亚</dd></div>
+                </dl>
+                <a href="https://openai.com/index/new-ways-to-buy-chatgpt-ads/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">融资估值</span>
+                </div>
+                <h3>ElevenLabs 披露 ARR 超 5 亿美元，语音 AI 进入收入验证阶段</h3>
+                <p>ElevenLabs 在 5 月 5 日发布官方更新，确认年化经常性收入已经超过 <code>5 亿美元</code>，并宣布 Series D 融资中迎来新投资者，同时启动 <code>1 亿美元</code> 员工流动性计划。这条新闻的新增价值在于官方披露经营指标，而不是重复早前估值传闻。</p>
+                <p>语音 AI 已经不只是演示能力，正在进入规模化企业采购和开发者嵌入阶段。ElevenLabs 把 ARR 放在标题里，本质上是在向资本市场传达：公司不只高估值，也有高速现金化能力。</p>
+                <dl class="news-facts">
+                  <div><dt>公司</dt><dd>ElevenLabs</dd></div>
+                  <div><dt>ARR</dt><dd>超过 $5 亿</dd></div>
+                  <div><dt>资本动作</dt><dd>Series D 新投资人；$1 亿员工流动性计划</dd></div>
+                </dl>
+                <a href="https://elevenlabs.io/blog/500m-arr-and-new-investors" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>当日判断</h3>
+              <p>5 月 6 日的主线是 OpenAI 同时推进能力、可解释性和商业化：GPT-5.5 Instant 负责默认助手体验，Memory Sources 负责信任，Ads Manager 负责变现。ElevenLabs 的 ARR 披露则说明语音 AI 赛道已经进入收入兑现阶段。</p>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="weekly" aria-label="每周重点新闻">
+        <div class="content-grid">
+          <article class="feature-board news-board">
+            <div class="news-date-card weekly-date-card">
+              <span>每周重点新闻</span>
+              <strong>2026-05-08 起</strong>
+              <small>从每日新闻中勾选条目后自动汇总到这里，本周先作为候选池。</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Weekly Picks</p>
+              <h2>每周重点新闻</h2>
+              <p>先在“每日重点新闻”里勾选你想保留的条目；这里会自动生成周度精选列表，方便下周再做最终取舍。</p>
+            </div>
+
+            <div class="weekly-toolbar">
+              <strong id="weeklyCount">0 条已入选</strong>
+              <button class="clear-weekly" id="clearWeekly" type="button">清空选择</button>
+            </div>
+
+            <div class="weekly-feed" id="weeklyFeed" aria-live="polite">
+              <p class="empty">还没有入选周度新闻。去“每日重点新闻”勾选几条试试。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
