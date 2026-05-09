@@ -457,7 +457,12 @@
               <p>过去两年，AI 应用的重点已经从“如何写出更有效的提示词”，逐步转向“如何组织上下文、工具、流程和评测机制，让模型在真实工作流中稳定运行”。这一变化不仅影响产品设计，也影响平台能力、客户黏性和收入结构。</p>
             </div>
 
-            <section class="concept-topic">
+            <div class="concept-switcher" aria-label="切换概念专题">
+              <button class="concept-chip is-active" type="button" data-concept-topic="mcp-harness">MCP / Context / Harness</button>
+              <button class="concept-chip" type="button" data-concept-topic="agent-stack">Agent / OpenClaw / Hermes</button>
+            </div>
+
+            <section class="concept-topic is-active" data-concept-panel="mcp-harness">
               <div class="concept-topic-head">
                 <h3>MCP 和 Harness 到底在解决什么问题</h3>
                 <p>这条演进线可以概括为三步：先优化单次交互，再管理多轮上下文，最后把模型纳入可治理、可评测、可连接外部系统的完整执行框架。下面按这个顺序展开。</p>
@@ -571,6 +576,109 @@
               <h3>看这个专题时最该记住什么</h3>
               <p><code>Prompt engineering</code> 主要解决输入表达问题，<code>context engineering</code> 主要解决信息组织问题，<code>harness</code> 主要解决系统执行与治理问题，<code>MCP</code> 则更接近其中的标准化连接层。</p>
               <p>对头部公司而言，这意味着竞争边界正在从模型能力，扩展到连接器、工作流、评测和企业治理能力。对行业观察者而言，这通常比单次模型排行更接近长期平台价值。</p>
+            </section>
+
+            <section class="concept-topic" data-concept-panel="agent-stack">
+              <div class="concept-topic-head">
+                <h3>Agent 这一层，为什么近一年变得更重要</h3>
+                <p><code>Agent</code> 可以简单理解为“能够围绕目标持续调用工具、读取环境、管理状态并执行多步动作的模型系统”。这一定义不要求它完全自主，但强调它不是一次性回答，而是可以完成连续任务。</p>
+              </div>
+
+              <figure class="concept-hero-figure concept-agent-figure">
+                <div class="concept-hero-grid concept-agent-grid">
+                  <section class="concept-stage">
+                    <span class="concept-stage-badge">Layer 1</span>
+                    <h4>Model</h4>
+                    <p class="concept-stage-era">Reasoning Core</p>
+                    <div class="concept-stage-visual agent-visual-box">
+                      <span>Reason</span>
+                      <span>Plan</span>
+                      <span>Respond</span>
+                    </div>
+                    <p class="concept-stage-summary">模型负责理解任务、生成计划和给出中间判断，但单独存在时仍然偏向“回答问题”。</p>
+                  </section>
+
+                  <section class="concept-stage">
+                    <span class="concept-stage-badge">Layer 2</span>
+                    <h4>Agent Runtime</h4>
+                    <p class="concept-stage-era">State + Tools</p>
+                    <div class="concept-stage-visual agent-visual-box runtime-box">
+                      <span>Memory</span>
+                      <span>Tools</span>
+                      <span>Tasks</span>
+                    </div>
+                    <p class="concept-stage-summary">Agent runtime 把模型和记忆、工具、任务调度、权限边界放在一起，支持连续执行。</p>
+                  </section>
+
+                  <section class="concept-stage">
+                    <span class="concept-stage-badge">Layer 3</span>
+                    <h4>Operator Surface</h4>
+                    <p class="concept-stage-era">Gateway + Channels</p>
+                    <div class="concept-stage-visual agent-visual-box surface-box">
+                      <span>Inbox</span>
+                      <span>Gateway</span>
+                      <span>Control</span>
+                    </div>
+                    <p class="concept-stage-summary">真正进入业务使用时，还需要消息入口、控制台、日志、审批和连接渠道，才能变成可运营产品。</p>
+                  </section>
+                </div>
+                <figcaption>自制示意图：Agent 不只是模型本身，而是模型、runtime 和 operator surface 的组合。</figcaption>
+              </figure>
+
+              <div class="news-feed concept-feed">
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-tag">Agent</span>
+                  </div>
+                  <h3>Agent 在这里具体指什么</h3>
+                  <p>在当前行业语境里，<code>agent</code> 通常指一种可持续执行任务的模型系统。它会围绕目标进行多步处理，而不是只返回一次答案。典型能力包括调用工具、读取外部数据、保持状态、拆分步骤、处理异常和在必要时等待下一次触发。</p>
+                  <p>因此，讨论 agent 时，重点通常不在“它会不会聊天”，而在“它能否持续完成工作”。这也是为什么很多公司开始把模型、工作流、调度器和连接层一起打包成新的产品层。</p>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-tag">OpenClaw</span>
+                  </div>
+                  <h3>OpenClaw 更像多渠道入口和控制平面</h3>
+                  <p>从官方 GitHub 和文档看，OpenClaw 的核心特点是本地优先的 gateway、跨渠道接入和统一控制面。它强调的是：同一个 agent 可以连接 Telegram、Slack、Discord、Feishu、WebChat 等多个入口，并通过 dashboard、skills、sessions 和 routing 做统一管理。</p>
+                  <p>因此，OpenClaw 的价值更偏“分发和运营层”。如果团队关注的是多平台消息接入、统一会话控制、技能安装和设备/浏览器能力调用，那么 OpenClaw 提供的是一套更接近 control plane 的产品形态。</p>
+                  <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noreferrer">参考：OpenClaw GitHub</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-tag">Hermes</span>
+                  </div>
+                  <h3>Hermes 更强调 memory、learning loop 和 agent runtime</h3>
+                  <p>Nous Research 的官方仓库把 Hermes 描述为 “the self-improving AI agent”。从公开文档看，它最强调的几个点是：持久记忆、跨会话检索、技能自我改进、定时任务、子代理并行，以及可在多种终端或消息入口上长期运行。</p>
+                  <p>这意味着 Hermes 的核心卖点更偏“agent 本体”。相比把渠道和控制面放在第一位，它更强调 agent 在长期运行中的学习、记忆和任务延续能力，也因此更容易被讨论为一类 agent runtime 或 agent OS。</p>
+                  <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">参考：NousResearch Hermes Agent GitHub</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-tag">对比</span>
+                  </div>
+                  <h3>OpenClaw 和 Hermes 的差异可以怎么理解</h3>
+                  <p>一个相对稳妥的理解方式是：OpenClaw 更偏“gateway-first / control-plane-first”，Hermes 更偏“agent-first / runtime-first”。两者并非完全对立，也有大量能力重叠，但产品重心不同。</p>
+                  <p>如果关注的是跨平台入口、路由、会话管理和统一控制，OpenClaw 的框架更容易理解；如果关注的是记忆、技能积累、自我改进和长期任务连续性，Hermes 的叙事会更突出。行业层面，这也说明 agent 竞争已经开始分化为不同产品路线，而不只是模型路线。</p>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-tag">影响</span>
+                  </div>
+                  <h3>为什么这类项目值得关注</h3>
+                  <p>第一，它们反映了市场正在从“调用模型”走向“部署 agent 系统”。第二，它们把模型之外的价值层显性化，包括入口、记忆、路由、治理、技能分发和长期运行。第三，它们说明 agent 产品未来未必会被单一模型厂商完全垄断，中间层和控制层仍有独立产品空间。</p>
+                  <p>对头部公司来说，这种变化会推动更多平台能力内建化；对创业项目来说，则意味着仍然可以围绕 runtime、workflow、control plane 或垂直入口建立产品差异。</p>
+                </article>
+              </div>
+
+              <section class="judgement-card concept-judgement">
+                <h3>看这个专题时最该记住什么</h3>
+                <p><code>Agent</code> 并不只是“更智能的聊天机器人”，而是一个能持续调动工具、保持状态并执行多步任务的系统。围绕 agent 的竞争，正在从模型本身扩展到 runtime、gateway、memory、skills 和治理能力。</p>
+                <p>OpenClaw 和 Hermes 可以看作两条不同重心的产品路线：前者更偏控制平面和多入口，后者更偏 agent runtime 和长期记忆。这种分化本身就是当前 agent 市场成熟度提升的信号。</p>
+              </section>
             </section>
           </article>
         </div>
