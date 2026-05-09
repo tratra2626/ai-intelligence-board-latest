@@ -741,7 +741,7 @@ const anthropicCostSeries = {
 };
 
 const anthropicAnnualForecastSeries = {
-  labels: ["2025", "2026", "2027", "2028"],
+  labels: ["2025", "2026-04A", "2026", "2027", "2028", "2029"],
   feb2025Base: [
     { label: "2025", value: 2.2, short: "2.2", note: "2025 base case revenue（Reuters 转引 The Information）" },
     { label: "2027", value: 12.0, short: "12", note: "2027 base case revenue（Reuters 转引 The Information）" },
@@ -751,11 +751,13 @@ const anthropicAnnualForecastSeries = {
     { label: "2027", value: 34.5, short: "34.5", note: "2027 optimistic / up-to revenue（Reuters 转引 The Information）" },
   ],
   nov2025Bull: [
-    { label: "2025", value: 4.7, short: "4.7", note: "2025 updated revenue expectation（The Information 摘要）" },
-    { label: "2026", value: 15.2, short: "15.2", note: "2026 updated optimistic revenue（The Information 摘要）" },
-    { label: "2027", value: 38.9, short: "38.9", note: "2027 updated optimistic revenue（The Information 摘要）" },
-    { label: "2028", value: 70.0, short: "70", note: "2028 updated optimistic revenue（The Information 摘要）" },
+    { label: "2025", value: 9.0, short: "9", note: "2025 actual / annualized revenue（用户提供图示）" },
+    { label: "2026", value: 32.0, short: "32", note: "2025-12 projection for 2026 year-end（用户提供图示）" },
+    { label: "2027", value: 77.0, short: "77", note: "2025-12 projection for 2027（用户提供图示）" },
+    { label: "2028", value: 126.0, short: "126", note: "2025-12 projection for 2028（用户提供图示）" },
+    { label: "2029", value: 174.0, short: "174", note: "2025-12 projection for 2029（用户提供图示）" },
   ],
+  apr2026Actual: [{ label: "2026-04A", value: 30.0, short: "30", note: "Actual on April 6, 2026（用户提供图示）" }],
 };
 
 const anthropicMarginSeries = [
@@ -2535,8 +2537,8 @@ function renderAnthropicAnnualRevenueChart() {
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const labels = anthropicAnnualForecastSeries.labels;
-  const maxValue = 75;
-  const ticks = [0, 15, 30, 45, 60, 75];
+  const maxValue = 180;
+  const ticks = [0, 30, 60, 90, 120, 150, 180];
   const xFor = (label) =>
     margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
   const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
@@ -2551,6 +2553,7 @@ function renderAnthropicAnnualRevenueChart() {
   const febBase = toPoints(anthropicAnnualForecastSeries.feb2025Base);
   const febBull = toPoints(anthropicAnnualForecastSeries.feb2025Bull);
   const novBull = toPoints(anthropicAnnualForecastSeries.nov2025Bull);
+  const aprActual = toPoints(anthropicAnnualForecastSeries.apr2026Actual);
 
   anthropicAnnualRevenueChart.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
@@ -2581,13 +2584,23 @@ function renderAnthropicAnnualRevenueChart() {
         `,
       )
       .join("")}
+    ${aprActual
+      .map(
+        (point) => `
+          <circle cx="${point.x}" cy="${point.y}" r="6" fill="#5cc63b" stroke="#fffdf8" stroke-width="2" />
+          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+        `,
+      )
+      .join("")}
     <g transform="translate(${margin.left}, 10)">
       <line x1="0" y1="6" x2="34" y2="6" stroke="#315f8f" stroke-width="3" stroke-dasharray="6 5" />
       <text x="42" y="10" fill="#1f2528" font-size="12">2025-02 base case</text>
       <line x1="200" y1="6" x2="234" y2="6" stroke="#9c6a22" stroke-width="3" stroke-dasharray="10 6" />
       <text x="242" y="10" fill="#1f2528" font-size="12">2025-02 optimistic</text>
       <line x1="430" y1="6" x2="464" y2="6" stroke="#8a4fdc" stroke-width="3.2" />
-      <text x="472" y="10" fill="#1f2528" font-size="12">2025-11 updated optimistic</text>
+      <text x="472" y="10" fill="#1f2528" font-size="12">2025-12 projection</text>
+      <circle cx="700" cy="6" r="6" fill="#5cc63b" />
+      <text x="714" y="10" fill="#1f2528" font-size="12">2026-04 actual</text>
     </g>
   `;
 }
