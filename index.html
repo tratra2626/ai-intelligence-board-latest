@@ -15,6 +15,7 @@
         </div>
         <nav class="tabs" aria-label="看板栏目">
           <button class="tab is-active" type="button" data-tab="news">每日重点新闻</button>
+          <button class="tab" type="button" data-tab="concepts">关键概念/专题</button>
           <button class="tab" type="button" data-tab="weekly">每周重点新闻</button>
           <button class="tab" type="button" data-tab="pricing">模型价格对比</button>
           <button class="tab" type="button" data-tab="price-chart">价格趋势图</button>
@@ -436,6 +437,105 @@
             <section class="judgement-card">
               <h3>当日判断</h3>
               <p>5 月 6 日的主线是 OpenAI 同时推进能力、可解释性和商业化：GPT-5.5 Instant 负责默认助手体验，Memory Sources 负责信任，Ads Manager 负责变现。ElevenLabs 的 ARR 披露则说明语音 AI 赛道已经进入收入兑现阶段。</p>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="concepts" aria-label="关键概念与专题">
+        <div class="content-grid">
+          <article class="feature-board news-board concepts-board">
+            <div class="news-date-card concepts-date-card">
+              <span>本期专题</span>
+              <strong>MCP / Context / Harness</strong>
+              <small>面向 AI 行业财务人员的非技术扫盲版，先理解“为什么会这样演进”，再看谁会因此受益。</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Concept Primer</p>
+              <h2>从 Prompt Engineering 到 Context Engineering，再到 Harness</h2>
+              <p>如果把大模型看成一个越来越强的“分析员”，行业这两年的重点已经从“怎么把一句话问好”，逐步转向“怎么把正确的信息、工具、流程和检查机制稳定地交给它”。这一轮演进会直接影响模型厂商的产品形态、客户黏性和商业化深度。</p>
+            </div>
+
+            <section class="concept-topic">
+              <div class="concept-topic-head">
+                <p class="eyebrow">Topic 01</p>
+                <h3>MCP 和 Harness 到底在解决什么问题</h3>
+                <p>可以把这条演进线理解成三步：先学会“提问题”，再学会“喂上下文”，最后学会“搭工作台”。下面这几张卡片只讲业务上真正有用的部分，不讲实现细节。</p>
+              </div>
+
+              <div class="news-feed concept-feed">
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-rank">01</span>
+                    <span class="news-tag">Prompt</span>
+                  </div>
+                  <h3>Prompt engineering 是什么</h3>
+                  <p>最早的大模型像一个非常聪明、但不太会猜老板心思的分析师。你问得越清楚，它答得越像你想要的格式。所以所谓 <code>prompt engineering</code>，本质上就是把任务讲明白：角色是什么、输出格式是什么、不能做什么、最好参考哪些例子。</p>
+                  <p>这个阶段有效，是因为早期很多价值都来自“把模型从能用调到好用”。对业务团队来说，它像是学会写一份更规范的 brief。问题在于，一旦任务变成长流程、多轮对话、跨系统查询，单靠一句提示词已经不够了。</p>
+                  <a href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noreferrer">参考：OpenAI Prompt Engineering Best Practices</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-rank">02</span>
+                    <span class="news-tag">Context</span>
+                  </div>
+                  <h3>为什么行业会升级到 context engineering</h3>
+                  <p>因为真实工作里，模型不是只差一句“更好的提问”，而是差一整包“做判断需要的材料”。这里的 <code>context</code> 不只是聊天记录，还包括文档、表格、CRM 数据、权限范围、历史操作、工具返回结果、公司口径和任务状态。</p>
+                  <p><code>Context engineering</code> 的核心，是决定“此刻到底该把什么信息给模型、按什么顺序给、给多少、怎么压缩噪音”。这一步开始直接影响成本、正确率和稳定性。对企业客户来说，这比单纯换一个更强模型更重要，因为它决定了模型能不能真的接入业务流程。</p>
+                  <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips" target="_blank" rel="noreferrer">参考：Anthropic Long Context Tips</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-rank">03</span>
+                    <span class="news-tag">Harness</span>
+                  </div>
+                  <h3>Harness 可以理解成“把模型包起来的工作台”</h3>
+                  <p><code>Harness</code> 不是一个单独标准，更像行业里的工程说法。它指的是包在模型外面的一整套执行框架：怎么调模型、怎么接工具、何时检索、何时记忆、怎么重试、怎么审计、怎么打分、出了错怎么回退。也可以把它理解成 AI 应用的“操作系统外壳”。</p>
+                  <p>当任务从“写一段文案”变成“读财报、查数据库、生成初稿、跑校验、回填系统”时，真正决定产品差异的往往不是模型本身，而是这套 harness 做得多稳。谁能把工作流、日志、评测和权限管理做厚，谁就更容易拿下高价值企业场景。</p>
+                  <a href="https://platform.openai.com/docs/guides/agent-evals" target="_blank" rel="noreferrer">参考：OpenAI Agent Evals</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-rank">04</span>
+                    <span class="news-tag">MCP</span>
+                  </div>
+                  <h3>MCP 在这条链路里的位置</h3>
+                  <p><code>MCP</code> 可以把它想成模型接外部系统的“通用接口标准”。以前每接一个数据源或工具，都要单独做一遍定制集成；MCP 试图把这件事标准化，让模型客户端和工具/数据服务端用同一种协议说话。</p>
+                  <p>业务意义很直接：集成成本更低，工具生态更容易长出来，客户也更不想被单一厂商锁死。它不直接让模型“更聪明”，但会让模型更容易进入企业系统。对头部公司来说，这种标准一旦形成网络效应，会显著改变平台层的话语权分配。</p>
+                  <a href="https://docs.anthropic.com/en/docs/mcp" target="_blank" rel="noreferrer">参考：Anthropic MCP Docs</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-rank">05</span>
+                    <span class="news-tag">影响</span>
+                  </div>
+                  <h3>对 OpenAI、Anthropic、Google 这类头部公司的影响</h3>
+                  <p>第一，竞争焦点会从“谁的模型分数更高”转向“谁的整套 agent 基础设施更完整”。模型、工具调用、检索、记忆、评测、权限、连接器，会一起打包卖。第二，标准和工作流能力会提高客户迁移门槛，因为企业一旦把流程接进去，替换成本远高于换一个聊天机器人。</p>
+                  <p>第三，收入结构会更平台化。头部公司不只是卖 token，还在卖工作流托管、评测、连接器、企业治理和生态入口。财务视角上，这通常意味着更高 ARPU、更长合同周期，以及更接近基础设施公司的估值叙事。</p>
+                  <a href="https://platform.openai.com/docs/guides/evals?api-mode=responses" target="_blank" rel="noreferrer">参考：OpenAI Evals Guide</a>
+                </article>
+
+                <article class="news-card concept-card">
+                  <div class="news-card-head">
+                    <span class="news-rank">06</span>
+                    <span class="news-tag">结论</span>
+                  </div>
+                  <h3>给非技术同学的一句话判断</h3>
+                  <p>如果只盯模型发布，很容易低估行业变化。真正进入企业预算池的，往往不是“更会聊天”的模型，而是“能接系统、能控风险、能留痕、能持续优化”的完整工作台。</p>
+                  <p>所以从研究和财务角度看，后面要重点观察的不只是模型能力，而是三类指标：连接器生态是否在变厚、评测与治理是否变成标准配置、以及厂商能否把这些能力从 demo 变成可持续收费的企业产品。</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="judgement-card concept-judgement">
+              <h3>看这个专题时最该记住什么</h3>
+              <p><code>Prompt engineering</code> 解决的是“怎么说”；<code>context engineering</code> 解决的是“给模型什么材料”；<code>harness</code> 解决的是“让整套流程稳定跑起来”；<code>MCP</code> 则是在其中承担“把模型接到外部工具和数据”的通用接口角色。</p>
+              <p>对头部公司而言，这意味着护城河正在从单一模型能力，扩展到标准、工作流、连接器和企业治理。对做 AI 行业研究的财务同学来说，这比单次 benchmark 排名更接近未来收入质量。</p>
             </section>
           </article>
         </div>

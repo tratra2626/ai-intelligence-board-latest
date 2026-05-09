@@ -1005,6 +1005,46 @@ h2 {
   line-height: 1.7;
 }
 
+.concepts-date-card {
+  border-left-color: var(--gold);
+}
+
+.concept-topic {
+  display: grid;
+  gap: 14px;
+  max-width: 1180px;
+}
+
+.concept-topic-head {
+  display: grid;
+  gap: 8px;
+  max-width: 920px;
+}
+
+.concept-topic-head h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.concept-topic-head p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+.concept-feed {
+  align-items: stretch;
+}
+
+.concept-card {
+  min-height: 100%;
+}
+
+.concept-judgement {
+  border-left-color: var(--gold);
+}
+
 .news-feed {
   display: grid;
   grid-template-columns: repeat(2, minmax(280px, 1fr));
@@ -1157,6 +1197,17 @@ h2 {
 }
 
 .news-card a:hover {
+  text-decoration: underline;
+}
+
+.concept-card a {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.concept-card a:hover {
   text-decoration: underline;
 }
 
