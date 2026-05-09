@@ -669,7 +669,8 @@ const anthropicRevenueChart = document.querySelector("#anthropicRevenueChart");
 const anthropicAnnualRevenueChart = document.querySelector("#anthropicAnnualRevenueChart");
 const anthropicMarginChart = document.querySelector("#anthropicMarginChart");
 const anthropicFundingChart = document.querySelector("#anthropicFundingChart");
-const anthropicRevenueMix = document.querySelector("#anthropicRevenueMix");
+const anthropicCostChart = document.querySelector("#anthropicCostChart");
+const anthropicCostStats = document.querySelector("#anthropicCostStats");
 const anthropicFundingTable = document.querySelector("#anthropicFundingTable");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 
@@ -706,38 +707,34 @@ const anthropicRevenueSeries = {
   labels: ["2024-12", "2025-03", "2025-05", "2025-07", "2025-10", "2025-12", "2026-02", "2026-03", "2026-04", "2026-12E"],
 };
 
-const anthropicRevenueMixStats = [
+const anthropicCostStatsData = [
   {
-    label: "企业/业务收入占比",
-    value: "约 80%",
-    note: "Reuters 2025-10 报道称企业客户贡献约 80% 收入，说明 Anthropic 商业化核心仍在 B2B 与开发者。",
+    label: "Anthropic 服务器成本",
+    value: "$27B",
+    note: "The Information 图示口径下，Anthropic 2028 年服务器成本约 $27B，低于 OpenAI 同期的 $111B。",
   },
   {
-    label: "Claude Code run-rate",
-    value: ">$2.5B",
-    note: "Anthropic 2026-02 官方称 Claude Code run-rate 已超过 $2.5B，是当前最重要的新产品收入引擎之一。",
+    label: "OpenAI 服务器成本",
+    value: "$111B",
+    note: "同一图示口径下，OpenAI 2028 年服务器成本约为 Anthropic 的 4 倍以上，反映两家公司产品规模与计算负载差异。",
   },
   {
-    label: "Claude Code 企业占比",
-    value: ">50%",
-    note: "Anthropic 2026-02 官方称企业使用已占 Claude Code 收入的一半以上，表明其已从个人开发者工具转向企业预算科目。",
+    label: "Anthropic 2028 推理成本占比",
+    value: "约 59%",
+    note: "从图示估读，Anthropic 2028 年服务器成本中，推理（chatbots / APIs / agents）已成为最大单项，说明商业化扩张将把成本重心进一步推向 inference。",
   },
   {
-    label: "$100K+ 大客户数量",
-    value: "7x YoY",
-    note: "Anthropic 2026-02 官方：过去一年，年化支出超 $100K 的客户数量增长约 7 倍。",
-  },
-  {
-    label: "$1M+ 年化客户数",
-    value: "500+",
-    note: "Anthropic 2026-02 官方：年化支出超过 $1M 的客户从两年前约 12 家增长到超过 500 家。",
-  },
-  {
-    label: "Fortune 10 渗透",
-    value: "8 / 10",
-    note: "Anthropic 2026-02 官方：Fortune 10 中已有 8 家是 Claude 客户，说明其企业渗透率已进入大型采购层面。",
+    label: "成本优势核心",
+    value: "更低推理总负担",
+    note: "如果收入扩张持续而总服务器成本显著低于 OpenAI，Anthropic 的商业叙事会更容易落到“更轻的推理成本结构”和“更早逼近现金流转正”。",
   },
 ];
+
+const anthropicCostSeries = {
+  years: ["2024", "2025", "2026", "2027", "2028"],
+  anthropic: [2, 6, 13, 20, 27],
+  openai: [4, 16, 40, 69, 111],
+};
 
 const anthropicAnnualForecastSeries = {
   labels: ["2025", "2026", "2027", "2028"],
@@ -2291,12 +2288,12 @@ function buildPolyline(points) {
   return points.map((point) => `${point.x},${point.y}`).join(" ");
 }
 
-function renderAnthropicRevenueMix() {
-  if (!anthropicRevenueMix) {
+function renderAnthropicCostStats() {
+  if (!anthropicCostStats) {
     return;
   }
 
-  anthropicRevenueMix.innerHTML = anthropicRevenueMixStats
+  anthropicCostStats.innerHTML = anthropicCostStatsData
     .map(
       (item) => `
         <article class="commercial-stat-item">
@@ -2307,6 +2304,59 @@ function renderAnthropicRevenueMix() {
       `,
     )
     .join("");
+}
+
+function renderAnthropicCostChart() {
+  if (!anthropicCostChart) {
+    return;
+  }
+
+  const width = 520;
+  const height = 320;
+  const margin = { top: 26, right: 18, bottom: 46, left: 46 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const maxValue = 120;
+  const ticks = [0, 20, 40, 60, 80, 100, 120];
+  const groupWidth = chartWidth / anthropicCostSeries.years.length;
+  const barWidth = 28;
+
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  anthropicCostChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    ${anthropicCostSeries.years
+      .map((year, index) => {
+        const groupX = margin.left + index * groupWidth + 16;
+        const anthropicValue = anthropicCostSeries.anthropic[index];
+        const openaiValue = anthropicCostSeries.openai[index];
+        const anthropicY = yFor(anthropicValue);
+        const openaiY = yFor(openaiValue);
+        return `
+          <rect x="${groupX}" y="${anthropicY}" width="${barWidth}" height="${margin.top + chartHeight - anthropicY}" rx="7" fill="#2e6f5d" />
+          <rect x="${groupX + barWidth + 8}" y="${openaiY}" width="${barWidth}" height="${margin.top + chartHeight - openaiY}" rx="7" fill="#315f8f" />
+          <text x="${groupX + barWidth / 2}" y="${anthropicY - 8}" text-anchor="middle" fill="#1f2528" font-size="10" font-weight="800">${anthropicValue}</text>
+          <text x="${groupX + barWidth + 8 + barWidth / 2}" y="${openaiY - 8}" text-anchor="middle" fill="#1f2528" font-size="10" font-weight="800">${openaiValue}</text>
+          <text x="${groupX + barWidth + 4}" y="${height - 16}" text-anchor="middle" fill="#6f7478" font-size="11">${year}</text>
+        `;
+      })
+      .join("")}
+    <g transform="translate(${margin.left}, 10)">
+      <rect x="0" y="0" width="12" height="12" rx="3" fill="#2e6f5d" />
+      <text x="18" y="10" fill="#1f2528" font-size="12">Anthropic</text>
+      <rect x="110" y="0" width="12" height="12" rx="3" fill="#315f8f" />
+      <text x="128" y="10" fill="#1f2528" font-size="12">OpenAI</text>
+    </g>
+  `;
 }
 
 function renderAnthropicFundingTable() {
@@ -2581,7 +2631,8 @@ function renderAnthropicFundingChart() {
 }
 
 function renderCommercialPanel() {
-  renderAnthropicRevenueMix();
+  renderAnthropicCostChart();
+  renderAnthropicCostStats();
   renderAnthropicRevenueChart();
   renderAnthropicAnnualRevenueChart();
   renderAnthropicMarginChart();
