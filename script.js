@@ -741,23 +741,43 @@ const anthropicCostSeries = {
 };
 
 const anthropicAnnualForecastSeries = {
-  labels: ["2025", "2026-04A", "2026", "2027", "2028", "2029"],
-  feb2025Base: [
-    { label: "2025", value: 2.2, short: "2.2", note: "2025 base case revenue（Reuters 转引 The Information）" },
-    { label: "2027", value: 12.0, short: "12", note: "2027 base case revenue（Reuters 转引 The Information）" },
+  labels: ["2024", "2025", "2026", "2027", "2028", "2029"],
+  formerOptimistic2024: [
+    { label: "2024", value: 0.3, short: "0.3" },
+    { label: "2025", value: 3.4, short: "3.4" },
+    { label: "2026", value: 11.5, short: "11.5" },
+    { label: "2027", value: 34.0, short: "34" },
+    { label: "2028", value: 35.0, short: "35" },
   ],
-  feb2025Bull: [
-    { label: "2025", value: 3.7, short: "3.7", note: "2025 optimistic / up-to revenue（The Information 摘要）" },
-    { label: "2027", value: 34.5, short: "34.5", note: "2027 optimistic / up-to revenue（Reuters 转引 The Information）" },
+  base2025: [
+    { label: "2024", value: 0.3, short: "0.3" },
+    { label: "2025", value: 4.0, short: "4" },
+    { label: "2026", value: 10.0, short: "10" },
+    { label: "2027", value: 21.0, short: "21" },
+    { label: "2028", value: 33.0, short: "33" },
   ],
-  nov2025Bull: [
-    { label: "2025", value: 9.0, short: "9", note: "2025 actual / annualized revenue（用户提供图示）" },
-    { label: "2026", value: 32.0, short: "32", note: "2025-12 projection for 2026 year-end（用户提供图示）" },
-    { label: "2027", value: 77.0, short: "77", note: "2025-12 projection for 2027（用户提供图示）" },
-    { label: "2028", value: 126.0, short: "126", note: "2025-12 projection for 2028（用户提供图示）" },
-    { label: "2029", value: 174.0, short: "174", note: "2025-12 projection for 2029（用户提供图示）" },
+  optimistic2025: [
+    { label: "2024", value: 0.3, short: "0.3" },
+    { label: "2025", value: 4.7, short: "4.7" },
+    { label: "2026", value: 15.0, short: "15" },
+    { label: "2027", value: 39.0, short: "39" },
+    { label: "2028", value: 70.0, short: "70" },
   ],
-  apr2026Actual: [{ label: "2026-04A", value: 30.0, short: "30", note: "Actual on April 6, 2026（用户提供图示）" }],
+  openaiProjection: [
+    { label: "2024", value: 4.0, short: "4" },
+    { label: "2025", value: 13.0, short: "13" },
+    { label: "2026", value: 30.0, short: "30" },
+    { label: "2027", value: 60.0, short: "60" },
+    { label: "2028", value: 100.0, short: "100" },
+  ],
+  projectionDec2025: [
+    { label: "2025", value: 9.0, short: "9" },
+    { label: "2026", value: 32.0, short: "32" },
+    { label: "2027", value: 77.0, short: "77" },
+    { label: "2028", value: 126.0, short: "126" },
+    { label: "2029", value: 174.0, short: "174" },
+  ],
+  apr2026Actual: [{ label: "2026", value: 30.0, short: "30", note: "Actual on April 6, 2026（用户提供图示）" }],
 };
 
 const anthropicMarginSeries = [
@@ -2584,9 +2604,11 @@ function renderAnthropicAnnualRevenueChart() {
       y: yFor(point.value),
     }));
 
-  const febBase = toPoints(anthropicAnnualForecastSeries.feb2025Base);
-  const febBull = toPoints(anthropicAnnualForecastSeries.feb2025Bull);
-  const novBull = toPoints(anthropicAnnualForecastSeries.nov2025Bull);
+  const formerOptimistic = toPoints(anthropicAnnualForecastSeries.formerOptimistic2024);
+  const base2025 = toPoints(anthropicAnnualForecastSeries.base2025);
+  const optimistic2025 = toPoints(anthropicAnnualForecastSeries.optimistic2025);
+  const openaiProjection = toPoints(anthropicAnnualForecastSeries.openaiProjection);
+  const projectionDec2025 = toPoints(anthropicAnnualForecastSeries.projectionDec2025);
   const aprActual = toPoints(anthropicAnnualForecastSeries.apr2026Actual);
 
   anthropicAnnualRevenueChart.innerHTML = `
@@ -2607,14 +2629,22 @@ function renderAnthropicAnnualRevenueChart() {
         return `<text x="${x}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="11">${label}</text>`;
       })
       .join("")}
-    <polyline fill="none" stroke="#315f8f" stroke-width="3" stroke-dasharray="6 5" points="${buildPolyline(febBase)}" />
-    <polyline fill="none" stroke="#9c6a22" stroke-width="3" stroke-dasharray="10 6" points="${buildPolyline(febBull)}" />
-    <polyline fill="none" stroke="#8a4fdc" stroke-width="3.2" points="${buildPolyline(novBull)}" />
-    ${[...febBase, ...febBull, ...novBull]
+    <polyline fill="none" stroke="#b8b8b8" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(formerOptimistic)}" />
+    <polyline fill="none" stroke="#8b000f" stroke-width="2.8" stroke-dasharray="7 6" points="${buildPolyline(base2025)}" />
+    <polyline fill="none" stroke="#f52656" stroke-width="3" stroke-dasharray="10 6" points="${buildPolyline(optimistic2025)}" />
+    <polyline fill="none" stroke="#3158b0" stroke-width="3" stroke-dasharray="10 6" points="${buildPolyline(openaiProjection)}" />
+    <polyline fill="none" stroke="#8a4fdc" stroke-width="3.2" points="${buildPolyline(projectionDec2025)}" />
+    ${[
+      ...formerOptimistic.map((point) => ({ ...point, color: "#b8b8b8" })),
+      ...base2025.map((point) => ({ ...point, color: "#8b000f" })),
+      ...optimistic2025.map((point) => ({ ...point, color: "#f52656" })),
+      ...openaiProjection.map((point) => ({ ...point, color: "#3158b0" })),
+      ...projectionDec2025.map((point) => ({ ...point, color: "#8a4fdc" })),
+    ]
       .map(
-        (point, index) => `
-          <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#fffdf8" stroke="${index < 2 ? "#315f8f" : index < 4 ? "#9c6a22" : "#8a4fdc"}" stroke-width="2" />
-          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+        (point) => `
+          <circle cx="${point.x}" cy="${point.y}" r="4.2" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />
+          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="10.5" font-weight="700">${point.short}</text>
         `,
       )
       .join("")}
@@ -2627,14 +2657,20 @@ function renderAnthropicAnnualRevenueChart() {
       )
       .join("")}
     <g transform="translate(${margin.left}, 10)">
-      <line x1="0" y1="6" x2="34" y2="6" stroke="#315f8f" stroke-width="3" stroke-dasharray="6 5" />
-      <text x="42" y="10" fill="#1f2528" font-size="12">2025-02 base case</text>
-      <line x1="200" y1="6" x2="234" y2="6" stroke="#9c6a22" stroke-width="3" stroke-dasharray="10 6" />
-      <text x="242" y="10" fill="#1f2528" font-size="12">2025-02 optimistic</text>
-      <line x1="430" y1="6" x2="464" y2="6" stroke="#8a4fdc" stroke-width="3.2" />
-      <text x="472" y="10" fill="#1f2528" font-size="12">2025-12 projection</text>
-      <circle cx="700" cy="6" r="6" fill="#5cc63b" />
-      <text x="714" y="10" fill="#1f2528" font-size="12">2026-04 actual</text>
+      <line x1="0" y1="6" x2="28" y2="6" stroke="#b8b8b8" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="36" y="10" fill="#1f2528" font-size="12">Anthropic former optimistic (2024)</text>
+      <line x1="286" y1="6" x2="314" y2="6" stroke="#8b000f" stroke-width="2.8" stroke-dasharray="7 6" />
+      <text x="322" y="10" fill="#1f2528" font-size="12">Anthropic base (2025)</text>
+      <line x1="500" y1="6" x2="528" y2="6" stroke="#f52656" stroke-width="3" stroke-dasharray="10 6" />
+      <text x="536" y="10" fill="#1f2528" font-size="12">Anthropic optimistic (2025)</text>
+    </g>
+    <g transform="translate(${margin.left}, 28)">
+      <line x1="0" y1="6" x2="28" y2="6" stroke="#3158b0" stroke-width="3" stroke-dasharray="10 6" />
+      <text x="36" y="10" fill="#1f2528" font-size="12">OpenAI projection</text>
+      <line x1="180" y1="6" x2="208" y2="6" stroke="#8a4fdc" stroke-width="3.2" />
+      <text x="216" y="10" fill="#1f2528" font-size="12">Anthropic 2025-12 projection</text>
+      <circle cx="470" cy="6" r="6" fill="#5cc63b" />
+      <text x="484" y="10" fill="#1f2528" font-size="12">2026-04 actual</text>
     </g>
   `;
 }
