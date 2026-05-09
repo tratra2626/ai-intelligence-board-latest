@@ -761,8 +761,27 @@ const anthropicAnnualForecastSeries = {
 };
 
 const anthropicMarginSeries = [
-  { label: "此前内部预期", value: 50, color: "#7fa6d9" },
-  { label: "2025 修订预期", value: 40, color: "#2e6f5d" },
+  {
+    label: "2024",
+    revenue: 0.21,
+    inference: 0.58,
+    margin: -94,
+    marginLabel: "-94%",
+  },
+  {
+    label: "2025 Projection\n(as of summer)",
+    revenue: 4.5,
+    inference: 2.05,
+    margin: 50,
+    marginLabel: "50%",
+  },
+  {
+    label: "2025 Projection\n(as of mid-Dec.)",
+    revenue: 4.35,
+    inference: 2.6,
+    margin: 40,
+    marginLabel: "40%",
+  },
 ];
 
 const anthropicFundingRows = [
@@ -2490,39 +2509,54 @@ function renderAnthropicMarginChart() {
 
   const width = 420;
   const height = 260;
-  const margin = { top: 24, right: 24, bottom: 44, left: 40 };
+  const margin = { top: 24, right: 20, bottom: 62, left: 40 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
-  const maxValue = 60;
-  const barWidth = 84;
-  const gap = 56;
-  const startX = margin.left + 42;
+  const maxValue = 5;
+  const groupWidth = chartWidth / anthropicMarginSeries.length;
+  const barWidth = 42;
 
   const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
 
   anthropicMarginChart.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
-    ${[0, 20, 40, 60]
+    ${[0, 1, 2, 3, 4, 5]
       .map((tick) => {
         const y = yFor(tick);
         return `
           <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
-          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}%</text>
+          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">$${tick}B</text>
         `;
       })
       .join("")}
     ${anthropicMarginSeries
       .map((bar, index) => {
-        const x = startX + index * (barWidth + gap);
-        const y = yFor(bar.value);
-        const barHeight = margin.top + chartHeight - y;
+        const groupX = margin.left + index * groupWidth + (groupWidth - (barWidth * 2 + 10)) / 2;
+        const revenueY = yFor(bar.revenue);
+        const inferenceY = yFor(bar.inference);
+        const revenueHeight = margin.top + chartHeight - revenueY;
+        const inferenceHeight = margin.top + chartHeight - inferenceY;
         return `
-          <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="10" fill="${bar.color}" opacity="0.92" />
-          <text x="${x + barWidth / 2}" y="${y - 10}" text-anchor="middle" fill="#1f2528" font-size="12" font-weight="800">${bar.value}%</text>
-          <text x="${x + barWidth / 2}" y="${height - 20}" text-anchor="middle" fill="#6f7478" font-size="11">${bar.label}</text>
+          <rect x="${groupX}" y="${revenueY}" width="${barWidth}" height="${revenueHeight}" rx="8" fill="#5cc63b" />
+          <rect x="${groupX + barWidth + 10}" y="${inferenceY}" width="${barWidth}" height="${inferenceHeight}" rx="8" fill="#f52656" />
+          <text x="${groupX + barWidth / 2}" y="${revenueY - 8}" text-anchor="middle" fill="#1f2528" font-size="10" font-weight="800">${bar.revenue.toFixed(2).replace(/\.00$/, "")}</text>
+          <text x="${groupX + barWidth + 10 + barWidth / 2}" y="${inferenceY - 8}" text-anchor="middle" fill="#1f2528" font-size="10" font-weight="800">${bar.inference.toFixed(2).replace(/\.00$/, "")}</text>
+          <text x="${groupX + barWidth + 5}" y="${height - 28}" text-anchor="middle" fill="#6f7478" font-size="10">${bar.label.split("\n")[0]}</text>
+          ${
+            bar.label.split("\n")[1]
+              ? `<text x="${groupX + barWidth + 5}" y="${height - 16}" text-anchor="middle" fill="#6f7478" font-size="10">${bar.label.split("\n")[1]}</text>`
+              : ""
+          }
+          <text x="${groupX + barWidth + 5}" y="${height - 2}" text-anchor="middle" fill="#1f2528" font-size="10" font-weight="800">${bar.marginLabel} gross margin</text>
         `;
       })
       .join("")}
+    <g transform="translate(${margin.left}, 8)">
+      <rect x="0" y="0" width="12" height="12" rx="3" fill="#5cc63b" />
+      <text x="18" y="10" fill="#1f2528" font-size="12">Revenue</text>
+      <rect x="100" y="0" width="12" height="12" rx="3" fill="#f52656" />
+      <text x="118" y="10" fill="#1f2528" font-size="12">Paid inference costs</text>
+    </g>
   `;
 }
 
