@@ -666,6 +666,7 @@ const chartTooltip = document.querySelector("#chartTooltip");
 const commercialChips = [...document.querySelectorAll(".commercial-chip")];
 const commercialPanels = [...document.querySelectorAll("[data-commercial-panel]")];
 const anthropicRevenueChart = document.querySelector("#anthropicRevenueChart");
+const anthropicAnnualRevenueChart = document.querySelector("#anthropicAnnualRevenueChart");
 const anthropicMarginChart = document.querySelector("#anthropicMarginChart");
 const anthropicFundingChart = document.querySelector("#anthropicFundingChart");
 const anthropicRevenueMix = document.querySelector("#anthropicRevenueMix");
@@ -733,6 +734,22 @@ const anthropicRevenueMixStats = [
     note: "Anthropic 2026-02 官方：Fortune 10 中已有 8 家是 Claude 客户，说明其企业渗透率已进入大型采购层面。",
   },
 ];
+
+const anthropicAnnualForecastSeries = {
+  labels: ["2025", "2026", "2027", "2028"],
+  feb2025Base: [
+    { label: "2025", value: 2.2, short: "2.2", note: "2025 base case revenue（Reuters 转引 The Information）" },
+    { label: "2027", value: 12.0, short: "12", note: "2027 base case revenue（Reuters 转引 The Information）" },
+  ],
+  feb2025Bull: [
+    { label: "2025", value: 3.7, short: "3.7", note: "2025 optimistic / up-to revenue（The Information 摘要）" },
+    { label: "2027", value: 34.5, short: "34.5", note: "2027 optimistic / up-to revenue（Reuters 转引 The Information）" },
+  ],
+  nov2025Bull: [
+    { label: "2025", value: 4.7, short: "4.7", note: "2025 updated revenue expectation（The Information 摘要）" },
+    { label: "2028", value: 70.0, short: "70", note: "2028 updated optimistic revenue（The Information 摘要）" },
+  ],
+};
 
 const anthropicMarginSeries = [
   { label: "此前内部预期", value: 50, color: "#7fa6d9" },
@@ -2439,6 +2456,74 @@ function renderAnthropicMarginChart() {
   `;
 }
 
+function renderAnthropicAnnualRevenueChart() {
+  if (!anthropicAnnualRevenueChart) {
+    return;
+  }
+
+  const width = 900;
+  const height = 340;
+  const margin = { top: 26, right: 32, bottom: 54, left: 56 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = anthropicAnnualForecastSeries.labels;
+  const maxValue = 75;
+  const ticks = [0, 15, 30, 45, 60, 75];
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  const toPoints = (series) =>
+    series.map((point) => ({
+      ...point,
+      x: xFor(point.label),
+      y: yFor(point.value),
+    }));
+
+  const febBase = toPoints(anthropicAnnualForecastSeries.feb2025Base);
+  const febBull = toPoints(anthropicAnnualForecastSeries.feb2025Bull);
+  const novBull = toPoints(anthropicAnnualForecastSeries.nov2025Bull);
+
+  anthropicAnnualRevenueChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    ${labels
+      .map((label) => {
+        const x = xFor(label);
+        return `<text x="${x}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="11">${label}</text>`;
+      })
+      .join("")}
+    <polyline fill="none" stroke="#315f8f" stroke-width="3" stroke-dasharray="6 5" points="${buildPolyline(febBase)}" />
+    <polyline fill="none" stroke="#9c6a22" stroke-width="3" stroke-dasharray="10 6" points="${buildPolyline(febBull)}" />
+    <polyline fill="none" stroke="#8a4fdc" stroke-width="3.2" points="${buildPolyline(novBull)}" />
+    ${[...febBase, ...febBull, ...novBull]
+      .map(
+        (point, index) => `
+          <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#fffdf8" stroke="${index < 2 ? "#315f8f" : index < 4 ? "#9c6a22" : "#8a4fdc"}" stroke-width="2" />
+          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+        `,
+      )
+      .join("")}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="34" y2="6" stroke="#315f8f" stroke-width="3" stroke-dasharray="6 5" />
+      <text x="42" y="10" fill="#1f2528" font-size="12">2025-02 base case</text>
+      <line x1="200" y1="6" x2="234" y2="6" stroke="#9c6a22" stroke-width="3" stroke-dasharray="10 6" />
+      <text x="242" y="10" fill="#1f2528" font-size="12">2025-02 optimistic</text>
+      <line x1="430" y1="6" x2="464" y2="6" stroke="#8a4fdc" stroke-width="3.2" />
+      <text x="472" y="10" fill="#1f2528" font-size="12">2025-11 updated optimistic</text>
+    </g>
+  `;
+}
+
 function renderAnthropicFundingChart() {
   if (!anthropicFundingChart) {
     return;
@@ -2492,6 +2577,7 @@ function renderAnthropicFundingChart() {
 function renderCommercialPanel() {
   renderAnthropicRevenueMix();
   renderAnthropicRevenueChart();
+  renderAnthropicAnnualRevenueChart();
   renderAnthropicMarginChart();
   renderAnthropicFundingChart();
   renderAnthropicFundingTable();
