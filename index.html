@@ -856,7 +856,10 @@
                     </div>
                   </div>
                   <p class="commercial-note">这里的 <code>gross margin</code> 主要是 The Information 与 Meritech 图中使用的经营口径：收入减去 <code>paid inference costs</code> 和其他销售成本后的毛利率。它不包含训练成本，也不是完整公司层面的 GAAP gross margin。Anthropic 的 optimistic / conservative 路径更接近付费业务 gross margin；若把免费 Claude 用户推理成本也计入，The Information 估算会更接近 38%。</p>
-                  <svg id="anthropicMarginChart" class="commercial-chart commercial-chart-small" viewBox="0 0 420 260" role="img" aria-label="Anthropic 毛利展望图"></svg>
+                  <div class="commercial-mini-grid">
+                    <svg id="anthropicMarginChart" class="commercial-chart commercial-chart-small" viewBox="0 0 420 260" role="img" aria-label="Anthropic 毛利展望图"></svg>
+                    <svg id="anthropicMarginLineChart" class="commercial-chart commercial-chart-small" viewBox="0 0 420 260" role="img" aria-label="Anthropic gross margin 路径线图"></svg>
+                  </div>
                   <div class="commercial-footnote">
                     <strong>公开口径：</strong>
                     <span>2024 年 gross margin 约为 <code>-94%</code>；2025 年夏季最乐观 projection 约 <code>50%</code>；到 2025 年 12 月中旬更新为约 <code>40%</code>。从你给的第二张图看，Anthropic optimistic / conservative 两条路径到 2028 年都在继续改善，但它们的含义仍然更接近“付费推理业务 gross margin”，而不是把训练资本开支、研发和全公司费用一并纳入后的完整利润率。</span>

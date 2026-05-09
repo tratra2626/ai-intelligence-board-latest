@@ -668,6 +668,7 @@ const commercialPanels = [...document.querySelectorAll("[data-commercial-panel]"
 const anthropicRevenueChart = document.querySelector("#anthropicRevenueChart");
 const anthropicAnnualRevenueChart = document.querySelector("#anthropicAnnualRevenueChart");
 const anthropicMarginChart = document.querySelector("#anthropicMarginChart");
+const anthropicMarginLineChart = document.querySelector("#anthropicMarginLineChart");
 const anthropicFundingChart = document.querySelector("#anthropicFundingChart");
 const anthropicCostChart = document.querySelector("#anthropicCostChart");
 const anthropicCostStats = document.querySelector("#anthropicCostStats");
@@ -803,6 +804,13 @@ const anthropicMarginSeries = [
     marginLabel: "40%",
   },
 ];
+
+const anthropicMarginPathSeries = {
+  labels: ["2024", "2025", "2026", "2027", "2028"],
+  optimistic: [-100, 33, 55, 62, 68],
+  conservative: [-100, 33, 50, 60, 66],
+  openai: [35, 38, 46, 55, 60],
+};
 
 const anthropicFundingRows = [
   {
@@ -2580,6 +2588,82 @@ function renderAnthropicMarginChart() {
   `;
 }
 
+function renderAnthropicMarginLineChart() {
+  if (!anthropicMarginLineChart) {
+    return;
+  }
+
+  const width = 420;
+  const height = 260;
+  const margin = { top: 28, right: 18, bottom: 44, left: 42 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = anthropicMarginPathSeries.labels;
+  const minValue = -125;
+  const maxValue = 100;
+  const ticks = [-125, -100, -75, -50, -25, 0, 25, 50, 75, 100];
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) =>
+    margin.top + chartHeight - ((value - minValue) / (maxValue - minValue)) * chartHeight;
+  const toPoints = (values) =>
+    values.map((value, index) => ({
+      x: xFor(labels[index]),
+      y: yFor(value),
+      value,
+      label: labels[index],
+    }));
+
+  const optimistic = toPoints(anthropicMarginPathSeries.optimistic);
+  const conservative = toPoints(anthropicMarginPathSeries.conservative);
+  const openai = toPoints(anthropicMarginPathSeries.openai);
+
+  anthropicMarginLineChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="10">${tick}%</text>
+        `;
+      })
+      .join("")}
+    ${labels
+      .map((label) => {
+        const x = xFor(label);
+        return `<text x="${x}" y="${height - 16}" text-anchor="middle" fill="#6f7478" font-size="10">${label}</text>`;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${yFor(75)}" x2="${width - margin.right}" y2="${yFor(75)}" stroke="#c9c9c9" stroke-dasharray="5 4" />
+    <text x="${margin.left + 6}" y="${yFor(75) - 8}" fill="#8f8f8f" font-size="10">Avg public software co. ~75%</text>
+    <polyline fill="none" stroke="#f52656" stroke-width="3" points="${buildPolyline(optimistic)}" />
+    <polyline fill="none" stroke="#f8b8c5" stroke-width="3" points="${buildPolyline(conservative)}" />
+    <polyline fill="none" stroke="#3158b0" stroke-width="3" points="${buildPolyline(openai)}" />
+    ${[
+      ...optimistic.map((point) => ({ ...point, color: "#f52656" })),
+      ...conservative.map((point) => ({ ...point, color: "#f8b8c5" })),
+      ...openai.map((point) => ({ ...point, color: "#3158b0" })),
+    ]
+      .map(
+        (point) => `
+          <circle cx="${point.x}" cy="${point.y}" r="4.2" fill="${point.color}" />
+        `,
+      )
+      .join("")}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="24" y2="6" stroke="#f52656" stroke-width="3" />
+      <text x="30" y="10" fill="#1f2528" font-size="11">Anthropic optimistic Dec. 2025</text>
+      <line x1="210" y1="6" x2="234" y2="6" stroke="#f8b8c5" stroke-width="3" />
+      <text x="240" y="10" fill="#1f2528" font-size="11">Anthropic conservative Dec. 2025</text>
+    </g>
+    <g transform="translate(${margin.left}, 26)">
+      <line x1="0" y1="6" x2="24" y2="6" stroke="#3158b0" stroke-width="3" />
+      <text x="30" y="10" fill="#1f2528" font-size="11">OpenAI outlook Q3 2025</text>
+    </g>
+  `;
+}
+
 function renderAnthropicAnnualRevenueChart() {
   if (!anthropicAnnualRevenueChart) {
     return;
@@ -2731,6 +2815,7 @@ function renderCommercialPanel() {
   renderAnthropicRevenueChart();
   renderAnthropicAnnualRevenueChart();
   renderAnthropicMarginChart();
+  renderAnthropicMarginLineChart();
   renderAnthropicFundingChart();
   renderAnthropicFundingTable();
 }
