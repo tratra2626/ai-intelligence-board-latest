@@ -663,6 +663,13 @@ const priceChartMeta = document.querySelector("#priceChartMeta");
 const chartCompanyChips = document.querySelector("#chartCompanyChips");
 const chartResetView = document.querySelector("#chartResetView");
 const chartTooltip = document.querySelector("#chartTooltip");
+const commercialChips = [...document.querySelectorAll(".commercial-chip")];
+const commercialPanels = [...document.querySelectorAll("[data-commercial-panel]")];
+const anthropicRevenueChart = document.querySelector("#anthropicRevenueChart");
+const anthropicMarginChart = document.querySelector("#anthropicMarginChart");
+const anthropicFundingChart = document.querySelector("#anthropicFundingChart");
+const anthropicRevenueMix = document.querySelector("#anthropicRevenueMix");
+const anthropicFundingTable = document.querySelector("#anthropicFundingTable");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 
 let activeCompany = "all";
@@ -670,6 +677,150 @@ let selectedPriceCompanies = new Set();
 let chartView = null;
 let chartDrag = null;
 let selectedChartPoint = null;
+let activeCommercialCompany = "Anthropic";
+
+const anthropicRevenueSeries = {
+  actual: [
+    { label: "2025-01", value: 1.0, short: "1.0", note: "2025 年初 run-rate 约 $1B（Anthropic Series F 官方）" },
+    { label: "2025-05", value: 3.0, short: "3.0", note: "2025-05 run-rate 约 $3B（Reuters/CNBC）" },
+    { label: "2025-08", value: 5.0, short: "5.0+", note: "2025-08 run-rate 超过 $5B（Anthropic Series F 官方）" },
+    { label: "2026-02", value: 14.0, short: "14", note: "2026-02 run-rate $14B（Anthropic Series G 官方）" },
+  ],
+  target2025: [
+    { label: "2025-08", value: 5.0 },
+    { label: "2025-12E", value: 9.0, short: "9", note: "2025 年末 internal target（Reuters）" },
+  ],
+  base2026: [
+    { label: "2026-02", value: 14.0 },
+    { label: "2026-12E", value: 20.0, short: "20", note: "2026 年末 base case（Reuters）" },
+  ],
+  bull2026: [
+    { label: "2026-02", value: 14.0 },
+    { label: "2026-12E", value: 26.0, short: "26", note: "2026 年末 best case（Reuters）" },
+  ],
+  labels: ["2025-01", "2025-05", "2025-08", "2025-12E", "2026-02", "2026-12E"],
+};
+
+const anthropicRevenueMixStats = [
+  {
+    label: "企业/业务收入占比",
+    value: "约 80%",
+    note: "Reuters 2025-10 报道称企业客户贡献约 80% 收入，说明 Anthropic 商业化核心仍在 B2B 与开发者。",
+  },
+  {
+    label: "Claude Code run-rate",
+    value: ">$2.5B",
+    note: "Anthropic 2026-02 官方称 Claude Code run-rate 已超过 $2.5B，是当前最重要的新产品收入引擎之一。",
+  },
+  {
+    label: "Claude Code 企业占比",
+    value: ">50%",
+    note: "Anthropic 2026-02 官方称企业使用已占 Claude Code 收入的一半以上，表明其已从个人开发者工具转向企业预算科目。",
+  },
+  {
+    label: "$100K+ 大客户数量",
+    value: "7x YoY",
+    note: "Anthropic 2026-02 官方：过去一年，年化支出超 $100K 的客户数量增长约 7 倍。",
+  },
+  {
+    label: "$1M+ 年化客户数",
+    value: "500+",
+    note: "Anthropic 2026-02 官方：年化支出超过 $1M 的客户从两年前约 12 家增长到超过 500 家。",
+  },
+  {
+    label: "Fortune 10 渗透",
+    value: "8 / 10",
+    note: "Anthropic 2026-02 官方：Fortune 10 中已有 8 家是 Claude 客户，说明其企业渗透率已进入大型采购层面。",
+  },
+];
+
+const anthropicMarginSeries = [
+  { label: "此前内部预期", value: 50, color: "#7fa6d9" },
+  { label: "2025 修订预期", value: 40, color: "#2e6f5d" },
+];
+
+const anthropicFundingRows = [
+  {
+    date: "2021-05-28",
+    type: "Series A",
+    amount: 0.124,
+    amountLabel: "$124M",
+    valuation: "未披露",
+    note: "官方披露；Jaan Tallinn 领投。",
+    source: "https://www.anthropic.com/news/anthropic-raises-124-million-to-build-more-reliable-general-ai-systems",
+    kind: "equity",
+  },
+  {
+    date: "2022-04-29",
+    type: "Series B",
+    amount: 0.58,
+    amountLabel: "$580M",
+    valuation: "未披露",
+    note: "官方披露；安全与大规模实验基础设施扩张。",
+    source: "https://www.anthropic.com/news/anthropic-raises-series-b-to-build-safe-reliable-ai",
+    kind: "equity",
+  },
+  {
+    date: "2023-05-23",
+    type: "Series C",
+    amount: 0.45,
+    amountLabel: "$450M",
+    valuation: "媒体多报 ~$4.1B",
+    note: "官方披露融资额；估值通常见于外部媒体口径。",
+    source: "https://www.anthropic.com/news/anthropic-series-c",
+    kind: "equity",
+  },
+  {
+    date: "2023-09-25",
+    type: "Amazon 战略投资承诺",
+    amount: 4.0,
+    amountLabel: "Up to $4B",
+    valuation: "未披露",
+    note: "官方披露；AWS 成为关键基础设施伙伴。",
+    source: "https://www.anthropic.com/news/anthropic-amazon",
+    kind: "strategic",
+  },
+  {
+    date: "2024-11-22",
+    type: "Amazon 追加投资",
+    amount: 4.0,
+    amountLabel: "Additional $4B",
+    valuation: "总投资达 $8B",
+    note: "官方披露；总投资升至 $8B，仍为少数股东。",
+    source: "https://www.anthropic.com/news/anthropic-amazon-trainium",
+    kind: "strategic",
+  },
+  {
+    date: "2025-03-03",
+    type: "Series E",
+    amount: 3.5,
+    amountLabel: "$3.5B",
+    valuation: "$61.5B post-money",
+    note: "官方披露；Claude 3.7 Sonnet / Claude Code 发布后融资。",
+    source: "https://www.anthropic.com/news/anthropic-raises-series-e-at-usd61-5b-post-money-valuation",
+    kind: "equity",
+  },
+  {
+    date: "2025-09-02",
+    type: "Series F",
+    amount: 13.0,
+    amountLabel: "$13B",
+    valuation: "$183B post-money",
+    note: "官方披露；run-rate 从年初约 $1B 增长到 8 月超 $5B。",
+    source: "https://www.anthropic.com/news/anthropic-raises-series-f-at-usd183b-post-money-valuation",
+    kind: "equity",
+  },
+  {
+    date: "2026-02-12",
+    type: "Series G",
+    amount: 30.0,
+    amountLabel: "$30B",
+    valuation: "$380B post-money",
+    note: "官方披露；run-rate 达 $14B，刷新 AI 私募融资规模。",
+    source: "https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation",
+    kind: "equity",
+  },
+];
 
 const priceRows = [
   {
@@ -2105,6 +2256,247 @@ function setupDailyNewsTimeline() {
   board.append(timeline);
 }
 
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function buildPolyline(points) {
+  return points.map((point) => `${point.x},${point.y}`).join(" ");
+}
+
+function renderAnthropicRevenueMix() {
+  if (!anthropicRevenueMix) {
+    return;
+  }
+
+  anthropicRevenueMix.innerHTML = anthropicRevenueMixStats
+    .map(
+      (item) => `
+        <article class="commercial-stat-item">
+          <span>${item.label}</span>
+          <strong>${item.value}</strong>
+          <small>${item.note}</small>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function renderAnthropicFundingTable() {
+  if (!anthropicFundingTable) {
+    return;
+  }
+
+  anthropicFundingTable.innerHTML = anthropicFundingRows
+    .map(
+      (row) => `
+        <tr>
+          <td>${row.date}</td>
+          <td>${row.type}</td>
+          <td>${row.amountLabel}</td>
+          <td>${row.valuation}</td>
+          <td><a href="${row.source}" target="_blank" rel="noreferrer">${row.note}</a></td>
+        </tr>
+      `,
+    )
+    .join("");
+}
+
+function renderAnthropicRevenueChart() {
+  if (!anthropicRevenueChart) {
+    return;
+  }
+
+  const width = 900;
+  const height = 340;
+  const margin = { top: 26, right: 32, bottom: 54, left: 56 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = anthropicRevenueSeries.labels;
+  const maxValue = 28;
+  const ticks = [0, 5, 10, 15, 20, 25];
+
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  const actualPoints = anthropicRevenueSeries.actual.map((point) => ({
+    ...point,
+    x: xFor(point.label),
+    y: yFor(point.value),
+  }));
+  const target2025Points = anthropicRevenueSeries.target2025.map((point) => ({
+    ...point,
+    x: xFor(point.label),
+    y: yFor(point.value),
+  }));
+  const base2026Points = anthropicRevenueSeries.base2026.map((point) => ({
+    ...point,
+    x: xFor(point.label),
+    y: yFor(point.value),
+  }));
+  const bull2026Points = anthropicRevenueSeries.bull2026.map((point) => ({
+    ...point,
+    x: xFor(point.label),
+    y: yFor(point.value),
+  }));
+
+  anthropicRevenueChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    ${labels
+      .map((label) => {
+        const x = xFor(label);
+        return `<text x="${x}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="11">${label}</text>`;
+      })
+      .join("")}
+    <polyline fill="none" stroke="#2e6f5d" stroke-width="3.2" points="${buildPolyline(actualPoints)}" />
+    <polyline fill="none" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(target2025Points)}" />
+    <polyline fill="none" stroke="#315f8f" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(base2026Points)}" />
+    <polyline fill="none" stroke="#8a4fdc" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(bull2026Points)}" />
+    ${actualPoints
+      .map(
+        (point) => `
+          <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#2e6f5d" />
+          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+        `,
+      )
+      .join("")}
+    ${[...target2025Points.slice(1), ...base2026Points.slice(1), ...bull2026Points.slice(1)]
+      .map(
+        (point) => `
+          <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#fffdf8" stroke="#1f2528" />
+          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+        `,
+      )
+      .join("")}
+    <g transform="translate(${margin.left}, 10)">
+      <rect x="0" y="0" width="12" height="12" rx="6" fill="#2e6f5d" />
+      <text x="18" y="10" fill="#1f2528" font-size="12">已公开 historical run-rate</text>
+      <line x1="220" y1="6" x2="252" y2="6" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="260" y="10" fill="#1f2528" font-size="12">2025 年末内部目标</text>
+      <line x1="430" y1="6" x2="462" y2="6" stroke="#315f8f" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="470" y="10" fill="#1f2528" font-size="12">2026 base</text>
+      <line x1="560" y1="6" x2="592" y2="6" stroke="#8a4fdc" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="600" y="10" fill="#1f2528" font-size="12">2026 bull</text>
+    </g>
+  `;
+}
+
+function renderAnthropicMarginChart() {
+  if (!anthropicMarginChart) {
+    return;
+  }
+
+  const width = 420;
+  const height = 260;
+  const margin = { top: 24, right: 24, bottom: 44, left: 40 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const maxValue = 60;
+  const barWidth = 84;
+  const gap = 56;
+  const startX = margin.left + 42;
+
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  anthropicMarginChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${[0, 20, 40, 60]
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}%</text>
+        `;
+      })
+      .join("")}
+    ${anthropicMarginSeries
+      .map((bar, index) => {
+        const x = startX + index * (barWidth + gap);
+        const y = yFor(bar.value);
+        const barHeight = margin.top + chartHeight - y;
+        return `
+          <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="10" fill="${bar.color}" opacity="0.92" />
+          <text x="${x + barWidth / 2}" y="${y - 10}" text-anchor="middle" fill="#1f2528" font-size="12" font-weight="800">${bar.value}%</text>
+          <text x="${x + barWidth / 2}" y="${height - 20}" text-anchor="middle" fill="#6f7478" font-size="11">${bar.label}</text>
+        `;
+      })
+      .join("")}
+  `;
+}
+
+function renderAnthropicFundingChart() {
+  if (!anthropicFundingChart) {
+    return;
+  }
+
+  const width = 900;
+  const height = 320;
+  const margin = { top: 28, right: 28, bottom: 62, left: 54 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const maxValue = 32;
+  const ticks = [0, 5, 10, 15, 20, 25, 30];
+  const slotWidth = chartWidth / anthropicFundingRows.length;
+  const barWidth = Math.min(52, slotWidth * 0.62);
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  anthropicFundingChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    ${anthropicFundingRows
+      .map((row, index) => {
+        const x = margin.left + slotWidth * index + (slotWidth - barWidth) / 2;
+        const y = yFor(row.amount);
+        const barHeight = margin.top + chartHeight - y;
+        const color = row.kind === "strategic" ? "#9c6a22" : "#315f8f";
+        return `
+          <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${color}" opacity="0.9" />
+          <text x="${x + barWidth / 2}" y="${y - 10}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="800">${row.amountLabel.replace("Additional ", "")}</text>
+          <text x="${x + barWidth / 2}" y="${height - 28}" text-anchor="middle" fill="#6f7478" font-size="10">${row.date.slice(2, 7)}</text>
+          <text x="${x + barWidth / 2}" y="${height - 14}" text-anchor="middle" fill="#6f7478" font-size="10">${escapeHtml(row.type.slice(0, 10))}</text>
+        `;
+      })
+      .join("")}
+    <g transform="translate(${margin.left}, 10)">
+      <rect x="0" y="0" width="12" height="12" rx="3" fill="#315f8f" />
+      <text x="18" y="10" fill="#1f2528" font-size="12">股权融资轮次</text>
+      <rect x="130" y="0" width="12" height="12" rx="3" fill="#9c6a22" />
+      <text x="148" y="10" fill="#1f2528" font-size="12">战略投资 / 云合作承诺</text>
+    </g>
+  `;
+}
+
+function renderCommercialPanel() {
+  renderAnthropicRevenueMix();
+  renderAnthropicRevenueChart();
+  renderAnthropicMarginChart();
+  renderAnthropicFundingChart();
+  renderAnthropicFundingTable();
+}
+
 function render() {
   const keyword = searchInput.value.trim().toLowerCase();
   const filtered = events.filter((event) => {
@@ -2170,6 +2562,20 @@ tabButtons.forEach((button) => {
     if (target === "weekly") {
       renderWeeklyPicks();
     }
+    if (target === "commercial") {
+      renderCommercialPanel();
+    }
+  });
+});
+
+commercialChips.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    activeCommercialCompany = chip.dataset.commercialCompany;
+    commercialChips.forEach((item) => item.classList.toggle("is-active", item === chip));
+    commercialPanels.forEach((panel) =>
+      panel.classList.toggle("is-active", panel.dataset.commercialPanel === activeCommercialCompany),
+    );
+    renderCommercialPanel();
   });
 });
 
@@ -2200,4 +2606,5 @@ setupPriceCompanyFilter();
 setupPriceChartInteractions();
 renderPriceChart();
 renderPriceTable();
+renderCommercialPanel();
 render();

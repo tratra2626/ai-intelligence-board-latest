@@ -16,6 +16,7 @@
         <nav class="tabs" aria-label="看板栏目">
           <button class="tab is-active" type="button" data-tab="news">每日重点新闻</button>
           <button class="tab" type="button" data-tab="concepts">关键概念/专题</button>
+          <button class="tab" type="button" data-tab="commercial">商业化跟踪</button>
           <button class="tab" type="button" data-tab="weekly">每周重点新闻</button>
           <button class="tab" type="button" data-tab="pricing">模型价格对比</button>
           <button class="tab" type="button" data-tab="price-chart">价格趋势图</button>
@@ -723,6 +724,133 @@
             <div class="weekly-feed" id="weeklyFeed" aria-live="polite">
               <p class="empty">还没有入选周度新闻。去“每日重点新闻”勾选几条试试。</p>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="commercial" aria-label="商业化跟踪">
+        <div class="content-grid">
+          <article class="feature-board commercial-board">
+            <div class="news-summary">
+              <p class="eyebrow">Commercial Tracker</p>
+              <h2>商业化跟踪</h2>
+              <p>这一页聚焦头部 AI 公司的收入、毛利、融资和客户结构。当前先整理 Anthropic，后续可以按同样结构继续加入 OpenAI、Google、xAI、DeepSeek 等公司。</p>
+            </div>
+
+            <div class="commercial-company-switcher" aria-label="按公司查看商业化信息">
+              <button class="commercial-chip is-active" type="button" data-commercial-company="Anthropic">Anthropic</button>
+            </div>
+
+            <section class="commercial-company-panel is-active" data-commercial-panel="Anthropic">
+              <div class="commercial-hero">
+                <div class="news-date-card commercial-date-card">
+                  <span>公司跟踪</span>
+                  <strong>Anthropic</strong>
+                  <small>收入以公开披露和可靠媒体报道的 annualized run-rate 为主；预测值与毛利口径均在图表注释中区分“官方”与“媒体/投融资材料”。</small>
+                </div>
+
+                <div class="commercial-meta-card">
+                  <div class="commercial-meta-grid">
+                    <div>
+                      <span>最新 run-rate</span>
+                      <strong>$14B</strong>
+                      <small>2026-02，Anthropic Series G 官方</small>
+                    </div>
+                    <div>
+                      <span>2026 指引</span>
+                      <strong>$20B-$26B</strong>
+                      <small>2026 年末 annualized run-rate，Reuters 引述内部目标</small>
+                    </div>
+                    <div>
+                      <span>业务收入占比</span>
+                      <strong>约 80%</strong>
+                      <small>企业客户驱动，Reuters 2025-10</small>
+                    </div>
+                    <div>
+                      <span>最新估值</span>
+                      <strong>$380B</strong>
+                      <small>2026-02 Series G 官方 post-money</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="commercial-grid">
+                <section class="commercial-card commercial-card-wide">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Revenue</p>
+                      <h3>收入 run-rate：历史进展与 2026 预测</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">单位：十亿美元。实线为已公开 historical run-rate，虚线为媒体报道的内部目标。Anthropic 当前公开最常见的是 annualized run-rate，而非完整财年 GAAP 收入。</p>
+                  <svg id="anthropicRevenueChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="Anthropic 收入 run-rate 历史与预测图"></svg>
+                  <div class="commercial-source-list">
+                    <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noreferrer">Anthropic Series G 官方披露</a>
+                    <a href="https://www.anthropic.com/news/anthropic-raises-series-f-at-usd183b-post-money-valuation" target="_blank" rel="noreferrer">Anthropic Series F 官方披露</a>
+                    <a href="https://www.tradingview.com/news/reuters.com%2C2025%3Anewsml_L6N3VW07F%3A0-anthropic-aims-to-nearly-triple-annualized-revenue-in-2026-sources-say/" target="_blank" rel="noreferrer">Reuters：2026 run-rate 目标</a>
+                    <a href="https://www.cnbc.com/2025/05/30/anthropic-hits-3-billion-in-annualized-revenue-on-business-demand-for-ai.html" target="_blank" rel="noreferrer">CNBC / Reuters：2025-05 run-rate</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Mix</p>
+                      <h3>收入结构与客户结构</h3>
+                    </div>
+                  </div>
+                  <div class="commercial-stat-list" id="anthropicRevenueMix"></div>
+                  <div class="commercial-source-list">
+                    <a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" target="_blank" rel="noreferrer">Anthropic Series G 官方披露</a>
+                    <a href="https://www.tradingview.com/news/reuters.com%2C2025%3Anewsml_L6N3VW07F%3A0-anthropic-aims-to-nearly-triple-annualized-revenue-in-2026-sources-say/" target="_blank" rel="noreferrer">Reuters：业务收入占比</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Margin</p>
+                      <h3>毛利口径</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">当前公开能较清楚确认的是“付费业务/API 销售毛利展望”，不是完整公司口径的整体毛利率。这里按公开报道只展示可验证部分。</p>
+                  <svg id="anthropicMarginChart" class="commercial-chart commercial-chart-small" viewBox="0 0 420 260" role="img" aria-label="Anthropic 毛利展望图"></svg>
+                  <div class="commercial-footnote">
+                    <strong>公开口径：</strong>
+                    <span>2025 年付费业务/API 销售毛利率预期约 40%，低于此前内部更乐观的约 50% 预期；整体公司毛利率未见公开拆分。</span>
+                  </div>
+                  <div class="commercial-source-list">
+                    <a href="https://www.investing.com/news/stock-market-news/anthropic-trims-profit-margin-outlook-as-ai-operating-costs-rise--the-information-4459316" target="_blank" rel="noreferrer">Investing 转引 The Information：毛利预期调整</a>
+                    <a href="https://techcrunch.com/2024/01/23/ai-startups-margins-low-valuations/" target="_blank" rel="noreferrer">TechCrunch：早期毛利讨论</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card commercial-card-wide">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Funding</p>
+                      <h3>历史融资与战略投资</h3>
+                    </div>
+                  </div>
+                  <svg id="anthropicFundingChart" class="commercial-chart" viewBox="0 0 900 320" role="img" aria-label="Anthropic 历史融资图"></svg>
+                  <div class="commercial-table-wrap">
+                    <table class="commercial-table">
+                      <thead>
+                        <tr>
+                          <th>时间</th>
+                          <th>轮次 / 类型</th>
+                          <th>金额</th>
+                          <th>估值</th>
+                          <th>备注</th>
+                        </tr>
+                      </thead>
+                      <tbody id="anthropicFundingTable"></tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </section>
           </article>
         </div>
       </section>
