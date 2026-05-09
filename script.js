@@ -702,9 +702,13 @@ const anthropicRevenueSeries = {
   ],
   bull2026: [
     { label: "2025-12", value: 9.0 },
-    { label: "2026-12E", value: 26.0, short: "26", note: "2026 年末 best case（Reuters）" },
+    { label: "2026-12E", value: 32.0, short: "32", note: "2026 年末 higher internal projection（The Information newsletter）" },
   ],
-  labels: ["2024-12", "2025-03", "2025-05", "2025-07", "2025-10", "2025-12", "2026-02", "2026-03", "2026-04", "2026-12E"],
+  extrapolated2027: [
+    { label: "2026-04", value: 30.0 },
+    { label: "2027-04E", value: 100.0, short: "100", note: "The Information 2026-04 基于近四个月增速的外推，不是公司 guidance" },
+  ],
+  labels: ["2024-12", "2025-03", "2025-05", "2025-07", "2025-10", "2025-12", "2026-02", "2026-03", "2026-04", "2026-12E", "2027-04E"],
 };
 
 const anthropicCostStatsData = [
@@ -2390,8 +2394,8 @@ function renderAnthropicRevenueChart() {
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const labels = anthropicRevenueSeries.labels;
-  const maxValue = 35;
-  const ticks = [0, 5, 10, 15, 20, 25, 30, 35];
+  const maxValue = 110;
+  const ticks = [0, 20, 40, 60, 80, 100];
 
   const xFor = (label) =>
     margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
@@ -2413,6 +2417,11 @@ function renderAnthropicRevenueChart() {
     y: yFor(point.value),
   }));
   const bull2026Points = anthropicRevenueSeries.bull2026.map((point) => ({
+    ...point,
+    x: xFor(point.label),
+    y: yFor(point.value),
+  }));
+  const extrapolatedPoints = anthropicRevenueSeries.extrapolated2027.map((point) => ({
     ...point,
     x: xFor(point.label),
     y: yFor(point.value),
@@ -2440,6 +2449,7 @@ function renderAnthropicRevenueChart() {
     <polyline fill="none" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(target2025Points)}" />
     <polyline fill="none" stroke="#315f8f" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(base2026Points)}" />
     <polyline fill="none" stroke="#8a4fdc" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(bull2026Points)}" />
+    <polyline fill="none" stroke="#a5483f" stroke-width="2.6" stroke-dasharray="3 6" points="${buildPolyline(extrapolatedPoints)}" />
     ${actualPoints
       .map(
         (point) => `
@@ -2448,7 +2458,7 @@ function renderAnthropicRevenueChart() {
         `,
       )
       .join("")}
-    ${[...target2025Points.slice(1), ...base2026Points.slice(1), ...bull2026Points.slice(1)]
+    ${[...target2025Points.slice(1), ...base2026Points.slice(1), ...bull2026Points.slice(1), ...extrapolatedPoints.slice(1)]
       .map(
         (point) => `
           <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#fffdf8" stroke="#1f2528" />
@@ -2464,7 +2474,9 @@ function renderAnthropicRevenueChart() {
       <line x1="430" y1="6" x2="462" y2="6" stroke="#315f8f" stroke-width="2.6" stroke-dasharray="7 6" />
       <text x="470" y="10" fill="#1f2528" font-size="12">2026 base</text>
       <line x1="560" y1="6" x2="592" y2="6" stroke="#8a4fdc" stroke-width="2.6" stroke-dasharray="7 6" />
-      <text x="600" y="10" fill="#1f2528" font-size="12">2026 bull</text>
+      <text x="600" y="10" fill="#1f2528" font-size="12">2026 high case</text>
+      <line x1="700" y1="6" x2="732" y2="6" stroke="#a5483f" stroke-width="2.6" stroke-dasharray="3 6" />
+      <text x="740" y="10" fill="#1f2528" font-size="12">TI 1-year extrapolation</text>
     </g>
   `;
 }
