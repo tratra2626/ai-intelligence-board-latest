@@ -682,24 +682,28 @@ let activeCommercialCompany = "Anthropic";
 
 const anthropicRevenueSeries = {
   actual: [
-    { label: "2025-01", value: 1.0, short: "1.0", note: "2025 年初 run-rate 约 $1B（Anthropic Series F 官方）" },
+    { label: "2024-12", value: 1.0, short: "1.0", note: "2024 年末 run-rate 约 $1B（Anthropic Series F 官方）" },
+    { label: "2025-03", value: 1.4, short: "1.4", note: "2025-03 run-rate $1.4B（The Information）" },
     { label: "2025-05", value: 3.0, short: "3.0", note: "2025-05 run-rate 约 $3B（Reuters/CNBC）" },
-    { label: "2025-08", value: 5.0, short: "5.0+", note: "2025-08 run-rate 超过 $5B（Anthropic Series F 官方）" },
+    { label: "2025-07", value: 5.0, short: "5.0", note: "2025-07 run-rate 约 $5B（The Information 摘要）" },
+    { label: "2025-10", value: 7.0, short: "7.0", note: "2025-10 run-rate 接近 $7B（Reuters / The Information）" },
+    { label: "2025-12", value: 9.0, short: "9.0", note: "2025 年末 internal goal $9B（Reuters）" },
     { label: "2026-02", value: 14.0, short: "14", note: "2026-02 run-rate $14B（Anthropic Series G 官方）" },
+    { label: "2026-03", value: 19.0, short: "19", note: "2026-03 run-rate $19B（Bloomberg / Axios 转述）" },
+    { label: "2026-04", value: 30.0, short: "30+", note: "2026-04 run-rate 超过 $30B（Anthropic 官方）" },
   ],
   target2025: [
-    { label: "2025-08", value: 5.0 },
-    { label: "2025-12E", value: 9.0, short: "9", note: "2025 年末 internal target（Reuters）" },
+    { label: "2025-12", value: 9.0, short: "9", note: "2025 年末 internal target（Reuters）" },
   ],
   base2026: [
-    { label: "2026-02", value: 14.0 },
+    { label: "2025-12", value: 9.0 },
     { label: "2026-12E", value: 20.0, short: "20", note: "2026 年末 base case（Reuters）" },
   ],
   bull2026: [
-    { label: "2026-02", value: 14.0 },
+    { label: "2025-12", value: 9.0 },
     { label: "2026-12E", value: 26.0, short: "26", note: "2026 年末 best case（Reuters）" },
   ],
-  labels: ["2025-01", "2025-05", "2025-08", "2025-12E", "2026-02", "2026-12E"],
+  labels: ["2024-12", "2025-03", "2025-05", "2025-07", "2025-10", "2025-12", "2026-02", "2026-03", "2026-04", "2026-12E"],
 };
 
 const anthropicRevenueMixStats = [
@@ -747,6 +751,8 @@ const anthropicAnnualForecastSeries = {
   ],
   nov2025Bull: [
     { label: "2025", value: 4.7, short: "4.7", note: "2025 updated revenue expectation（The Information 摘要）" },
+    { label: "2026", value: 15.2, short: "15.2", note: "2026 updated optimistic revenue（The Information 摘要）" },
+    { label: "2027", value: 38.9, short: "38.9", note: "2027 updated optimistic revenue（The Information 摘要）" },
     { label: "2028", value: 70.0, short: "70", note: "2028 updated optimistic revenue（The Information 摘要）" },
   ],
 };
@@ -2334,8 +2340,8 @@ function renderAnthropicRevenueChart() {
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const labels = anthropicRevenueSeries.labels;
-  const maxValue = 28;
-  const ticks = [0, 5, 10, 15, 20, 25];
+  const maxValue = 35;
+  const ticks = [0, 5, 10, 15, 20, 25, 30, 35];
 
   const xFor = (label) =>
     margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
