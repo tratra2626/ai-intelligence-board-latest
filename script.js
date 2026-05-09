@@ -663,8 +663,6 @@ const priceChartMeta = document.querySelector("#priceChartMeta");
 const chartCompanyChips = document.querySelector("#chartCompanyChips");
 const chartResetView = document.querySelector("#chartResetView");
 const chartTooltip = document.querySelector("#chartTooltip");
-const conceptChips = [...document.querySelectorAll("[data-concept-topic]")];
-const conceptPanels = [...document.querySelectorAll("[data-concept-panel]")];
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 
 let activeCompany = "all";
@@ -2194,14 +2192,6 @@ priceMetricInputs.forEach((input) =>
     renderPriceChart();
   }),
 );
-
-conceptChips.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    const target = chip.dataset.conceptTopic;
-    conceptChips.forEach((item) => item.classList.toggle("is-active", item === chip));
-    conceptPanels.forEach((panel) => panel.classList.toggle("is-active", panel.dataset.conceptPanel === target));
-  });
-});
 
 setVerifiedText();
 setupDailyNewsTimeline();

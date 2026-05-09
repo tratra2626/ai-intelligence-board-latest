@@ -445,241 +445,257 @@
       <section class="tab-panel" id="concepts" aria-label="关键概念与专题">
         <div class="content-grid">
           <article class="feature-board news-board concepts-board">
-            <div class="news-date-card concepts-date-card">
-              <span>本期专题</span>
-              <strong>MCP / Context / Harness</strong>
-              <small>围绕 AI 工程范式演进的基础概念梳理：先看定义，再看它为什么重要。</small>
-            </div>
-
             <div class="news-summary">
-              <p class="eyebrow">Concept Primer</p>
-              <h2>从 Prompt Engineering 到 Context Engineering，再到 Harness</h2>
-              <p>过去两年，AI 应用的重点已经从“如何写出更有效的提示词”，逐步转向“如何组织上下文、工具、流程和评测机制，让模型在真实工作流中稳定运行”。这一变化不仅影响产品设计，也影响平台能力、客户黏性和收入结构。</p>
+              <p class="eyebrow">Concept Library</p>
+              <h2>关键概念与专题</h2>
+              <p>这一页按专题持续积累 AI 关键概念。结构上保留时间轴式阅读体验：左侧是专题卡片，右侧是正文；最新专题的顶部提供专题列表，方便快速跳转。</p>
             </div>
 
-            <div class="concept-switcher" aria-label="切换概念专题">
-              <button class="concept-chip is-active" type="button" data-concept-topic="mcp-harness">MCP / Context / Harness</button>
-              <button class="concept-chip" type="button" data-concept-topic="agent-stack">Agent / OpenClaw / Hermes</button>
-            </div>
+            <div class="concept-timeline">
+              <section class="concept-entry" id="concept-agent-stack">
+                <div class="news-date-card concepts-date-card">
+                  <span>本期专题</span>
+                  <strong>Agent / OpenClaw / Hermes</strong>
+                  <small>聚焦 agent 这一层的产品形态，以及 OpenClaw 和 Hermes 两条不同的实现路线。</small>
+                </div>
 
-            <section class="concept-topic is-active" data-concept-panel="mcp-harness">
-              <div class="concept-topic-head">
-                <h3>MCP 和 Harness 到底在解决什么问题</h3>
-                <p>这条演进线可以概括为三步：先优化单次交互，再管理多轮上下文，最后把模型纳入可治理、可评测、可连接外部系统的完整执行框架。下面按这个顺序展开。</p>
-              </div>
+                <div class="concept-entry-content">
+                  <div class="concept-switcher concept-switcher-panel" aria-label="专题列表">
+                    <a class="concept-chip is-active" href="#concept-agent-stack">Agent / OpenClaw / Hermes</a>
+                    <a class="concept-chip" href="#concept-mcp-harness">MCP / Context / Harness</a>
+                  </div>
 
-              <figure class="concept-hero-figure">
-                <div class="concept-hero-grid">
-                  <section class="concept-stage">
-                    <span class="concept-stage-badge">Stage 1</span>
-                    <h4>Prompt Engineering</h4>
-                    <p class="concept-stage-era">Early 2020s</p>
-                    <div class="concept-stage-visual prompt-visual">
-                      <span class="prompt-box">Prompt</span>
-                      <span class="prompt-arrow"></span>
-                      <span class="prompt-box output-box">Output</span>
+                  <section class="concept-topic concept-topic-static">
+                    <div class="concept-topic-head">
+                      <h3>Agent 这一层，为什么近一年变得更重要</h3>
+                      <p><code>Agent</code> 可以简单理解为“能够围绕目标持续调用工具、读取环境、管理状态并执行多步动作的模型系统”。这一定义不要求它完全自主，但强调它不是一次性回答，而是可以完成连续任务。</p>
                     </div>
-                    <p class="concept-stage-summary">重点是把任务描述得更清楚，包括角色、格式、约束和示例。</p>
-                  </section>
 
-                  <section class="concept-stage">
-                    <span class="concept-stage-badge">Stage 2</span>
-                    <h4>Context Engineering</h4>
-                    <p class="concept-stage-era">Mid 2020s</p>
-                    <div class="concept-stage-visual context-visual">
-                      <span>History</span>
-                      <span>Docs</span>
-                      <span>Tools</span>
-                      <span>Memory</span>
-                    </div>
-                    <p class="concept-stage-summary">重点是决定模型在当前步骤应当看到哪些信息，以及如何控制噪音和成本。</p>
-                  </section>
+                    <figure class="concept-hero-figure concept-agent-figure">
+                      <div class="concept-hero-grid concept-agent-grid">
+                        <section class="concept-stage">
+                          <span class="concept-stage-badge">Layer 1</span>
+                          <h4>Model</h4>
+                          <p class="concept-stage-era">Reasoning Core</p>
+                          <div class="concept-stage-visual agent-visual-box">
+                            <span>Reason</span>
+                            <span>Plan</span>
+                            <span>Respond</span>
+                          </div>
+                          <p class="concept-stage-summary">模型负责理解任务、生成计划和给出中间判断，但单独存在时仍然偏向“回答问题”。</p>
+                        </section>
 
-                  <section class="concept-stage">
-                    <span class="concept-stage-badge">Stage 3</span>
-                    <h4>Harness Engineering</h4>
-                    <p class="concept-stage-era">Present</p>
-                    <div class="concept-stage-visual harness-visual">
-                      <span>Context</span>
-                      <span>Constraints</span>
-                      <span>Feedback</span>
+                        <section class="concept-stage">
+                          <span class="concept-stage-badge">Layer 2</span>
+                          <h4>Agent Runtime</h4>
+                          <p class="concept-stage-era">State + Tools</p>
+                          <div class="concept-stage-visual agent-visual-box runtime-box">
+                            <span>Memory</span>
+                            <span>Tools</span>
+                            <span>Tasks</span>
+                          </div>
+                          <p class="concept-stage-summary">Agent runtime 把模型和记忆、工具、任务调度、权限边界放在一起，支持连续执行。</p>
+                        </section>
+
+                        <section class="concept-stage">
+                          <span class="concept-stage-badge">Layer 3</span>
+                          <h4>Operator Surface</h4>
+                          <p class="concept-stage-era">Gateway + Channels</p>
+                          <div class="concept-stage-visual agent-visual-box surface-box">
+                            <span>Inbox</span>
+                            <span>Gateway</span>
+                            <span>Control</span>
+                          </div>
+                          <p class="concept-stage-summary">真正进入业务使用时，还需要消息入口、控制台、日志、审批和连接渠道，才能变成可运营产品。</p>
+                        </section>
+                      </div>
+                      <figcaption>自制示意图：Agent 不只是模型本身，而是模型、runtime 和 operator surface 的组合。</figcaption>
+                    </figure>
+
+                    <div class="news-feed concept-feed">
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">Agent</span>
+                        </div>
+                        <h3>Agent 在这里具体指什么</h3>
+                        <p>在当前行业语境里，<code>agent</code> 通常指一种可持续执行任务的模型系统。它会围绕目标进行多步处理，而不是只返回一次答案。典型能力包括调用工具、读取外部数据、保持状态、拆分步骤、处理异常和在必要时等待下一次触发。</p>
+                        <p>因此，讨论 agent 时，重点通常不在“它会不会聊天”，而在“它能否持续完成工作”。这也是为什么很多公司开始把模型、工作流、调度器和连接层一起打包成新的产品层。</p>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">OpenClaw</span>
+                        </div>
+                        <h3>OpenClaw 更像多渠道入口和控制平面</h3>
+                        <p>从官方 GitHub 和文档看，OpenClaw 的核心特点是本地优先的 gateway、跨渠道接入和统一控制面。它强调的是：同一个 agent 可以连接 Telegram、Slack、Discord、Feishu、WebChat 等多个入口，并通过 dashboard、skills、sessions 和 routing 做统一管理。</p>
+                        <p>因此，OpenClaw 的价值更偏“分发和运营层”。如果团队关注的是多平台消息接入、统一会话控制、技能安装和设备/浏览器能力调用，那么 OpenClaw 提供的是一套更接近 control plane 的产品形态。</p>
+                        <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noreferrer">参考：OpenClaw GitHub</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">Hermes</span>
+                        </div>
+                        <h3>Hermes 更强调 memory、learning loop 和 agent runtime</h3>
+                        <p>Nous Research 的官方仓库把 Hermes 描述为 “the self-improving AI agent”。从公开文档看，它最强调的几个点是：持久记忆、跨会话检索、技能自我改进、定时任务、子代理并行，以及可在多种终端或消息入口上长期运行。</p>
+                        <p>这意味着 Hermes 的核心卖点更偏“agent 本体”。相比把渠道和控制面放在第一位，它更强调 agent 在长期运行中的学习、记忆和任务延续能力，也因此更容易被讨论为一类 agent runtime 或 agent OS。</p>
+                        <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">参考：NousResearch Hermes Agent GitHub</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">对比</span>
+                        </div>
+                        <h3>OpenClaw 和 Hermes 的差异可以怎么理解</h3>
+                        <p>一个相对稳妥的理解方式是：OpenClaw 更偏“gateway-first / control-plane-first”，Hermes 更偏“agent-first / runtime-first”。两者并非完全对立，也有大量能力重叠，但产品重心不同。</p>
+                        <p>如果关注的是跨平台入口、路由、会话管理和统一控制，OpenClaw 的框架更容易理解；如果关注的是记忆、技能积累、自我改进和长期任务连续性，Hermes 的叙事会更突出。行业层面，这也说明 agent 竞争已经开始分化为不同产品路线，而不只是模型路线。</p>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">影响</span>
+                        </div>
+                        <h3>为什么这类项目值得关注</h3>
+                        <p>第一，它们反映了市场正在从“调用模型”走向“部署 agent 系统”。第二，它们把模型之外的价值层显性化，包括入口、记忆、路由、治理、技能分发和长期运行。第三，它们说明 agent 产品未来未必会被单一模型厂商完全垄断，中间层和控制层仍有独立产品空间。</p>
+                        <p>对头部公司来说，这种变化会推动更多平台能力内建化；对创业项目来说，则意味着仍然可以围绕 runtime、workflow、control plane 或垂直入口建立产品差异。</p>
+                      </article>
                     </div>
-                    <p class="concept-stage-summary">重点是把模型、工具、权限、评测和回路管理组合成可运行、可治理的系统。</p>
+
+                    <section class="judgement-card concept-judgement">
+                      <h3>看这个专题时最该记住什么</h3>
+                      <p><code>Agent</code> 并不只是“更智能的聊天机器人”，而是一个能持续调动工具、保持状态并执行多步任务的系统。围绕 agent 的竞争，正在从模型本身扩展到 runtime、gateway、memory、skills 和治理能力。</p>
+                      <p>OpenClaw 和 Hermes 可以看作两条不同重心的产品路线：前者更偏控制平面和多入口，后者更偏 agent runtime 和长期记忆。这种分化本身就是当前 agent 市场成熟度提升的信号。</p>
+                    </section>
                   </section>
                 </div>
-                <figcaption>自制示意图：AI 工程重点从单轮提示词，逐步扩展到上下文编排，再扩展到完整执行框架。</figcaption>
-              </figure>
-
-              <div class="news-feed concept-feed">
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">Prompt</span>
-                  </div>
-                  <h3>Prompt engineering 是什么</h3>
-                  <p><code>Prompt engineering</code> 的核心是优化输入表达，让模型更稳定地理解任务目标。常见做法包括明确角色、输出格式、边界条件、语气要求，以及提供少量示例。</p>
-                  <p>它在早期非常有效，因为当时很多应用仍以单轮问答或单步生成任务为主。问题在于，当任务开始涉及多步处理、外部数据、工具调用和连续状态时，提示词本身不再足以承载全部控制逻辑。</p>
-                  <a href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noreferrer">参考：OpenAI Prompt Engineering Best Practices</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">Context</span>
-                  </div>
-                  <h3>为什么行业会升级到 context engineering</h3>
-                  <p>随着应用复杂度提升，模型需要处理的不再只是一个问题，而是一组与当前任务相关的信息。这里的 <code>context</code> 包括聊天历史、文档片段、数据库结果、工具返回值、用户状态、权限范围和中间步骤结果。</p>
-                  <p><code>Context engineering</code> 关注的是：哪些信息应当进入当前上下文，如何排序，如何压缩，何时保留历史，何时丢弃噪音。它直接影响响应质量、推理成本和系统稳定性，因此已经成为企业级 AI 应用的关键工程环节。</p>
-                  <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips" target="_blank" rel="noreferrer">参考：Anthropic Long Context Tips</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">Harness</span>
-                  </div>
-                  <h3>Harness 是什么</h3>
-                  <p><code>Harness</code> 不是单一协议，而是更偏工程实践的说法。它指模型外层的执行框架，包括任务编排、工具调用、权限控制、失败重试、状态管理、日志追踪、评测与回退机制。</p>
-                  <p>当应用从“生成一段内容”转向“调用多个系统完成一个流程”时，差异化优势往往不再只来自模型能力，而来自 harness 是否足够稳定、可观测、可审计。也正因如此，很多头部厂商正在把这部分能力产品化。</p>
-                  <a href="https://platform.openai.com/docs/guides/agent-evals" target="_blank" rel="noreferrer">参考：OpenAI Agent Evals</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">MCP</span>
-                  </div>
-                  <h3>MCP 在这条链路里的位置</h3>
-                  <p><code>MCP</code> 是一类面向模型与外部工具/数据源连接的开放协议。它试图把原本高度定制化的连接过程标准化，让模型客户端、工具服务和外部资源之间形成更统一的交互方式。</p>
-                  <p>它的重要性不在于直接提升模型智能，而在于降低集成成本、扩大工具生态，并提高模型进入企业系统的效率。如果这类协议形成规模效应，平台竞争就会从单一模型能力扩展到连接标准和生态组织能力。</p>
-                  <a href="https://docs.anthropic.com/en/docs/mcp" target="_blank" rel="noreferrer">参考：Anthropic MCP Docs</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">影响</span>
-                  </div>
-                  <h3>对 OpenAI、Anthropic、Google 这类头部公司的影响</h3>
-                  <p>第一，竞争焦点会从模型能力本身，转向更完整的 agent 基础设施能力。第二，连接器、评测、权限治理和工作流管理，会逐渐从附属功能变成主产品的一部分。第三，客户迁移成本会提升，因为企业真正接入的是一整套流程，而不是单个聊天入口。</p>
-                  <p>从商业角度看，这通常意味着收入结构更平台化：除了 token 计费，厂商还会围绕连接、评测、治理和企业工作流形成新的产品层。长期看，这类能力可能比单次 benchmark 优势更接近可持续护城河。</p>
-                  <a href="https://platform.openai.com/docs/guides/evals?api-mode=responses" target="_blank" rel="noreferrer">参考：OpenAI Evals Guide</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">结论</span>
-                  </div>
-                  <h3>可以如何理解这一轮演进</h3>
-                  <p>如果只关注模型版本更新，很容易低估 AI 工程层面的变化。当前更重要的趋势，是模型正被嵌入到越来越完整的系统中：它需要上下文、工具、规则、反馈和外部连接共同支撑，才能在生产环境中稳定运行。</p>
-                  <p>因此，后续值得持续关注的，不只是模型能力提升本身，而是连接器生态是否扩张、评测与治理是否标准化，以及头部公司能否把这些能力沉淀为稳定可收费的平台产品。</p>
-                </article>
-              </div>
-            </section>
-
-            <section class="judgement-card concept-judgement">
-              <h3>看这个专题时最该记住什么</h3>
-              <p><code>Prompt engineering</code> 主要解决输入表达问题，<code>context engineering</code> 主要解决信息组织问题，<code>harness</code> 主要解决系统执行与治理问题，<code>MCP</code> 则更接近其中的标准化连接层。</p>
-              <p>对头部公司而言，这意味着竞争边界正在从模型能力，扩展到连接器、工作流、评测和企业治理能力。对行业观察者而言，这通常比单次模型排行更接近长期平台价值。</p>
-            </section>
-
-            <section class="concept-topic" data-concept-panel="agent-stack">
-              <div class="concept-topic-head">
-                <h3>Agent 这一层，为什么近一年变得更重要</h3>
-                <p><code>Agent</code> 可以简单理解为“能够围绕目标持续调用工具、读取环境、管理状态并执行多步动作的模型系统”。这一定义不要求它完全自主，但强调它不是一次性回答，而是可以完成连续任务。</p>
-              </div>
-
-              <figure class="concept-hero-figure concept-agent-figure">
-                <div class="concept-hero-grid concept-agent-grid">
-                  <section class="concept-stage">
-                    <span class="concept-stage-badge">Layer 1</span>
-                    <h4>Model</h4>
-                    <p class="concept-stage-era">Reasoning Core</p>
-                    <div class="concept-stage-visual agent-visual-box">
-                      <span>Reason</span>
-                      <span>Plan</span>
-                      <span>Respond</span>
-                    </div>
-                    <p class="concept-stage-summary">模型负责理解任务、生成计划和给出中间判断，但单独存在时仍然偏向“回答问题”。</p>
-                  </section>
-
-                  <section class="concept-stage">
-                    <span class="concept-stage-badge">Layer 2</span>
-                    <h4>Agent Runtime</h4>
-                    <p class="concept-stage-era">State + Tools</p>
-                    <div class="concept-stage-visual agent-visual-box runtime-box">
-                      <span>Memory</span>
-                      <span>Tools</span>
-                      <span>Tasks</span>
-                    </div>
-                    <p class="concept-stage-summary">Agent runtime 把模型和记忆、工具、任务调度、权限边界放在一起，支持连续执行。</p>
-                  </section>
-
-                  <section class="concept-stage">
-                    <span class="concept-stage-badge">Layer 3</span>
-                    <h4>Operator Surface</h4>
-                    <p class="concept-stage-era">Gateway + Channels</p>
-                    <div class="concept-stage-visual agent-visual-box surface-box">
-                      <span>Inbox</span>
-                      <span>Gateway</span>
-                      <span>Control</span>
-                    </div>
-                    <p class="concept-stage-summary">真正进入业务使用时，还需要消息入口、控制台、日志、审批和连接渠道，才能变成可运营产品。</p>
-                  </section>
-                </div>
-                <figcaption>自制示意图：Agent 不只是模型本身，而是模型、runtime 和 operator surface 的组合。</figcaption>
-              </figure>
-
-              <div class="news-feed concept-feed">
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">Agent</span>
-                  </div>
-                  <h3>Agent 在这里具体指什么</h3>
-                  <p>在当前行业语境里，<code>agent</code> 通常指一种可持续执行任务的模型系统。它会围绕目标进行多步处理，而不是只返回一次答案。典型能力包括调用工具、读取外部数据、保持状态、拆分步骤、处理异常和在必要时等待下一次触发。</p>
-                  <p>因此，讨论 agent 时，重点通常不在“它会不会聊天”，而在“它能否持续完成工作”。这也是为什么很多公司开始把模型、工作流、调度器和连接层一起打包成新的产品层。</p>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">OpenClaw</span>
-                  </div>
-                  <h3>OpenClaw 更像多渠道入口和控制平面</h3>
-                  <p>从官方 GitHub 和文档看，OpenClaw 的核心特点是本地优先的 gateway、跨渠道接入和统一控制面。它强调的是：同一个 agent 可以连接 Telegram、Slack、Discord、Feishu、WebChat 等多个入口，并通过 dashboard、skills、sessions 和 routing 做统一管理。</p>
-                  <p>因此，OpenClaw 的价值更偏“分发和运营层”。如果团队关注的是多平台消息接入、统一会话控制、技能安装和设备/浏览器能力调用，那么 OpenClaw 提供的是一套更接近 control plane 的产品形态。</p>
-                  <a href="https://github.com/openclaw/openclaw" target="_blank" rel="noreferrer">参考：OpenClaw GitHub</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">Hermes</span>
-                  </div>
-                  <h3>Hermes 更强调 memory、learning loop 和 agent runtime</h3>
-                  <p>Nous Research 的官方仓库把 Hermes 描述为 “the self-improving AI agent”。从公开文档看，它最强调的几个点是：持久记忆、跨会话检索、技能自我改进、定时任务、子代理并行，以及可在多种终端或消息入口上长期运行。</p>
-                  <p>这意味着 Hermes 的核心卖点更偏“agent 本体”。相比把渠道和控制面放在第一位，它更强调 agent 在长期运行中的学习、记忆和任务延续能力，也因此更容易被讨论为一类 agent runtime 或 agent OS。</p>
-                  <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">参考：NousResearch Hermes Agent GitHub</a>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">对比</span>
-                  </div>
-                  <h3>OpenClaw 和 Hermes 的差异可以怎么理解</h3>
-                  <p>一个相对稳妥的理解方式是：OpenClaw 更偏“gateway-first / control-plane-first”，Hermes 更偏“agent-first / runtime-first”。两者并非完全对立，也有大量能力重叠，但产品重心不同。</p>
-                  <p>如果关注的是跨平台入口、路由、会话管理和统一控制，OpenClaw 的框架更容易理解；如果关注的是记忆、技能积累、自我改进和长期任务连续性，Hermes 的叙事会更突出。行业层面，这也说明 agent 竞争已经开始分化为不同产品路线，而不只是模型路线。</p>
-                </article>
-
-                <article class="news-card concept-card">
-                  <div class="news-card-head">
-                    <span class="news-tag">影响</span>
-                  </div>
-                  <h3>为什么这类项目值得关注</h3>
-                  <p>第一，它们反映了市场正在从“调用模型”走向“部署 agent 系统”。第二，它们把模型之外的价值层显性化，包括入口、记忆、路由、治理、技能分发和长期运行。第三，它们说明 agent 产品未来未必会被单一模型厂商完全垄断，中间层和控制层仍有独立产品空间。</p>
-                  <p>对头部公司来说，这种变化会推动更多平台能力内建化；对创业项目来说，则意味着仍然可以围绕 runtime、workflow、control plane 或垂直入口建立产品差异。</p>
-                </article>
-              </div>
-
-              <section class="judgement-card concept-judgement">
-                <h3>看这个专题时最该记住什么</h3>
-                <p><code>Agent</code> 并不只是“更智能的聊天机器人”，而是一个能持续调动工具、保持状态并执行多步任务的系统。围绕 agent 的竞争，正在从模型本身扩展到 runtime、gateway、memory、skills 和治理能力。</p>
-                <p>OpenClaw 和 Hermes 可以看作两条不同重心的产品路线：前者更偏控制平面和多入口，后者更偏 agent runtime 和长期记忆。这种分化本身就是当前 agent 市场成熟度提升的信号。</p>
               </section>
-            </section>
+
+              <section class="concept-entry" id="concept-mcp-harness">
+                <div class="news-date-card concepts-date-card">
+                  <span>本期专题</span>
+                  <strong>MCP / Context / Harness</strong>
+                  <small>围绕 AI 工程范式演进的基础概念梳理：先看定义，再看它为什么重要。</small>
+                </div>
+
+                <div class="concept-entry-content">
+                  <section class="concept-topic concept-topic-static">
+                    <div class="concept-topic-head">
+                      <h3>MCP 和 Harness 到底在解决什么问题</h3>
+                      <p>这条演进线可以概括为三步：先优化单次交互，再管理多轮上下文，最后把模型纳入可治理、可评测、可连接外部系统的完整执行框架。下面按这个顺序展开。</p>
+                    </div>
+
+                    <figure class="concept-hero-figure">
+                      <div class="concept-hero-grid">
+                        <section class="concept-stage">
+                          <span class="concept-stage-badge">Stage 1</span>
+                          <h4>Prompt Engineering</h4>
+                          <p class="concept-stage-era">Early 2020s</p>
+                          <div class="concept-stage-visual prompt-visual">
+                            <span class="prompt-box">Prompt</span>
+                            <span class="prompt-arrow"></span>
+                            <span class="prompt-box output-box">Output</span>
+                          </div>
+                          <p class="concept-stage-summary">重点是把任务描述得更清楚，包括角色、格式、约束和示例。</p>
+                        </section>
+
+                        <section class="concept-stage">
+                          <span class="concept-stage-badge">Stage 2</span>
+                          <h4>Context Engineering</h4>
+                          <p class="concept-stage-era">Mid 2020s</p>
+                          <div class="concept-stage-visual context-visual">
+                            <span>History</span>
+                            <span>Docs</span>
+                            <span>Tools</span>
+                            <span>Memory</span>
+                          </div>
+                          <p class="concept-stage-summary">重点是决定模型在当前步骤应当看到哪些信息，以及如何控制噪音和成本。</p>
+                        </section>
+
+                        <section class="concept-stage">
+                          <span class="concept-stage-badge">Stage 3</span>
+                          <h4>Harness Engineering</h4>
+                          <p class="concept-stage-era">Present</p>
+                          <div class="concept-stage-visual harness-visual">
+                            <span>Context</span>
+                            <span>Constraints</span>
+                            <span>Feedback</span>
+                          </div>
+                          <p class="concept-stage-summary">重点是把模型、工具、权限、评测和回路管理组合成可运行、可治理的系统。</p>
+                        </section>
+                      </div>
+                      <figcaption>自制示意图：AI 工程重点从单轮提示词，逐步扩展到上下文编排，再扩展到完整执行框架。</figcaption>
+                    </figure>
+
+                    <div class="news-feed concept-feed">
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">Prompt</span>
+                        </div>
+                        <h3>Prompt engineering 是什么</h3>
+                        <p><code>Prompt engineering</code> 的核心是优化输入表达，让模型更稳定地理解任务目标。常见做法包括明确角色、输出格式、边界条件、语气要求，以及提供少量示例。</p>
+                        <p>它在早期非常有效，因为当时很多应用仍以单轮问答或单步生成任务为主。问题在于，当任务开始涉及多步处理、外部数据、工具调用和连续状态时，提示词本身不再足以承载全部控制逻辑。</p>
+                        <a href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noreferrer">参考：OpenAI Prompt Engineering Best Practices</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">Context</span>
+                        </div>
+                        <h3>为什么行业会升级到 context engineering</h3>
+                        <p>随着应用复杂度提升，模型需要处理的不再只是一个问题，而是一组与当前任务相关的信息。这里的 <code>context</code> 包括聊天历史、文档片段、数据库结果、工具返回值、用户状态、权限范围和中间步骤结果。</p>
+                        <p><code>Context engineering</code> 关注的是：哪些信息应当进入当前上下文，如何排序，如何压缩，何时保留历史，何时丢弃噪音。它直接影响响应质量、推理成本和系统稳定性，因此已经成为企业级 AI 应用的关键工程环节。</p>
+                        <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/long-context-tips" target="_blank" rel="noreferrer">参考：Anthropic Long Context Tips</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">Harness</span>
+                        </div>
+                        <h3>Harness 是什么</h3>
+                        <p><code>Harness</code> 不是单一协议，而是更偏工程实践的说法。它指模型外层的执行框架，包括任务编排、工具调用、权限控制、失败重试、状态管理、日志追踪、评测与回退机制。</p>
+                        <p>当应用从“生成一段内容”转向“调用多个系统完成一个流程”时，差异化优势往往不再只来自模型能力，而来自 harness 是否足够稳定、可观测、可审计。也正因如此，很多头部厂商正在把这部分能力产品化。</p>
+                        <a href="https://platform.openai.com/docs/guides/agent-evals" target="_blank" rel="noreferrer">参考：OpenAI Agent Evals</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">MCP</span>
+                        </div>
+                        <h3>MCP 在这条链路里的位置</h3>
+                        <p><code>MCP</code> 是一类面向模型与外部工具/数据源连接的开放协议。它试图把原本高度定制化的连接过程标准化，让模型客户端、工具服务和外部资源之间形成更统一的交互方式。</p>
+                        <p>它的重要性不在于直接提升模型智能，而在于降低集成成本、扩大工具生态，并提高模型进入企业系统的效率。如果这类协议形成规模效应，平台竞争就会从单一模型能力扩展到连接标准和生态组织能力。</p>
+                        <a href="https://docs.anthropic.com/en/docs/mcp" target="_blank" rel="noreferrer">参考：Anthropic MCP Docs</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">影响</span>
+                        </div>
+                        <h3>对 OpenAI、Anthropic、Google 这类头部公司的影响</h3>
+                        <p>第一，竞争焦点会从模型能力本身，转向更完整的 agent 基础设施能力。第二，连接器、评测、权限治理和工作流管理，会逐渐从附属功能变成主产品的一部分。第三，客户迁移成本会提升，因为企业真正接入的是一整套流程，而不是单个聊天入口。</p>
+                        <p>从商业角度看，这通常意味着收入结构更平台化：除了 token 计费，厂商还会围绕连接、评测、治理和企业工作流形成新的产品层。长期看，这类能力可能比单次 benchmark 优势更接近可持续护城河。</p>
+                        <a href="https://platform.openai.com/docs/guides/evals?api-mode=responses" target="_blank" rel="noreferrer">参考：OpenAI Evals Guide</a>
+                      </article>
+
+                      <article class="news-card concept-card">
+                        <div class="news-card-head">
+                          <span class="news-tag">结论</span>
+                        </div>
+                        <h3>可以如何理解这一轮演进</h3>
+                        <p>如果只关注模型版本更新，很容易低估 AI 工程层面的变化。当前更重要的趋势，是模型正被嵌入到越来越完整的系统中：它需要上下文、工具、规则、反馈和外部连接共同支撑，才能在生产环境中稳定运行。</p>
+                        <p>因此，后续值得持续关注的，不只是模型能力提升本身，而是连接器生态是否扩张、评测与治理是否标准化，以及头部公司能否把这些能力沉淀为稳定可收费的平台产品。</p>
+                      </article>
+                    </div>
+
+                    <section class="judgement-card concept-judgement">
+                      <h3>看这个专题时最该记住什么</h3>
+                      <p><code>Prompt engineering</code> 主要解决输入表达问题，<code>context engineering</code> 主要解决信息组织问题，<code>harness</code> 主要解决系统执行与治理问题，<code>MCP</code> 则更接近其中的标准化连接层。</p>
+                      <p>对头部公司而言，这意味着竞争边界正在从模型能力，扩展到连接器、工作流、评测和企业治理能力。对行业观察者而言，这通常比单次模型排行更接近长期平台价值。</p>
+                    </section>
+                  </section>
+                </div>
+              </section>
+            </div>
           </article>
         </div>
       </section>
