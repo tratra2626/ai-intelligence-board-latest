@@ -877,6 +877,26 @@ const anthropicFundingRows = [
   },
 ];
 
+const anthropicValuationSeries = anthropicFundingRows
+  .map((row) => {
+    const match = row.valuation.match(/\$([\d.]+)B/);
+    if (!match) {
+      return null;
+    }
+    return {
+      date: row.date,
+      label: row.date.slice(0, 7),
+      type: row.type,
+      value: Number(match[1]),
+      short: match[1].replace(/\.0$/, ""),
+      valuation: row.valuation,
+      note: row.note,
+      source: row.source,
+      kind: row.kind,
+    };
+  })
+  .filter(Boolean);
+
 const priceRows = [
   {
     company: "OpenAI",
@@ -2461,7 +2481,6 @@ function renderAnthropicFundingTable() {
         <tr>
           <td>${row.date}</td>
           <td>${row.type}</td>
-          <td>${row.amountLabel}</td>
           <td>${row.valuation}</td>
           <td><a href="${row.source}" target="_blank" rel="noreferrer">${row.note}</a></td>
         </tr>
@@ -2875,14 +2894,39 @@ function renderAnthropicFundingChart() {
 
   const width = 900;
   const height = 320;
-  const margin = { top: 28, right: 28, bottom: 62, left: 54 };
+  const margin = { top: 28, right: 28, bottom: 58, left: 54 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
-  const maxValue = 32;
-  const ticks = [0, 5, 10, 15, 20, 25, 30];
-  const slotWidth = chartWidth / anthropicFundingRows.length;
-  const barWidth = Math.min(52, slotWidth * 0.62);
+  const maxValue = 400;
+  const ticks = [0, 50, 100, 150, 200, 250, 300, 350, 400];
+  const xFor = (index) =>
+    margin.left + (index / (anthropicValuationSeries.length - 1 || 1)) * chartWidth;
   const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  const valuationPoints = anthropicValuationSeries.map((row, index) => ({
+    ...row,
+    x: xFor(index),
+    y: yFor(row.value),
+  }));
+
+  const valuationPointMarkup = valuationPoints
+    .map((point) => {
+      const color = point.kind === "strategic" ? "#9c6a22" : "#315f8f";
+      const pointId = registerCommercialPoint({
+        chartKey: "anthropic-valuation",
+        seriesLabel: "Anthropic valuation",
+        label: `${point.label} · ${point.type}`,
+        valueText: point.valuation,
+        note: point.note,
+        color,
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`Anthropic valuation ${point.label} ${point.valuation}`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="6" fill="#fffdf8" stroke="${color}" stroke-width="3" />
+        <text x="${point.x}" y="${point.y - 14}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="800">${point.short}</text>
+        <text x="${point.x}" y="${height - 22}" text-anchor="middle" fill="#6f7478" font-size="10">${point.label}</text>
+      `;
+    })
+    .join("");
 
   anthropicFundingChart.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
@@ -2895,27 +2939,16 @@ function renderAnthropicFundingChart() {
         `;
       })
       .join("")}
-    ${anthropicFundingRows
-      .map((row, index) => {
-        const x = margin.left + slotWidth * index + (slotWidth - barWidth) / 2;
-        const y = yFor(row.amount);
-        const barHeight = margin.top + chartHeight - y;
-        const color = row.kind === "strategic" ? "#9c6a22" : "#315f8f";
-        return `
-          <rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" rx="8" fill="${color}" opacity="0.9" />
-          <text x="${x + barWidth / 2}" y="${y - 10}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="800">${row.amountLabel.replace("Additional ", "")}</text>
-          <text x="${x + barWidth / 2}" y="${height - 28}" text-anchor="middle" fill="#6f7478" font-size="10">${row.date.slice(2, 7)}</text>
-          <text x="${x + barWidth / 2}" y="${height - 14}" text-anchor="middle" fill="#6f7478" font-size="10">${escapeHtml(row.type.slice(0, 10))}</text>
-        `;
-      })
-      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    <polyline fill="none" stroke="#315f8f" stroke-width="3.2" points="${buildPolyline(valuationPoints)}" />
+    ${valuationPointMarkup}
     <g transform="translate(${margin.left}, 10)">
-      <rect x="0" y="0" width="12" height="12" rx="3" fill="#315f8f" />
-      <text x="18" y="10" fill="#1f2528" font-size="12">股权融资轮次</text>
-      <rect x="130" y="0" width="12" height="12" rx="3" fill="#9c6a22" />
-      <text x="148" y="10" fill="#1f2528" font-size="12">战略投资 / 云合作承诺</text>
+      <line x1="0" y1="6" x2="28" y2="6" stroke="#315f8f" stroke-width="3.2" />
+      <text x="36" y="10" fill="#1f2528" font-size="12">公开估值节点</text>
+      <text x="160" y="10" fill="#6f7478" font-size="11">单位：USD bn</text>
     </g>
   `;
+  attachCommercialPointInteractions(anthropicFundingChart);
 }
 
 function renderCommercialPanel() {
