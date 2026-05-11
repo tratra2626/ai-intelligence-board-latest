@@ -1504,6 +1504,18 @@ h2 {
   gap: 20px;
 }
 
+.st-board {
+  gap: 18px;
+}
+
+.st-hero .commercial-meta-grid strong {
+  font-size: 22px;
+}
+
+.st-date-card {
+  border-left-color: var(--blue);
+}
+
 .commercial-company-switcher {
   display: flex;
   flex-wrap: wrap;

@@ -678,6 +678,13 @@ const openaiCostChart = document.querySelector("#openaiCostChart");
 const openaiMarginChart = document.querySelector("#openaiMarginChart");
 const openaiValuationChart = document.querySelector("#openaiValuationChart");
 const openaiValuationTable = document.querySelector("#openaiValuationTable");
+const stProductChips = document.querySelector("#stProductChips");
+const stCountryChips = document.querySelector("#stCountryChips");
+const stOverallChart = document.querySelector("#stOverallChart");
+const stCountryChart = document.querySelector("#stCountryChart");
+const stPeakValue = document.querySelector("#stPeakValue");
+const stPeakMeta = document.querySelector("#stPeakMeta");
+const stActiveCountryLabel = document.querySelector("#stActiveCountry");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
@@ -692,6 +699,8 @@ let selectedChartPoint = null;
 let activeCommercialCompany = "Anthropic";
 let selectedCommercialPointId = null;
 const commercialPointRegistry = new Map();
+let activeStCountry = "PH";
+let selectedStProducts = new Set();
 
 const anthropicRevenueSeries = {
   actual: [
@@ -977,6 +986,83 @@ const openaiValuationRows = [
     kind: "closed",
   },
 ];
+
+const stProductColors = {
+  ChatGPT: "#2e6f5d",
+  Gemini: "#3158b0",
+  Claude: "#9c6a22",
+  Grok: "#1f2528",
+  Perplexity: "#8a4fdc",
+  Dola: "#a5483f",
+};
+
+const stWeeklyData = {
+  weeks: [
+    "2026/01/04~2026/01/10",
+    "2026/01/11~2026/01/17",
+    "2026/01/18~2026/01/24",
+    "2026/01/25~2026/01/31",
+    "2026/02/01~2026/02/07",
+    "2026/02/08~2026/02/14",
+    "2026/02/15~2026/02/21",
+    "2026/02/22~2026/02/28",
+    "2026/03/01~2026/03/07",
+    "2026/03/08~2026/03/14",
+    "2026/03/15~2026/03/21",
+    "2026/03/22~2026/03/28",
+    "2026/03/29~2026/04/04",
+  ],
+  overall: {
+    ChatGPT: [42269, 42982, 44013, 44009, 44654, 45449, 44557, 45607, 44639, 44361, 43381, 43254, 43443],
+    Dola: [917, 1046, 1116, 1248, 1187, 1259, 1199, 1237, 1377, 1701, 1180, 1190, 1072],
+    Claude: [262, 277, 302, 314, 364, 400, 466, 591, 843, 959, 1040, 1147, 1203],
+    Gemini: [7162, 7414, 7619, 7807, 8081, 8201, 8381, 8678, 8810, 9027, 9034, 9412, 9489],
+    Grok: [1159, 1171, 1196, 1148, 1189, 1163, 1208, 1224, 1258, 1272, 1235, 1182, 1137],
+    Perplexity: [1058, 1023, 1014, 988, 984, 982, 960, 967, 958, 946, 924, 931, 899],
+  },
+  countries: {
+    PH: {
+      ChatGPT: [898, 917, 931, 912, 924, 951, 926, 931, 937, 905, 855, 795, 760],
+      Dola: [272, 279, 310, 280, 344, 330, 316, 332, 320, 380, 263, 216, 166],
+      Claude: [2, 2, 3, 2, 3, 3, 4, 5, 6, 7, 8, 9, 8],
+      Gemini: [139, 149, 160, 155, 163, 175, 176, 186, 192, 190, 184, 175, 165],
+      Grok: [12, 13, 10, 9, 10, 11, 11, 12, 12, 13, 11, 11, 10],
+      Perplexity: [21, 22, 21, 16, 16, 21, 18, 19, 16, 14, 12, 12, 11],
+    },
+    ID: {
+      ChatGPT: [1879, 2008, 2057, 2095, 2083, 2116, 1931, 2022, 2056, 1939, 1697, 1737, 1926],
+      Dola: [266, 344, 373, 458, 398, 378, 334, 345, 436, 573, 319, 283, 295],
+      Claude: [14, 14, 15, 17, 16, 18, 18, 22, 37, 41, 39, 44, 49],
+      Gemini: [411, 435, 468, 484, 482, 485, 474, 499, 536, 521, 517, 534, 565],
+      Grok: [55, 47, 40, 36, 35, 34, 39, 37, 38, 43, 40, 37, 34],
+      Perplexity: [40, 40, 37, 38, 35, 34, 36, 37, 37, 36, 31, 36, 34],
+    },
+    MX: {
+      ChatGPT: [1241, 1343, 1388, 1387, 1418, 1505, 1496, 1520, 1486, 1534, 1477, 1479, 1233],
+      Dola: [194, 236, 226, 253, 235, 258, 257, 259, 276, 323, 250, 241, 146],
+      Claude: [3, 3, 4, 3, 3, 4, 6, 6, 12, 13, 16, 17, 13],
+      Gemini: [272, 299, 312, 319, 341, 362, 387, 365, 391, 405, 403, 417, 363],
+      Grok: [24, 25, 30, 30, 32, 33, 33, 32, 35, 34, 38, 34, 29],
+      Perplexity: [14, 14, 16, 12, 14, 15, 15, 17, 17, 17, 16, 15, 14],
+    },
+    GB: {
+      ChatGPT: [812, 806, 814, 820, 820, 854, 816, 818, 802, 805, 812, 796, 800],
+      Dola: [21, 25, 32, 33, 33, 37, 42, 39, 44, 39, 44, 45, 53],
+      Claude: [10, 10, 9, 10, 11, 14, 15, 21, 25, 27, 29, 33, 34],
+      Gemini: [102, 104, 109, 106, 114, 111, 116, 122, 117, 120, 128, 125, 128],
+      Grok: [43, 49, 44, 43, 45, 44, 43, 39, 47, 40, 39, 38, 35],
+      Perplexity: [18, 16, 17, 18, 18, 17, 16, 18, 17, 16, 16, 15, 15],
+    },
+    BR: {
+      ChatGPT: [2413, 2478, 2486, 2546, 2566, 2893, 2700, 2769, 2777, 2788, 2851, 2823, 2831],
+      Dola: [47, 46, 48, 48, 50, 55, 68, 70, 77, 86, 90, 100, 115],
+      Claude: [7, 8, 8, 9, 10, 11, 12, 14, 20, 23, 26, 32, 31],
+      Gemini: [437, 450, 462, 465, 472, 485, 483, 502, 515, 531, 546, 568, 558],
+      Grok: [44, 47, 50, 52, 54, 52, 53, 60, 56, 58, 60, 53, 52],
+      Perplexity: [58, 53, 55, 56, 53, 56, 53, 54, 54, 53, 53, 54, 50],
+    },
+  },
+};
 
 const priceRows = [
   {
@@ -3422,6 +3508,198 @@ function renderOpenAIValuationChart() {
   attachCommercialPointInteractions(openaiValuationChart);
 }
 
+function formatStValue(value) {
+  return `${(value / 10000).toFixed(2).replace(/\.?0+$/, "")}亿`;
+}
+
+function getStSelectedProducts() {
+  const products = Object.keys(stWeeklyData.overall);
+  return selectedStProducts.size ? products.filter((product) => selectedStProducts.has(product)) : products;
+}
+
+function setupStProductChips() {
+  if (!stProductChips) {
+    return;
+  }
+
+  const products = Object.keys(stWeeklyData.overall);
+  if (!selectedStProducts.size) {
+    products.forEach((product) => selectedStProducts.add(product));
+  }
+
+  stProductChips.innerHTML = products
+    .map(
+      (product) =>
+        `<button class="commercial-chip${selectedStProducts.has(product) ? " is-active" : ""}" type="button" data-st-product="${escapeText(product)}" style="--chip-color:${stProductColors[product] || "#5f6569"}">${escapeText(product)}</button>`,
+    )
+    .join("");
+
+  stProductChips.querySelectorAll("[data-st-product]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const product = button.dataset.stProduct;
+      if (selectedStProducts.has(product) && selectedStProducts.size > 1) {
+        selectedStProducts.delete(product);
+      } else {
+        selectedStProducts.add(product);
+      }
+      setupStProductChips();
+      renderStOverviewCards();
+      renderStOverallChart();
+      renderStCountryChart();
+    });
+  });
+}
+
+function setupStCountryChips() {
+  if (!stCountryChips) {
+    return;
+  }
+
+  const countries = Object.keys(stWeeklyData.countries);
+  stCountryChips.innerHTML = countries
+    .map(
+      (country) =>
+        `<button class="commercial-chip${activeStCountry === country ? " is-active" : ""}" type="button" data-st-country="${escapeText(country)}">${escapeText(country)}</button>`,
+    )
+    .join("");
+
+  stCountryChips.querySelectorAll("[data-st-country]").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeStCountry = button.dataset.stCountry;
+      setupStCountryChips();
+      renderStOverviewCards();
+      renderStCountryChart();
+    });
+  });
+}
+
+function renderStOverviewCards() {
+  const selectedProducts = getStSelectedProducts();
+  let best = null;
+  selectedProducts.forEach((product) => {
+    stWeeklyData.overall[product].forEach((value, index) => {
+      if (!best || value > best.value) {
+        best = { product, value, week: stWeeklyData.weeks[index] };
+      }
+    });
+  });
+
+  if (stPeakValue && stPeakMeta && best) {
+    stPeakValue.textContent = formatStValue(best.value);
+    stPeakMeta.textContent = `${best.product} · ${best.week}`;
+  }
+  if (stActiveCountryLabel) {
+    stActiveCountryLabel.textContent = activeStCountry;
+  }
+}
+
+function renderStLineChart(svg, dataset, chartKey, title) {
+  if (!svg) {
+    return;
+  }
+
+  const width = 900;
+  const height = 340;
+  const margin = { top: 28, right: 28, bottom: 58, left: 62 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = stWeeklyData.weeks;
+  const selectedProducts = getStSelectedProducts();
+  const maxValue = Math.max(
+    ...selectedProducts.flatMap((product) => dataset[product] || [0]),
+    0,
+  );
+  const niceMax = maxValue > 10000 ? Math.ceil(maxValue / 5000) * 5000 : Math.ceil(maxValue / 500) * 500;
+  const tickCount = 5;
+  const ticks = Array.from({ length: tickCount + 1 }, (_, index) => Math.round((niceMax * index) / tickCount));
+  const xFor = (index) => margin.left + (index / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / (niceMax || 1)) * chartHeight;
+
+  const lineMarkup = selectedProducts
+    .map((product) => {
+      const color = stProductColors[product] || "#5f6569";
+      const points = (dataset[product] || []).map((value, index) => ({
+        label: labels[index],
+        value,
+        x: xFor(index),
+        y: yFor(value),
+      }));
+      const pointMarkup = points
+        .map((point) => {
+          const pointId = registerCommercialPoint({
+            chartKey,
+            seriesLabel: product,
+            label: point.label,
+            valueText: `${point.value} 万`,
+            note: `${title}；单位：万。`,
+            color,
+          });
+          return `<circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${product} ${point.label} ${point.value}万`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4" fill="#fffdf8" stroke="${color}" stroke-width="2" />`;
+        })
+        .join("");
+      return `
+        <polyline fill="none" stroke="${color}" stroke-width="2.8" points="${buildPolyline(points)}" />
+        ${pointMarkup}
+      `;
+    })
+    .join("");
+
+  const legendMarkup = selectedProducts
+    .map((product, index) => {
+      const x = margin.left + (index % 3) * 180;
+      const y = 10 + Math.floor(index / 3) * 18;
+      const color = stProductColors[product] || "#5f6569";
+      return `
+        <g transform="translate(${x}, ${y})">
+          <line x1="0" y1="6" x2="22" y2="6" stroke="${color}" stroke-width="2.8" />
+          <text x="28" y="10" fill="#1f2528" font-size="11">${escapeHtml(product)}</text>
+        </g>
+      `;
+    })
+    .join("");
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    ${labels
+      .map((label, index) => `<text x="${xFor(index)}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="10">${label.slice(5, 10)}</text>`)
+      .join("")}
+    ${lineMarkup}
+    ${legendMarkup}
+  `;
+  attachCommercialPointInteractions(svg);
+}
+
+function renderStOverallChart() {
+  renderStLineChart(stOverallChart, stWeeklyData.overall, "st-overall", "整体峰值 DAU 周度走势");
+}
+
+function renderStCountryChart() {
+  renderStLineChart(
+    stCountryChart,
+    stWeeklyData.countries[activeStCountry] || {},
+    `st-country-${activeStCountry}`,
+    `${activeStCountry} 峰值 DAU 周度走势`,
+  );
+}
+
+function renderStPanel() {
+  setupStProductChips();
+  setupStCountryChips();
+  renderStOverviewCards();
+  renderStOverallChart();
+  renderStCountryChart();
+}
+
 function renderCommercialPanel() {
   hideCommercialTooltip();
   renderAnthropicCostChart();
@@ -3507,6 +3785,9 @@ tabButtons.forEach((button) => {
     if (target === "commercial") {
       renderCommercialPanel();
     }
+    if (target === "overseas-st") {
+      renderStPanel();
+    }
   });
 });
 
@@ -3549,6 +3830,7 @@ setupPriceChartInteractions();
 renderPriceChart();
 renderPriceTable();
 renderCommercialPanel();
+renderStPanel();
 render();
 
 document.addEventListener("click", (event) => {

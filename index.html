@@ -17,6 +17,7 @@
           <button class="tab is-active" type="button" data-tab="news">每日重点新闻</button>
           <button class="tab" type="button" data-tab="concepts">关键概念/专题</button>
           <button class="tab" type="button" data-tab="commercial">商业化跟踪</button>
+          <button class="tab" type="button" data-tab="overseas-st">海外竞品-ST</button>
           <button class="tab" type="button" data-tab="weekly">每周重点新闻</button>
           <button class="tab" type="button" data-tab="pricing">模型价格对比</button>
           <button class="tab" type="button" data-tab="price-chart">价格趋势图</button>
@@ -1063,6 +1064,86 @@
                 </section>
               </div>
             </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="overseas-st" aria-label="海外竞品-ST">
+        <div class="content-grid">
+          <article class="feature-board commercial-board st-board">
+            <div class="news-summary">
+              <p class="eyebrow">Overseas Competitor Tracker</p>
+              <h2>海外竞品关键数据-ST</h2>
+              <p>数据来自你本地 `海外竞品关键数据-ST` 表。当前先展示 2026 年开始的双平台峰值 DAU 周度数据：一张总盘产品对比图，和一张按国家切换的周度图，方便直接看 ChatGPT、Gemini、Claude、Grok、Perplexity、Dola 的相对走势。</p>
+            </div>
+
+            <div class="commercial-hero st-hero">
+              <div class="news-date-card commercial-date-card st-date-card">
+                <span>数据范围</span>
+                <strong>2026 W1 - 2026 W14</strong>
+                <small>周度窗口从 2026-01-04~2026-01-10 到 2026-03-29~2026-04-04；单位为万，口径为双平台峰值 DAU。</small>
+              </div>
+
+              <div class="commercial-meta-card">
+                <div class="commercial-meta-grid">
+                  <div>
+                    <span>产品数</span>
+                    <strong>6</strong>
+                    <small>ChatGPT、Gemini、Claude、Grok、Perplexity、Dola</small>
+                  </div>
+                  <div>
+                    <span>国家数</span>
+                    <strong>5</strong>
+                    <small>PH、ID、MX、GB、BR</small>
+                  </div>
+                  <div>
+                    <span>最高峰值 DAU</span>
+                    <strong id="stPeakValue">-</strong>
+                    <small id="stPeakMeta">-</small>
+                  </div>
+                  <div>
+                    <span>当前国家</span>
+                    <strong id="stActiveCountry">PH</strong>
+                    <small>切换下面国家按钮查看对应周度曲线</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="commercial-card">
+              <div class="commercial-card-head">
+                <div>
+                  <p class="eyebrow">Product Filter</p>
+                  <h3>按产品筛选曲线</h3>
+                </div>
+              </div>
+              <div class="commercial-company-switcher" id="stProductChips" aria-label="按产品筛选海外竞品图"></div>
+            </div>
+
+            <div class="commercial-grid">
+              <section class="commercial-card commercial-card-wide">
+                <div class="commercial-card-head">
+                  <div>
+                    <p class="eyebrow">Overall Peak DAU</p>
+                    <h3>整体峰值 DAU 周度走势</h3>
+                  </div>
+                </div>
+                <p class="commercial-note">单位：万。展示 2026 年开始各产品双平台峰值 DAU 的周度变化。默认全部产品同屏，点击上方 chips 可筛掉不关心的曲线。</p>
+                <svg id="stOverallChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="海外竞品整体峰值 DAU 周度走势"></svg>
+              </section>
+
+              <section class="commercial-card commercial-card-wide">
+                <div class="commercial-card-head">
+                  <div>
+                    <p class="eyebrow">Country View</p>
+                    <h3>分国家峰值 DAU 周度走势</h3>
+                  </div>
+                </div>
+                <div class="commercial-company-switcher" id="stCountryChips" aria-label="按国家切换海外竞品图"></div>
+                <p class="commercial-note">单位：万。这里展示选中国家的各产品峰值 DAU 周度变化，更适合看结构差异，比如 ChatGPT 的领先幅度、Gemini 的跟随位置，以及 Dola 在部分市场的异常高位。</p>
+                <svg id="stCountryChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="海外竞品分国家峰值 DAU 周度走势"></svg>
+              </section>
+            </div>
           </article>
         </div>
       </section>
