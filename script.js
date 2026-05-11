@@ -674,6 +674,10 @@ const anthropicCostChart = document.querySelector("#anthropicCostChart");
 const anthropicCostStats = document.querySelector("#anthropicCostStats");
 const anthropicFundingTable = document.querySelector("#anthropicFundingTable");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
+const commercialChartTooltip = document.createElement("article");
+commercialChartTooltip.className = "commercial-chart-tooltip";
+commercialChartTooltip.hidden = true;
+document.body.appendChild(commercialChartTooltip);
 
 let activeCompany = "all";
 let selectedPriceCompanies = new Set();
@@ -681,6 +685,8 @@ let chartView = null;
 let chartDrag = null;
 let selectedChartPoint = null;
 let activeCommercialCompany = "Anthropic";
+let selectedCommercialPointId = null;
+const commercialPointRegistry = new Map();
 
 const anthropicRevenueSeries = {
   actual: [
@@ -1709,6 +1715,80 @@ function formatUsdPrice(value) {
   return `$${value < 1 ? value.toFixed(3).replace(/\.?0+$/, "") : value.toFixed(2).replace(/\.?0+$/, "")}`;
 }
 
+function hideCommercialTooltip() {
+  selectedCommercialPointId = null;
+  commercialChartTooltip.hidden = true;
+  commercialChartTooltip.innerHTML = "";
+  document
+    .querySelectorAll(".commercial-chart-point.is-active")
+    .forEach((node) => node.classList.remove("is-active"));
+}
+
+function registerCommercialPoint({ chartKey, seriesLabel, label, valueText, note, color }) {
+  const id = `${chartKey}::${seriesLabel}::${label}`;
+  commercialPointRegistry.set(id, { seriesLabel, label, valueText, note, color });
+  return id;
+}
+
+function setCommercialPointSelection(pointId) {
+  selectedCommercialPointId = pointId;
+  document.querySelectorAll(".commercial-chart-point").forEach((node) => {
+    node.classList.toggle("is-active", node.dataset.commercialPointId === pointId);
+  });
+}
+
+function showCommercialTooltip(pointId, target) {
+  const point = commercialPointRegistry.get(pointId);
+  if (!point || !target) {
+    return;
+  }
+
+  setCommercialPointSelection(pointId);
+  commercialChartTooltip.hidden = false;
+  commercialChartTooltip.style.setProperty("--tooltip-color", point.color || "#315f8f");
+  commercialChartTooltip.innerHTML = `
+    <div class="tooltip-head">
+      <span class="tooltip-company">${escapeText(point.seriesLabel)}</span>
+      <button class="tooltip-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <div class="tooltip-model">${escapeText(point.label)}</div>
+    <div class="tooltip-meta">
+      <span>数值：<strong class="tooltip-price">${escapeText(point.valueText)}</strong></span>
+      ${point.note ? `<span>${escapeText(point.note)}</span>` : ""}
+    </div>
+  `;
+
+  const rect = target.getBoundingClientRect();
+  const tooltipWidth = 280;
+  const tooltipHeight = point.note ? 146 : 110;
+  const maxLeft = window.innerWidth - tooltipWidth - 12;
+  const maxTop = window.innerHeight - tooltipHeight - 12;
+  const left = Math.min(maxLeft, Math.max(12, rect.left + rect.width / 2 - tooltipWidth / 2));
+  const top = Math.min(maxTop, Math.max(12, rect.top - tooltipHeight - 10));
+  commercialChartTooltip.style.left = `${left}px`;
+  commercialChartTooltip.style.top = `${top}px`;
+  commercialChartTooltip.querySelector(".tooltip-close")?.addEventListener("click", hideCommercialTooltip);
+}
+
+function attachCommercialPointInteractions(svg) {
+  if (!svg) {
+    return;
+  }
+
+  svg.querySelectorAll(".commercial-chart-point").forEach((node) => {
+    node.addEventListener("click", (event) => {
+      event.stopPropagation();
+      showCommercialTooltip(node.dataset.commercialPointId, node);
+    });
+    node.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        showCommercialTooltip(node.dataset.commercialPointId, node);
+      }
+    });
+  });
+}
+
 function hideChartTooltip() {
   selectedChartPoint = null;
   if (chartTooltip) {
@@ -2476,6 +2556,45 @@ function renderAnthropicRevenueChart() {
     y: yFor(point.value),
   }));
 
+  const actualPointMarkup = actualPoints
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "anthropic-revenue",
+        seriesLabel: "Historical run-rate",
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: point.note,
+        color: "#2e6f5d",
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`Historical run-rate ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.5" fill="#2e6f5d" />
+        <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+      `;
+    })
+    .join("");
+
+  const projectedPointMarkup = [
+    ...target2025Points.slice(1).map((point) => ({ ...point, seriesLabel: "2025 年末内部目标", color: "#9c6a22" })),
+    ...base2026Points.slice(1).map((point) => ({ ...point, seriesLabel: "2026 base", color: "#315f8f" })),
+    ...bull2026Points.slice(1).map((point) => ({ ...point, seriesLabel: "2026 high case", color: "#8a4fdc" })),
+    ...extrapolatedPoints.slice(1).map((point) => ({ ...point, seriesLabel: "TI 1-year extrapolation", color: "#a5483f" })),
+  ]
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "anthropic-revenue",
+        seriesLabel: point.seriesLabel,
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: point.note,
+        color: point.color,
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${point.seriesLabel} ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.5" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />
+        <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+      `;
+    })
+    .join("");
+
   anthropicRevenueChart.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
     ${ticks
@@ -2499,22 +2618,8 @@ function renderAnthropicRevenueChart() {
     <polyline fill="none" stroke="#315f8f" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(base2026Points)}" />
     <polyline fill="none" stroke="#8a4fdc" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(bull2026Points)}" />
     <polyline fill="none" stroke="#a5483f" stroke-width="2.6" stroke-dasharray="3 6" points="${buildPolyline(extrapolatedPoints)}" />
-    ${actualPoints
-      .map(
-        (point) => `
-          <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#2e6f5d" />
-          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
-        `,
-      )
-      .join("")}
-    ${[...target2025Points.slice(1), ...base2026Points.slice(1), ...bull2026Points.slice(1), ...extrapolatedPoints.slice(1)]
-      .map(
-        (point) => `
-          <circle cx="${point.x}" cy="${point.y}" r="4.5" fill="#fffdf8" stroke="#1f2528" />
-          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
-        `,
-      )
-      .join("")}
+    ${actualPointMarkup}
+    ${projectedPointMarkup}
     <g transform="translate(${margin.left}, 10)">
       <rect x="0" y="0" width="12" height="12" rx="6" fill="#2e6f5d" />
       <text x="18" y="10" fill="#1f2528" font-size="12">已公开 historical run-rate</text>
@@ -2528,6 +2633,7 @@ function renderAnthropicRevenueChart() {
       <text x="740" y="10" fill="#1f2528" font-size="12">TI 1-year extrapolation</text>
     </g>
   `;
+  attachCommercialPointInteractions(anthropicRevenueChart);
 }
 
 function renderAnthropicMarginChart() {
@@ -2618,6 +2724,39 @@ function renderAnthropicMarginLineChart() {
   const conservative = toPoints(anthropicMarginPathSeries.conservative);
   const openai = toPoints(anthropicMarginPathSeries.openai);
 
+  const marginPointMarkup = [
+    ...optimistic.map((point) => ({
+      ...point,
+      seriesLabel: "Anthropic optimistic Dec. 2025",
+      color: "#f52656",
+      note: "The Information / Meritech 图示中的 optimistic paid gross margin 路径。",
+    })),
+    ...conservative.map((point) => ({
+      ...point,
+      seriesLabel: "Anthropic conservative Dec. 2025",
+      color: "#f8b8c5",
+      note: "The Information / Meritech 图示中的 conservative paid gross margin 路径。",
+    })),
+    ...openai.map((point) => ({
+      ...point,
+      seriesLabel: "OpenAI outlook Q3 2025",
+      color: "#3158b0",
+      note: "作为同一张对比图中的 OpenAI 经营毛利展望参照。",
+    })),
+  ]
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "anthropic-margin-line",
+        seriesLabel: point.seriesLabel,
+        label: point.label,
+        valueText: `${point.value}%`,
+        note: point.note,
+        color: point.color,
+      });
+      return `<circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${point.seriesLabel} ${point.label} ${point.value}%`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.2" fill="${point.color}" />`;
+    })
+    .join("");
+
   anthropicMarginLineChart.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
     ${ticks
@@ -2640,17 +2779,7 @@ function renderAnthropicMarginLineChart() {
     <polyline fill="none" stroke="#f52656" stroke-width="3" points="${buildPolyline(optimistic)}" />
     <polyline fill="none" stroke="#f8b8c5" stroke-width="3" points="${buildPolyline(conservative)}" />
     <polyline fill="none" stroke="#3158b0" stroke-width="3" points="${buildPolyline(openai)}" />
-    ${[
-      ...optimistic.map((point) => ({ ...point, color: "#f52656" })),
-      ...conservative.map((point) => ({ ...point, color: "#f8b8c5" })),
-      ...openai.map((point) => ({ ...point, color: "#3158b0" })),
-    ]
-      .map(
-        (point) => `
-          <circle cx="${point.x}" cy="${point.y}" r="4.2" fill="${point.color}" />
-        `,
-      )
-      .join("")}
+    ${marginPointMarkup}
     <g transform="translate(${margin.left}, 10)">
       <line x1="0" y1="6" x2="24" y2="6" stroke="#f52656" stroke-width="3" />
       <text x="30" y="10" fill="#1f2528" font-size="11">Anthropic optimistic Dec. 2025</text>
@@ -2662,6 +2791,7 @@ function renderAnthropicMarginLineChart() {
       <text x="30" y="10" fill="#1f2528" font-size="11">OpenAI outlook Q3 2025</text>
     </g>
   `;
+  attachCommercialPointInteractions(anthropicMarginLineChart);
 }
 
 function renderAnthropicAnnualRevenueChart() {
@@ -2695,6 +2825,46 @@ function renderAnthropicAnnualRevenueChart() {
   const projectionDec2025 = toPoints(anthropicAnnualForecastSeries.projectionDec2025);
   const aprActual = toPoints(anthropicAnnualForecastSeries.apr2026Actual);
 
+  const annualForecastPointMarkup = [
+    ...formerOptimistic.map((point) => ({ ...point, seriesLabel: "Anthropic former optimistic (2024)", color: "#b8b8b8" })),
+    ...base2025.map((point) => ({ ...point, seriesLabel: "Anthropic base (2025)", color: "#8b000f" })),
+    ...optimistic2025.map((point) => ({ ...point, seriesLabel: "Anthropic optimistic (2025)", color: "#f52656" })),
+    ...openaiProjection.map((point) => ({ ...point, seriesLabel: "OpenAI projection", color: "#3158b0" })),
+    ...projectionDec2025.map((point) => ({ ...point, seriesLabel: "Anthropic 2025-12 projection", color: "#8a4fdc" })),
+  ]
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "anthropic-annual-forecast",
+        seriesLabel: point.seriesLabel,
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: point.note,
+        color: point.color,
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${point.seriesLabel} ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.2" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />
+        <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="10.5" font-weight="700">${point.short}</text>
+      `;
+    })
+    .join("");
+
+  const annualActualPointMarkup = aprActual
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "anthropic-annual-forecast",
+        seriesLabel: "2026-04 actual",
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: point.note,
+        color: "#5cc63b",
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`2026-04 actual ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="6" fill="#5cc63b" stroke="#fffdf8" stroke-width="2" />
+        <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+      `;
+    })
+    .join("");
+
   anthropicAnnualRevenueChart.innerHTML = `
     <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
     ${ticks
@@ -2718,28 +2888,8 @@ function renderAnthropicAnnualRevenueChart() {
     <polyline fill="none" stroke="#f52656" stroke-width="3" stroke-dasharray="10 6" points="${buildPolyline(optimistic2025)}" />
     <polyline fill="none" stroke="#3158b0" stroke-width="3" stroke-dasharray="10 6" points="${buildPolyline(openaiProjection)}" />
     <polyline fill="none" stroke="#8a4fdc" stroke-width="3.2" points="${buildPolyline(projectionDec2025)}" />
-    ${[
-      ...formerOptimistic.map((point) => ({ ...point, color: "#b8b8b8" })),
-      ...base2025.map((point) => ({ ...point, color: "#8b000f" })),
-      ...optimistic2025.map((point) => ({ ...point, color: "#f52656" })),
-      ...openaiProjection.map((point) => ({ ...point, color: "#3158b0" })),
-      ...projectionDec2025.map((point) => ({ ...point, color: "#8a4fdc" })),
-    ]
-      .map(
-        (point) => `
-          <circle cx="${point.x}" cy="${point.y}" r="4.2" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />
-          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="10.5" font-weight="700">${point.short}</text>
-        `,
-      )
-      .join("")}
-    ${aprActual
-      .map(
-        (point) => `
-          <circle cx="${point.x}" cy="${point.y}" r="6" fill="#5cc63b" stroke="#fffdf8" stroke-width="2" />
-          <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
-        `,
-      )
-      .join("")}
+    ${annualForecastPointMarkup}
+    ${annualActualPointMarkup}
     <g transform="translate(${margin.left}, 10)">
       <line x1="0" y1="6" x2="28" y2="6" stroke="#b8b8b8" stroke-width="2.6" stroke-dasharray="7 6" />
       <text x="36" y="10" fill="#1f2528" font-size="12">Anthropic former optimistic (2024)</text>
@@ -2757,6 +2907,7 @@ function renderAnthropicAnnualRevenueChart() {
       <text x="484" y="10" fill="#1f2528" font-size="12">2026-04 actual</text>
     </g>
   `;
+  attachCommercialPointInteractions(anthropicAnnualRevenueChart);
 }
 
 function renderAnthropicFundingChart() {
@@ -2810,6 +2961,7 @@ function renderAnthropicFundingChart() {
 }
 
 function renderCommercialPanel() {
+  hideCommercialTooltip();
   renderAnthropicCostChart();
   renderAnthropicCostStats();
   renderAnthropicRevenueChart();
@@ -2931,3 +3083,13 @@ renderPriceChart();
 renderPriceTable();
 renderCommercialPanel();
 render();
+
+document.addEventListener("click", (event) => {
+  if (
+    !commercialChartTooltip.hidden &&
+    !commercialChartTooltip.contains(event.target) &&
+    !event.target.closest(".commercial-chart-point")
+  ) {
+    hideCommercialTooltip();
+  }
+});

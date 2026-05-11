@@ -1640,6 +1640,23 @@ h2 {
     #fff;
 }
 
+.commercial-chart-point {
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+}
+
+.commercial-chart-point:hover,
+.commercial-chart-point:focus-visible,
+.commercial-chart-point.is-active {
+  filter: drop-shadow(0 4px 10px rgba(49, 95, 143, 0.28));
+}
+
+.commercial-chart-point:focus-visible {
+  outline: none;
+}
+
 .commercial-chart-small {
   max-width: 420px;
 }
@@ -1679,6 +1696,22 @@ h2 {
   border-left: 4px solid var(--gold);
   background: rgba(156, 106, 34, 0.06);
   padding: 12px 14px;
+}
+
+.commercial-chart-tooltip {
+  position: fixed;
+  z-index: 40;
+  width: min(280px, calc(100vw - 24px));
+  border: 1px solid rgba(40, 48, 52, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 253, 248, 0.98);
+  box-shadow: 0 18px 40px rgba(31, 37, 40, 0.16);
+  padding: 12px 14px;
+  backdrop-filter: blur(10px);
+}
+
+.commercial-chart-tooltip[hidden] {
+  display: none;
 }
 
 .commercial-table-wrap {
