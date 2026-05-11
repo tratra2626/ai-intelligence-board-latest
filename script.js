@@ -671,7 +671,6 @@ const anthropicMarginChart = document.querySelector("#anthropicMarginChart");
 const anthropicMarginLineChart = document.querySelector("#anthropicMarginLineChart");
 const anthropicFundingChart = document.querySelector("#anthropicFundingChart");
 const anthropicCostChart = document.querySelector("#anthropicCostChart");
-const anthropicCostStats = document.querySelector("#anthropicCostStats");
 const anthropicFundingTable = document.querySelector("#anthropicFundingTable");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 const commercialChartTooltip = document.createElement("article");
@@ -717,29 +716,6 @@ const anthropicRevenueSeries = {
   ],
   labels: ["2024-12", "2025-03", "2025-05", "2025-07", "2025-10", "2025-12", "2026-02", "2026-03", "2026-04", "2026-12E", "2027-04E"],
 };
-
-const anthropicCostStatsData = [
-  {
-    label: "Anthropic 服务器成本",
-    value: "$27B",
-    note: "The Information 图示口径下，Anthropic 2028 年服务器成本约 $27B，低于 OpenAI 同期的 $111B。",
-  },
-  {
-    label: "OpenAI 服务器成本",
-    value: "$111B",
-    note: "同一图示口径下，OpenAI 2028 年服务器成本约为 Anthropic 的 4 倍以上，反映两家公司产品规模与计算负载差异。",
-  },
-  {
-    label: "Anthropic 2028 推理成本占比",
-    value: "约 59%",
-    note: "从图示估读，Anthropic 2028 年服务器成本中，推理（chatbots / APIs / agents）已成为最大单项，说明商业化扩张将把成本重心进一步推向 inference。",
-  },
-  {
-    label: "成本优势核心",
-    value: "更低推理总负担",
-    note: "如果收入扩张持续而总服务器成本显著低于 OpenAI，Anthropic 的商业叙事会更容易落到“更轻的推理成本结构”和“更早逼近现金流转正”。",
-  },
-];
 
 const anthropicCostSeries = {
   years: ["2024", "2025", "2026", "2027", "2028"],
@@ -2421,24 +2397,6 @@ function buildPolyline(points) {
   return points.map((point) => `${point.x},${point.y}`).join(" ");
 }
 
-function renderAnthropicCostStats() {
-  if (!anthropicCostStats) {
-    return;
-  }
-
-  anthropicCostStats.innerHTML = anthropicCostStatsData
-    .map(
-      (item) => `
-        <article class="commercial-stat-item">
-          <span>${item.label}</span>
-          <strong>${item.value}</strong>
-          <small>${item.note}</small>
-        </article>
-      `,
-    )
-    .join("");
-}
-
 function renderAnthropicCostChart() {
   if (!anthropicCostChart) {
     return;
@@ -2963,7 +2921,6 @@ function renderAnthropicFundingChart() {
 function renderCommercialPanel() {
   hideCommercialTooltip();
   renderAnthropicCostChart();
-  renderAnthropicCostStats();
   renderAnthropicRevenueChart();
   renderAnthropicAnnualRevenueChart();
   renderAnthropicMarginChart();
