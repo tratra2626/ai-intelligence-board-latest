@@ -672,6 +672,12 @@ const anthropicMarginLineChart = document.querySelector("#anthropicMarginLineCha
 const anthropicFundingChart = document.querySelector("#anthropicFundingChart");
 const anthropicCostChart = document.querySelector("#anthropicCostChart");
 const anthropicFundingTable = document.querySelector("#anthropicFundingTable");
+const openaiRevenueChart = document.querySelector("#openaiRevenueChart");
+const openaiAnnualRevenueChart = document.querySelector("#openaiAnnualRevenueChart");
+const openaiCostChart = document.querySelector("#openaiCostChart");
+const openaiMarginChart = document.querySelector("#openaiMarginChart");
+const openaiValuationChart = document.querySelector("#openaiValuationChart");
+const openaiValuationTable = document.querySelector("#openaiValuationTable");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
@@ -896,6 +902,81 @@ const anthropicValuationSeries = anthropicFundingRows
     };
   })
   .filter(Boolean);
+
+const openaiRevenueSeries = {
+  labels: ["2023", "2024", "2025-07", "2025", "2026-03"],
+  actual: [
+    { label: "2023", value: 2.0, short: "2", note: "2023 ARR $2B（OpenAI CFO 官方博文）" },
+    { label: "2024", value: 6.0, short: "6", note: "2024 ARR $6B（OpenAI CFO 官方博文）" },
+    { label: "2025-07", value: 12.0, short: "12", note: "2025-07 annualized revenue $12B（Reuters / The Information）" },
+    { label: "2025", value: 20.0, short: "20+", note: "2025 ARR 超过 $20B（OpenAI CFO 官方博文，2026-01）" },
+    { label: "2026-03", value: 24.0, short: "24+", note: "按 2026-03 官方“月收入 >$2B”折算，年化 run-rate 超过 $24B（基于官方数字推算）" },
+  ],
+};
+
+const openaiAnnualForecastSeries = {
+  labels: ["2024", "2025", "2026", "2027", "2028", "2029", "2030"],
+  winter2025: [4, 13, 30, 54, 80, 125, 174],
+  summer2025: [4, 13, 30, 63, 96, 145, 200],
+  winter2026: [4, 13, 30, 63, 113, 185, 284],
+};
+
+const openaiCostProjectionSeries = {
+  labels: ["2024", "2025", "2026", "2027", "2028", "2029", "2030"],
+  winter2025: [2, 6, 14, 19, 28, 39, 50],
+  summer2025: [2, 7, 14, 22, 33, 44, 56],
+  winter2026: [2, 9, 14, 28, 44, 67, 94],
+};
+
+const openaiMarginProjectionSeries = {
+  labels: ["2024", "2025", "2026", "2027", "2028", "2029", "2030"],
+  winter2025: [40, 48, 54, 64, 67, 70, 72],
+  summer2025: [40, 46, 54, 64, 67, 70, 72],
+  winter2026: [40, 33, 52, 55, 61, 64, 67],
+};
+
+const openaiValuationRows = [
+  {
+    date: "2023-01-05",
+    type: "Tender / 二级转让",
+    valuation: "$29B",
+    note: "Reuters / WSJ：ChatGPT 爆发初期，员工持股转让把估值推到约 $29B。",
+    source: "https://www.euronews.com/next/2023/01/05/openai-tender",
+    kind: "reported",
+  },
+  {
+    date: "2024-02-16",
+    type: "Tender offer",
+    valuation: "$80B",
+    note: "Reuters：Thrive 领投的 tender 把 OpenAI 估值推到约 $80B。",
+    source: "https://www.investing.com/news/stock-market-news/openai-valued-at-80-billion-after-deal-nyt-reports-3306784",
+    kind: "reported",
+  },
+  {
+    date: "2024-10-02",
+    type: "Funding round",
+    valuation: "$157B post-money",
+    note: "Reuters / CNBC：正式融资完成，OpenAI 进入 $150B+ 私营公司梯队。",
+    source: "https://www.investing.com/news/stock-market-news/openai-closes-66-billion-funding-haul-at-valuation-of-157-billion-with-investment-from-microsoft-and-nvidia-3645659",
+    kind: "closed",
+  },
+  {
+    date: "2025-01-29",
+    type: "SoftBank 领投谈判",
+    valuation: "$300B incl. new money",
+    note: "Reuters：新一轮融资谈判中的估值口径，属于媒体报道，并非最终关闭估值。",
+    source: "https://www.tradingview.com/news/reuters.com%2C2025%3Anewsml_L3N3OQ1VN%3A0-softbank-in-talks-to-lead-openai-funding-round-at-300-billion-valuation-sources-say/",
+    kind: "reported",
+  },
+  {
+    date: "2026-03-31",
+    type: "Latest funding round",
+    valuation: "$852B post-money",
+    note: "OpenAI 官方：关闭 $122B 融资，OpenAI 被市场按基础设施级平台重新定价。",
+    source: "https://openai.com/index/accelerating-the-next-phase-ai/",
+    kind: "closed",
+  },
+];
 
 const priceRows = [
   {
@@ -2951,6 +3032,396 @@ function renderAnthropicFundingChart() {
   attachCommercialPointInteractions(anthropicFundingChart);
 }
 
+function renderOpenAIRevenueChart() {
+  if (!openaiRevenueChart) {
+    return;
+  }
+
+  const width = 900;
+  const height = 340;
+  const margin = { top: 26, right: 32, bottom: 54, left: 56 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = openaiRevenueSeries.labels;
+  const maxValue = 28;
+  const ticks = [0, 4, 8, 12, 16, 20, 24, 28];
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+
+  const points = openaiRevenueSeries.actual.map((point) => ({
+    ...point,
+    x: xFor(point.label),
+    y: yFor(point.value),
+  }));
+
+  const pointMarkup = points
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "openai-revenue",
+        seriesLabel: "OpenAI disclosed run-rate",
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: point.note,
+        color: "#2e6f5d",
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`OpenAI run-rate ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="5" fill="#fffdf8" stroke="#2e6f5d" stroke-width="2.6" />
+        <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="700">${point.short}</text>
+      `;
+    })
+    .join("");
+
+  openaiRevenueChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    ${labels
+      .map((label) => {
+        const x = xFor(label);
+        return `<text x="${x}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="11">${label}</text>`;
+      })
+      .join("")}
+    <polyline fill="none" stroke="#2e6f5d" stroke-width="3.2" points="${buildPolyline(points)}" />
+    ${pointMarkup}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="28" y2="6" stroke="#2e6f5d" stroke-width="3.2" />
+      <text x="36" y="10" fill="#1f2528" font-size="12">OpenAI 官方 / Reuters 已披露 run-rate 节点</text>
+    </g>
+  `;
+  attachCommercialPointInteractions(openaiRevenueChart);
+}
+
+function renderOpenAIAnnualRevenueChart() {
+  if (!openaiAnnualRevenueChart) {
+    return;
+  }
+
+  const width = 900;
+  const height = 340;
+  const margin = { top: 26, right: 32, bottom: 54, left: 56 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = openaiAnnualForecastSeries.labels;
+  const maxValue = 300;
+  const ticks = [0, 50, 100, 150, 200, 250, 300];
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+  const toPoints = (values) =>
+    values.map((value, index) => ({
+      label: labels[index],
+      value,
+      short: String(value),
+      x: xFor(labels[index]),
+      y: yFor(value),
+    }));
+
+  const winter2025 = toPoints(openaiAnnualForecastSeries.winter2025);
+  const summer2025 = toPoints(openaiAnnualForecastSeries.summer2025);
+  const winter2026 = toPoints(openaiAnnualForecastSeries.winter2026);
+
+  const pointMarkup = [
+    ...winter2025.map((point) => ({ ...point, seriesLabel: "Winter 2025 projection", color: "#b8b8b8" })),
+    ...summer2025.map((point) => ({ ...point, seriesLabel: "Summer 2025 projection", color: "#9c6a22" })),
+    ...winter2026.map((point) => ({ ...point, seriesLabel: "Winter 2026 projection", color: "#3158b0" })),
+  ]
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "openai-annual-forecast",
+        seriesLabel: point.seriesLabel,
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: "用户提供的 The Information projection 图示，按 rounded values 整理。",
+        color: point.color,
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${point.seriesLabel} ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.3" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />
+        <text x="${point.x}" y="${point.y - 12}" text-anchor="middle" fill="#1f2528" font-size="10.5" font-weight="700">${point.short}</text>
+      `;
+    })
+    .join("");
+
+  openaiAnnualRevenueChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    ${labels
+      .map((label) => `<text x="${xFor(label)}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="11">${label}</text>`)
+      .join("")}
+    <polyline fill="none" stroke="#b8b8b8" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(winter2025)}" />
+    <polyline fill="none" stroke="#9c6a22" stroke-width="2.8" stroke-dasharray="7 6" points="${buildPolyline(summer2025)}" />
+    <polyline fill="none" stroke="#3158b0" stroke-width="3.2" points="${buildPolyline(winter2026)}" />
+    ${pointMarkup}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="28" y2="6" stroke="#b8b8b8" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="36" y="10" fill="#1f2528" font-size="12">Winter 2025 projection</text>
+      <line x1="250" y1="6" x2="278" y2="6" stroke="#9c6a22" stroke-width="2.8" stroke-dasharray="7 6" />
+      <text x="286" y="10" fill="#1f2528" font-size="12">Summer 2025 projection</text>
+      <line x1="520" y1="6" x2="548" y2="6" stroke="#3158b0" stroke-width="3.2" />
+      <text x="556" y="10" fill="#1f2528" font-size="12">Winter 2026 projection</text>
+    </g>
+  `;
+  attachCommercialPointInteractions(openaiAnnualRevenueChart);
+}
+
+function renderOpenAICostChart() {
+  if (!openaiCostChart) {
+    return;
+  }
+
+  const width = 420;
+  const height = 260;
+  const margin = { top: 28, right: 18, bottom: 44, left: 42 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = openaiCostProjectionSeries.labels;
+  const maxValue = 100;
+  const ticks = [0, 20, 40, 60, 80, 100];
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+  const toPoints = (values) =>
+    values.map((value, index) => ({
+      label: labels[index],
+      value,
+      short: String(value),
+      x: xFor(labels[index]),
+      y: yFor(value),
+    }));
+
+  const winter2025 = toPoints(openaiCostProjectionSeries.winter2025);
+  const summer2025 = toPoints(openaiCostProjectionSeries.summer2025);
+  const winter2026 = toPoints(openaiCostProjectionSeries.winter2026);
+
+  const pointMarkup = [
+    ...winter2025.map((point) => ({ ...point, seriesLabel: "Winter 2025 projection", color: "#b8b8b8" })),
+    ...summer2025.map((point) => ({ ...point, seriesLabel: "Summer 2025 projection", color: "#9c6a22" })),
+    ...winter2026.map((point) => ({ ...point, seriesLabel: "Winter 2026 projection", color: "#3158b0" })),
+  ]
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "openai-cost",
+        seriesLabel: point.seriesLabel,
+        label: point.label,
+        valueText: `$${point.short}B`,
+        note: "Inference costs projection，来自用户提供的 The Information 图示。",
+        color: point.color,
+      });
+      return `<circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${point.seriesLabel} ${point.label} ${point.short}B`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.1" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />`;
+    })
+    .join("");
+
+  openaiCostChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="10">${tick}</text>
+        `;
+      })
+      .join("")}
+    ${labels.map((label) => `<text x="${xFor(label)}" y="${height - 16}" text-anchor="middle" fill="#6f7478" font-size="10">${label}</text>`).join("")}
+    <polyline fill="none" stroke="#b8b8b8" stroke-width="2.4" stroke-dasharray="7 6" points="${buildPolyline(winter2025)}" />
+    <polyline fill="none" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(summer2025)}" />
+    <polyline fill="none" stroke="#3158b0" stroke-width="3" points="${buildPolyline(winter2026)}" />
+    ${pointMarkup}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="24" y2="6" stroke="#b8b8b8" stroke-width="2.4" stroke-dasharray="7 6" />
+      <text x="30" y="10" fill="#1f2528" font-size="10.5">Winter 2025</text>
+      <line x1="118" y1="6" x2="142" y2="6" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="148" y="10" fill="#1f2528" font-size="10.5">Summer 2025</text>
+      <line x1="250" y1="6" x2="274" y2="6" stroke="#3158b0" stroke-width="3" />
+      <text x="280" y="10" fill="#1f2528" font-size="10.5">Winter 2026</text>
+    </g>
+  `;
+  attachCommercialPointInteractions(openaiCostChart);
+}
+
+function renderOpenAIMarginChart() {
+  if (!openaiMarginChart) {
+    return;
+  }
+
+  const width = 420;
+  const height = 260;
+  const margin = { top: 28, right: 18, bottom: 44, left: 42 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const labels = openaiMarginProjectionSeries.labels;
+  const minValue = 25;
+  const maxValue = 80;
+  const ticks = [30, 40, 50, 60, 70, 80];
+  const xFor = (label) =>
+    margin.left + (labels.indexOf(label) / (labels.length - 1 || 1)) * chartWidth;
+  const yFor = (value) =>
+    margin.top + chartHeight - ((value - minValue) / (maxValue - minValue)) * chartHeight;
+  const toPoints = (values) =>
+    values.map((value, index) => ({
+      label: labels[index],
+      value,
+      x: xFor(labels[index]),
+      y: yFor(value),
+    }));
+
+  const winter2025 = toPoints(openaiMarginProjectionSeries.winter2025);
+  const summer2025 = toPoints(openaiMarginProjectionSeries.summer2025);
+  const winter2026 = toPoints(openaiMarginProjectionSeries.winter2026);
+
+  const pointMarkup = [
+    ...winter2025.map((point) => ({ ...point, seriesLabel: "Winter 2025 projection", color: "#b8b8b8" })),
+    ...summer2025.map((point) => ({ ...point, seriesLabel: "Summer 2025 projection", color: "#9c6a22" })),
+    ...winter2026.map((point) => ({ ...point, seriesLabel: "Winter 2026 projection", color: "#3158b0" })),
+  ]
+    .map((point) => {
+      const pointId = registerCommercialPoint({
+        chartKey: "openai-margin",
+        seriesLabel: point.seriesLabel,
+        label: point.label,
+        valueText: `${point.value}%`,
+        note: "Adjusted gross profit margin projection，来自用户提供的 The Information 图示。",
+        color: point.color,
+      });
+      return `<circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`${point.seriesLabel} ${point.label} ${point.value}%`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="4.1" fill="#fffdf8" stroke="${point.color}" stroke-width="2" />`;
+    })
+    .join("");
+
+  openaiMarginChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="10">${tick}%</text>
+        `;
+      })
+      .join("")}
+    ${labels.map((label) => `<text x="${xFor(label)}" y="${height - 16}" text-anchor="middle" fill="#6f7478" font-size="10">${label}</text>`).join("")}
+    <line x1="${margin.left}" y1="${yFor(75)}" x2="${width - margin.right}" y2="${yFor(75)}" stroke="#c9c9c9" stroke-dasharray="5 4" />
+    <text x="${margin.left + 6}" y="${yFor(75) - 8}" fill="#8f8f8f" font-size="10">Avg public software co. ~75%</text>
+    <polyline fill="none" stroke="#b8b8b8" stroke-width="2.4" stroke-dasharray="7 6" points="${buildPolyline(winter2025)}" />
+    <polyline fill="none" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" points="${buildPolyline(summer2025)}" />
+    <polyline fill="none" stroke="#3158b0" stroke-width="3" points="${buildPolyline(winter2026)}" />
+    ${pointMarkup}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="24" y2="6" stroke="#b8b8b8" stroke-width="2.4" stroke-dasharray="7 6" />
+      <text x="30" y="10" fill="#1f2528" font-size="10.5">Winter 2025</text>
+      <line x1="118" y1="6" x2="142" y2="6" stroke="#9c6a22" stroke-width="2.6" stroke-dasharray="7 6" />
+      <text x="148" y="10" fill="#1f2528" font-size="10.5">Summer 2025</text>
+      <line x1="250" y1="6" x2="274" y2="6" stroke="#3158b0" stroke-width="3" />
+      <text x="280" y="10" fill="#1f2528" font-size="10.5">Winter 2026</text>
+    </g>
+  `;
+  attachCommercialPointInteractions(openaiMarginChart);
+}
+
+function renderOpenAIValuationTable() {
+  if (!openaiValuationTable) {
+    return;
+  }
+
+  openaiValuationTable.innerHTML = openaiValuationRows
+    .map(
+      (row) => `
+        <tr>
+          <td>${row.date}</td>
+          <td>${row.type}</td>
+          <td>${row.valuation}</td>
+          <td><a href="${row.source}" target="_blank" rel="noreferrer">${row.note}</a></td>
+        </tr>
+      `,
+    )
+    .join("");
+}
+
+function renderOpenAIValuationChart() {
+  if (!openaiValuationChart) {
+    return;
+  }
+
+  const width = 900;
+  const height = 320;
+  const margin = { top: 28, right: 28, bottom: 58, left: 54 };
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
+  const maxValue = 900;
+  const ticks = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+  const xFor = (index) =>
+    margin.left + (index / (openaiValuationRows.length - 1 || 1)) * chartWidth;
+  const yFor = (value) => margin.top + chartHeight - (value / maxValue) * chartHeight;
+  const points = openaiValuationRows.map((row, index) => ({
+    ...row,
+    value: Number(row.valuation.match(/\$([\d.]+)/)?.[1] || 0),
+    short: row.valuation.match(/\$([\d.]+)/)?.[1]?.replace(/\.0$/, "") || "",
+    x: xFor(index),
+    y: yFor(Number(row.valuation.match(/\$([\d.]+)/)?.[1] || 0)),
+    label: row.date.slice(0, 7),
+  }));
+
+  const pointMarkup = points
+    .map((point) => {
+      const color = point.kind === "closed" ? "#3158b0" : "#9c6a22";
+      const pointId = registerCommercialPoint({
+        chartKey: "openai-valuation",
+        seriesLabel: "OpenAI valuation",
+        label: `${point.label} · ${point.type}`,
+        valueText: point.valuation,
+        note: point.note,
+        color,
+      });
+      return `
+        <circle class="commercial-chart-point" tabindex="0" role="button" aria-label="${escapeText(`OpenAI valuation ${point.label} ${point.valuation}`)}" data-commercial-point-id="${escapeText(pointId)}" cx="${point.x}" cy="${point.y}" r="6" fill="#fffdf8" stroke="${color}" stroke-width="3" />
+        <text x="${point.x}" y="${point.y - 14}" text-anchor="middle" fill="#1f2528" font-size="11" font-weight="800">${point.short}</text>
+        <text x="${point.x}" y="${height - 22}" text-anchor="middle" fill="#6f7478" font-size="10">${point.label}</text>
+      `;
+    })
+    .join("");
+
+  openaiValuationChart.innerHTML = `
+    <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf8" />
+    ${ticks
+      .map((tick) => {
+        const y = yFor(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+        `;
+      })
+      .join("")}
+    <line x1="${margin.left}" y1="${margin.top + chartHeight}" x2="${width - margin.right}" y2="${margin.top + chartHeight}" stroke="#7d8286" />
+    <polyline fill="none" stroke="#3158b0" stroke-width="3.2" points="${buildPolyline(points)}" />
+    ${pointMarkup}
+    <g transform="translate(${margin.left}, 10)">
+      <line x1="0" y1="6" x2="28" y2="6" stroke="#3158b0" stroke-width="3.2" />
+      <text x="36" y="10" fill="#1f2528" font-size="12">估值节点</text>
+      <rect x="128" y="0" width="12" height="12" rx="3" fill="#3158b0" />
+      <text x="146" y="10" fill="#1f2528" font-size="11">已完成 / 官方</text>
+      <rect x="244" y="0" width="12" height="12" rx="3" fill="#9c6a22" />
+      <text x="262" y="10" fill="#1f2528" font-size="11">媒体报道 / 融资谈判</text>
+    </g>
+  `;
+  attachCommercialPointInteractions(openaiValuationChart);
+}
+
 function renderCommercialPanel() {
   hideCommercialTooltip();
   renderAnthropicCostChart();
@@ -2960,6 +3431,12 @@ function renderCommercialPanel() {
   renderAnthropicMarginLineChart();
   renderAnthropicFundingChart();
   renderAnthropicFundingTable();
+  renderOpenAIRevenueChart();
+  renderOpenAIAnnualRevenueChart();
+  renderOpenAICostChart();
+  renderOpenAIMarginChart();
+  renderOpenAIValuationChart();
+  renderOpenAIValuationTable();
 }
 
 function render() {

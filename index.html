@@ -757,11 +757,12 @@
             <div class="news-summary">
               <p class="eyebrow">Commercial Tracker</p>
               <h2>商业化跟踪</h2>
-              <p>这一页聚焦头部 AI 公司的收入、毛利、融资和客户结构。当前先整理 Anthropic，后续可以按同样结构继续加入 OpenAI、Google、xAI、DeepSeek 等公司。</p>
+              <p>这一页聚焦头部 AI 公司的收入、毛利、成本、估值和商业化结构。当前先整理 Anthropic 与 OpenAI / ChatGPT，后续可以按同样框架继续加入 Google、xAI、DeepSeek 等公司。</p>
             </div>
 
             <div class="commercial-company-switcher" aria-label="按公司查看商业化信息">
               <button class="commercial-chip is-active" type="button" data-commercial-company="Anthropic">Anthropic</button>
+              <button class="commercial-chip" type="button" data-commercial-company="OpenAI">OpenAI / ChatGPT</button>
             </div>
 
             <section class="commercial-company-panel is-active" data-commercial-panel="Anthropic">
@@ -913,6 +914,150 @@
                         </tr>
                       </thead>
                       <tbody id="anthropicFundingTable"></tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </section>
+
+            <section class="commercial-company-panel" data-commercial-panel="OpenAI">
+              <div class="commercial-hero">
+                <div class="news-date-card commercial-date-card">
+                  <span>公司跟踪</span>
+                  <strong>OpenAI / ChatGPT</strong>
+                  <small>收入、估值与增长节点优先采用 OpenAI 官方和 Reuters；中长期 projection、推理成本与调整后毛利，结合你提供的 The Information 图示整理，并在图注里明确说明口径。</small>
+                </div>
+
+                <div class="commercial-meta-card">
+                  <div class="commercial-meta-grid">
+                    <div>
+                      <span>最新 ARR</span>
+                      <strong>>$20B</strong>
+                      <small>OpenAI CFO 2026-01：2025 annualized revenue 超过 $20B</small>
+                    </div>
+                    <div>
+                      <span>最新月收入</span>
+                      <strong>>$2B / 月</strong>
+                      <small>2026-03 OpenAI 官方融资页披露，可折算年化 run-rate 超过 $24B</small>
+                    </div>
+                    <div>
+                      <span>2025 revenue</span>
+                      <strong>$13B</strong>
+                      <small>Reuters 2026-02：2025 全年收入高于原先 $10B projection</small>
+                    </div>
+                    <div>
+                      <span>2025 adjusted gross margin</span>
+                      <strong>33%</strong>
+                      <small>Reuters / The Information：推理成本上升后 2025 毛利率低于 2024</small>
+                    </div>
+                    <div>
+                      <span>最新估值</span>
+                      <strong>$852B</strong>
+                      <small>2026-03 官方 post-money valuation</small>
+                    </div>
+                    <div>
+                      <span>2030 latest revenue projection</span>
+                      <strong>$284B</strong>
+                      <small>你提供的 The Information 2026 冬季 projection 图示，按 rounded values 整理</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="commercial-grid">
+                <section class="commercial-card commercial-card-wide">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Revenue</p>
+                      <h3>收入 run-rate：已公开节点与最新年化速度</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">单位：十亿美元。这里优先采用 OpenAI 官方和 Reuters 能确认的 annualized revenue / ARR 节点。<code>>$24B</code> 来自 2026-03 官方“月收入超过 $2B”按年化折算，因此属于基于官方数字的推算，而不是公司直接给出的 ARR 表述。</p>
+                  <svg id="openaiRevenueChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="OpenAI 收入 run-rate 历史图"></svg>
+                  <div class="commercial-footnote">
+                    <strong>口径区分：</strong>
+                    <span><code>$2B ARR in 2023</code>、<code>$6B in 2024</code> 和 <code>$20B+ in 2025</code> 来自 OpenAI CFO 官方文章；<code>$12B</code> 节点来自 Reuters 转述 The Information；<code>>$24B</code> 是对 2026-03 官方“月收入 >$2B”的年化推算。</span>
+                  </div>
+                  <div class="commercial-source-list">
+                    <a href="https://openai.com/index/a-business-that-scales-with-the-value-of-intelligence/" target="_blank" rel="noreferrer">OpenAI CFO：2023-2025 ARR 与 compute 同步增长</a>
+                    <a href="https://www.investing.com/news/stock-market-news/openai-hits-12-billion-in-annualized-revenue-the-information-reports-4161615" target="_blank" rel="noreferrer">Reuters：2025-07 annualized revenue $12B</a>
+                    <a href="https://openai.com/index/accelerating-the-next-phase-ai/" target="_blank" rel="noreferrer">OpenAI：2026-03 月收入 >$2B、enterprise >40%、ads ARR >$100M</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card commercial-card-wide">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Annual Forecast</p>
+                      <h3>全年收入预测：三次内部 projection 快照</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">单位：十亿美元。数据来自你提供的 The Information 图示，我按图中可见标签做了 rounded values 整理。重点是看 2025 冬季、2025 夏季、2026 冬季三次 projection 如何持续上修，而不是把这张图当成审计口径财务指引。</p>
+                  <svg id="openaiAnnualRevenueChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="OpenAI 全年收入预测图"></svg>
+                  <div class="commercial-footnote">
+                    <strong>如何看：</strong>
+                    <span>最新一条 <code>2026 Winter projection</code> 对应 <code>2026-2030</code> 收入序列约 <code>30 / 63 / 113 / 185 / 284</code>。同一组图还把 2030 收入拆成 consumer、B2B、platform 和新产品四部分，说明 OpenAI 内部商业化叙事已经不只是 API，而是多线收入共同抬升。</span>
+                  </div>
+                  <div class="commercial-source-list">
+                    <a href="https://www.theinformation.com/articles/openai-getting-efficient-running-ai-internal-financials-show?rc=ifnkyd" target="_blank" rel="noreferrer">The Information：OpenAI internal financials / revenue projection 图示</a>
+                    <a href="https://www.investing.com/news/stock-market-news/openai-sees-compute-spend-of-around-600-billion-by-2030-cnbc-reports-4517341" target="_blank" rel="noreferrer">Reuters：2030 revenue >$280B、compute spend ~ $600B</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Costs</p>
+                      <h3>推理成本预测：需求扩张带来的成本曲线</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">单位：十亿美元。这里整理的是你提供图示中的 <code>Inference Costs</code> 三次 projection 快照。它反映的是模型运行成本，而不是训练资本开支或完整公司总成本。</p>
+                  <svg id="openaiCostChart" class="commercial-chart commercial-chart-small" viewBox="0 0 420 260" role="img" aria-label="OpenAI 推理成本预测图"></svg>
+                  <div class="commercial-source-list">
+                    <a href="https://www.theinformation.com/articles/openai-getting-efficient-running-ai-internal-financials-show?rc=ifnkyd" target="_blank" rel="noreferrer">The Information：Inference costs 图示</a>
+                    <a href="https://www.investing.com/news/stock-market-news/openai-sees-compute-spend-of-around-600-billion-by-2030-cnbc-reports-4517341" target="_blank" rel="noreferrer">Reuters：2030 compute spend ~ $600B</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Margin</p>
+                      <h3>调整后毛利：projection 一路上修后又回落</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">这里的 <code>adjusted gross profit margin</code> 延续你给的图示口径，重点看模型运行成本上升后，OpenAI 对 2025 及之后毛利路径的重估。它不等于完整公司 GAAP 净利率，也不含全部研发、销售和资本开支。</p>
+                  <svg id="openaiMarginChart" class="commercial-chart commercial-chart-small" viewBox="0 0 420 260" role="img" aria-label="OpenAI 调整后毛利率预测图"></svg>
+                  <div class="commercial-footnote commercial-footnote-compact">
+                    <strong>公开口径：</strong>
+                    <span>Reuters 2026-02 援引内部材料称，OpenAI 的 adjusted gross margin 已从 <code>2024</code> 年约 <code>40%</code> 降到 <code>2025</code> 年约 <code>33%</code>。你给的图示显示，最新一版 <code>2026 Winter projection</code> 到 <code>2030</code> 仍可回升到约 <code>67%</code>，但明显低于更早时点对高毛利软件公司的想象。</span>
+                  </div>
+                  <div class="commercial-source-list">
+                    <a href="https://www.theinformation.com/articles/openai-getting-efficient-running-ai-internal-financials-show?rc=ifnkyd" target="_blank" rel="noreferrer">The Information：Adjusted gross profit margin 图示</a>
+                    <a href="https://www.investing.com/news/stock-market-news/openai-sees-compute-spend-of-around-600-billion-by-2030-cnbc-reports-4517341" target="_blank" rel="noreferrer">Reuters：2025 adjusted gross margin ~33%</a>
+                  </div>
+                </section>
+
+                <section class="commercial-card commercial-card-wide">
+                  <div class="commercial-card-head">
+                    <div>
+                      <p class="eyebrow">Valuation</p>
+                      <h3>估值跃迁：从 ChatGPT 引爆到基础设施级平台定价</h3>
+                    </div>
+                  </div>
+                  <p class="commercial-note">单位：十亿美元。这里把 OpenAI 的公开估值节点放到一条线上：2023 年初的二级转让、2024 年 tender、2024 年正式融资、2025 年大轮融资谈判，以及 2026 年关闭的 <code>$852B</code> 官方 post-money。媒体报道节点会在说明里标明，不和已完成融资混为一谈。</p>
+                  <svg id="openaiValuationChart" class="commercial-chart" viewBox="0 0 900 320" role="img" aria-label="OpenAI 历史估值抬升图"></svg>
+                  <div class="commercial-table-wrap">
+                    <table class="commercial-table">
+                      <thead>
+                        <tr>
+                          <th>时间</th>
+                          <th>轮次 / 类型</th>
+                          <th>估值</th>
+                          <th>备注</th>
+                        </tr>
+                      </thead>
+                      <tbody id="openaiValuationTable"></tbody>
                     </table>
                   </div>
                 </section>
