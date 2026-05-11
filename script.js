@@ -1935,6 +1935,38 @@ function showCommercialTooltip(pointId, target) {
   commercialChartTooltip.querySelector(".tooltip-close")?.addEventListener("click", hideCommercialTooltip);
 }
 
+function showCommercialHtmlTooltip({ title, label, html, color = "#315f8f", width = 340 }, target) {
+  if (!target) {
+    return;
+  }
+
+  selectedCommercialPointId = null;
+  document
+    .querySelectorAll(".commercial-chart-point.is-active")
+    .forEach((node) => node.classList.remove("is-active"));
+
+  commercialChartTooltip.hidden = false;
+  commercialChartTooltip.style.setProperty("--tooltip-color", color);
+  commercialChartTooltip.innerHTML = `
+    <div class="tooltip-head">
+      <span class="tooltip-company">${escapeText(title)}</span>
+      <button class="tooltip-close" type="button" aria-label="关闭">×</button>
+    </div>
+    <div class="tooltip-model">${escapeText(label)}</div>
+    <div class="tooltip-meta tooltip-meta-rich">${html}</div>
+  `;
+
+  const rect = target.getBoundingClientRect();
+  const tooltipHeight = 220;
+  const maxLeft = window.innerWidth - width - 12;
+  const maxTop = window.innerHeight - tooltipHeight - 12;
+  const left = Math.min(maxLeft, Math.max(12, rect.left + rect.width / 2 - width / 2));
+  const top = Math.min(maxTop, Math.max(12, rect.top - tooltipHeight - 10));
+  commercialChartTooltip.style.left = `${left}px`;
+  commercialChartTooltip.style.top = `${top}px`;
+  commercialChartTooltip.querySelector(".tooltip-close")?.addEventListener("click", hideCommercialTooltip);
+}
+
 function attachCommercialPointInteractions(svg) {
   if (!svg) {
     return;
@@ -3610,7 +3642,7 @@ function renderStLineChart(svg, dataset, chartKey, title, options = {}) {
   const { mode = "absolute", excludeProducts = [] } = options;
   const width = 900;
   const height = 340;
-  const margin = { top: 28, right: 28, bottom: 58, left: 62 };
+  const margin = { top: 28, right: 92, bottom: 58, left: 62 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const labels = stWeeklyData.weeks;
@@ -3658,11 +3690,12 @@ function renderStLineChart(svg, dataset, chartKey, title, options = {}) {
       const lastPoint = points[points.length - 1];
       const pointMarkup = points
         .map((point) => {
+          const pointIndex = points.indexOf(point);
           const pointId = registerCommercialPoint({
             chartKey,
             seriesLabel: product,
             label: point.label,
-            valueText: mode === "indexed" ? `${point.value.toFixed(1)} (W1=100)` : `${rawValues[points.indexOf(point)]} 万`,
+            valueText: mode === "indexed" ? `${point.value.toFixed(1)} (W1=100)` : `${rawValues[pointIndex]} 万`,
             note: `${title}；单位：万。`,
             color,
           });
@@ -3674,10 +3707,19 @@ function renderStLineChart(svg, dataset, chartKey, title, options = {}) {
         ${pointMarkup}
         ${
           lastPoint
-            ? `<text x="${Math.min(width - 8, lastPoint.x + 8)}" y="${lastPoint.y + 4}" fill="${color}" font-size="10.5" font-weight="700">${mode === "indexed" ? lastPoint.value.toFixed(0) : formatStValue(rawValues[rawValues.length - 1])}</text>`
+            ? `<text x="${Math.min(width - 18, lastPoint.x + 10)}" y="${lastPoint.y + 4}" fill="${color}" font-size="10.5" font-weight="700">${mode === "indexed" ? lastPoint.value.toFixed(0) : formatStValue(rawValues[rawValues.length - 1])}</text>`
             : ""
         }
       `;
+    })
+    .join("");
+
+  const weekHitMarkup = labels
+    .map((label, index) => {
+      const x = xFor(index);
+      const prevX = index === 0 ? margin.left : (xFor(index - 1) + x) / 2;
+      const nextX = index === labels.length - 1 ? width - margin.right : (x + xFor(index + 1)) / 2;
+      return `<rect class="st-week-hit" data-week-index="${index}" x="${prevX}" y="${margin.top}" width="${Math.max(8, nextX - prevX)}" height="${chartHeight}" fill="transparent" />`;
     })
     .join("");
 
@@ -3710,10 +3752,44 @@ function renderStLineChart(svg, dataset, chartKey, title, options = {}) {
     ${labels
       .map((label, index) => `<text x="${xFor(index)}" y="${height - 18}" text-anchor="middle" fill="#6f7478" font-size="10">${label.slice(5, 10)}</text>`)
       .join("")}
+    ${weekHitMarkup}
     ${lineMarkup}
     ${legendMarkup}
   `;
   attachCommercialPointInteractions(svg);
+  svg.querySelectorAll(".st-week-hit").forEach((node) => {
+    node.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const weekIndex = Number(node.dataset.weekIndex);
+      const rows = selectedProducts
+        .map((product) => {
+          const rawValue = dataset[product]?.[weekIndex] ?? 0;
+          const indexedValue = dataset[product]?.[0] ? ((rawValue / dataset[product][0]) * 100).toFixed(0) : "-";
+          return {
+            product,
+            rawValue,
+            display: mode === "indexed" ? `${indexedValue}（${formatStValue(rawValue)}）` : formatStValue(rawValue),
+          };
+        })
+        .sort((a, b) => b.rawValue - a.rawValue);
+      const html = rows
+        .map(
+          (row) =>
+            `<span><strong style="color:${stProductColors[row.product] || "#1f2528"}">${escapeHtml(row.product)}</strong>：${escapeHtml(row.display)}</span>`,
+        )
+        .join("");
+      showCommercialHtmlTooltip(
+        {
+          title,
+          label: labels[weekIndex],
+          html,
+          color: "#3158b0",
+          width: 360,
+        },
+        node,
+      );
+    });
+  });
 }
 
 function renderStOverallChart() {
@@ -3725,8 +3801,8 @@ function renderStExChatgptChart() {
     stExChatgptChart,
     stWeeklyData.overall,
     "st-overall-ex-chatgpt",
-    "不含 ChatGPT 的峰值 DAU 周度走势",
-    { excludeProducts: ["ChatGPT"] },
+    "不含 ChatGPT / Gemini 的峰值 DAU 周度走势",
+    { excludeProducts: ["ChatGPT", "Gemini"] },
   );
 }
 

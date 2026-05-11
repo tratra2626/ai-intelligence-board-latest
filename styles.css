@@ -1732,6 +1732,15 @@ h2 {
   display: none;
 }
 
+.tooltip-meta-rich {
+  display: grid;
+  gap: 6px;
+}
+
+.st-week-hit {
+  cursor: pointer;
+}
+
 .commercial-table-wrap {
   overflow-x: auto;
 }
