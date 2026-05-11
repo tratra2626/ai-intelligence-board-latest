@@ -1125,11 +1125,33 @@
                 <div class="commercial-card-head">
                   <div>
                     <p class="eyebrow">Overall Peak DAU</p>
-                    <h3>整体峰值 DAU 周度走势</h3>
+                    <h3>整体峰值 DAU：绝对值主图</h3>
                   </div>
                 </div>
-                <p class="commercial-note">单位：万。展示 2026 年开始各产品双平台峰值 DAU 的周度变化。默认全部产品同屏，点击上方 chips 可筛掉不关心的曲线。</p>
+                <p class="commercial-note">主图保留绝对值量级，Y 轴按 “亿” 展示，并在每条线末端直接标最新一周值。这样可以先看真实规模，再往下看拆分视图。</p>
                 <svg id="stOverallChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="海外竞品整体峰值 DAU 周度走势"></svg>
+              </section>
+
+              <section class="commercial-card commercial-card-wide">
+                <div class="commercial-card-head">
+                  <div>
+                    <p class="eyebrow">Ex ChatGPT</p>
+                    <h3>不含 ChatGPT：其它产品绝对值走势</h3>
+                  </div>
+                </div>
+                <p class="commercial-note">这张图把 ChatGPT 拿掉，专门看 Gemini、Claude、Grok、Perplexity、Dola 的绝对值差异。这样小体量产品不会再被头部量级压扁。</p>
+                <svg id="stExChatgptChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="海外竞品不含 ChatGPT 的峰值 DAU 周度走势"></svg>
+              </section>
+
+              <section class="commercial-card commercial-card-wide">
+                <div class="commercial-card-head">
+                  <div>
+                    <p class="eyebrow">Indexed Growth</p>
+                    <h3>指数化增长：2026 W1 = 100</h3>
+                  </div>
+                </div>
+                <p class="commercial-note">指数图更适合看相对增速，而不是绝对规模。这里把各产品的 2026 年第一周统一设为 100，方便比较谁在这段时间里增长更快。</p>
+                <svg id="stIndexedChart" class="commercial-chart" viewBox="0 0 900 340" role="img" aria-label="海外竞品指数化增长走势"></svg>
               </section>
 
               <section class="commercial-card commercial-card-wide">

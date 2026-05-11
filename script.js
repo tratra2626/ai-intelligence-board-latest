@@ -681,6 +681,8 @@ const openaiValuationTable = document.querySelector("#openaiValuationTable");
 const stProductChips = document.querySelector("#stProductChips");
 const stCountryChips = document.querySelector("#stCountryChips");
 const stOverallChart = document.querySelector("#stOverallChart");
+const stExChatgptChart = document.querySelector("#stExChatgptChart");
+const stIndexedChart = document.querySelector("#stIndexedChart");
 const stCountryChart = document.querySelector("#stCountryChart");
 const stPeakValue = document.querySelector("#stPeakValue");
 const stPeakMeta = document.querySelector("#stPeakMeta");
@@ -3512,6 +3514,13 @@ function formatStValue(value) {
   return `${(value / 10000).toFixed(2).replace(/\.?0+$/, "")}亿`;
 }
 
+function formatStTick(value, mode = "absolute") {
+  if (mode === "indexed") {
+    return String(value);
+  }
+  return `${(value / 10000).toFixed(1).replace(/\.0$/, "")}亿`;
+}
+
 function getStSelectedProducts() {
   const products = Object.keys(stWeeklyData.overall);
   return selectedStProducts.size ? products.filter((product) => selectedStProducts.has(product)) : products;
@@ -3593,23 +3602,43 @@ function renderStOverviewCards() {
   }
 }
 
-function renderStLineChart(svg, dataset, chartKey, title) {
+function renderStLineChart(svg, dataset, chartKey, title, options = {}) {
   if (!svg) {
     return;
   }
 
+  const { mode = "absolute", excludeProducts = [] } = options;
   const width = 900;
   const height = 340;
   const margin = { top: 28, right: 28, bottom: 58, left: 62 };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
   const labels = stWeeklyData.weeks;
-  const selectedProducts = getStSelectedProducts();
+  const selectedProducts = getStSelectedProducts().filter((product) => !excludeProducts.includes(product));
+  if (!selectedProducts.length) {
+    svg.innerHTML = `<text x="450" y="170" text-anchor="middle" fill="#6f7478" font-size="14">当前筛选下暂无可展示的产品</text>`;
+    return;
+  }
+
+  const datasetForRender =
+    mode === "indexed"
+      ? Object.fromEntries(
+          Object.entries(dataset).map(([product, values]) => [
+            product,
+            (values || []).map((value, index) => (index === 0 ? 100 : (value / (values[0] || 1)) * 100)),
+          ]),
+        )
+      : dataset;
   const maxValue = Math.max(
-    ...selectedProducts.flatMap((product) => dataset[product] || [0]),
+    ...selectedProducts.flatMap((product) => datasetForRender[product] || [0]),
     0,
   );
-  const niceMax = maxValue > 10000 ? Math.ceil(maxValue / 5000) * 5000 : Math.ceil(maxValue / 500) * 500;
+  const niceMax =
+    mode === "indexed"
+      ? Math.ceil(maxValue / 20) * 20
+      : maxValue > 10000
+        ? Math.ceil(maxValue / 5000) * 5000
+        : Math.ceil(maxValue / 500) * 500;
   const tickCount = 5;
   const ticks = Array.from({ length: tickCount + 1 }, (_, index) => Math.round((niceMax * index) / tickCount));
   const xFor = (index) => margin.left + (index / (labels.length - 1 || 1)) * chartWidth;
@@ -3618,19 +3647,22 @@ function renderStLineChart(svg, dataset, chartKey, title) {
   const lineMarkup = selectedProducts
     .map((product) => {
       const color = stProductColors[product] || "#5f6569";
-      const points = (dataset[product] || []).map((value, index) => ({
+      const values = datasetForRender[product] || [];
+      const rawValues = dataset[product] || [];
+      const points = values.map((value, index) => ({
         label: labels[index],
         value,
         x: xFor(index),
         y: yFor(value),
       }));
+      const lastPoint = points[points.length - 1];
       const pointMarkup = points
         .map((point) => {
           const pointId = registerCommercialPoint({
             chartKey,
             seriesLabel: product,
             label: point.label,
-            valueText: `${point.value} 万`,
+            valueText: mode === "indexed" ? `${point.value.toFixed(1)} (W1=100)` : `${rawValues[points.indexOf(point)]} 万`,
             note: `${title}；单位：万。`,
             color,
           });
@@ -3640,6 +3672,11 @@ function renderStLineChart(svg, dataset, chartKey, title) {
       return `
         <polyline fill="none" stroke="${color}" stroke-width="2.8" points="${buildPolyline(points)}" />
         ${pointMarkup}
+        ${
+          lastPoint
+            ? `<text x="${Math.min(width - 8, lastPoint.x + 8)}" y="${lastPoint.y + 4}" fill="${color}" font-size="10.5" font-weight="700">${mode === "indexed" ? lastPoint.value.toFixed(0) : formatStValue(rawValues[rawValues.length - 1])}</text>`
+            : ""
+        }
       `;
     })
     .join("");
@@ -3665,7 +3702,7 @@ function renderStLineChart(svg, dataset, chartKey, title) {
         const y = yFor(tick);
         return `
           <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(40,48,52,0.1)" />
-          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${tick}</text>
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" fill="#6f7478" font-size="11">${formatStTick(tick, mode)}</text>
         `;
       })
       .join("")}
@@ -3683,6 +3720,26 @@ function renderStOverallChart() {
   renderStLineChart(stOverallChart, stWeeklyData.overall, "st-overall", "整体峰值 DAU 周度走势");
 }
 
+function renderStExChatgptChart() {
+  renderStLineChart(
+    stExChatgptChart,
+    stWeeklyData.overall,
+    "st-overall-ex-chatgpt",
+    "不含 ChatGPT 的峰值 DAU 周度走势",
+    { excludeProducts: ["ChatGPT"] },
+  );
+}
+
+function renderStIndexedChart() {
+  renderStLineChart(
+    stIndexedChart,
+    stWeeklyData.overall,
+    "st-indexed",
+    "指数化增长走势",
+    { mode: "indexed" },
+  );
+}
+
 function renderStCountryChart() {
   renderStLineChart(
     stCountryChart,
@@ -3697,6 +3754,8 @@ function renderStPanel() {
   setupStCountryChips();
   renderStOverviewCards();
   renderStOverallChart();
+  renderStExChatgptChart();
+  renderStIndexedChart();
   renderStCountryChart();
 }
 
