@@ -1447,6 +1447,14 @@ h2 {
   background: #fff;
 }
 
+.news-media svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  background: #fff;
+}
+
 .news-media figcaption {
   color: var(--muted);
   font-size: 12px;
