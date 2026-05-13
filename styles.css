@@ -1801,6 +1801,24 @@ h2 {
   font-size: 14px;
 }
 
+.weekly-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weekly-export {
+  background: rgba(49, 88, 176, 0.1);
+  border-color: rgba(49, 88, 176, 0.18);
+  color: var(--blue);
+}
+
+.weekly-export:hover {
+  border-color: transparent;
+  background: var(--blue);
+  color: #fff;
+}
+
 .clear-weekly {
   min-height: 32px;
   border: 1px solid rgba(40, 48, 52, 0.14);
@@ -1818,6 +1836,47 @@ h2 {
   border-color: transparent;
   background: var(--ink);
   color: #fff;
+}
+
+.weekly-export-panel {
+  display: grid;
+  gap: 10px;
+  max-width: 980px;
+  border: 1px solid rgba(49, 88, 176, 0.12);
+  border-radius: 10px;
+  background: rgba(49, 88, 176, 0.04);
+  padding: 14px;
+}
+
+.weekly-export-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.weekly-export-head strong {
+  font-size: 14px;
+}
+
+.weekly-export-head span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.weekly-export-output {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+  border: 1px solid rgba(40, 48, 52, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 14px;
 }
 
 .weekly-feed {
@@ -1971,6 +2030,16 @@ h2 {
 
   .news-card-head,
   .weekly-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .weekly-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .weekly-export-head {
     align-items: flex-start;
     flex-direction: column;
   }

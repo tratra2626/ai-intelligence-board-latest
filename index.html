@@ -774,8 +774,8 @@
           <article class="feature-board news-board">
             <div class="news-date-card weekly-date-card">
               <span>每周重点新闻</span>
-              <strong>2026-05-08 起</strong>
-              <small>从每日新闻中勾选条目后自动汇总到这里，本周先作为候选池。</small>
+              <strong id="weeklyWindowTitle">2026-05-08 至 2026-05-13</strong>
+              <small id="weeklyWindowNote">本周按 2026-05-08 至 2026-05-13 统计；2026-05-14 起自动切到新一周。</small>
             </div>
 
             <div class="news-summary">
@@ -786,7 +786,18 @@
 
             <div class="weekly-toolbar">
               <strong id="weeklyCount">0 条已入选</strong>
-              <button class="clear-weekly" id="clearWeekly" type="button">清空选择</button>
+              <div class="weekly-actions">
+                <button class="clear-weekly weekly-export" id="exportWeekly" type="button">导出本周已选</button>
+                <button class="clear-weekly" id="clearWeekly" type="button">清空选择</button>
+              </div>
+            </div>
+
+            <div class="weekly-export-panel" id="weeklyExportPanel" hidden>
+              <div class="weekly-export-head">
+                <strong>周报文字导出</strong>
+                <span id="weeklyExportStatus">点击按钮后会在这里生成文本，并尝试复制到剪贴板。</span>
+              </div>
+              <textarea id="weeklyExportOutput" class="weekly-export-output" spellcheck="false" aria-label="周报导出文本"></textarea>
             </div>
 
             <div class="weekly-feed" id="weeklyFeed" aria-live="polite">

@@ -654,6 +654,12 @@ const tabPanels = [...document.querySelectorAll(".tab-panel")];
 const weeklyFeed = document.querySelector("#weeklyFeed");
 const weeklyCount = document.querySelector("#weeklyCount");
 const clearWeekly = document.querySelector("#clearWeekly");
+const exportWeekly = document.querySelector("#exportWeekly");
+const weeklyWindowTitle = document.querySelector("#weeklyWindowTitle");
+const weeklyWindowNote = document.querySelector("#weeklyWindowNote");
+const weeklyExportPanel = document.querySelector("#weeklyExportPanel");
+const weeklyExportStatus = document.querySelector("#weeklyExportStatus");
+const weeklyExportOutput = document.querySelector("#weeklyExportOutput");
 const currencySelect = document.querySelector("#currencySelect");
 const fxRate = document.querySelector("#fxRate");
 const priceTableBody = document.querySelector("#priceTableBody");
@@ -688,6 +694,20 @@ const stPeakValue = document.querySelector("#stPeakValue");
 const stPeakMeta = document.querySelector("#stPeakMeta");
 const stActiveCountryLabel = document.querySelector("#stActiveCountry");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
+const weeklyWindows = [
+  {
+    label: "2026-05-08 至 2026-05-13",
+    note: "本周按 2026-05-08 至 2026-05-13 统计；2026-05-14 起自动切到新一周。",
+    start: "2026-05-08",
+    end: "2026-05-13",
+  },
+  {
+    label: "2026-05-14 起",
+    note: "新一周从 2026-05-14 开始；导出时只会取 2026-05-14 之后的已选条目。",
+    start: "2026-05-14",
+    end: null,
+  },
+];
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
 commercialChartTooltip.hidden = true;
@@ -2488,6 +2508,51 @@ function normalizeNewsId(text) {
     .slice(0, 80);
 }
 
+function parseIsoDate(value) {
+  if (!value) {
+    return null;
+  }
+  return new Date(`${value}T00:00:00+08:00`);
+}
+
+function getActiveWeeklyWindow() {
+  const today = new Date();
+  const todayValue = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  return (
+    weeklyWindows.find((windowItem) => {
+      const start = parseIsoDate(windowItem.start);
+      const end = windowItem.end ? parseIsoDate(windowItem.end) : null;
+      if (!start) {
+        return false;
+      }
+      if (end) {
+        return todayValue >= start && todayValue <= end;
+      }
+      return todayValue >= start;
+    }) || weeklyWindows[0]
+  );
+}
+
+function isNewsInWeeklyWindow(dateText, windowItem = getActiveWeeklyWindow()) {
+  const current = parseIsoDate(dateText);
+  const start = parseIsoDate(windowItem.start);
+  const end = windowItem.end ? parseIsoDate(windowItem.end) : null;
+  if (!current || !start) {
+    return false;
+  }
+  if (end) {
+    return current >= start && current <= end;
+  }
+  return current >= start;
+}
+
+function getWeeklySelectedItems() {
+  const picks = getStoredWeeklyPicks();
+  const weeklyWindow = getActiveWeeklyWindow();
+  return collectNewsCards().filter((item) => picks.has(item.id) && isNewsInWeeklyWindow(item.date, weeklyWindow));
+}
+
 function collectNewsCards() {
   return [...document.querySelectorAll("#news .news-card")].map((card) => {
     const title = card.querySelector("h3")?.textContent.trim() || "";
@@ -2510,8 +2575,14 @@ function renderWeeklyPicks() {
     return;
   }
 
-  const picks = getStoredWeeklyPicks();
-  const selectedItems = collectNewsCards().filter((item) => picks.has(item.id));
+  const weeklyWindow = getActiveWeeklyWindow();
+  const selectedItems = getWeeklySelectedItems();
+  if (weeklyWindowTitle) {
+    weeklyWindowTitle.textContent = weeklyWindow.label;
+  }
+  if (weeklyWindowNote) {
+    weeklyWindowNote.textContent = weeklyWindow.note;
+  }
   weeklyCount.textContent = `${selectedItems.length} 条已入选`;
 
   if (!selectedItems.length) {
@@ -2534,6 +2605,71 @@ function renderWeeklyPicks() {
       `,
     )
     .join("");
+}
+
+function buildWeeklyExportText() {
+  const weeklyWindow = getActiveWeeklyWindow();
+  const selectedItems = getWeeklySelectedItems();
+  if (!selectedItems.length) {
+    return {
+      text: "",
+      status: `当前周 ${weeklyWindow.label} 还没有已选条目。`,
+    };
+  }
+
+  const grouped = new Map();
+  selectedItems.forEach((item) => {
+    if (!grouped.has(item.category)) {
+      grouped.set(item.category, []);
+    }
+    grouped.get(item.category).push(item);
+  });
+
+  const categoryOrder = ["模型侧", "模型端", "产品侧", "商业化", "估值与融资", "安全", "研究侧", "数据侧", "监管"];
+  const sections = [...grouped.entries()].sort((a, b) => {
+    const aIndex = categoryOrder.indexOf(a[0]);
+    const bIndex = categoryOrder.indexOf(b[0]);
+    return (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex);
+  });
+
+  const lines = [`每周重点新闻（${weeklyWindow.label}）`, ""];
+  sections.forEach(([category, items]) => {
+    lines.push(`${category}`);
+    items.forEach((item) => {
+      const text = item.summary.join(" ").replace(/\s+/g, " ").trim();
+      lines.push(`- ${item.title}${text ? `：${text}` : ""}`);
+    });
+    lines.push("");
+  });
+
+  return {
+    text: lines.join("\n").trim(),
+    status: `已生成 ${selectedItems.length} 条周报文本（${weeklyWindow.label}）。`,
+  };
+}
+
+async function exportWeeklyPicks() {
+  if (!weeklyExportPanel || !weeklyExportStatus || !weeklyExportOutput) {
+    return;
+  }
+
+  const { text, status } = buildWeeklyExportText();
+  weeklyExportPanel.hidden = false;
+  weeklyExportOutput.value = text;
+  weeklyExportStatus.textContent = status;
+
+  if (!text) {
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    weeklyExportStatus.textContent = `${status} 已复制到剪贴板。`;
+  } catch {
+    weeklyExportOutput.focus();
+    weeklyExportOutput.select();
+    weeklyExportStatus.textContent = `${status} 已在下方选中文本，可直接复制。`;
+  }
 }
 
 function setupWeeklySelectors() {
@@ -3943,8 +4079,16 @@ clearWeekly?.addEventListener("click", () => {
     input.checked = false;
     input.closest(".news-card")?.classList.remove("is-selected");
   });
+  if (weeklyExportPanel) {
+    weeklyExportPanel.hidden = true;
+  }
+  if (weeklyExportOutput) {
+    weeklyExportOutput.value = "";
+  }
   renderWeeklyPicks();
 });
+
+exportWeekly?.addEventListener("click", exportWeeklyPicks);
 
 searchInput.addEventListener("input", render);
 currencySelect?.addEventListener("change", renderPriceTable);
