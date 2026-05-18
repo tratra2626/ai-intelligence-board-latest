@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-15";
+const verifiedAt = "2026-05-18";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
