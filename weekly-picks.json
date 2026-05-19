@@ -1,5 +1,12 @@
 {
   "version": 1,
-  "updatedAt": null,
-  "picks": []
+  "updatedAt": "2026-05-19T11:12:00+08:00",
+  "picks": [
+    "2026-05-19-openai-联合-dell-推出企业级-codex-混合部署方案开始把-agent-编码正式卖进私有云与本地机房",
+    "2026-05-19-anthropic-收购-stainless把-api-sdk-与文档生成链路并入-claude-开发者栈",
+    "2026-05-19-the-informationopenai-与-anthropic-已吃掉头部-ai-创业公司-89-收入模型层双寡头继续强化",
+    "2026-05-19-the-informationopenai-正准备推出面向大客户的新产品进一步正面追击-anthropic-的企业优势",
+    "2026-05-15-openai-把-codex-带到手机端并把-remote-sshhooks-与企业令牌一起推向更完整的跨端工作流",
+    "2026-05-15-anthropic-与-gates-foundation-启动四年期-2-亿美元合作把-claude-的有益部署从口号变成正式预算"
+  ]
 }

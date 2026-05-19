@@ -708,8 +708,8 @@ const weeklyWindows = [
     end: "2026-05-13",
   },
   {
-    label: "2026-05-14 起",
-    note: "新一周从 2026-05-14 开始；导出时只会取 2026-05-14 之后的已选条目。",
+    label: "2026-05-14 至 2026-05-19",
+    note: "本周重点按 2026-05-14 至 2026-05-19 汇总；后续日更继续写入这一周，周报以这里的入选条目为准。",
     start: "2026-05-14",
     end: null,
   },
@@ -2865,7 +2865,12 @@ function buildWeeklyExportText() {
     lines.push(`${category}`);
     items.forEach((item) => {
       const text = item.summary.join(" ").replace(/\s+/g, " ").trim();
-      lines.push(`- ${item.title}${text ? `：${text}` : ""}`);
+      const firstSentence = text
+        .split(/(?<=。|！|？)/)
+        .map((sentence) => sentence.trim())
+        .find(Boolean) || text;
+      const compact = firstSentence.length > 90 ? `${firstSentence.slice(0, 90)}...` : firstSentence;
+      lines.push(`- ${item.title}${compact ? `：${compact}` : ""}`);
     });
     lines.push("");
   });
