@@ -655,6 +655,7 @@ const weeklyFeed = document.querySelector("#weeklyFeed");
 const weeklyCount = document.querySelector("#weeklyCount");
 const clearWeekly = document.querySelector("#clearWeekly");
 const exportWeekly = document.querySelector("#exportWeekly");
+const bindWeeklyFile = document.querySelector("#bindWeeklyFile");
 const syncWeeklyToFile = document.querySelector("#syncWeeklyToFile");
 const loadWeeklyFromFile = document.querySelector("#loadWeeklyFromFile");
 const weeklyWindowTitle = document.querySelector("#weeklyWindowTitle");
@@ -700,6 +701,9 @@ const stActiveCountryLabel = document.querySelector("#stActiveCountry");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
 const weeklyStateStorageKey = "modelTimelineWeeklyPicksState";
 const weeklyPicksFilePath = "./weekly-picks.json";
+const weeklyPicksHandleDbName = "modelTimelineWeeklyFileHandle";
+const weeklyPicksHandleStoreName = "handles";
+const weeklyPicksHandleKey = "weekly-picks";
 const weeklyWindows = [
   {
     label: "2026-05-08 至 2026-05-13",
@@ -772,6 +776,13 @@ function setWeeklySyncStatus(message, tone = "warning") {
   weeklySyncStatus.classList.toggle("is-warning", tone !== "synced");
 }
 
+function setWeeklyBindButtonLabel(bound) {
+  if (!bindWeeklyFile) {
+    return;
+  }
+  bindWeeklyFile.textContent = bound ? "更换同步文件" : "绑定同步文件";
+}
+
 function parseWeeklyTimestamp(value) {
   if (!value) {
     return 0;
@@ -784,6 +795,129 @@ function arePickListsEqual(left, right) {
   const a = [...left].sort();
   const b = [...right].sort();
   return a.length === b.length && a.every((item, index) => item === b[index]);
+}
+
+function canPersistWeeklyFileHandle() {
+  return "showSaveFilePicker" in window && "indexedDB" in window;
+}
+
+function openWeeklyHandleDb() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(weeklyPicksHandleDbName, 1);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(weeklyPicksHandleStoreName)) {
+        db.createObjectStore(weeklyPicksHandleStoreName);
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function getStoredWeeklyFileHandle() {
+  if (!canPersistWeeklyFileHandle()) {
+    return null;
+  }
+
+  try {
+    const db = await openWeeklyHandleDb();
+    return await new Promise((resolve, reject) => {
+      const transaction = db.transaction(weeklyPicksHandleStoreName, "readonly");
+      const store = transaction.objectStore(weeklyPicksHandleStoreName);
+      const request = store.get(weeklyPicksHandleKey);
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error);
+      transaction.oncomplete = () => db.close();
+    });
+  } catch {
+    return null;
+  }
+}
+
+async function storeWeeklyFileHandle(handle) {
+  if (!canPersistWeeklyFileHandle()) {
+    return false;
+  }
+
+  try {
+    const db = await openWeeklyHandleDb();
+    await new Promise((resolve, reject) => {
+      const transaction = db.transaction(weeklyPicksHandleStoreName, "readwrite");
+      const store = transaction.objectStore(weeklyPicksHandleStoreName);
+      const request = store.put(handle, weeklyPicksHandleKey);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+      transaction.oncomplete = () => db.close();
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function clearStoredWeeklyFileHandle() {
+  if (!canPersistWeeklyFileHandle()) {
+    return;
+  }
+
+  try {
+    const db = await openWeeklyHandleDb();
+    await new Promise((resolve, reject) => {
+      const transaction = db.transaction(weeklyPicksHandleStoreName, "readwrite");
+      const store = transaction.objectStore(weeklyPicksHandleStoreName);
+      const request = store.delete(weeklyPicksHandleKey);
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+      transaction.oncomplete = () => db.close();
+    });
+  } catch {
+    // Ignore handle cleanup failures and fall back to manual flow.
+  }
+}
+
+async function ensureWeeklyFilePermission(handle, mode = "readwrite") {
+  if (!handle) {
+    return false;
+  }
+
+  const options = { mode };
+  if (typeof handle.queryPermission === "function") {
+    const current = await handle.queryPermission(options);
+    if (current === "granted") {
+      return true;
+    }
+  }
+
+  if (typeof handle.requestPermission === "function") {
+    const requested = await handle.requestPermission(options);
+    return requested === "granted";
+  }
+
+  return false;
+}
+
+async function pickWeeklyPicksFileHandle() {
+  if (!("showSaveFilePicker" in window)) {
+    return null;
+  }
+
+  return window.showSaveFilePicker({
+    id: "weekly-picks-sync",
+    suggestedName: "weekly-picks.json",
+    types: [
+      {
+        description: "JSON",
+        accept: { "application/json": [".json"] },
+      },
+    ],
+  });
+}
+
+async function writeWeeklyPicksToHandle(handle, payload) {
+  const writable = await handle.createWritable();
+  await writable.write(`${JSON.stringify(payload, null, 2)}\n`);
+  await writable.close();
 }
 
 const anthropicRevenueSeries = {
@@ -2621,6 +2755,8 @@ function updateWeeklySyncStatusWithRepo(repoState = null) {
 async function hydrateWeeklyPicksFromRepo() {
   const localState = getStoredWeeklyState();
   const repoState = await loadWeeklyPicksFromRepo();
+  const storedHandle = await getStoredWeeklyFileHandle();
+  setWeeklyBindButtonLabel(Boolean(storedHandle));
   if (!repoState) {
     updateWeeklySyncStatusWithRepo(null);
     return;
@@ -2656,25 +2792,87 @@ function downloadWeeklyPicksPayload(payload) {
   setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
+async function bindWeeklyPicksFile(showStatus = true) {
+  if (!("showSaveFilePicker" in window)) {
+    setWeeklyBindButtonLabel(false);
+    if (showStatus) {
+      setWeeklySyncStatus(
+        "当前浏览器不支持记住同步文件；会继续走下载文件的方式。",
+        "warning",
+      );
+    }
+    return null;
+  }
+
+  try {
+    const handle = await pickWeeklyPicksFileHandle();
+    const granted = await ensureWeeklyFilePermission(handle, "readwrite");
+    if (!granted) {
+      setWeeklyBindButtonLabel(false);
+      if (showStatus) {
+        setWeeklySyncStatus(
+          "没有拿到写入权限，周选文件还没绑定成功。",
+          "warning",
+        );
+      }
+      return null;
+    }
+    await storeWeeklyFileHandle(handle);
+    setWeeklyBindButtonLabel(true);
+    if (showStatus) {
+      setWeeklySyncStatus(
+        "已绑定周选同步文件。之后点“同步到文件”就会直接覆盖同一个 <code>weekly-picks.json</code>。",
+        "synced",
+      );
+    }
+    return handle;
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      if (showStatus) {
+        setWeeklySyncStatus("已取消绑定，当前还是下载式同步。", "warning");
+      }
+      return null;
+    }
+    if (showStatus) {
+      setWeeklySyncStatus("绑定同步文件失败，会继续回退到下载文件方式。", "warning");
+    }
+    return null;
+  }
+}
+
 async function syncWeeklyPicksFile() {
   const payload = getWeeklyPicksPayload();
   saveWeeklyPicks(new Set(payload.picks), payload.updatedAt);
 
   try {
     if ("showSaveFilePicker" in window) {
-      const handle = await window.showSaveFilePicker({
-        suggestedName: "weekly-picks.json",
-        types: [
-          {
-            description: "JSON",
-            accept: { "application/json": [".json"] },
-          },
-        ],
-      });
-      const writable = await handle.createWritable();
-      await writable.write(`${JSON.stringify(payload, null, 2)}\n`);
-      await writable.close();
-      updateWeeklySyncStatusWithRepo(payload);
+      let handle = await getStoredWeeklyFileHandle();
+      if (handle) {
+        const granted = await ensureWeeklyFilePermission(handle, "readwrite");
+        if (!granted) {
+          await clearStoredWeeklyFileHandle();
+          setWeeklyBindButtonLabel(false);
+          handle = null;
+        }
+      }
+
+      if (!handle) {
+        handle = await bindWeeklyPicksFile(false);
+      }
+
+      if (handle) {
+        await writeWeeklyPicksToHandle(handle, payload);
+        setWeeklyBindButtonLabel(true);
+        updateWeeklySyncStatusWithRepo(payload);
+        return;
+      }
+
+      setWeeklyBindButtonLabel(false);
+      setWeeklySyncStatus(
+        "这次还没绑定到目标文件，先回退成下载文件；如果想一键覆盖，下次先点“绑定同步文件”。",
+        "warning",
+      );
+      downloadWeeklyPicksPayload(payload);
       return;
     }
   } catch (error) {
@@ -2682,11 +2880,13 @@ async function syncWeeklyPicksFile() {
       setWeeklySyncStatus("已取消同步，当前浏览器里的周选未写入 <code>weekly-picks.json</code>。", "warning");
       return;
     }
+    await clearStoredWeeklyFileHandle();
+    setWeeklyBindButtonLabel(false);
   }
 
   downloadWeeklyPicksPayload(payload);
   setWeeklySyncStatus(
-    `浏览器已下载新的 <code>weekly-picks.json</code>。把它放回仓库中的同名文件后，我下次就能直接读到这些周选。`,
+    `浏览器已下载新的 <code>weekly-picks.json</code>。如果你想摆脱“总落到下载文件夹”，先点一次“绑定同步文件”，后面就能一键覆盖。`,
     "warning",
   );
 }
@@ -4324,6 +4524,9 @@ clearWeekly?.addEventListener("click", () => {
 });
 
 exportWeekly?.addEventListener("click", exportWeeklyPicks);
+bindWeeklyFile?.addEventListener("click", () => {
+  bindWeeklyPicksFile(true);
+});
 syncWeeklyToFile?.addEventListener("click", syncWeeklyPicksFile);
 loadWeeklyFromFile?.addEventListener("click", async () => {
   try {
