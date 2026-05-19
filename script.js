@@ -655,11 +655,15 @@ const weeklyFeed = document.querySelector("#weeklyFeed");
 const weeklyCount = document.querySelector("#weeklyCount");
 const clearWeekly = document.querySelector("#clearWeekly");
 const exportWeekly = document.querySelector("#exportWeekly");
+const syncWeeklyToFile = document.querySelector("#syncWeeklyToFile");
+const loadWeeklyFromFile = document.querySelector("#loadWeeklyFromFile");
 const weeklyWindowTitle = document.querySelector("#weeklyWindowTitle");
 const weeklyWindowNote = document.querySelector("#weeklyWindowNote");
 const weeklyExportPanel = document.querySelector("#weeklyExportPanel");
 const weeklyExportStatus = document.querySelector("#weeklyExportStatus");
 const weeklyExportOutput = document.querySelector("#weeklyExportOutput");
+const weeklySyncStatus = document.querySelector("#weeklySyncStatus");
+const weeklyFileInput = document.querySelector("#weeklyFileInput");
 const currencySelect = document.querySelector("#currencySelect");
 const fxRate = document.querySelector("#fxRate");
 const priceTableBody = document.querySelector("#priceTableBody");
@@ -694,6 +698,8 @@ const stPeakValue = document.querySelector("#stPeakValue");
 const stPeakMeta = document.querySelector("#stPeakMeta");
 const stActiveCountryLabel = document.querySelector("#stActiveCountry");
 const weeklyStorageKey = "modelTimelineWeeklyPicks";
+const weeklyStateStorageKey = "modelTimelineWeeklyPicksState";
+const weeklyPicksFilePath = "./weekly-picks.json";
 const weeklyWindows = [
   {
     label: "2026-05-08 至 2026-05-13",
@@ -723,6 +729,62 @@ let selectedCommercialPointId = null;
 const commercialPointRegistry = new Map();
 let activeStCountry = "PH";
 let selectedStProducts = new Set();
+
+function normalizeWeeklyState(raw) {
+  if (Array.isArray(raw)) {
+    return {
+      version: 1,
+      updatedAt: null,
+      picks: [...new Set(raw.filter((item) => typeof item === "string" && item.trim()))].sort(),
+    };
+  }
+
+  if (!raw || typeof raw !== "object") {
+    return {
+      version: 1,
+      updatedAt: null,
+      picks: [],
+    };
+  }
+
+  return {
+    version: Number(raw.version) || 1,
+    updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : null,
+    picks: [...new Set((Array.isArray(raw.picks) ? raw.picks : []).filter((item) => typeof item === "string" && item.trim()))].sort(),
+  };
+}
+
+function buildWeeklyState(picks, updatedAt = null) {
+  return normalizeWeeklyState({
+    version: 1,
+    updatedAt,
+    picks: [...picks],
+  });
+}
+
+function setWeeklySyncStatus(message, tone = "warning") {
+  if (!weeklySyncStatus) {
+    return;
+  }
+
+  weeklySyncStatus.innerHTML = message;
+  weeklySyncStatus.classList.toggle("is-synced", tone === "synced");
+  weeklySyncStatus.classList.toggle("is-warning", tone !== "synced");
+}
+
+function parseWeeklyTimestamp(value) {
+  if (!value) {
+    return 0;
+  }
+  const time = new Date(value).getTime();
+  return Number.isFinite(time) ? time : 0;
+}
+
+function arePickListsEqual(left, right) {
+  const a = [...left].sort();
+  const b = [...right].sort();
+  return a.length === b.length && a.every((item, index) => item === b[index]);
+}
 
 const anthropicRevenueSeries = {
   actual: [
@@ -2474,14 +2536,180 @@ function getModelType(event) {
 
 function getStoredWeeklyPicks() {
   try {
-    return new Set(JSON.parse(localStorage.getItem(weeklyStorageKey) || "[]"));
+    const rawState = localStorage.getItem(weeklyStateStorageKey);
+    if (rawState) {
+      return new Set(normalizeWeeklyState(JSON.parse(rawState)).picks);
+    }
+    return new Set(normalizeWeeklyState(JSON.parse(localStorage.getItem(weeklyStorageKey) || "[]")).picks);
   } catch {
     return new Set();
   }
 }
 
-function saveWeeklyPicks(picks) {
-  localStorage.setItem(weeklyStorageKey, JSON.stringify([...picks]));
+function getStoredWeeklyState() {
+  try {
+    const rawState = localStorage.getItem(weeklyStateStorageKey);
+    if (rawState) {
+      return normalizeWeeklyState(JSON.parse(rawState));
+    }
+    return normalizeWeeklyState(JSON.parse(localStorage.getItem(weeklyStorageKey) || "[]"));
+  } catch {
+    return normalizeWeeklyState(null);
+  }
+}
+
+function saveWeeklyPicks(picks, updatedAt = null) {
+  const state = buildWeeklyState(picks, updatedAt);
+  localStorage.setItem(weeklyStorageKey, JSON.stringify(state.picks));
+  localStorage.setItem(weeklyStateStorageKey, JSON.stringify(state));
+}
+
+async function loadWeeklyPicksFromRepo(cacheBust = false) {
+  try {
+    const url = cacheBust ? `${weeklyPicksFilePath}?ts=${Date.now()}` : weeklyPicksFilePath;
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok) {
+      return null;
+    }
+    return normalizeWeeklyState(await response.json());
+  } catch {
+    return null;
+  }
+}
+
+function applyWeeklyPicksToCards() {
+  const picks = getStoredWeeklyPicks();
+  document.querySelectorAll(".weekly-select input").forEach((input) => {
+    const card = input.closest(".news-card");
+    const id = card?.dataset.weeklyId;
+    const checked = id ? picks.has(id) : false;
+    input.checked = checked;
+    card?.classList.toggle("is-selected", checked);
+  });
+}
+
+function updateWeeklySyncStatusWithRepo(repoState = null) {
+  const localState = getStoredWeeklyState();
+  const localCount = localState.picks.length;
+
+  if (!repoState) {
+    setWeeklySyncStatus(
+      `当前已在浏览器里选中 <strong>${localCount}</strong> 条；仓库里的 <code>weekly-picks.json</code> 还没有可用状态，请先点“同步到文件”。`,
+      "warning",
+    );
+    return;
+  }
+
+  const synced = arePickListsEqual(localState.picks, repoState.picks) && (
+    !repoState.updatedAt || localState.updatedAt === repoState.updatedAt
+  );
+
+  if (synced) {
+    setWeeklySyncStatus(
+      `已与 <code>weekly-picks.json</code> 同步，共 <strong>${repoState.picks.length}</strong> 条。最后同步时间：${repoState.updatedAt ? new Date(repoState.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未记录"}`,
+      "synced",
+    );
+    return;
+  }
+
+  setWeeklySyncStatus(
+    `当前浏览器里有 <strong>${localCount}</strong> 条选择，和仓库文件不一致。点“同步到文件”覆盖仓库文件，或点“从文件加载”以仓库文件为准。`,
+    "warning",
+  );
+}
+
+async function hydrateWeeklyPicksFromRepo() {
+  const localState = getStoredWeeklyState();
+  const repoState = await loadWeeklyPicksFromRepo();
+  if (!repoState) {
+    updateWeeklySyncStatusWithRepo(null);
+    return;
+  }
+
+  const localStamp = parseWeeklyTimestamp(localState.updatedAt);
+  const repoStamp = parseWeeklyTimestamp(repoState.updatedAt);
+  if ((!localState.picks.length && repoState.picks.length) || repoStamp > localStamp) {
+    saveWeeklyPicks(new Set(repoState.picks), repoState.updatedAt);
+  }
+
+  applyWeeklyPicksToCards();
+  renderWeeklyPicks();
+  updateWeeklySyncStatusWithRepo(repoState);
+}
+
+function getWeeklyPicksPayload() {
+  const state = buildWeeklyState(getStoredWeeklyPicks(), new Date().toISOString());
+  return {
+    version: state.version,
+    updatedAt: state.updatedAt,
+    picks: state.picks,
+  };
+}
+
+function downloadWeeklyPicksPayload(payload) {
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "weekly-picks.json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+async function syncWeeklyPicksFile() {
+  const payload = getWeeklyPicksPayload();
+  saveWeeklyPicks(new Set(payload.picks), payload.updatedAt);
+
+  try {
+    if ("showSaveFilePicker" in window) {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: "weekly-picks.json",
+        types: [
+          {
+            description: "JSON",
+            accept: { "application/json": [".json"] },
+          },
+        ],
+      });
+      const writable = await handle.createWritable();
+      await writable.write(`${JSON.stringify(payload, null, 2)}\n`);
+      await writable.close();
+      updateWeeklySyncStatusWithRepo(payload);
+      return;
+    }
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      setWeeklySyncStatus("已取消同步，当前浏览器里的周选未写入 <code>weekly-picks.json</code>。", "warning");
+      return;
+    }
+  }
+
+  downloadWeeklyPicksPayload(payload);
+  setWeeklySyncStatus(
+    `浏览器已下载新的 <code>weekly-picks.json</code>。把它放回仓库中的同名文件后，我下次就能直接读到这些周选。`,
+    "warning",
+  );
+}
+
+function applyImportedWeeklyState(state) {
+  saveWeeklyPicks(new Set(state.picks), state.updatedAt || new Date().toISOString());
+  applyWeeklyPicksToCards();
+  renderWeeklyPicks();
+  updateWeeklySyncStatusWithRepo(normalizeWeeklyState(state));
+}
+
+async function loadWeeklyPicksFromChosenFile(file) {
+  if (!file) {
+    return;
+  }
+
+  try {
+    const text = await file.text();
+    const state = normalizeWeeklyState(JSON.parse(text));
+    applyImportedWeeklyState(state);
+  } catch {
+    setWeeklySyncStatus("读取 <code>weekly-picks.json</code> 失败，请确认文件内容是有效 JSON。", "warning");
+  }
 }
 
 function getNewsDate(card) {
@@ -2700,9 +2928,10 @@ function setupWeeklySelectors() {
       } else {
         nextPicks.delete(id);
       }
-      saveWeeklyPicks(nextPicks);
+      saveWeeklyPicks(nextPicks, new Date().toISOString());
       card.classList.toggle("is-selected", event.target.checked);
       renderWeeklyPicks();
+      loadWeeklyPicksFromRepo(true).then((repoState) => updateWeeklySyncStatusWithRepo(repoState));
     });
   });
 
@@ -4074,7 +4303,7 @@ commercialChips.forEach((chip) => {
 });
 
 clearWeekly?.addEventListener("click", () => {
-  saveWeeklyPicks(new Set());
+  saveWeeklyPicks(new Set(), new Date().toISOString());
   document.querySelectorAll(".weekly-select input").forEach((input) => {
     input.checked = false;
     input.closest(".news-card")?.classList.remove("is-selected");
@@ -4086,9 +4315,40 @@ clearWeekly?.addEventListener("click", () => {
     weeklyExportOutput.value = "";
   }
   renderWeeklyPicks();
+  loadWeeklyPicksFromRepo(true).then((repoState) => updateWeeklySyncStatusWithRepo(repoState));
 });
 
 exportWeekly?.addEventListener("click", exportWeeklyPicks);
+syncWeeklyToFile?.addEventListener("click", syncWeeklyPicksFile);
+loadWeeklyFromFile?.addEventListener("click", async () => {
+  try {
+    if ("showOpenFilePicker" in window) {
+      const [handle] = await window.showOpenFilePicker({
+        multiple: false,
+        types: [
+          {
+            description: "JSON",
+            accept: { "application/json": [".json"] },
+          },
+        ],
+      });
+      const file = await handle.getFile();
+      await loadWeeklyPicksFromChosenFile(file);
+      return;
+    }
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      return;
+    }
+  }
+
+  weeklyFileInput?.click();
+});
+weeklyFileInput?.addEventListener("change", async (event) => {
+  const [file] = event.target.files || [];
+  await loadWeeklyPicksFromChosenFile(file);
+  event.target.value = "";
+});
 
 searchInput.addEventListener("input", render);
 currencySelect?.addEventListener("change", renderPriceTable);
@@ -4104,6 +4364,7 @@ priceMetricInputs.forEach((input) =>
 setVerifiedText();
 setupDailyNewsTimeline();
 setupWeeklySelectors();
+hydrateWeeklyPicksFromRepo();
 setupPriceCompanyFilter();
 setupPriceChartInteractions();
 renderPriceChart();

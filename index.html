@@ -1139,15 +1139,21 @@
             <div class="news-summary">
               <p class="eyebrow">Weekly Picks</p>
               <h2>每周重点新闻</h2>
-              <p>先在“每日重点新闻”里勾选你想保留的条目；这里会自动生成周度精选列表，方便下周再做最终取舍。</p>
+              <p>先在“每日重点新闻”里勾选你想保留的条目；这里会自动生成周度精选列表。勾选仍会先保存在当前浏览器，同时你可以把状态同步到仓库里的 <code>weekly-picks.json</code>，这样我下次也能直接读到。</p>
             </div>
 
             <div class="weekly-toolbar">
               <strong id="weeklyCount">0 条已入选</strong>
               <div class="weekly-actions">
                 <button class="clear-weekly weekly-export" id="exportWeekly" type="button">导出本周已选</button>
+                <button class="clear-weekly weekly-export" id="syncWeeklyToFile" type="button">同步到文件</button>
+                <button class="clear-weekly" id="loadWeeklyFromFile" type="button">从文件加载</button>
                 <button class="clear-weekly" id="clearWeekly" type="button">清空选择</button>
               </div>
+            </div>
+
+            <div class="weekly-sync-status" id="weeklySyncStatus" aria-live="polite">
+              当前周选仍只保存在本浏览器；同步到 <code>weekly-picks.json</code> 后，后续自动化才能直接读取。
             </div>
 
             <div class="weekly-export-panel" id="weeklyExportPanel" hidden>
@@ -1157,6 +1163,8 @@
               </div>
               <textarea id="weeklyExportOutput" class="weekly-export-output" spellcheck="false" aria-label="周报导出文本"></textarea>
             </div>
+
+            <input id="weeklyFileInput" type="file" accept="application/json" hidden />
 
             <div class="weekly-feed" id="weeklyFeed" aria-live="polite">
               <p class="empty">还没有入选周度新闻。去“每日重点新闻”勾选几条试试。</p>

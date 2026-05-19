@@ -1848,6 +1848,29 @@ h2 {
   padding: 14px;
 }
 
+.weekly-sync-status {
+  max-width: 980px;
+  border: 1px solid rgba(40, 48, 52, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 10px 14px;
+}
+
+.weekly-sync-status.is-synced {
+  border-color: rgba(46, 111, 93, 0.22);
+  background: rgba(46, 111, 93, 0.08);
+  color: var(--green);
+}
+
+.weekly-sync-status.is-warning {
+  border-color: rgba(156, 106, 34, 0.22);
+  background: rgba(156, 106, 34, 0.08);
+  color: var(--gold);
+}
+
 .weekly-export-head {
   display: flex;
   align-items: baseline;
