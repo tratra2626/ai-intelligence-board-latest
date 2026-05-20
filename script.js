@@ -730,7 +730,7 @@ const weeklyWindows = [
     label: "2026-05-14 至 2026-05-19",
     note: "本周重点按 2026-05-14 至 2026-05-19 汇总；后续日更继续写入这一周，周报以这里的入选条目为准。",
     start: "2026-05-14",
-    end: null,
+    end: "2026-05-19",
   },
 ];
 const commercialChartTooltip = document.createElement("article");
@@ -2738,12 +2738,13 @@ function applyWeeklyPicksToCards() {
 }
 
 function updateWeeklySyncStatusWithRepo(repoState = null) {
-  const localState = getStoredWeeklyState();
+  const weeklyWindow = getActiveWeeklyWindow();
+  const localState = getLocalWeeklyWindowState(weeklyWindow);
   const localCount = localState.picks.length;
 
   if (!repoState) {
     setWeeklySyncStatus(
-      `当前已在浏览器里选中 <strong>${localCount}</strong> 条；仓库里的 <code>weekly-picks.json</code> 还没有可用状态，请先点“同步到文件”。`,
+      `当前周窗口 ${weeklyWindow.label} 已在浏览器里选中 <strong>${localCount}</strong> 条；仓库里的 <code>weekly-picks.json</code> 还没有可用状态，请先点“同步到文件”。`,
       "warning",
     );
     return;
@@ -2755,14 +2756,14 @@ function updateWeeklySyncStatusWithRepo(repoState = null) {
 
   if (synced) {
     setWeeklySyncStatus(
-      `已与 <code>weekly-picks.json</code> 同步，共 <strong>${repoState.picks.length}</strong> 条。最后同步时间：${repoState.updatedAt ? new Date(repoState.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未记录"}`,
+      `当前周窗口 ${weeklyWindow.label} 已与 <code>weekly-picks.json</code> 同步，共 <strong>${repoState.picks.length}</strong> 条。最后同步时间：${repoState.updatedAt ? new Date(repoState.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未记录"}`,
       "synced",
     );
     return;
   }
 
   setWeeklySyncStatus(
-    `当前浏览器里有 <strong>${localCount}</strong> 条选择，和仓库文件不一致。点“同步到文件”覆盖仓库文件，或点“从文件加载”以仓库文件为准。`,
+    `当前周窗口 ${weeklyWindow.label} 在浏览器里有 <strong>${localCount}</strong> 条选择，和仓库文件不一致。点“同步到文件”覆盖仓库文件，或点“从文件加载”以仓库文件为准。`,
     "warning",
   );
 }
@@ -2789,7 +2790,7 @@ async function hydrateWeeklyPicksFromRepo() {
 }
 
 function getWeeklyPicksPayload() {
-  const state = buildWeeklyState(getStoredWeeklyPicks(), new Date().toISOString());
+  const state = buildWeeklyState(getWeeklySelectedItems().map((item) => item.id), new Date().toISOString());
   return {
     version: state.version,
     updatedAt: state.updatedAt,
@@ -2858,6 +2859,8 @@ async function bindWeeklyPicksFile(showStatus = true) {
 async function syncWeeklyPicksFile() {
   const payload = getWeeklyPicksPayload();
   saveWeeklyPicks(new Set(payload.picks), payload.updatedAt);
+  applyWeeklyPicksToCards();
+  renderWeeklyPicks();
 
   try {
     if ("showSaveFilePicker" in window) {
@@ -2962,19 +2965,30 @@ function getActiveWeeklyWindow() {
   const today = new Date();
   const todayValue = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-  return (
-    weeklyWindows.find((windowItem) => {
+  const exact = weeklyWindows.find((windowItem) => {
+    const start = parseIsoDate(windowItem.start);
+    const end = windowItem.end ? parseIsoDate(windowItem.end) : null;
+    if (!start) {
+      return false;
+    }
+    if (end) {
+      return todayValue >= start && todayValue <= end;
+    }
+    return todayValue >= start;
+  });
+
+  if (exact) {
+    return exact;
+  }
+
+  const started = weeklyWindows
+    .filter((windowItem) => {
       const start = parseIsoDate(windowItem.start);
-      const end = windowItem.end ? parseIsoDate(windowItem.end) : null;
-      if (!start) {
-        return false;
-      }
-      if (end) {
-        return todayValue >= start && todayValue <= end;
-      }
-      return todayValue >= start;
-    }) || weeklyWindows[0]
-  );
+      return start && todayValue >= start;
+    })
+    .sort((left, right) => parseIsoDate(right.start) - parseIsoDate(left.start));
+
+  return started[0] || weeklyWindows[0];
 }
 
 function isNewsInWeeklyWindow(dateText, windowItem = getActiveWeeklyWindow()) {
@@ -2994,6 +3008,20 @@ function getWeeklySelectedItems() {
   const picks = getStoredWeeklyPicks();
   const weeklyWindow = getActiveWeeklyWindow();
   return collectNewsCards().filter((item) => picks.has(item.id) && isNewsInWeeklyWindow(item.date, weeklyWindow));
+}
+
+function getLocalWeeklyWindowState(windowItem = getActiveWeeklyWindow()) {
+  const localState = getStoredWeeklyState();
+  const windowIds = new Set(
+    collectNewsCards()
+      .filter((item) => isNewsInWeeklyWindow(item.date, windowItem))
+      .map((item) => item.id),
+  );
+
+  return buildWeeklyState(
+    localState.picks.filter((id) => windowIds.has(id)),
+    localState.updatedAt,
+  );
 }
 
 function collectNewsCards() {
