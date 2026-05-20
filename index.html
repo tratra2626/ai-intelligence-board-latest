@@ -138,77 +138,99 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>今日重点新闻</span>
-              <strong>2026-05-19</strong>
-              <small>时间窗口：2026-05-18 10:33 至 2026-05-19 10:33 CST</small>
+              <strong>2026-05-20</strong>
+              <small>时间窗口：2026-05-19 10:00 至 2026-05-20 10:00 CST</small>
             </div>
 
             <div class="news-summary">
               <p class="eyebrow">Daily Highlights</p>
               <h2>每日重点新闻</h2>
-              <p>过去 24 小时没有确认到 OpenAI、Anthropic、Google/DeepMind、xAI、DeepSeek、豆包、千问、腾讯、MiniMax、智谱、Kimi、Meta、Mistral 或百度发布新的头部通用模型，也没有看到需要写入时间轴、价格表和价格趋势图的全新官方 API 定价。这一版按你的关注范围收窄到大公司和高信号媒体：除了 OpenAI、Anthropic、xAI 的官方动作外，补回过去两天最值得看的 The Information 报道，重点是 OpenAI/Anthropic 收入集中度、OpenAI 企业化推进，以及 Anthropic 对开发者工具链的控制力增强。</p>
+              <p>过去 24 小时最重要的变量来自 Google I/O 2026：Google 不只是更新了 Gemini app，而是同步推出 <code>Gemini 3.5</code> 家族、把 <code>Gemini 3.5 Flash</code> 正式推入 Gemini API 与企业产品，并上线托管式 agent 基础设施 <code>Managed Agents</code>。这一窗口内没有确认到 OpenAI、Anthropic、xAI、DeepSeek、豆包、千问、腾讯、Meta 或 Mistral 发布新的头部通用 API 模型；因此这版首页重点转向 Google 的模型/API 进展，以及 Anthropic 和 OpenAI 在企业落地与可信内容基础设施上的新动作。</p>
             </div>
 
             <div class="news-feed">
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">01</span>
-                  <span class="news-tag">商业化</span>
+                  <span class="news-tag">模型侧</span>
                 </div>
-                <h3>OpenAI 联合 Dell 推出企业级 Codex 混合部署方案，开始把 agent 编码正式卖进私有云与本地机房</h3>
-                <p>OpenAI 于 2026 年 5 月 18 日发布官方公告，宣布与 Dell Technologies 合作，把 <code>Codex</code> 带入混合云和本地企业环境。按 OpenAI 公告，合作重点是让企业能够在数据、系统和工作流本来就存在的环境中部署 Codex，包括 Dell AI Factory 和 Dell AI Data Platform 一类基础设施。</p>
-                <p>这条值得放在第一位，因为它不是单纯的渠道合作，而是 OpenAI 第一次把“最强编码 agent”更系统地包装成企业基础设施能力。过去 Codex 更像云端工具或开发者产品；现在它被重新表述成可落在企业现有合规边界里的生产力层。窗口内没有新的头部模型，但这一动作会直接影响 Codex 的付费扩张路径，也会把 Anthropic、GitHub Copilot Enterprise 和国内企业代码助手拉回到更正面的私有部署竞争。</p>
-                <a href="https://openai.com/index/dell-codex-enterprise-partnership/" target="_blank" rel="noreferrer">查看来源</a>
+                <h3>Google 发布 Gemini 3.5，并让 Gemini 3.5 Flash 当天进入 Gemini API 与企业产品</h3>
+                <p>Google 于 2026 年 5 月 19 日发布官方公告，推出新一代 <code>Gemini 3.5</code> 家族，并以 <code>Gemini 3.5 Flash</code> 作为首发型号。按 Google 官方说法，3.5 Flash 已当天面向 Gemini app、Search AI Mode、Google Antigravity、Gemini API、Android Studio、Gemini Enterprise Agent Platform 和 Gemini Enterprise 提供；<code>Gemini 3.5 Pro</code> 仍处于内部使用阶段，计划下个月再 rollout。</p>
+                <p>这一发布的重要性在于，Google 终于把“更强模型”和“可执行 agent 工作流”合成一条产品线来卖，而不是只在消费端秀功能。Google 官方披露的核心 benchmark 包括 Terminal-Bench 2.1 的 <code>76.2%</code>、MCP Atlas 的 <code>83.6%</code> 和 CharXiv Reasoning 的 <code>84.2%</code>，全部属于 Google 自引的官方发布页数据；价格页则显示 Gemini API 当前在售定价仍写作 <code>gemini-3-flash-preview</code>，我已在价格表中按这个官方计费口径同步更新为 3.5 Flash 对应条目。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 640 300" role="img" aria-label="Gemini 3.5 Flash 官方 benchmark 自制汇总图">
+                    <rect x="0" y="0" width="640" height="300" rx="16" fill="#f8f5ee"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">Gemini 3.5 Flash</text>
+                    <text x="28" y="68" fill="#6f7478" font-size="14">Google 2026-05-19 发布页列出的官方 benchmark 数值</text>
+                    <line x1="190" y1="240" x2="596" y2="240" stroke="#d9d1c5" stroke-width="2"></line>
+                    <text x="28" y="108" fill="#1f2528" font-size="14">Terminal-Bench 2.1</text>
+                    <rect x="228" y="92" width="309" height="22" rx="11" fill="#315f8f"></rect>
+                    <text x="548" y="108" fill="#1f2528" font-size="14" font-weight="700">76.2%</text>
+                    <text x="28" y="148" fill="#1f2528" font-size="14">MCP Atlas</text>
+                    <rect x="228" y="132" width="339" height="22" rx="11" fill="#4b79a6"></rect>
+                    <text x="578" y="148" fill="#1f2528" font-size="14" font-weight="700">83.6%</text>
+                    <text x="28" y="188" fill="#1f2528" font-size="14">CharXiv Reasoning</text>
+                    <rect x="228" y="172" width="341" height="22" rx="11" fill="#6b96bd"></rect>
+                    <text x="580" y="188" fill="#1f2528" font-size="14" font-weight="700">84.2%</text>
+                    <text x="28" y="228" fill="#1f2528" font-size="14">GDPval-AA</text>
+                    <rect x="228" y="212" width="303" height="22" rx="11" fill="#8fb0ce"></rect>
+                    <text x="542" y="228" fill="#1f2528" font-size="14" font-weight="700">1656 Elo</text>
+                  </svg>
+                  <figcaption>自制比较图，基于 Google 2026-05-19 官方发布页披露的 Gemini 3.5 Flash benchmark 数据。</figcaption>
+                </figure>
+                <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/" target="_blank" rel="noreferrer">查看模型发布来源</a>
+                <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noreferrer">查看 Gemini API 官方定价</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">02</span>
-                  <span class="news-tag">产品侧</span>
+                  <span class="news-tag">开发者生态</span>
                 </div>
-                <h3>xAI 发布 Grok Skills，把文档、演示文稿、表格和 PDF 生成能力做成可复用技能层</h3>
-                <p>xAI 于 2026 年 5 月 18 日在官方新闻页发布 <code>Grok Skills</code>。按官方描述，Skills 让 Grok 可以记住用户的格式、偏好和工作流步骤，并提供一批开箱即用的内置技能，当前官方重点展示的是 <code>Word Documents</code>、<code>Presentations</code>、<code>Spreadsheets</code>、<code>PDFs</code> 和 <code>Skill Creator</code>，已经在 Web、iOS 和 Android 上线。</p>
-                <p>这条更新的重要性在于，xAI 正在把 Grok 从“问答模型”推向“工作流宿主”。如果说 Grok 4.3 是底层模型，Skills 就是面向终端产品的任务封装层。它会直接影响 xAI 后续的企业工作流深度和用户黏性，也说明 xAI 在产品形态上越来越接近 ChatGPT、Claude 和 Copilot 的 agent 工作台路线，而不是单纯靠 X 平台流量分发。</p>
-                <a href="https://x.ai/news/grok-skills" target="_blank" rel="noreferrer">查看来源</a>
+                <h3>Google 在 Gemini API 推出 Managed Agents，把沙箱执行、工具调用和 AGENTS.md / SKILL.md 一起产品化</h3>
+                <p>同样在 2026 年 5 月 19 日，Google 发布 <code>Managed Agents</code>。官方描述是，开发者现在可以通过单次 API 调用拉起一个带推理、工具使用和代码执行能力的 agent，它运行在隔离、短生命周期的 Linux sandbox 中，并由新的 <code>Antigravity agent</code> 提供底层能力。</p>
+                <p>这条的意义并不亚于模型本身，因为它说明 Google 不是只把 3.5 Flash 当成一个“更强模型 SKU”，而是正在复制 OpenAI Codex/Responses 和 Anthropic Claude Code 背后的基础设施打法。官方还明确支持把 agent 行为定义为 <code>AGENTS.md</code> 和 <code>SKILL.md</code> 文件，这意味着 Google 已经把 agent runtime、沙箱、技能封装和版本化配置打包成开发者平台能力。</p>
+                <a href="https://blog.google/innovation-and-ai/technology/developers-tools/managed-agents-gemini-api/" target="_blank" rel="noreferrer">查看来源</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">03</span>
-                  <span class="news-tag">开发者生态</span>
+                  <span class="news-tag">产品侧</span>
                 </div>
-                <h3>Anthropic 收购 Stainless，把 API SDK 与文档生成链路并入 Claude 开发者栈</h3>
-                <p>Anthropic 于 2026 年 5 月 18 日宣布收购开发者工具公司 <code>Stainless</code>。官方公告强调，Stainless 的核心能力是从 OpenAPI 规范自动生成高质量 SDK、文档和示例，已经服务大量 API 团队；交易完成后，Stainless 团队将继续维护现有产品，同时帮助 Anthropic 改进自家的开发者体验。</p>
-                <p>这笔交易的信号很明确：Anthropic 不满足于只卖模型调用，而是要把“开发者从看到 API 文档到真正接入生产”的关键基础设施掌握在自己手里。对比 OpenAI 持续强化 Responses、Agents 和 Codex，Anthropic 此时买下 Stainless，本质上是在补齐模型之外的交付层。窗口内没有新的 Claude 型号，但这类并购比单次 feature release 更能说明下一阶段竞争从模型能力转向开发者工作流完整度。</p>
-                <a href="https://www.anthropic.com/news/anthropic-acquires-stainless" target="_blank" rel="noreferrer">查看来源</a>
+                <h3>Gemini app 同步推出 Omni、Spark 和 Daily Brief，Google 把消费端助手往“常驻 agent”推进</h3>
+                <p>Google 在 Gemini app 更新中披露，Gemini 月活已超过 <code>9 亿</code>，覆盖 <code>230</code> 个国家和地区、<code>70+</code> 种语言。同一篇官方公告里，Google 把 <code>Gemini Omni</code> 定义为可将文本、图片和视频提示转换成高质量电影级视频的新模型，并宣布 <code>Gemini Spark</code> 作为 24/7 个人 agent 启动受限测试，<code>Daily Brief</code> 作为晨间摘要 agent 同步推出。</p>
+                <p>这说明 Google 的策略已经不是“Gemini app 多几个功能”，而是把搜索、生成视频、桌面端和待办式执行全部挂到一个持续在线的助手框架下。官方还确认 macOS 版 Gemini app 已于当天开放下载，后续会把 Spark 和更强语音能力带到桌面端。对 ChatGPT 和 Claude 而言，真正的竞争点从单轮问答继续往“谁能成为默认工作界面”移动。</p>
+                <a href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/" target="_blank" rel="noreferrer">查看来源</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">04</span>
-                  <span class="news-tag">市场侧</span>
+                  <span class="news-tag">商业化</span>
                 </div>
-                <h3>The Information：OpenAI 与 Anthropic 已吃掉头部 AI 创业公司 89% 收入，模型层双寡头继续强化</h3>
-                <p><em>The Information</em> 于 2026 年 5 月 17 日发布的 Sunday Insights 指出，其跟踪的 <code>34</code> 家较成熟 AI 模型与应用创业公司，合计已经达到接近 <code>800 亿美元 annualized revenue</code>，约 <code>66 亿美元/月</code>。其中 <code>OpenAI + Anthropic</code> 两家合计占到这批公司收入的 <code>89%</code>，比半年前进一步抬升。</p>
-                <p>这条应该保留在首页，因为它回答的是“这一轮 AI 商业化的钱最终流向哪里”。它不是单一产品或单一融资新闻，而是在说明模型层对应用层利润的抽取仍在增强。对看板而言，这种收入集中度变化比很多边缘功能更新更重要，也更贴合你只关心头部公司的筛选标准。</p>
-                <a href="https://www.theinformation.com/articles/anthropic-openais-share-ai-startup-revenues-rises-89" target="_blank" rel="noreferrer">查看来源</a>
+                <h3>Anthropic 与 KPMG 达成全球联盟，把 Claude 铺到 27.6 万名员工和税务、法务、私募工作流</h3>
+                <p>Anthropic 于 2026 年 5 月 19 日宣布与 KPMG 建立全球联盟。按官方公告，KPMG 将把 Claude 嵌入自家 <code>Digital Gateway</code> 平台，并让全球超过 <code>276,000</code> 名员工获得 Claude 使用权限，首批重点场景包括税务、法务、私募股权以及网络安全。</p>
+                <p>这条新闻比一般“企业采购 Claude”更重，因为它展示的是一个咨询与审计巨头把 Claude 直接塞进核心交付流程，而不是停留在知识问答或局部试点。Anthropic 同时把 KPMG 设为私募领域 preferred partner，也意味着 Claude 正在往行业解决方案、实施服务和项目收入更深处走，继续巩固它在大型企业和专业服务市场里的领先心智。</p>
+                <a href="https://www.anthropic.com/news/anthropic-kpmg" target="_blank" rel="noreferrer">查看来源</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">05</span>
-                  <span class="news-tag">商业化</span>
+                  <span class="news-tag">安全/基础设施</span>
                 </div>
-                <h3>The Information：OpenAI 正准备推出面向大客户的新产品，进一步正面追击 Anthropic 的企业优势</h3>
-                <p><em>The Information</em> 在 2026 年 5 月 17 日报道称，OpenAI 正准备推出一项新 offering，帮助大型企业把 AI 更系统地嵌入客户服务、旧代码重写等业务流程。报道还提到，OpenAI 正在争取签下更多超过 <code>1 亿美元</code> 的多年期合同，并把 Codex 的下一步升级视作企业竞争的重要抓手。</p>
-                <p>这条和 Dell x Codex 官方新闻放在一起看就更完整了。官方公告告诉我们 OpenAI 正在解决部署问题，而 The Information 的报道补上了销售策略和收入目标：OpenAI 不只是发产品，而是在系统性把 Anthropic 眼下更强的企业心智拉回自己这边。这比泛泛的“AI 还在增长”更有判断价值。</p>
-                <a href="https://www.theinformation.com/briefings/openai-plans-new-offering-aimed-large-customers" target="_blank" rel="noreferrer">查看来源</a>
+                <h3>OpenAI 发布内容溯源更新：C2PA、Google SynthID 和公开验证工具预览开始合流</h3>
+                <p>OpenAI 于 2026 年 5 月 19 日发布内容溯源公告，宣布把其来源标记体系升级为三层结构：第一层是成为 <code>C2PA conforming generator</code>，第二层是与 Google 合作，把 <code>SynthID</code> 隐形水印加入通过 ChatGPT、Codex 和 OpenAI API 生成的图片，第三层则是开放一个面向公众的验证工具预览，用来检测图像里是否存在 OpenAI 的 provenance signals。</p>
+                <p>这条不属于新模型发布，但它对行业影响很大，因为 OpenAI 等于公开承认“单靠 metadata 不够”，需要把跨平台水印和最终验证工具一起做起来。更关键的是，Google 在同一天把 Gemini agent 战略推到台前，而 OpenAI 则在可信内容基础设施上与 Google 形成合作关系，这种“能力上竞争、标准上互操作”的关系会越来越常见。</p>
+                <a href="https://openai.com/index/advancing-content-provenance/" target="_blank" rel="noreferrer">查看来源</a>
               </article>
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
-              <p>今天最重要的结论是：窗口内虽然没有新的头部模型可写进时间线，但 OpenAI 和 Anthropic 的竞争已经明显从“谁的模型更强”转向“谁能先锁定企业预算、开发者入口和收入集中度”。Dell x Codex、Anthropic 收购 Stainless，以及 The Information 对 OpenAI 大客户产品和 89% 收入份额的报道，拼起来是同一个趋势。</p>
-              <p>因此这页不该被小公司融资和边缘产品稀释。短期最值得盯的，仍然是 OpenAI、Anthropic、xAI、Google 这些头部玩家是否继续推出企业部署、定价、SDK、连接器和组织整合动作；一旦有新的官方模型发布，再补写时间线和价格图会更有意义。</p>
+              <p>这 24 小时最值得更新到看板的数据点只有一个核心结论：Google 终于把 Gemini 的竞争方式从“模型迭代”切到“模型 + agent runtime + consumer surface + enterprise SKU”一整套体系。`Gemini 3.5 Flash`、`Managed Agents` 和 Gemini app 的 Omni/Spark 不是三条孤立新闻，而是一套连着卖的产品栈。</p>
+              <p>从跟踪优先级看，接下来最值得盯的是三件事：一是 Google 是否在 2026 年 6 月按期推出 <code>Gemini 3.5 Pro</code>；二是当前价格页仍写作 <code>gemini-3-flash-preview</code> 的计费名称是否改成正式版；三是 Anthropic 和 OpenAI 会不会在未来几天用新的企业部署、agent 平台或安全基础设施更新来回应 Google I/O。</p>
             </section>
 
             <div class="news-date-card">

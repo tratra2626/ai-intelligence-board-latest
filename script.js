@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-19";
+const verifiedAt = "2026-05-20";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -435,6 +435,13 @@ const events = [
     source: "https://developer.volcengine.com/articles/7636596381943070763",
   },
   {
+    date: "2026-05-19",
+    company: "Google",
+    model: "Gemini 3.5 / 3.5 Flash",
+    note: "Google 发布 Gemini 3.5 家族，并让 Gemini 3.5 Flash 当天在 Gemini API、Antigravity、Gemini app 与企业产品中可用。",
+    source: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+  },
+  {
     date: "2023-09-20",
     company: "OpenAI",
     model: "DALL-E 3",
@@ -641,6 +648,14 @@ const events = [
     type: "图像",
     note: "Grok Imagine Image Quality 面向更高真实感、更强文字渲染和更好的创意控制。",
     source: "https://docs.x.ai/developers/models/grok-imagine-image-quality",
+  },
+  {
+    date: "2026-05-19",
+    company: "Google",
+    model: "Gemini Omni",
+    type: "图像/视频",
+    note: "Google 在 Gemini app 推出 Gemini Omni，可将文本、图片和视频提示转换为高质量电影级视频，并向 Google AI Plus/Pro/Ultra 用户开始 rollout。",
+    source: "https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/",
   },
 ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -1675,13 +1690,13 @@ const priceRows = [
   },
   {
     company: "Google",
-    model: "Gemini 3 Flash Preview",
-    date: "2025-12-17",
+    model: "Gemini 3.5 Flash",
+    date: "2026-05-19",
     input: 0.5,
     cached: 0.05,
     output: 3,
-    note: "轻量高速模型，文本/图像/视频输入同价；音频输入按 $1/1M tokens。",
-    source: "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    note: "Google 5 月 19 日发布 Gemini 3.5 Flash；截至 2026-05-20，Gemini API 官方价格页对应计费型号仍写作 gemini-3-flash-preview。",
+    source: "https://ai.google.dev/gemini-api/docs/pricing",
   },
   {
     company: "Google",
