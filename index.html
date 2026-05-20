@@ -145,7 +145,7 @@
             <div class="news-summary">
               <p class="eyebrow">Daily Highlights</p>
               <h2>每日重点新闻</h2>
-              <p>过去 24 小时最重要的变量来自 Google I/O 2026：Google 不只是更新了 Gemini app，而是同步推出 <code>Gemini 3.5</code> 家族、把 <code>Gemini 3.5 Flash</code> 正式推入 Gemini API 与企业产品，并上线托管式 agent 基础设施 <code>Managed Agents</code>。这一窗口内没有确认到 OpenAI、Anthropic、xAI、DeepSeek、豆包、千问、腾讯、Meta 或 Mistral 发布新的头部通用 API 模型；因此这版首页重点转向 Google 的模型/API 进展，以及 Anthropic 和 OpenAI 在企业落地与可信内容基础设施上的新动作。</p>
+              <p>过去 24 小时最重要的变量来自 Google I/O 2026：Google 不只是更新了 Gemini app，而是同步推出 <code>Gemini 3.5</code> 家族、把 <code>Gemini 3.5 Flash</code> 正式推入 Gemini API 与企业产品，并上线托管式 agent 基础设施 <code>Managed Agents</code>。同一窗口里，国内更值得补记的是腾讯两条产品线动作：一条是应用宝团队开始邀请内测操作系统级多 Agent 助手 <code>Marvis</code>，另一条是腾讯云正式预告 <code>Hy3 preview</code> 与 <code>DeepSeek-V4-Pro</code> 将结束免费公测、转入按量商用。也就是说，这一页不能只盯海外模型发布，国内厂商最近几天的重点已经更明显地转到 agent 入口和商用节奏。</p>
             </div>
 
             <div class="news-feed">
@@ -225,12 +225,34 @@
                 <p>这条不属于新模型发布，但它对行业影响很大，因为 OpenAI 等于公开承认“单靠 metadata 不够”，需要把跨平台水印和最终验证工具一起做起来。更关键的是，Google 在同一天把 Gemini agent 战略推到台前，而 OpenAI 则在可信内容基础设施上与 Google 形成合作关系，这种“能力上竞争、标准上互操作”的关系会越来越常见。</p>
                 <a href="https://openai.com/index/advancing-content-provenance/" target="_blank" rel="noreferrer">查看来源</a>
               </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">06</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>腾讯开始邀请内测操作系统级 AI 助手 Marvis，用 1 个主 Agent 加 5 个执行 Agent 直接接管电脑任务</h3>
+                <p>5 月 19 日，多家国内媒体披露腾讯应用宝团队正在邀请制内测个人 AI 助手 <code>Marvis</code>。按媒体实测口径，这个产品不是常见的聊天窗口，而是一个操作系统层的多 Agent 框架：上面有 1 个负责理解需求和拆任务的 PM Agent，下面挂着 <code>File</code>、<code>Computer</code>、<code>APP</code>、<code>Search</code> 和 <code>Browser</code> 五个垂直 Agent，覆盖文件处理、系统设置、应用内代操作、公开信息搜索和网页交互。</p>
+                <p>这条新闻值得补进首页，因为它基本回答了“腾讯最近在个人 agent 上到底做什么”。和元宝偏云端问答、QClaw 偏远程操控、WorkBuddy 偏企业办公不同，Marvis 更像腾讯第一次试图把多 Agent 协作做成桌面默认层。这里的功能细节目前主要来自爱范儿和市场资讯等媒体实测，尚未看到腾讯发布完整官方产品页，所以页面里应把它明确标注为媒体报道与内测观察，而不是已全面开放的官方 GA。</p>
+                <a href="https://finance.sina.com.cn/tech/roll/2026-05-19/doc-inhymumf2200261.shtml" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">07</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>腾讯云公告：Hy3 preview 与 DeepSeek-V4-Pro 将于 5 月 27 日结束免费公测，转为正式商用</h3>
+                <p>腾讯云在智能体开发平台公告中披露，平台内提供的 <code>Hy3 preview</code> 与 <code>DeepSeek-V4-Pro</code> 将于北京时间 <code>2026 年 5 月 27 日 10:00</code> 起结束限时免费公测，转为正式商用，并根据模型调用按量计费。公告同时说明，套餐订阅用户将按 PU 抵扣使用，非套餐用户则需要切换到套餐订阅模式。</p>
+                <p>这条更新的意义在于，腾讯终于把最近一波最有热度的国产模型能力，从“先免费引流和拉生态”推进到“开始按平台规则收费”。对于这张看板来说，它比单纯再写一条模型性能稿更重要，因为它意味着混元和 DeepSeek 在腾讯云 agent 平台上的价值，已经开始进入真实商业化验证阶段。</p>
+                <a href="https://cloud.tencent.com/announce/detail/2292" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
-              <p>这 24 小时最值得更新到看板的数据点只有一个核心结论：Google 终于把 Gemini 的竞争方式从“模型迭代”切到“模型 + agent runtime + consumer surface + enterprise SKU”一整套体系。`Gemini 3.5 Flash`、`Managed Agents` 和 Gemini app 的 Omni/Spark 不是三条孤立新闻，而是一套连着卖的产品栈。</p>
-              <p>从跟踪优先级看，接下来最值得盯的是三件事：一是 Google 是否在 2026 年 6 月按期推出 <code>Gemini 3.5 Pro</code>；二是当前价格页仍写作 <code>gemini-3-flash-preview</code> 的计费名称是否改成正式版；三是 Anthropic 和 OpenAI 会不会在未来几天用新的企业部署、agent 平台或安全基础设施更新来回应 Google I/O。</p>
+              <p>这 24 小时最值得更新到看板的数据点，不再只是 Google 的模型和 agent 平台，而是中美头部厂商都在往“默认执行入口”推进。Google 把 Gemini 做成模型、runtime 和消费端入口一体化产品；腾讯则在另一侧同时试验操作系统级个人 agent（Marvis）和 agent 平台上的模型正式商用节奏。</p>
+              <p>从跟踪优先级看，接下来最值得盯的是四件事：一是 Google 是否在 2026 年 6 月按期推出 <code>Gemini 3.5 Pro</code>；二是当前价格页仍写作 <code>gemini-3-flash-preview</code> 的计费名称是否改成正式版；三是腾讯会不会正式发布 Marvis 官方产品页并开放更大范围内测；四是 Hy3 preview 与 DeepSeek-V4-Pro 转商用后，腾讯云侧是否会进一步公开真实调用量、套餐设计或价格变化。</p>
             </section>
 
             <div class="news-date-card">
@@ -454,12 +476,34 @@
                 <a href="https://www.business-standard.com/technology/tech-news/google-reports-its-first-discovery-of-a-zero-day-exploit-made-with-ai-help-126051200737_1.html" target="_blank" rel="noreferrer">查看来源</a>
               </article>
 
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">08</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>腾讯元宝接入微信聊天记录一键总结，开始把 AI 助手更深地塞进微信信息流</h3>
+                <p>5 月 13 日，腾讯通过官方公众号和多家媒体披露，元宝已支持总结微信聊天记录。用户在微信中选中需要处理的消息，点击“转发到其他应用”，选择元宝后即可把记录送入 AI 进行摘要、分析，媒体实测还提到元宝可据此生成回复建议和待办事项。</p>
+                <p>这条更新值得补，因为它比单独在 App 里加一个功能更重要。腾讯一直没有把元宝简单做成“再一个聊天机器人”，而是在把它往微信已有的高频信息流上接。对用户来说，微信群聊信息过载是刚需；对腾讯来说，真正的价值在于让元宝占住微信里的“信息处理层”，而不是只在应用商店里争一次下载量。</p>
+                <a href="https://www.nbd.com.cn/articles/2026-05-13/4390256.html" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">09</span>
+                  <span class="news-tag">产品/商业化</span>
+                </div>
+                <h3>千问与淘宝全量打通，阿里开始把 AI 购物从“会推荐”推进到“能下单、能售后”</h3>
+                <p>5 月 13 日，多家国内媒体跟进披露，千问 App 与淘宝天猫已完成全量双向互通。按报道，千问侧已可调度超过 <code>40 亿</code> 件商品与物流、售后等电商能力，用户能在千问对话里完成商品筛选、比价、下单；淘宝 App 侧则上线了 <code>千问 AI 购物助手</code>，覆盖 AI 试穿、智能算优惠、AI 种草等场景。</p>
+                <p>这条更新重要的地方不只是“阿里也做了 AI 购物”，而是阿里把交易闭环真正交给了千问一部分控制权。媒体普遍把这次打通描述为把搜索、订单履约和售后能力 Skill 化，再由千问按需调用。如果这套方式成立，千问就不再只是阿里生态里的引流入口，而会变成直接参与成交和服务成本优化的 agent 层。</p>
+                <a href="https://www.donews.com/news/detail/4/6554222.html" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
               <p>这个窗口里没有确认到 OpenAI、Anthropic、Google、xAI、DeepSeek、豆包、千问、腾讯、MiniMax、智谱、Kimi、百度、Meta 或 Mistral 的全新通用模型发布或新的官方 API 定价，因此模型时间轴、价格表和价格趋势图本轮不做无依据扩写。</p>
-              <p>更重要的变化发生在两端：一端是 Google 把 Gemini 深埋进 Android 与笔记本硬件层，开始争夺“系统级默认代理入口”；另一端是 OpenAI 通过研究复盘和客户案例，把 Codex 从模型能力叙事推向组织级部署叙事。融资和安全信号也在同步加码，说明接下来行业竞争会更少围绕单次模型发榜，更多围绕谁能把 AI 变成真实工作流、真实终端交互和真实高价值行业资产。</p>
+              <p>但如果把国内线一起放进来，这一天的竞争逻辑其实更完整了：腾讯在微信里把元宝往信息处理层推进，阿里则把千问往交易闭环推进。两家的共同点都不是先追求“最强模型 headline”，而是先占住高频入口和高价值流程。相比之下，MiniMax 和智谱这几天没有看到新的官方产品上线，更适合作为后续跟踪项，而不是硬塞进当天头条。</p>
             </section>
 
             <div class="news-date-card">
