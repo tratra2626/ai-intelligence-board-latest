@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-23";
+const verifiedAt = "2026-05-24";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -1772,10 +1772,10 @@ const priceRows = [
     company: "DeepSeek",
     model: "deepseek-v4-pro",
     date: "2026-05-07",
-    input: 1.74,
-    cached: 0.145,
-    output: 3.48,
-    note: "DeepSeek V4 Pro，价格高于 Flash，面向更强复杂推理与长上下文任务。",
+    input: 0.435,
+    cached: 0.003625,
+    output: 0.87,
+    note: "按 DeepSeek 2026-05-24 官方价页展示的当前实际价格；官方脚注写明 5 月 31 日促销结束后将以该价格正式生效。",
     source: "https://api-docs.deepseek.com/quick_start/pricing",
   },
   {
