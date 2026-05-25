@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-24";
+const verifiedAt = "2026-05-25";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -1775,7 +1775,7 @@ const priceRows = [
     input: 0.435,
     cached: 0.003625,
     output: 0.87,
-    note: "按 DeepSeek 2026-05-24 官方价页展示的当前实际价格；官方脚注写明 5 月 31 日促销结束后将以该价格正式生效。",
+    note: "按 DeepSeek 2026-05-25 复核的官方价页展示当前实际价格；官方脚注写明 5 月 31 日促销结束后将以该价格正式生效。",
     source: "https://api-docs.deepseek.com/quick_start/pricing",
   },
   {

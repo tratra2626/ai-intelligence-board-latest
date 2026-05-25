@@ -138,6 +138,125 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>今日重点新闻</span>
+              <strong>2026-05-25</strong>
+              <small>时间窗口：2026-05-24 10:00 至 2026-05-25 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有确认到新的头部通用模型正式 GA，因此这次首页的重点不在“再多一个新模型名”，而在三种更能直接改写竞争格局的信号：一是 <code>DeepSeek</code> 把 <code>deepseek-v4-pro</code> 的低价从促销写成了长期官方价；二是 <code>xAI</code> 在 5 月 24 日更新官方企业部署文档，开始把 <code>Grok Build</code> 的企业落地要件讲清楚；三是媒体继续把 OpenAI 与 Anthropic 的营收、利润和融资预期往前推，说明 AI 竞争正在越来越像一场经营纪律和交付体系的竞赛，而不只是 benchmark 竞赛。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">模型侧/盘点</span>
+                </div>
+                <h3>过去 24 小时未确认 OpenAI、Anthropic、Google、xAI、DeepSeek、Qwen、豆包、腾讯等头部厂商新增通用模型正式发布</h3>
+                <p>这轮窗口我重新核查了 OpenAI、Anthropic、Google、xAI、DeepSeek、阿里千问、字节豆包与腾讯混元的官方新闻页、模型页、文档页和价格页，没有确认到新的头部通用模型正式 GA，因此主时间线本轮不新增模型发布日期条目。</p>
+                <p>这并不意味着没有新增结构变化。今天更值得记录的是三类“弱发布、强影响”的变化：DeepSeek 价格规则正式转长期、xAI 开始把 Grok Build 的企业部署与权限控制写成文档标准件、以及 OpenAI 与 Anthropic 的财务与融资叙事继续在媒体端发酵。换句话说，站内模型时间线今天不需要加新点，但“谁更像一门成熟生意”这件事正在快速升温。</p>
+                <a href="https://openai.com/news/product/" target="_blank" rel="noreferrer">查看 OpenAI 产品发布页</a>
+                <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">查看 Anthropic 新闻页</a>
+                <a href="https://blog.google/innovation-and-ai/technology/ai/" target="_blank" rel="noreferrer">查看 Google AI 官方动态</a>
+                <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noreferrer">查看 DeepSeek 官方价页</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">商业化/价格战</span>
+                </div>
+                <h3>DeepSeek 官方价页继续确认：V4-Pro 当前 2.5 折在 5 月 31 日后将直接转成正式价格</h3>
+                <p>截至 2026 年 5 月 25 日上午复核，DeepSeek 官方 <code>Models &amp; Pricing</code> 页面仍明确写明：<code>deepseek-v4-pro</code> 当前价格为每百万输入 <code>$0.435</code>、缓存命中输入 <code>$0.003625</code>、输出 <code>$0.87</code>；而脚注进一步写到，在 <code>2026/05/31 15:59 UTC</code> 的 75% 折扣活动结束后，API 价格会“正式调整为原价的四分之一”。Reuters 于 5 月 23 日也据此跟进了永久降价消息。</p>
+                <p>对行业来说，这比一次短促销更重要。它意味着 DeepSeek 不是在用临时折扣搏曝光，而是在把高性能长上下文模型长期放进更低价格带。只要这一口径不变，中国模型 API 市场接下来就更可能继续围绕“成本锚点”展开，而不是单纯围绕性能榜单。</p>
+                <a href="https://api-docs.deepseek.com/quick_start/pricing" target="_blank" rel="noreferrer">查看 DeepSeek 官方 Models &amp; Pricing</a>
+                <a href="https://www.investing.com/news/stock-market-news/chinas-deepseek-to-make-permanent-75-price-cut-on-flagship-v4pro-ai-model-4708051" target="_blank" rel="noreferrer">查看 Reuters 报道转载</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">产品侧/企业部署</span>
+                </div>
+                <h3>xAI 官方企业部署文档在 5 月 24 日更新，Grok Build 开始把 OIDC、沙箱、权限和 ZDR 讲成可采购能力</h3>
+                <p>xAI 官方 <code>Enterprise Deployments</code> 文档标注的最近更新时间为 <code>May 24, 2026</code>。这次文档并不是简单修字，而是把企业级落地需要的关键控制面一次说清楚了：浏览器 OIDC、device code、外部身份提供商和 API key 四种认证方式；<code>/etc/grok/requirements.toml</code> 作为系统级强制策略入口；<code>workspace</code>、<code>strict</code> 等沙箱模式；以及 ZDR 团队级生效的数据生命周期。</p>
+                <p>这条的价值在于，它说明 xAI 正在尝试从“有模型、有 CLI”往“可被大公司安全团队接纳”走。对企业客户来说，真正决定是否采购 coding agent 的，往往不是 demo 有多酷，而是能不能接企业 IdP、能不能 pin 权限、能不能在管理配置和审计上过关。Grok Build 这次至少在文档层面补齐了不少必答题。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 300" role="img" aria-label="Grok Build 企业部署要点图">
+                    <rect x="0" y="0" width="720" height="300" rx="18" fill="#f8f5ee"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">Grok Build Enterprise</text>
+                    <text x="28" y="68" fill="#6f7478" font-size="14">自制工作流图，基于 xAI 官方 Enterprise Deployments 文档 2026-05-24 更新内容</text>
+                    <rect x="28" y="96" width="148" height="52" rx="12" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="56" y="118" fill="#6f7478" font-size="13">身份接入</text>
+                    <text x="56" y="136" fill="#1f2528" font-size="16" font-weight="700">OIDC / Device Auth</text>
+                    <rect x="206" y="96" width="148" height="52" rx="12" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="228" y="118" fill="#6f7478" font-size="13">策略层</text>
+                    <text x="228" y="136" fill="#1f2528" font-size="16" font-weight="700">requirements.toml</text>
+                    <rect x="384" y="96" width="148" height="52" rx="12" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="430" y="118" fill="#6f7478" font-size="13">执行层</text>
+                    <text x="430" y="136" fill="#1f2528" font-size="16" font-weight="700">Sandbox + Permissions</text>
+                    <rect x="562" y="96" width="130" height="52" rx="12" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="586" y="118" fill="#6f7478" font-size="13">数据侧</text>
+                    <text x="586" y="136" fill="#1f2528" font-size="16" font-weight="700">ZDR</text>
+                    <line x1="176" y1="122" x2="206" y2="122" stroke="#184f62" stroke-width="3"></line>
+                    <line x1="354" y1="122" x2="384" y2="122" stroke="#184f62" stroke-width="3"></line>
+                    <line x1="532" y1="122" x2="562" y2="122" stroke="#184f62" stroke-width="3"></line>
+                    <rect x="120" y="194" width="480" height="64" rx="14" fill="#184f62"></rect>
+                    <text x="144" y="221" fill="#f8f5ee" font-size="14">官方文档变化的核心含义：</text>
+                    <text x="144" y="244" fill="#ffffff" font-size="18" font-weight="700">xAI 正把 Grok Build 从“能用的 coding agent”补成“能进企业流程的 coding agent”。</text>
+                  </svg>
+                  <figcaption>自制工作流图，基于 xAI 官方企业部署文档；用于概括这次新增的身份、策略、沙箱与零数据保留要点。</figcaption>
+                </figure>
+                <a href="https://docs.x.ai/build/enterprise" target="_blank" rel="noreferrer">查看 xAI 官方 Enterprise Deployments</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">商业化/财务</span>
+                </div>
+                <h3>The Information：OpenAI 一季度营收据报约 57 亿美元，Codex 被点名为增长来源之一</h3>
+                <p>The Information 当前可见摘要显示，OpenAI 一季度营收约为 <code>57 亿美元</code>，比 Anthropic 同期高出近 <code>10 亿美元</code>；摘要同时写到，Codex 是推动增长的来源之一。PYMNTS 在 5 月 21 日的跟进稿中复述了这一点，并补充称 OpenAI 一季度平均周活仍显著低于 2 月峰值，说明流量高点与季度均值之间存在落差。</p>
+                <p>今天这条消息最值得首页记录的点，不只是“OpenAI 赚得更多”，而是 coding agent 已经明确进入营收叙事。过去 Codex 更像一个产品故事，现在它开始被外部报道写进季度财务解释里，这会让“agent 能否独立贡献收入”从抽象话题变成投资人会直接追问的经营问题。</p>
+                <a href="https://www.theinformation.com/articles/openai-held-1-billion-revenue-lead-anthropic-first-quarter" target="_blank" rel="noreferrer">查看 The Information 摘要</a>
+                <a href="https://www.pymnts.com/artificial-intelligence-2/2026/openais-codex-helps-drive-nearly-6-billion-quarter/" target="_blank" rel="noreferrer">查看 PYMNTS 跟进稿</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">估值与融资</span>
+                </div>
+                <h3>媒体在 5 月 24 日继续推进 Anthropic 融资预期：新一轮融资或超 300 亿美元、估值或超 9000 亿美元</h3>
+                <p>这条目前仍属于媒体口径，尚未见 Anthropic 官方确认。PYMNTS 在 2026 年 5 月 24 日的报道中称，Anthropic 预计将完成一轮超过 <code>300 亿美元</code> 的融资，估值可能超过 <code>9000 亿美元</code>；报道同时援引 Bloomberg 口径称，Anthropic 二季度收入预期可能升至 <code>109 亿美元</code>。更早些时候，Reuters 也在 4 月 29 日跟进过 Anthropic 正在考虑超过 <code>9000 亿美元</code> 估值融资的消息。</p>
+                <p>这类数字现在最值得关注的不是“是不是已经板上钉钉”，而是资本市场为什么愿意继续把钱压到这个量级。若融资最终按这一估值落地，市场给 Claude 的核心定价逻辑就不再只是模型强，而是其企业营收增速、编码场景抓手和潜在 IPO 路径被同时看作成立。</p>
+                <a href="https://www.pymnts.com/artificial-intelligence-2/2026/anthropic-eyes-900-billion-valuation-as-quarterly-revenue-doubles/" target="_blank" rel="noreferrer">查看 PYMNTS 报道</a>
+                <a href="https://finance.yahoo.com/markets/stocks/articles/anthropic-weighs-funding-round-valuation-224637021.html" target="_blank" rel="noreferrer">查看 Reuters 4 月 29 日融资背景稿</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">06</span>
+                  <span class="news-tag">风控/平台安全</span>
+                </div>
+                <h3>Google 相关安全问题继续发酵：媒体聚焦 Gemini API key 撤销延迟与账单暴露面</h3>
+                <p>TechCrunch 在 2026 年 5 月 24 日刊文讨论 AI 安全治理时，专门提到近期围绕 Google Cloud 与 Gemini API 的一连串问题：一方面，开发者称旧 API key 在能力边界扩大后可能被用于 Gemini；另一方面，Aikido 的研究被 The Register 报道称，删除后的 key 在部分情况下仍可能继续通过认证长达 <code>23 分钟</code>。TechCrunch 文中直接把这类问题放进更大的“shadow AI、治理与审计”框架里。</p>
+                <p>这条新闻的重要性不在于它宣布了一个新产品，而在于它提醒市场：agent 与模型的企业落地，安全设计已经不能后补。尤其是当平台方自己也在处理 key 管理、账单上限和权限边界问题时，采购方会更看重供应商的默认安全能力，而不是只看功能演示。</p>
+                <a href="https://techcrunch.com/2026/05/24/everyone-is-navigating-ai-security-in-real-time-even-google/" target="_blank" rel="noreferrer">查看 TechCrunch 报道</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>今天没有出现必须写进模型时间线的新前沿通用模型，但这不代表竞争减速。相反，今天的有效增量大多出现在“运营层”而不是“发布会层”：DeepSeek 继续把低价写成长期制度，xAI 开始把企业部署能力写成文档产品，OpenAI 和 Anthropic 则继续把 coding agent 与企业收入往财务叙事里推。</p>
+              <p>这意味着接下来几周更值得盯的，不只是 benchmark 有没有再跳一次，而是三条线会不会一起收敛：一，DeepSeek 的长期低价会不会逼出新一轮中国模型 API 降价；二，xAI 的企业部署文档会不会很快跟进到更明确的 pricing、compliance 或采购入口；三，OpenAI 与 Anthropic 会不会继续披露更多关于 Codex、Claude Code、企业合同与利润率的细节。</p>
+              <p>如果这些信号继续成立，那么 2026 年中段的 AI 竞赛就会越来越像“谁能把 agent 做成可控、可卖、可规模化交付的生意”，而不只是“谁又多发了一个模型版本号”。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>今日重点新闻</span>
               <strong>2026-05-24</strong>
               <small>时间窗口：2026-05-23 10:00 至 2026-05-24 10:00 CST</small>
             </div>
