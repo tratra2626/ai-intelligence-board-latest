@@ -1,11 +1,18 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-20T03:12:00.498Z",
+  "updatedAt": "2026-05-27T03:55:00.000Z",
   "picks": [
-    "2026-05-14-anthropic-发布-claude-for-small-business把-cowork连接器和-15-个现成工作流打包卖给中小企业",
-    "2026-05-15-openai-把-codex-带到手机端并把-remote-sshhooks-与企业令牌一起推向更完整的跨端工作流",
-    "2026-05-19-openai-联合-dell-推出企业级-codex-混合部署方案开始把-agent-编码正式卖进私有云与本地机房",
-    "2026-05-19-the-informationopenai-与-anthropic-已吃掉头部-ai-创业公司-89-收入模型层双寡头继续强化",
-    "2026-05-19-the-informationopenai-正准备推出面向大客户的新产品进一步正面追击-anthropic-的企业优势"
+    "2026-05-20-google-发布-gemini-35并让-gemini-35-flash-当天进入-gemini-api-与企业产品",
+    "2026-05-20-google-在-gemini-api-推出-managed-agents把沙箱执行工具调用和-agentsmd--skillmd-一起产",
+    "2026-05-21-google-推出-ask-advisor用一个统一-gemini-agent-串起-google-adsanalyticsmerchan",
+    "2026-05-21-github-继续把-copilot-调成自动路由工作台vs-code-按任务选模型web-端则主动删减模型列表换稳定性",
+    "2026-05-22-openai-更新-chatgpt-内的-codexappshotsgoal-mode锁屏后远程-computer-use-一起上线",
+    "2026-05-22-the-informationchatgpt-一季度收入已到-57-亿美元量级anthropic-则被报道将在本季度首次实现经营利润转正",
+    "2026-05-23-anthropic-发布-project-glasswing-首份阶段更新约-50-家合作方用-mythos-preview-已找到超过-",
+    "2026-05-24-deepseek-官方价页确认v4-pro-当前-25-折将在-5-月-31-日后转为正式价格低价策略从促销变成长期规则",
+    "2026-05-24-google-推出-gemini-for-science科研实验工具开始逐步开放era-与-co-scientist-论文同日登上-nat",
+    "2026-05-25-xai-官方企业部署文档在-5-月-24-日更新grok-build-开始把-oidc沙箱权限和-zdr-讲成可采购能力",
+    "2026-05-27-anthropic-在-5-月-26-日把-responsible-scaling-policy-升级到-33继续把风险阈值和模型级更新流",
+    "2026-05-27-moonshot-ai-把旧-k2-系列-api-正式下线开发者目录转向-k26我同步补了站内-k26-时间线和价格数据"
   ]
 }

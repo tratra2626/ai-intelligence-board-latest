@@ -740,6 +740,12 @@ const weeklyWindows = [
     start: "2026-05-14",
     end: "2026-05-19",
   },
+  {
+    label: "2026-05-20 至 2026-05-27",
+    note: "本周重点按 2026-05-20 至 2026-05-27 汇总；点“导出本周已选”即可生成这一周的周报文字。",
+    start: "2026-05-20",
+    end: "2026-05-27",
+  },
 ];
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
