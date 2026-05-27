@@ -448,6 +448,362 @@
 
             <div class="news-date-card">
               <span>今日重点新闻</span>
+              <strong>2026-05-23</strong>
+              <small>时间窗口：2026-05-22 10:00 至 2026-05-23 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时里，头部模型厂商没有再给出需要写入主时间线的全新通用模型正式发布，也没有看到新的官方 API 价卡变动；真正值得放到首页的，是“AI 进入生产环境之后，瓶颈从模型发布转向安全修补、数据控制和资本落位”的几条新信号。Anthropic 在 5 月 22 日连续放出两份一手材料，把 Mythos Preview 在漏洞发现上的真实推进速度摊开：一边是 Project Glasswing 称其与约 50 家合作伙伴已发现超过 <code>1 万</code> 个高危或严重漏洞，另一边是公开披露看板显示，面向开源软件的协调披露已经累计到 <code>1,596</code> 个漏洞、覆盖 <code>281</code> 个项目。与此同时，两篇 5 月 22 日的 The Information 报道把企业控制权和中国产业资本这两条线补齐：微软被报道正在限制合作方把数据管理工具接到 Power BI 上，以防 agent 时代的数据入口被外部平台拿走；宁德时代则被报道计划投资 DeepSeek 融资，说明中国 AI 竞争开始更明显地从模型公司本身，外溢到电力、设备与数据中心链条。今天首页因此不是“谁又发了一个新模型”，而是“谁在抢修漏洞、守住数据、绑定资本和基础设施”。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">模型侧</span>
+                </div>
+                <h3>过去 24 小时未见头部厂商新增通用模型正式 GA，主时间线与价格表维持不变</h3>
+                <p>这一窗口里我重新核查了 OpenAI、Anthropic、Google、xAI、DeepSeek、Qwen 和豆包等主要厂商的官方发布页与新闻枢纽，没有确认到新的头部通用模型正式发布，也没有发现新的官方 API 定价页改动。因此，这一轮不往“模型发布时间轴”“模型价格对比”和“价格趋势图”里补新条目，只更新首页新闻与核验日期。</p>
+                <p>这个判断本身也有信息含量：在 I/O、Claude 安全和企业 agent 话题持续升温之后，行业的新增信号开始从“发模型”转向“怎么把现有更强模型放进生产系统并承接它带来的安全与数据后果”。今天首页后面四条新闻，基本都属于这类执行层变化。</p>
+                <a href="https://openai.com/news/product-releases/" target="_blank" rel="noreferrer">查看 OpenAI 产品发布页</a>
+                <a href="https://www.anthropic.com/news" target="_blank" rel="noreferrer">查看 Anthropic 新闻页</a>
+                <a href="https://blog.google/technology/ai/" target="_blank" rel="noreferrer">查看 Google AI 官方动态</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">安全/研究</span>
+                </div>
+                <h3>Anthropic 发布 Project Glasswing 首份阶段更新：约 50 家合作方用 Mythos Preview 已找到超过 1 万个高危漏洞</h3>
+                <p>Anthropic 于 2026 年 5 月 22 日发布 <code>Project Glasswing: An initial update</code>。按官方说法，自上月启动以来，Anthropic 与大约 <code>50</code> 家合作伙伴已经使用 <code>Claude Mythos Preview</code> 在“最系统重要的软件”里发现了超过 <code>10,000</code> 个高危或严重漏洞；Cloudflare 报告在关键路径系统中找到 <code>2,000</code> 个 bug，其中 <code>400</code> 个为高危/严重；Mozilla 则称在测试中于 Firefox 150 发现并修复了 <code>271</code> 个漏洞，超过其在 Firefox 148 使用 Claude Opus 4.6 时的十倍。</p>
+                <p>这条更新的关键信号不是“Anthropic 又发了一个安全叙事”，而是它第一次把漏洞发现速度与修补速度之间的结构性失衡写得很直白。官方明确表示，过去软件安全受限于“找 bug 的速度”，现在更大的约束变成了“验证、披露、打补丁的人力速度”。如果这个判断成立，那么 Mythos 级能力带来的行业影响，将先体现在补丁周期、维护者负担和企业安全流程重构上，而不是体现在一张传统 benchmark 表上。</p>
+                <a href="https://www.anthropic.com/research/glasswing-initial-update?xs=1" target="_blank" rel="noreferrer">查看 Anthropic 官方更新</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">安全/披露</span>
+                </div>
+                <h3>Anthropic 同步公开开源漏洞披露看板：已披露 1,596 个漏洞、覆盖 281 个项目，97 个已修复</h3>
+                <p>和 Glasswing 阶段更新同时，Anthropic 还把一份更适合长期跟踪的公开看板推到了台前。按 <code>Anthropic's coordinated vulnerability disclosure dashboard</code> 与其配套说明页，截至 <code>2026-05-22 10:27 PT</code>，Anthropic 已就开源软件累计披露 <code>1,596</code> 个漏洞，覆盖 <code>281</code> 个项目；其中已知有 <code>97</code> 个被修补，<code>88</code> 个拿到 CVE 或 GHSA 编号。Anthropic 还披露，其外部协作的安全研究机构包括 Ada Logics、Anvil、Calif.io、Doyensec、Ophion Security 与 Trail of Bits。</p>
+                <p>这份看板的重要性在于，它把“模型发现漏洞”这件原本很容易沦为口号的能力，变成了一个可以被外部持续核对的过程指标。对企业和开源生态来说，更值得看的不只是发现数量，而是从发现到验证、再到补丁落地的漏斗收缩速度。如果后续几周补丁转化率明显抬升，才说明这类模型真正开始改变安全生产流程，而不只是增加 maintainer 的待办列表。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 360" role="img" aria-label="Anthropic 漏洞披露进度图">
+                    <rect x="0" y="0" width="720" height="360" rx="18" fill="#f8f5ee"></rect>
+                    <text x="28" y="40" fill="#1f2528" font-size="24" font-weight="700">Anthropic 开源漏洞披露进度</text>
+                    <text x="28" y="66" fill="#6f7478" font-size="14">基于 Anthropic 2026-05-22 官方 dashboard / Glasswing update 整理</text>
+                    <rect x="28" y="94" width="664" height="230" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="56" y="130" fill="#6f7478" font-size="14">高/严重漏洞估计总量</text>
+                    <rect x="56" y="146" width="560" height="26" rx="8" fill="#ede7da"></rect>
+                    <rect x="56" y="146" width="560" height="26" rx="8" fill="#9c6a22"></rect>
+                    <text x="632" y="165" fill="#1f2528" font-size="20" font-weight="700">6,202</text>
+                    <text x="56" y="204" fill="#6f7478" font-size="14">已披露漏洞</text>
+                    <rect x="56" y="220" width="560" height="26" rx="8" fill="#ede7da"></rect>
+                    <rect x="56" y="220" width="144" height="26" rx="8" fill="#315f8f"></rect>
+                    <text x="632" y="239" fill="#1f2528" font-size="20" font-weight="700">1,596</text>
+                    <text x="56" y="278" fill="#6f7478" font-size="14">已修补漏洞</text>
+                    <rect x="56" y="294" width="560" height="26" rx="8" fill="#ede7da"></rect>
+                    <rect x="56" y="294" width="34" height="26" rx="8" fill="#2e6f5d"></rect>
+                    <text x="632" y="313" fill="#1f2528" font-size="20" font-weight="700">97</text>
+                    <text x="372" y="130" fill="#6f7478" font-size="14">已覆盖项目</text>
+                    <text x="372" y="152" fill="#1f2528" font-size="26" font-weight="700">281</text>
+                    <text x="372" y="190" fill="#6f7478" font-size="14">已赋予 CVE / GHSA</text>
+                    <text x="372" y="212" fill="#1f2528" font-size="26" font-weight="700">88</text>
+                    <text x="372" y="250" fill="#6f7478" font-size="14">官方强调的瓶颈</text>
+                    <text x="372" y="272" fill="#1f2528" font-size="20" font-weight="700">验证、披露、打补丁</text>
+                  </svg>
+                  <figcaption>自制比较图，基于 Anthropic 官方漏洞披露看板与官方 Glasswing 更新整理。</figcaption>
+                </figure>
+                <a href="https://red.anthropic.com/2026/cvd/" target="_blank" rel="noreferrer">查看官方漏洞披露看板</a>
+                <a href="https://red.anthropic.com/2026/cvd/about/index.html" target="_blank" rel="noreferrer">查看看板说明与合作机构</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">企业软件/数据</span>
+                </div>
+                <h3>The Information：微软据报限制合作伙伴把数据管理工具接入 Power BI，AI agents 时代的数据入口争夺开始硬化</h3>
+                <p>The Information 于 2026 年 5 月 22 日报道称，微软正在阻止合作伙伴把它们的数据管理工具连接到 Power BI，以防自己在 AI agents 时代最关键的一层企业数据入口被第三方平台稀释。报道点名的摩擦焦点正是 Fortune 500 广泛采用的 Power BI，这意味着微软不是单纯在做一个产品权限调整，而是在主动收紧“谁能控制企业数据与 agent 执行面之间的那道门”。</p>
+                <p>这条值得放首页，因为它比单纯的功能发布更能解释接下来企业 AI 竞争的形状。模型层已经开始趋同后，真正决定客户黏性的，越来越像是谁控制数据权限、治理边界和 agent 访问路径。这里需要明确区分：这条消息目前来自 The Information 报道摘要，不是微软官方公告；但如果后续属实，它会是今年企业 AI 平台竞争里非常实质的一步防守动作。</p>
+                <a href="https://www.theinformation.com/features/artificial-intelligence" target="_blank" rel="noreferrer">查看 The Information AI 栏目摘要</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">产业资本/中国</span>
+                </div>
+                <h3>The Information：宁德时代据报计划投资 DeepSeek，AI 竞争开始向电力与设备资本链外溢</h3>
+                <p>The Information 于 2026 年 5 月 22 日报道称，宁德时代正计划参与 DeepSeek 的融资。报道摘要写得很直接：这项投资计划来自两位直接知情人士，而宁德时代此举与其加快向 AI 数据中心销售电力设备的动作同步推进。也就是说，这不是单纯的财务投资传闻，而更像是“算力基础设施需求上升，带动上游能源与设备巨头提前卡位”的产业信号。</p>
+                <p>这条新闻对中国 AI 板块尤其重要，因为它说明 DeepSeek 这类模型公司对外部资本的吸引力，已经不只来自软件估值叙事，还来自它们对机房、电力、散热和园区级基础设施的真实拉动能力。这里同样要明确区分：宁德时代计划投资 DeepSeek，目前仍是 The Information 援引知情人士的媒体报道，不是双方官方披露的已完成交易。</p>
+                <a href="https://www.theinformation.com/articles/chinese-ev-battery-giant-catl-plans-invest-deepseek" target="_blank" rel="noreferrer">查看 The Information 报道摘要</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>这 24 小时最强的共识信号，是行业约束正在从“谁先发模型”切到“谁先扛住模型落地后的系统成本”。所以本轮不扩写主时间线、价格对比表和价格趋势图，只把首页焦点放在 Anthropic 的安全披露进度、微软的数据控制动作，以及 DeepSeek 被中国产业资本继续盯上的事实。</p>
+              <p>Anthropic 今天给市场上的，是一组很不一样的一手材料：不是新的 benchmark，也不是新的订阅计划，而是更接近生产现实的漏洞披露漏斗。官方材料里反复出现的核心词，其实只有一个: 补丁人力跟不上模型发现速度。如果这成为 2026 年下半年的普遍现实，那么未来大模型竞争会越来越像“安全运维与组织执行能力竞赛”，而不是单纯的参数、分数和上下文长度竞赛。</p>
+              <p>微软和 DeepSeek 两条线，则分别对应企业软件控制权与中国产业资本化的下一步。微软据报围绕 Power BI 收紧接入，说明 agent 时代最值钱的层不只在模型，更在数据入口与治理边界；宁德时代计划投资 DeepSeek，则说明中国 AI 已经越来越难只按“模型公司估值”来理解，它正同时牵动电力、设备、园区和数据中心链条。接下来最值得跟踪的是：一，Anthropic 的公开看板未来几周补丁转化率能否明显上升；二，微软是否会在 Power BI 与 agent 数据接入上出现更公开的产品或政策动作；三，DeepSeek 是否会有更多一级资本或产业方跟进融资；四，OpenAI、Google、xAI、Qwen 和豆包会不会在下一个窗口重新把焦点拉回新模型或新价卡。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>今日重点新闻</span>
+              <strong>2026-05-22</strong>
+              <small>时间窗口：2026-05-21 10:00 至 2026-05-22 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有确认到需要写入主时间线的新头部通用模型正式发布，也没有新的官方 API 定价页改动。这一窗口更值得放到首页的，是六条更接近真实执行面的变化：OpenAI 在 ChatGPT 里继续把 Codex 做成长期运行的工作流产品；The Information 又补出一组更硬的商业化数字，显示 ChatGPT 的收入和订阅规模仍在快速上冲，而 Anthropic 已经接近经营利润转正；GitHub 把 Copilot for Eclipse 直接开源，连 agent、skills 和 MCP 集成都公开给开发者看；微软则拿 EY 的大规模部署数据和一笔超过 <code>10 亿美元</code> 的联合投入，把“企业 AI 从试点走向生产”这件事讲得更像一门交付生意。与此同时，两条来自 AP 和 Reuters 的报道把政策与算力约束重新推回桌面：白宫原定的前沿模型预发布审查行政令临时叫停，而 Anthropic 则被报道正与微软讨论租用 Maia 芯片服务器。今天的重点因此不是“又一个模型名”，而是 agent 工作流、商业化兑现、监管摇摆和算力路线在同一天更具体地显形。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>OpenAI 更新 ChatGPT 内的 Codex：Appshots、Goal mode、锁屏后远程 computer use 一起上线</h3>
+                <p>OpenAI 在 2026 年 5 月 21 日更新了 ChatGPT release notes，把一组 Codex 工作流能力集中推到产品前台。按官方说明，macOS 版 Codex app 新增 <code>Appshots</code>，可以通过快捷键把当前应用窗口的截图和可提取文本直接挂到线程里；<code>Goal mode</code> 已在 Codex app、IDE extension 和 CLI 全面可用，允许用户把“目标与验收标准”而不是一次性 prompt 交给 agent；同时，符合条件的 Mac Computer Use 用户现在可以在电脑锁屏后继续让 Codex 远程执行任务。</p>
+                <p>这条更新重要，因为它把 Codex 从“会写代码的会话界面”继续推向“持续运行的执行界面”。尤其是 Goal mode 和 locked computer use 组合起来，意味着 OpenAI 正在把 agent 的核心抽象从单步响应改成长期目标管理。这里的事实来自 OpenAI 官方 release notes；它反映的是产品和工作流层更新，不是新的模型发布，因此不需要新增时间线或价格数据。</p>
+                <a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noreferrer">查看 ChatGPT release notes</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">开发者生态</span>
+                </div>
+                <h3>GitHub 将 Copilot for Eclipse 开源，连 agent mode、skills、BYOK 和 MCP 集成都向外公开</h3>
+                <p>GitHub 于 2026 年 5 月 21 日发布 changelog，宣布 <code>GitHub Copilot for Eclipse is open source</code>。官方给出的范围不只是聊天窗口或代码补全，而是把 Eclipse 插件的聊天、inline completion、Next Edit Suggestions、agent mode、多步工作流、skills 与 prompt files、Bring Your Own Key，以及 Model Context Protocol 集成都一并公开到 MIT 许可仓库中。</p>
+                <p>这件事的含义比“又一个插件开源”更大。过去厂商谈 AI 编程产品，通常只开放 SDK 或局部扩展接口；GitHub 这次等于把它如何在 IDE 里组织 agent、工具调用和上下文处理的工程骨架也交出来了。对于企业客户和开发者社区，这会直接影响可审计性、二次开发空间和对 Copilot agent 能力的理解深度。它也说明 GitHub 在 agent 化开发工具上，愿意用更高透明度去换更强生态黏性。</p>
+                <a href="https://github.blog/changelog/2026-05-21-github-copilot-for-eclipse-is-open-source/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>The Information：ChatGPT 一季度收入已到 57 亿美元量级，Anthropic 则被报道将在本季度首次实现经营利润转正</h3>
+                <p>你提到的这条 The Information 很值得补进今天首页，因为它把 OpenAI 和 Anthropic 的商业化兑现拉到了同一张对比表里。基于 The Information 对 OpenAI 一季度结果的统计图，ChatGPT 母公司一季度收入为 <code>57 亿美元</code>，今年 2 月对应的年化收入约为 <code>250 亿美元</code>；图中同时给出 OpenAI 一季度调整后经营利润率约 <code>-122%</code>、一季度平均 ChatGPT 周活约 <code>9.05 亿</code>、2 月周活快照约 <code>9.2 亿</code>，以及付费 ChatGPT 消费者订阅用户约 <code>5500 万</code>。这些数字本身仍属 The Information 报道口径，不是 OpenAI 官方财报披露，但足以说明 ChatGPT 已经从“爆款应用”进一步变成极大规模的现金流入口。</p>
+                <p>另一边，The Information 5 月 20 日的 briefing 还提到，Anthropic 预计将在截至 2026 年 6 月的季度实现约 <code>5.59 亿美元</code> 的经营利润，这是其首次在经营层面转正；对应季度收入则预计达到 <code>109 亿美元</code>，高于 3 月季度的 <code>48 亿美元</code>。把两边放在一起看，今天最重要的商业化信号已经不只是“谁用户更多”，而是头部模型公司开始分别展示两条不同的兑现路径：OpenAI 通过超大规模消费者和多层付费订阅持续放大收入底盘，Anthropic 则试图证明自己能更快逼近利润拐点。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 360" role="img" aria-label="OpenAI 与 Anthropic 商业化对比图">
+                    <rect x="0" y="0" width="720" height="360" rx="18" fill="#f8f5ee"></rect>
+                    <text x="28" y="40" fill="#1f2528" font-size="24" font-weight="700">OpenAI / Anthropic 商业化对比</text>
+                    <text x="28" y="66" fill="#6f7478" font-size="14">基于 The Information 2026-05-20 至 2026-05-21 报道整理</text>
+                    <rect x="28" y="92" width="320" height="218" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="48" y="122" fill="#1f2528" font-size="20" font-weight="700">OpenAI / ChatGPT</text>
+                    <text x="48" y="156" fill="#6f7478" font-size="14">Q1 收入</text>
+                    <text x="220" y="156" fill="#a5483f" font-size="24" font-weight="700">$5.7B</text>
+                    <text x="48" y="188" fill="#6f7478" font-size="14">2 月年化收入</text>
+                    <text x="220" y="188" fill="#a5483f" font-size="24" font-weight="700">$25B</text>
+                    <text x="48" y="220" fill="#6f7478" font-size="14">Q1 调整后经营利润率</text>
+                    <text x="220" y="220" fill="#a5483f" font-size="24" font-weight="700">-122%</text>
+                    <text x="48" y="252" fill="#6f7478" font-size="14">Q1 平均周活</text>
+                    <text x="220" y="252" fill="#a5483f" font-size="24" font-weight="700">~905M</text>
+                    <text x="48" y="284" fill="#6f7478" font-size="14">消费者付费订阅</text>
+                    <text x="220" y="284" fill="#a5483f" font-size="24" font-weight="700">55M</text>
+                    <rect x="372" y="92" width="320" height="218" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="392" y="122" fill="#1f2528" font-size="20" font-weight="700">Anthropic</text>
+                    <text x="392" y="156" fill="#6f7478" font-size="14">6 月季度预计收入</text>
+                    <text x="560" y="156" fill="#9c6a22" font-size="24" font-weight="700">$10.9B</text>
+                    <text x="392" y="188" fill="#6f7478" font-size="14">3 月季度收入</text>
+                    <text x="560" y="188" fill="#9c6a22" font-size="24" font-weight="700">$4.8B</text>
+                    <text x="392" y="220" fill="#6f7478" font-size="14">预计经营利润</text>
+                    <text x="560" y="220" fill="#9c6a22" font-size="24" font-weight="700">$559M</text>
+                    <text x="392" y="252" fill="#6f7478" font-size="14">经营层面状态</text>
+                    <text x="518" y="252" fill="#9c6a22" font-size="20" font-weight="700">首次转正</text>
+                    <text x="392" y="284" fill="#6f7478" font-size="14">信息属性</text>
+                    <text x="504" y="284" fill="#9c6a22" font-size="18" font-weight="700">媒体报道口径</text>
+                  </svg>
+                  <figcaption>自制比较图，基于 The Information 对 OpenAI 一季度结果统计图和 Anthropic 盈利预期 briefing 整理。</figcaption>
+                </figure>
+                <a href="https://www.theinformation.com/briefings/anthropic-projects-turning-operating-profit-second-quarter" target="_blank" rel="noreferrer">查看 Anthropic briefing</a>
+                <a href="https://www.theinformation.com/" target="_blank" rel="noreferrer">查看 The Information OpenAI 商业化图表来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>微软与 EY 扩大联盟：披露 Copilot 大规模落地数据，并宣布超过 10 亿美元联合投入</h3>
+                <p>微软在 2026 年 5 月 21 日的官方博客中，把与 EY 的联盟升级为一条很明确的企业 AI 交付叙事。按微软披露，EY 已先向 <code>150,000</code> 名员工部署 Microsoft 365 Copilot，并给出 <code>94%</code> 月活、<code>85%</code> 周活、<code>15%</code> 生产率提升、<code>81%</code> 员工反馈节省时间等内部指标；同时，微软称双方将联合投入超过 <code>10 亿美元</code>，继续把 Azure、Microsoft 365 Copilot、Foundry、Fabric 与安全能力打包成更系统的企业转型方案。</p>
+                <p>这条不是模型新闻，但它非常适合放进首页，因为它把“企业为什么愿意继续为 Copilot 付费”说得比单一产品发布更具体。尤其值得注意的是，微软没有只强调个人提效，而是把多 agent 框架、财务流程 lead time 缩短和运营成本下降一起列成结果。这说明微软当前的 AI 商业化重点，已经从卖 seats 明显转向卖组织级执行能力和交付方法论。</p>
+                <a href="https://blogs.microsoft.com/blog/2026/05/21/from-ai-pilots-to-enterprise-impact-why-execution-is-the-new-differentiator/" target="_blank" rel="noreferrer">查看微软官方博客</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">算力/供应链</span>
+                </div>
+                <h3>Reuters：Anthropic 正与微软讨论租用 Maia 芯片服务器，Claude 算力路线继续外扩</h3>
+                <p>Reuters 于美国东部时间 2026 年 5 月 21 日援引 <code>The Information</code> 报道称，Anthropic 正在与微软讨论租用基于微软自研 AI 芯片的服务器，以应对其 AI 服务持续增长的需求。Reuters 明确写到，这些讨论仍处于早期阶段，未必会达成协议；微软拒绝就传闻置评，Anthropic 也未立即回应。</p>
+                <p>这条消息的价值，在于它继续强化 Anthropic 当前最核心的约束不是“有没有需求”，而是“如何锁定足够多、足够便宜的推理和训练供给”。如果 Anthropic 最终真的引入 Maia，这将不仅是微软芯片路线的重要背书，也意味着头部模型公司在 Nvidia 之外寻找替代算力的动作正在进一步常态化。这里要明确区分：Anthropic 使用微软芯片服务器，目前仍是 Reuters 转述的媒体报道，不是双方官方确认的已签署合作。</p>
+                <a href="https://www.reuters.com/" target="_blank" rel="noreferrer">Reuters 报道转载</a>
+                <a href="https://m.investing.com/news/stock-market-news/anthropic-in-talks-to-use-microsofts-ai-chips-the-information-reports-4704191?ampMode=1" target="_blank" rel="noreferrer">查看可访问转载页</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">06</span>
+                  <span class="news-tag">政策侧</span>
+                </div>
+                <h3>AP：特朗普临时叫停原定 AI 行政令，前沿模型预发布审查再度摇摆</h3>
+                <p>美联社于 2026 年 5 月 21 日报道称，特朗普政府原计划在当天签署一项新的 AI 行政令，但在签署前数小时临时取消，原因是特朗普担心该命令会削弱美国在 AI 领域相对中国和其他国家的领先优势。AP 援引知情人士称，该行政令原本会为最先进 AI 系统在公开发布前接受政府国家安全风险审查建立一个框架，并被描述为与 Anthropic、OpenAI、Google 等美国公司自愿协作的机制。</p>
+                <p>这条新闻值得保留，因为它把最近几周美国政府对“模型发布前安全评估”的摇摆讲得很具体。一方面，政府与前沿实验室确实在持续讨论预发布测试；另一方面，白宫又明确担心过强的审查会拖慢创新和竞争节奏。对看板来说，这意味着未来几周最值得继续追踪的，不是单一法规标题，而是美国是否会形成一个更稳定的 voluntary review 机制，以及它会不会反过来影响 OpenAI、Anthropic、Google 等公司的发布时间与开放范围。</p>
+                <a href="https://apnews.com/article/trump-ai-executive-order-ee318f35acc8a2c43e47f3ebf26cb459" target="_blank" rel="noreferrer">查看 AP 报道</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>这 24 小时没有新增需要写入主时间线或价格表的头部基础模型，因此本轮不扩写模型发布时间轴、价格对比表和价格趋势图。今天进入首页的六条内容，重点都落在产品工作流、商业化兑现、算力与政策层的结构性变化，而不是新的 foundation model 发布。</p>
+              <p>最强的共同信号，是头部模型公司已经不需要只靠 benchmark 证明自己，而开始用真实收入、订阅、利润和组织渗透来证明护城河。OpenAI 一侧，ChatGPT 的收入和付费订阅仍在高速扩张，Codex 又继续朝长期执行界面推进；Anthropic 一侧，则不只是继续涨收入，而是开始被报道有机会在经营层面率先转正。GitHub 和微软补上的，则是这套能力如何真正被 IDE 和企业流程吃进去。</p>
+              <p>另一条主线是，政策与算力约束并没有因为最近的产品热潮而退场。Anthropic 被报道继续向微软 Maia 这类替代算力路线靠拢，说明头部实验室对推理供给的饥渴还在加深；白宫又在预发布审查问题上临时刹车，说明美国政府内部对于“安全测试该推进到什么程度”仍远未定型。对接下来几天的跟踪来说，最值得看的是：一，OpenAI 会不会把这组商业化数字继续外化成更清晰的产品分层和价格动作；二，Anthropic 的利润转正说法会不会得到更多一级信源坐实；三，GitHub 开源 Eclipse 插件后，社区会不会迅速围绕 skills、subagents 和 MCP 提交真实改动；四，微软是否继续给出更多可审计的 Copilot ROI 指标；五，白宫是否很快推出更温和但仍覆盖前沿模型的替代性审查机制。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>今日重点新闻</span>
+              <strong>2026-05-21</strong>
+              <small>时间窗口：2026-05-20 10:00 至 2026-05-21 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有确认到需要写入主时间线的新一代头部通用模型正式发布，也没有新的官方 API 定价页变动。更值得更新到首页的是三条更现实的产品与平台信号：Google 在 Marketing Live 2026 上把 Gemini 从“广告优化器”推进成跨 Ads、Analytics、Merchant Center 的统一执行 agent；GitHub 继续把 Copilot 做成多模型自动路由的开发工作台，同时主动收缩 web 端可选模型以换稳定性；腾讯云则开始明确推动混元旧平台和旧模型向 <code>TokenHub</code> 与 <code>hy3-preview</code> 迁移。补充看过 <code>The Information</code> 今天的独家和 briefing 后，这一窗口还多了三条更偏结构性的变量：白宫正在就“模型发布前审查”与头部公司沟通，Anthropic 的高成本开始传导到软件客户的合同周期，而 OpenAI 则被报道正准备在未来几周提交 IPO 申请。再往前看，两天前我们已经补过的 <code>OpenAI + Anthropic 占 34 家较成熟 AI 创业公司 89% 收入</code> 仍是今天理解竞争格局的重要背景。也就是说，这一页的重点不在“又一个新模型名”，而在 agent、资本市场、政策与商业约束开始一起落到真实工作流里。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>Google 推出 Ask Advisor，用一个统一 Gemini agent 串起 Google Ads、Analytics、Merchant Center 和 Marketing Platform</h3>
+                <p>Google 于 2026 年 5 月 20 日发布 <code>Ask Advisor</code>。官方定义很直接：这不是某个单点助手，而是一个跨产品的统一 AI collaborator，能够把 Google Ads、Google Analytics、Merchant Center 与 Google Marketing Platform 里的数据、目标和操作连成一条连续线程。Google 举的官方例子是，商家只需要说“帮我的护发产品找新客户”，Ask Advisor 就能自动从 Merchant Center 拉取商品信息，在 Google Ads 里完成 campaign setup，并在后续用 Ads 和 Analytics 数据解释什么有效、下一步该怎么调。</p>
+                <p>这条更新的价值，在于 Google 开始把自己内部原本分散的营销 AI agent 产品化为一个可执行的总控层，而不只是继续卖“更聪明的推荐”。官方还明确说明 Ask Advisor 已以 beta 形式面向英文账户开放，更多功能会在未来几个月 rollout。对这张看板来说，这意味着 Google 正把 agent 竞争推进到更接近企业实际预算与投放执行的位置，离“消费者助手”更远，离“工作台和控制台”更近。</p>
+                <a href="https://blog.google/products/ads-commerce/ask-advisor/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>Google 在 Search 测试 Gemini 驱动的新广告形态，广告开始直接嵌进 AI 对话式选购过程</h3>
+                <p>同样在 2026 年 5 月 20 日，Google 发布 <code>A new generation of ads for the AI era of Search</code>。官方说法是，随着 Search 体验变得更“smart and conversational”，Google 正在测试两类由 Gemini 驱动的新广告格式，让广告不再只是一条跳转链接，而是能在 AI Mode 里补充产品细节、解释为什么这个商品适合当前需求，并在对话式研究和选购过程中原生出现。Google 同时提到，<code>Direct Offers</code> 试点也在扩展，希望让品牌在更接近购买决策的阶段介入。</p>
+                <p>这条新闻重要，不是因为 Google 又给广告系统加了一个 AI 标签，而是它说明“AI 搜索怎么变现”已经从实验议题走到了产品落地。Google 页面里还引用自家研究称，<code>75%</code> 的用户在 Search 的 AI Mode 中能更快、更有信心地做决定；这属于 Google 官方内部调研口径，不应当成独立第三方结论，但足以说明 Google 正把 AI 搜索广告的 KPI 从曝光与点击，转向“是否加速决策”和“是否补足对话式购买路径”。</p>
+                <a href="https://blog.google/products/ads-commerce/google-marketing-live-search-ads/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>Google 把 Universal Cart、AI performance insights 和 Ask Advisor 一起推入零售工具链，agentic commerce 开始长出后台控制面</h3>
+                <p>Google 在 5 月 20 日另一篇 Shopping 官方更新中，把 Marketing Live 上更偏零售的一侧讲得更明确了。面向消费者，Google 继续推进基于 <code>Universal Commerce Protocol</code> 的 agentic commerce 体验，包括可在 Search、Gemini 和 Maps 上协同工作的 <code>Universal Cart</code>；面向商家，Google 则把新的 <code>AI performance insights</code> 放进 Merchant Center，用来衡量品牌在 AI surfaces 上的 share of voice，并允许零售商使用更贴近对话搜索方式的 <code>conversational attributes</code> 重写商品描述。</p>
+                <p>更关键的是，Google 在同一页里把 Merchant Center 里的 agent 能力与 Ask Advisor 接上了，明确说这个新 collaborator 将能分享针对业务目标的洞察、代完成任务，并联通 Google Ads 与 Google Analytics。也就是说，Google 正在把“agentic shopping”的前台体验和后台经营工具同时做起来。相比只讨论用户在 Gemini 里怎么买东西，这一页更接近商家真实会不会把预算迁到 Google 的判断依据。</p>
+                <a href="https://blog.google/products-and-platforms/products/shopping/shopping-updates-google-marketing-live/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">开发者生态</span>
+                </div>
+                <h3>GitHub 继续把 Copilot 调成“自动路由工作台”：VS Code 按任务选模型，web 端则主动删减模型列表换稳定性</h3>
+                <p>GitHub 在 2026 年 5 月 20 日连续发布三条 Copilot 相关 changelog。第一条是 <code>Auto model selection now routes based on your task in VS Code</code>：官方称 Auto 会综合实时 availability、reliability、推理难度、代码生成复杂度、bug diagnosis 和 tool orchestration 需求，自动挑选最合适的模型，并对付费用户按所选模型 multiplier 再给 <code>10%</code> discount。第二条是 <code>Semantic issue search in Copilot Chat</code>：web 端 Copilot Chat 现在可以用自然语言按语义查 issue，而不只靠精确关键词和手动过滤。第三条则是 <code>Updates to available models in Copilot on web</code>：GitHub 明确删掉了 github.com 上 web chat 的全部 Gemini 模型，以及包括 <code>GPT-5.2 Codex</code>、<code>GPT-5.4 nano</code> 在内的若干模型，理由是为了换取更一致的质量和性能。</p>
+                <p>这三条一起看，比单看某个 changelog 更有意思。GitHub 的方向并不是无上限扩容模型选择，而是在 IDE 里把多模型路由做成默认能力，在 web 端则主动收窄模型面板，优先保证体验稳定。换句话说，Copilot 的竞争点正从“你能选多少模型”转向“平台能不能替你选、还能不能在不同表面保持可靠”。这也解释了为什么 GitHub 一边把 semantic issue search 这类 agent 能力继续往前推，一边又愿意主动减少前端可见模型列表。</p>
+                <figure class="news-media">
+                  <img src="https://github.blog/wp-content/uploads/2026/05/592762626-082e2067-4234-4b66-a517-2e011e7f65b8.jpg?resize=2064%2C1096" alt="GitHub Copilot Chat semantic issue search screenshot" />
+                  <figcaption>官方产品截图：GitHub 在 2026-05-20 changelog 中展示的 Copilot Chat 语义化 issue 检索界面。</figcaption>
+                </figure>
+                <a href="https://github.blog/changelog/2026-05-20-auto-model-selection-now-routes-based-on-your-task-in-vs-code/" target="_blank" rel="noreferrer">查看 Auto model selection 来源</a>
+                <a href="https://github.blog/changelog/2026-05-20-semantic-issue-search-in-copilot-chat/" target="_blank" rel="noreferrer">查看 semantic issue search 来源</a>
+                <a href="https://github.blog/changelog/2026-05-20-updates-to-available-models-in-copilot-on-web/" target="_blank" rel="noreferrer">查看 web 模型收缩来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">平台迁移</span>
+                </div>
+                <h3>腾讯云明确混元旧版本模型下线节奏，默认迁移目标指向 TokenHub 与 hy3-preview</h3>
+                <p>腾讯云在 2026 年 5 月 20 日更新了 <code>腾讯混元大模型 旧版本模型下线迁移公告</code>。按官方文档，混元旧版本模型将于北京时间 <code>2026 年 6 月 22 日 00:00</code> 起正式下线，原腾讯混元大模型平台则会在 <code>9 月 30 日</code> 全面停服下线。文档列出的迁移建议非常集中：大量历史模型参数，包括 <code>hunyuan-2.0-instruct-20251111</code>、<code>hunyuan-t1-latest</code>、<code>hunyuan-turbo</code>、<code>hunyuan-pro</code> 等，统一建议迁到 <code>hy3-preview</code>；角色类模型则多迁到 <code>hunyuan-role-latest</code>；翻译模型迁往 <code>hy-mt2-pro</code>。同时，腾讯也把 OpenAI SDK 的新 <code>base_url</code> 明确写成了 <code>https://tokenhub.tencentmaas.com/v1</code>。</p>
+                <p>这件事虽然不是“新模型发布”，但对国内开发者和企业用户更实际，因为它说明腾讯云的大模型平台正从分散入口收敛到 TokenHub，并试图把默认主力能力压到 <code>hy3-preview</code> 这一代上。结合昨天已经写入首页的 <code>Hy3 preview</code> 与 <code>DeepSeek-V4-Pro</code> 即将转正式商用公告，这一更新进一步说明腾讯当前的主线不是再讲多少 benchmark，而是加速把模型供给、API 入口和计费逻辑统一成一个更可商用的平台层。</p>
+                <a href="https://cloud.tencent.com/document/product/1729/131925" target="_blank" rel="noreferrer">查看下线迁移公告</a>
+                <a href="https://cloud.tencent.com/announce/detail/2287" target="_blank" rel="noreferrer">查看 TokenHub 旧平台下线公告</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">06</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>Meta 为 AI 眼镜补齐更多无障碍能力，开始把“看见世界”和“免手操作”做成稳定产品特性</h3>
+                <p>Meta 在 2026 年 5 月 20 日前后发布无障碍更新，继续推进旗下 AI 眼镜的 hands-free 使用场景。官方写得最明确的几项包括：与 <code>Be My Eyes</code> 的合作从随机志愿者扩展到可直接呼叫指定亲友或品牌支持代表；WhatsApp、Messenger、Instagram 和 Be My Eyes 通话将逐步支持纯语音控制；Ray-Ban Meta 与 Oakley Meta 的 action button 也能一键触发“describe what’s around me”这类 Meta AI prompt；另外，带显示的眼镜已经支持在镜片里实时显示通话字幕。</p>
+                <p>这条新闻不是通用模型竞争，但它说明头部厂商在把多模态 AI 真正嵌进可持续使用的硬件工作流。Meta 页面给出的案例很具体，例如盲人用户靠眼镜读取菜单、在机场导航，或者行动不便用户完全靠语音拍照拍视频。相比单纯展示“AI 眼镜很酷”，这类功能 rollout 更能说明产品开始从 demo 感转向稳定能力层，尤其是在无障碍和 assistive technology 场景里。</p>
+                <a href="https://about.fb.com/news/2026/05/meta-ai-wearables-changing-the-game-for-disabled-people/amp/" target="_blank" rel="noreferrer">查看来源</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">07</span>
+                  <span class="news-tag">政策侧</span>
+                </div>
+                <h3>The Information：白宫已向头部 AI 公司沟通“发布前模型审查”计划，前沿模型治理可能前移</h3>
+                <p><code>The Information</code> 于 2026 年 5 月 21 日首页挂出独家 <code>White House Briefs AI Companies on Plan to Review Models Before Release</code>。从当前可见的标题和链接信息来看，报道核心不是某项已经落地的正式法规，而是白宫已经开始向 AI 公司 briefing 一个“在模型发布前进行审查”的计划方向。由于原文在订阅墙后，可直接确认的公开事实主要限于报道标题、作者和发布时间语境，因此这里必须把它明确标成媒体独家，而不是已实施政策。</p>
+                <p>这条补充很重要，因为它和昨天 Reuters 提到的 guardrails 讨论是同一条更大的线索：监管关注点正在从一般原则和事后约束，逐步前移到模型 release gate 本身。如果未来真的出现发布前审查、备案或第三方测评要求，那么头部实验室的产品发布时间、开放范围和区域 rollout 都可能进一步受到影响。对看板来说，它值得作为今日补充判断保留，但现阶段还不能写成确定性制度变化。</p>
+                <a href="https://www.theinformation.com/articles/white-house-briefs-ai-companies-plan-review-models-release" target="_blank" rel="noreferrer">查看 The Information 报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">08</span>
+                  <span class="news-tag">商业化</span>
+                </div>
+                <h3>The Information：Anthropic 成本压力已开始传导到企业软件客户，部分买方正要求缩短合同期限</h3>
+                <p><code>The Information</code> 在 2026 年 5 月 21 日还发布了独家 <code>As Anthropic Costs Mount, Businesses Pressure Software Firms to Shorten Contracts</code>。目前公开页可直接确认的信息仍主要是标题与出处，但标题本身已经足够说明一个关键方向：随着 Anthropic 成本上升，使用 Claude 能力的企业软件客户不再只关心“效果够不够强”，而开始反向要求供应商缩短合同期限，以便重新谈价或降低未来成本波动风险。</p>
+                <p>这条值得补进今天的首页，因为它比单纯再写一条“Anthropic 很强”更接近真实采购行为。过去一轮 AI 商业化讨论更多围绕 seat 增长、调用量和收入增速；而当客户开始缩短合同、保留价格再谈判空间，市场就进入了另一阶段：模型厂商的算力成本、平台抽成与企业预算弹性，会更直接地决定谁能稳住毛利、谁又会把成本压力外溢给生态伙伴。这里的事实来源是 <code>The Information</code> 独家标题与公开索引，细节仍需等待更多一级披露或其他信源补强。</p>
+                <a href="https://www.theinformation.com/articles/anthropic-costs-mount-businesses-pressure-software-firms-shorten-contracts" target="_blank" rel="noreferrer">查看 The Information 报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">09</span>
+                  <span class="news-tag">资本市场</span>
+                </div>
+                <h3>The Information：OpenAI 正准备在未来几周提交 IPO 申请，头部模型公司竞赛开始切到上市赛道</h3>
+                <p><code>The Information</code> 的最新 briefing <code>OpenAI Prepares to File IPO in Coming Weeks</code> 把 OpenAI 的资本市场动作重新推回最前面。结合今天公开可见的外部转述，当前能较稳确认的要点是：OpenAI 正在准备 confidential IPO filing，时间可能就在未来几周；外部报道同时提到其目标可能是尽快完成申报、争取在今年秋季附近推动上市进程。因为原始 briefing 在订阅墙后，这里应把更具体的时间表、承销商与内部决策细节都继续标注为媒体报道口径，而不是公司正式确认。</p>
+                <p>这条值得直接进今天首页，因为它会改变我们看 OpenAI 后续动作的方式。如果 IPO 准备进入实操阶段，那么 OpenAI 接下来围绕企业收入、广告、Codex、治理与资本开支的所有叙事，都会更明显地服务于公开市场预期管理。它也让两天前那条“OpenAI 和 Anthropic 已占 34 家较成熟 AI 创业公司 89% 收入”的背景更有分量：收入继续向头部集中，不只是行业现象，也是在给最顶层公司的融资和上市窗口提供支撑。</p>
+                <a href="https://www.theinformation.com/briefings/openai-prepares-file-ipo-coming-weeks?rc=ifnkyd" target="_blank" rel="noreferrer">查看 The Information briefing</a>
+                <a href="https://www.straitstimes.com/business/companies-markets/chatgpt-maker-openai-preparing-to-file-for-listing-in-coming-weeks/" target="_blank" rel="noreferrer">查看外部转述</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>这 24 小时没有新增需要写入主时间线或价格表的头部基础模型，因此本轮不扩写模型发布时间轴、价格对比表和价格趋势图。Google 5 月 20 日的几篇官方更新虽多次提到 Gemini，但本质上是营销、零售和 agent 控制面的产品化推进，不是新的 foundation model 正式上线。</p>
+              <p>今天最强的共同信号，是 AI 产品开始从“给建议”转向“接管控制面”，同时政策、合同约束和资本市场窗口也开始同步上桌。Google 的 Ask Advisor 负责跨 Ads、Analytics 和 Merchant Center 协同执行；GitHub 的 Copilot 负责替开发者自动选模型、理解任务、检索 issue，并在不同入口上做差异化稳定性取舍；腾讯云则在平台层强推入口统一和模型迁移。补上 <code>The Information</code> 后，这一页还能再多看到三层压力：一层是白宫可能把前沿模型监管前移到发布前，一层是 Anthropic 的成本正在通过合同周期向企业客户外溢，另一层则是 OpenAI 可能已经进入 IPO 准备窗口。</p>
+              <p>你前面提到的“收入集中度提升”那条没有失效，只是从 5 月 18 日那次首页顶部日更块里被后续日期覆盖掉了。它现在仍然应该作为背景判断保留：如果 OpenAI 和 Anthropic 已经吃掉 34 家较成熟 AI 创业公司 89% 的收入，那么今天看到的 IPO 准备、合同重谈和平台控制面上移，其实都是同一条主线的延伸。</p>
+              <p>接下来最值得盯的五件事是：一，Ask Advisor 的 beta 会不会很快从英文账户扩大到更多市场，并开放更高权限的自动执行；二，GitHub 在主动收缩 web 端模型后，是否会把更多 agent 能力集中到 Auto 与 cloud agent 上；三，腾讯把旧混元平台用户迁入 TokenHub 后，<code>hy3-preview</code> 是否会很快换成正式版型号并披露更明确的商用价格与 SLA；四，<code>The Information</code> 提到的模型发布前审查和 Anthropic 合同压力，是否会在接下来几天获得白宫、Anthropic 或更多一级信源的进一步坐实；五，OpenAI 的 IPO 申报节奏会不会很快得到公司、主要承销商或更多主流媒体一致确认。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>今日重点新闻</span>
               <strong>2026-05-20</strong>
               <small>时间窗口：2026-05-19 10:00 至 2026-05-20 10:00 CST</small>
             </div>
