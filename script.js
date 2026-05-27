@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-26";
+const verifiedAt = "2026-05-27";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -11,6 +11,7 @@ const companyColors = {
   DeepSeek: "#184f62",
   MiniMax: "#b05d2a",
   智谱: "#5d6b2f",
+  月之暗面: "#4d5f86",
 };
 
 const events = [
@@ -391,6 +392,13 @@ const events = [
     model: "Claude Opus 4.7",
     note: "Anthropic 发布 Opus 4.7，提升编码、agents、视觉与复杂多步骤任务表现。",
     source: "https://www.anthropic.com/news/claude-opus-4-7",
+  },
+  {
+    date: "2026-04-20",
+    company: "月之暗面",
+    model: "Kimi K2.6",
+    note: "月之暗面发布并开源 Kimi K2.6，强调长程代码、多 Agent 协同、视觉理解与 Kimi Slides 等专业工作流。",
+    source: "https://www.kimi.com/blog/kimi-k2-6",
   },
   {
     date: "2026-04-23",
@@ -1797,6 +1805,16 @@ const priceRows = [
     output: 0.42,
     note: "兼容模型名，对应 DeepSeek-V3.2 思考模式；按官方当前兼容价展示。",
     source: "https://api-docs.deepseek.com/quick_start/pricing",
+  },
+  {
+    company: "月之暗面",
+    model: "kimi-k2.6",
+    date: "2026-04-20",
+    input: 0.903,
+    cached: 0.153,
+    output: 3.75,
+    note: "官方人民币价：缓存命中 ¥1.10、输入 ¥6.50、输出 ¥27；此处按汇率 7.20 折 USD。5 月 25 日起旧 K2 系列已下线，K2.6 成为官方推荐在售主力。",
+    source: "https://platform.kimi.com/docs/pricing/chat-k26",
   },
   {
     company: "豆包",
