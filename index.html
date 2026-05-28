@@ -138,100 +138,136 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>今日重点新闻</span>
-              <strong>2026-05-27</strong>
-              <small>时间窗口：2026-05-26 10:00 至 2026-05-27 10:00 CST</small>
+              <strong>2026-05-28</strong>
+              <small>时间窗口：2026-05-27 10:00 至 2026-05-28 10:00 CST</small>
             </div>
 
             <div class="news-summary">
               <p class="eyebrow">Daily Highlights</p>
               <h2>每日重点新闻</h2>
-              <p>过去 24 小时没有新的头部基础模型正式发布，但首页仍有五条值得写入的结构变化：<code>Anthropic</code> 同时更新了 <code>RSP 3.3</code> 并宣布韩国负责人、准备开设首尔办公室；<code>OpenAI</code> 继续把 <code>ChatGPT</code> 的广告边界写细；<code>Moonshot AI</code> 则把旧 <code>K2</code> API 明确下线并把 <code>K2.6</code> 作为当前主力在售模型。今天真正需要盯的，不是 benchmark 新高，而是治理、区域扩张、定价目录和编码生态的组织动作正在同步推进。</p>
+              <p>过去 24 小时没有新的头部基础模型正式发布或新 API 价格需要写入站内时间线，但仍有五条结构变化值得上首页：<code>OpenAI</code> 把图像溯源验证工具和选举年防护一起公开；<code>Google</code> 连续把 AI Search 和 Google Pay 往“可分发、可交易、可让 agent 代办”方向推进；<code>Kuaishou</code> 首次把 <code>Kling AI</code> 商业化规模讲得足够清楚；<code>ByteDance</code> 则出现了新的 AI 芯片供应链报道。今天更重要的不是谁又刷了一个 benchmark，而是谁先把 AI 入口、交易闭环和基础设施配齐。</p>
             </div>
 
             <div class="news-feed">
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">01</span>
-                  <span class="news-tag">治理/安全政策</span>
+                  <span class="news-tag">产品侧/安全与溯源</span>
                 </div>
-                <h3>Anthropic 在 5 月 26 日把 Responsible Scaling Policy 升级到 3.3，继续把风险阈值和模型级更新流程写成公开制度</h3>
-                <p>Anthropic 官网的 <code>Responsible Scaling Policy</code> 页面在 <code>2026-05-26</code> 更新到 <code>Version 3.3</code>。官方写得很具体：这次更新一是调整了针对新型化学/生物武器生产能力的阈值定义，二是细化了针对单个模型风险的 off-cycle 更新方式，三是做了若干术语层面的修订。换句话说，Anthropic 不是只说“我们重视安全”，而是在继续把什么情况下要升级治理动作、谁来触发、怎样披露，写成可追溯的规则文本。</p>
-                <p>这条值得放首页，是因为它反映出头部实验室正在把安全治理本身产品化、制度化。对企业客户和监管方来说，真正影响采购和信任的，不只是模型分数，而是供应商能不能稳定地说明阈值、例外和修订流程。今天没有新模型，但有新的治理口径，这本身就是竞争态势的一部分。</p>
-                <a href="https://www.anthropic.com/responsible-scaling-policy" target="_blank" rel="noreferrer">查看 Anthropic RSP 3.3 更新</a>
+                <h3>OpenAI 在 5 月 27 日把“选举信息防护”与“公开图像溯源验证”放进同一套产品叙事，开始把 provenance 从底层标准推向用户入口</h3>
+                <p>OpenAI 于 <code>2026-05-27</code> 发布 <code>Election information and safeguards in 2026</code>。比政策口号更关键的是其中两条产品化动作：一是美国和巴西大选季将接入 <code>AP</code> 实时计票、在美国接入 <code>Democracy Works</code> 的投票与注册信息；二是正式预告一个面向公众的图像验证工具，可以检测图片里是否存在来自 OpenAI 的 <code>SynthID</code> 水印，并在可用时展示 <code>C2PA</code> 元数据。</p>
+                <p>这条值得记，不是因为 OpenAI 突然多了一页公共政策文章，而是因为它把“图像是否由 AI 生成”这件事，从只面向平台和标准组织的底层能力，往普通用户也能直接操作的前台工具推进。对接下来所有做图像生成、视频生成和内容分发的平台来说，溯源不再只是 compliance 附件，而会越来越像产品标配。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 280" role="img" aria-label="OpenAI 图像溯源与验证流程图">
+                    <rect x="0" y="0" width="720" height="280" rx="18" fill="#f6f3ec"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">OpenAI 图像溯源链路</text>
+                    <text x="28" y="68" fill="#6f7478" font-size="14">自制流程图，基于 OpenAI 2026-05-27 官方说明与验证工具说明页</text>
+                    <rect x="28" y="98" width="184" height="118" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="52" y="126" fill="#6f7478" font-size="13">生成端</text>
+                    <text x="52" y="154" fill="#1f2528" font-size="18" font-weight="700">ChatGPT / API / Codex</text>
+                    <text x="52" y="182" fill="#1f2528" font-size="15">写入 Content Credentials</text>
+                    <text x="52" y="204" fill="#1f2528" font-size="15">叠加 SynthID 水印</text>
+                    <rect x="268" y="98" width="184" height="118" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="292" y="126" fill="#6f7478" font-size="13">传播端</text>
+                    <text x="292" y="154" fill="#1f2528" font-size="18" font-weight="700">社媒 / 消息 / 截图</text>
+                    <text x="292" y="182" fill="#1f2528" font-size="15">元数据可能保留或丢失</text>
+                    <text x="292" y="204" fill="#1f2528" font-size="15">水印负责补足韧性</text>
+                    <rect x="508" y="98" width="184" height="118" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="532" y="126" fill="#6f7478" font-size="13">验证端</text>
+                    <text x="532" y="154" fill="#1f2528" font-size="18" font-weight="700">OpenAI Verify</text>
+                    <text x="532" y="182" fill="#1f2528" font-size="15">检测 SynthID 信号</text>
+                    <text x="532" y="204" fill="#1f2528" font-size="15">展示 C2PA 元数据</text>
+                    <path d="M212 157 H252" stroke="#9c927f" stroke-width="3" marker-end="url(#arrow-openai)"></path>
+                    <path d="M452 157 H492" stroke="#9c927f" stroke-width="3" marker-end="url(#arrow-openai)"></path>
+                    <defs>
+                      <marker id="arrow-openai" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6 Z" fill="#9c927f"></path>
+                      </marker>
+                    </defs>
+                  </svg>
+                  <figcaption>自制流程图，基于 OpenAI 官方说明；用于概括 C2PA 元数据、SynthID 水印和公开验证工具如何组合成前台可用的 provenance 方案。</figcaption>
+                </figure>
+                <a href="https://openai.com/index/election-safeguards-2026/" target="_blank" rel="noreferrer">查看 OpenAI 官方选举与防护说明</a>
+                <a href="https://openai.com/verify/" target="_blank" rel="noreferrer">查看 OpenAI 图像验证工具</a>
+                <a href="https://help.openai.com/en/articles/8912793-c2pa-and-synthid-in-openai-generated-images" target="_blank" rel="noreferrer">查看 OpenAI 对 C2PA 与 SynthID 的说明</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">02</span>
-                  <span class="news-tag">国际化/企业市场</span>
+                  <span class="news-tag">产品侧/AI 搜索分发</span>
                 </div>
-                <h3>Anthropic 任命韩国负责人并预告首尔办公室开张，开始把 Claude 的高活跃市场直接转成线下销售与合作能力</h3>
-                <p>Anthropic 于 <code>2026-05-26</code> 宣布任命 <code>KiYoung Choi</code> 为韩国负责人，并明确写出首尔办公室将在未来几周正式开放。官方同时披露一个值得记录的数据点：按其最新 Economic Index 口径，韩国用户使用 Claude 的强度达到“按人口规模预期值”的 <code>3.5 倍以上</code>，且需求明显偏向技术和创意工作。这说明韩国已经不只是一个流量市场，而是 Anthropic 准备投放本地销售、开发者关系和政企合作资源的重点地区。</p>
-                <p>对看板来说，这类动作的意义在于，它把“哪里用得多”转换成“哪里值得建本地组织”。当前前沿模型公司的下一阶段竞争，不只是模型和 API，而是会不会在关键市场快速补上本地团队、渠道和客户成功能力。Anthropic 今天公开给出了这个信号。</p>
-                <a href="https://www.anthropic.com/news/kiyoung-choi-representative-director-anthropic-korea" target="_blank" rel="noreferrer">查看 Anthropic 韩国负责人公告</a>
+                <h3>Google 在 5 月 27 日继续细化 AI Search 的分发规则：Preferred Sources、新闻轮播和 Highly Cited 标签一起上，把“谁被 AI 引到前台”做得更显性</h3>
+                <p>Google Search 官方博客于 <code>2026-05-27</code> 宣布，把 <code>Preferred Sources</code> 正式带进 <code>AI Overviews</code> 和 <code>AI Mode</code>；同时，为“正在发展中的话题”增加更显眼的文章轮播，并把 <code>Highly Cited</code> 标签扩展到更多网页结果。官方还披露了一个值得记下的行为数据：用户点击被标为首选来源的网站概率大约是普通结果的 <code>2 倍</code>，而用户已主动挑选超过 <code>345,000</code> 个独立来源。</p>
+                <p>这条看起来像搜索 UI 小修，但实际影响不小。它意味着 AI 搜索阶段的竞争，正在从“模型能不能先回答出来”转向“回答之后把谁送到下一跳”。对媒体、内容平台和品牌来说，被 AI 搜索引用不再只是被动等待，而开始出现越来越明确的前台分发位和可运营入口。</p>
+                <a href="https://blog.google/products-and-platforms/products/search/original-high-quality-content-search/" target="_blank" rel="noreferrer">查看 Google Search 官方更新</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">03</span>
-                  <span class="news-tag">商业化/广告</span>
+                  <span class="news-tag">产品侧/Agentic Commerce</span>
                 </div>
-                <h3>OpenAI 在 5 月 26 日补细广告政策：把 ChatGPT 里“哪些上下文能贴广告、哪些绝对不能贴”写成更明确的运营规则</h3>
-                <p>OpenAI 的 <code>Ad policies</code> 页面在 <code>2026-05-26</code> 更新。官方新增的关键信息不是“要不要做广告”这件事本身，而是更细地写明了可投放和不可投放边界：广告只能出现在“安全、合适、符合用户信任和品牌安全”的聊天旁边；涉及个人、高风险或情绪脆弱情境的对话，以及违反使用政策或典型 brand unsafe 框架的上下文，都被排除在广告邻接场景之外。</p>
-                <p>这条值得记录，是因为它说明 ChatGPT 的商业化已经进入规则细化阶段。对市场而言，广告不再只是试探性的收入补充，而是在往更可规模化、可审计的产品运营体系走；对竞争对手来说，这也意味着 OpenAI 正在回答一个关键问题：如何在不明显破坏信任的前提下，把高频 AI 对话入口变成广告库存。</p>
-                <a href="https://openai.com/policies/ad-policies/" target="_blank" rel="noreferrer">查看 OpenAI 广告政策更新</a>
+                <h3>Google Pay 同日把 agentic commerce 技术栈讲得更完整：UCP、Developer MCP server、社交应用支付和跨设备认证一起推进</h3>
+                <p>Google Developers Blog 在 <code>2026-05-27</code> 的 Google Pay 更新里，释放了一个很明确的信号：Google 不只是想让 Gemini 帮你“找商品”，还想把交易链路本身交给 agent。官方写明，现有 Google Pay backend 和 Merchant ID 已兼容新的 <code>Universal Commerce Protocol</code>；同时推出 <code>Google Pay &amp; Wallet Developer MCP server</code> 公测版，允许 AI agent 在开发环境里辅助完成接入、排错、分析和代码生成。</p>
+                <p>更关键的是，支付链路也开始同步改造。Android 端新增动态回调以支持更靠前的一键结账，支付能力扩展到社交应用，桌面端则引入 <code>Cross-Device Authentication</code>，把高摩擦的 MFA 流程转移到手机上做生物认证。对行业来说，这不只是支付 API 更新，而是 Google 在补“AI 发现商品 - agent 代办流程 - 安全完成支付”这整条闭环。</p>
+                <a href="https://developers.googleblog.com/the-latest-updates-to-google-pay/" target="_blank" rel="noreferrer">查看 Google Pay 官方更新</a>
+                <a href="https://goo.gle/pay-wallet-mcp" target="_blank" rel="noreferrer">查看 Google Pay &amp; Wallet Developer MCP server</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">04</span>
-                  <span class="news-tag">模型侧/目录更新</span>
+                  <span class="news-tag">商业化/AI 视频</span>
                 </div>
-                <h3>Moonshot AI 把旧 K2 系列 API 正式下线，开发者目录转向 K2.6；我同步补了站内 K2.6 时间线和价格数据</h3>
-                <p>Moonshot AI 官方开发文档当前已经把两件事写得非常明确：一是在 <code>Kimi K2 快速开始</code> 和模型列表里，<code>kimi-k2</code> 系列模型被标注为已于 <code>2026-05-25</code> 正式下线，不再维护或支持；二是页面直接建议开发者迁移到最新的 <code>kimi-k2.6</code>。与此同时，Kimi 开放平台首页与 <code>K2.6</code> 定价页也给出当前在售价格：缓存命中输入 <code>¥1.10/MTok</code>、输入 <code>¥6.50/MTok</code>、输出 <code>¥27/MTok</code>。</p>
-                <p>这条对看板是“数据层新闻”，不是因为 K2.6 是今天新发的，而是因为官方目录口径在这 24 小时里已经明确切换完成。也正因为如此，我同步把 <code>Kimi K2.6</code> 补进了模型发布时间轴和价格表，把它从站内缺席状态改成正式在售模型。这样后续再看国内 coding/agent 模型价格带时，Moonshot 不会继续缺席。</p>
+                <h3>Kuaishou 披露 Kling AI 一季度收入超过 6.5 亿元、同比增速超 300%，AI 视频从“爆款演示”进一步走向独立增长曲线</h3>
+                <p>Kuaishou 于 <code>2026-05-27 04:38 ET</code> 发布一季报时，第一次把 <code>Kling AI</code> 的商业化体量讲得足够直白：一季度收入超过 <code>人民币 6.5 亿元</code>、同比增长超过 <code>300%</code>，3 月年化收入运行率约 <code>5 亿美元</code>。同一份官方材料还确认，2 月已经推出 <code>Kling AI 3.0</code> 系列，采用 <code>All-in-One</code> 产品框架，支持文本、图片、音频、视频的全模态输入输出，把视频理解、生成和编辑收进同一工作流。</p>
+                <p>这比“某个视频模板又刷屏”更重要。因为它说明中国 AI 视频赛道里，至少已经有一家公司可以把模型能力、产品体验和现金化放进同一张财报里。对同行的压力不只来自模型效果，还来自一个更直接的问题：谁能像 Kling 一样把专业创作工作流和收入规模同时做出来。</p>
                 <figure class="news-media">
-                  <svg viewBox="0 0 720 320" role="img" aria-label="Kimi K2 到 K2.6 的官方目录切换与定价图">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="Kling AI 商业化与产品形态图">
                     <rect x="0" y="0" width="720" height="320" rx="18" fill="#f8f5ee"></rect>
-                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">Kimi 官方目录切换</text>
-                    <text x="28" y="68" fill="#6f7478" font-size="14">自制比较图，基于 Moonshot AI 官方模型列表、K2 快速开始与 K2.6 定价页</text>
-                    <rect x="28" y="96" width="300" height="184" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
-                    <text x="52" y="126" fill="#6f7478" font-size="13">旧目录</text>
-                    <text x="52" y="154" fill="#1f2528" font-size="20" font-weight="700">Kimi K2 系列</text>
-                    <text x="52" y="184" fill="#1f2528" font-size="15">官方状态：2026-05-25 下线</text>
-                    <text x="52" y="212" fill="#6f7478" font-size="14">0905 / turbo / thinking / thinking-turbo</text>
-                    <text x="52" y="242" fill="#a5483f" font-size="16" font-weight="700">不再维护或支持</text>
-                    <rect x="392" y="96" width="300" height="184" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
-                    <text x="416" y="126" fill="#6f7478" font-size="13">当前主力</text>
-                    <text x="416" y="154" fill="#1f2528" font-size="20" font-weight="700">kimi-k2.6</text>
-                    <text x="416" y="184" fill="#1f2528" font-size="15">缓存命中 ¥1.10 / 输入 ¥6.50 / 输出 ¥27</text>
-                    <text x="416" y="212" fill="#6f7478" font-size="14">支持文本、图片、视频、思考与 Agent 任务</text>
-                    <text x="416" y="242" fill="#2e6f5d" font-size="16" font-weight="700">官方推荐直接迁移</text>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">Kling AI Q1 2026</text>
+                    <text x="28" y="68" fill="#6f7478" font-size="14">自制比较图，基于 Kuaishou 2026Q1 官方业绩公告</text>
+                    <rect x="28" y="96" width="210" height="184" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="52" y="126" fill="#6f7478" font-size="13">商业化</text>
+                    <text x="52" y="154" fill="#1f2528" font-size="24" font-weight="700">¥650M+</text>
+                    <text x="52" y="184" fill="#1f2528" font-size="15">2026Q1 收入</text>
+                    <text x="52" y="214" fill="#2e6f5d" font-size="18" font-weight="700">同比 +300%+</text>
+                    <text x="52" y="244" fill="#6f7478" font-size="14">3 月 ARR 约 5 亿美元</text>
+                    <rect x="255" y="96" width="210" height="184" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="279" y="126" fill="#6f7478" font-size="13">模型形态</text>
+                    <text x="279" y="154" fill="#1f2528" font-size="22" font-weight="700">Kling AI 3.0</text>
+                    <text x="279" y="184" fill="#1f2528" font-size="15">All-in-One 工作流</text>
+                    <text x="279" y="214" fill="#6f7478" font-size="14">文本 / 图片 / 音频 / 视频</text>
+                    <text x="279" y="242" fill="#6f7478" font-size="14">理解 + 生成 + 编辑</text>
+                    <rect x="482" y="96" width="210" height="184" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="506" y="126" fill="#6f7478" font-size="13">专业场景</text>
+                    <text x="506" y="154" fill="#1f2528" font-size="18" font-weight="700">影视 / 广告 / 电商 / 游戏</text>
+                    <text x="506" y="184" fill="#1f2528" font-size="15">团队协作计划上线</text>
+                    <text x="506" y="214" fill="#6f7478" font-size="14">支持 15 人实时协作</text>
+                    <text x="506" y="242" fill="#6f7478" font-size="14">走向工业级创作流程</text>
                   </svg>
-                  <figcaption>自制比较图，基于 Moonshot AI 官方模型列表与定价页；用于概括 K2 退役后 K2.6 作为当前在售主力的目录变化。</figcaption>
+                  <figcaption>自制比较图，基于 Kuaishou 官方业绩公告；用于概括 Kling AI 的收入规模、3.0 产品框架与专业工作流定位。</figcaption>
                 </figure>
-                <a href="https://platform.kimi.com/docs/guide/kimi-k2-quickstart" target="_blank" rel="noreferrer">查看 K2 下线与迁移说明</a>
-                <a href="https://platform.kimi.com/docs/pricing/chat-k26" target="_blank" rel="noreferrer">查看 K2.6 官方定价</a>
-                <a href="https://platform.kimi.com/docs/models" target="_blank" rel="noreferrer">查看 Kimi 模型列表</a>
+                <a href="https://www.prnewswire.com/news-releases/kuaishou-technology-announces-first-quarter-2026-unaudited-financial-results-302782888.html" target="_blank" rel="noreferrer">查看 Kuaishou 2026Q1 官方业绩公告</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">05</span>
-                  <span class="news-tag">产品侧/编码生态</span>
+                  <span class="news-tag">基础设施/媒体报道</span>
                 </div>
-                <h3>媒体称 xAI 已要求员工减少与 Cursor 员工接触，说明 Musk 阵营对 coding agent 资产整合进入更敏感阶段</h3>
-                <p>这条目前不是 xAI 官方公告，而是 Bloomberg 经 Investing 等渠道转述的媒体消息。报道说，xAI 总法律顾问上周已向员工下发指引，要求与 Cursor 员工的接触仅限于两家公司今年 4 月公开宣布的技术合作所必需的范围；在 SpaceX 完成任何潜在收购并拿到监管批准之前，xAI 与 Cursor 仍需作为法律上独立的实体分别运作。这里的背景是，SpaceX 早前已经公开拿到对 Cursor 的收购选择权，价格可高达 <code>600 亿美元</code>。</p>
-                <p>把它放到今天首页的原因，在于这不是普通的并购八卦。Cursor、Codex、Claude Code、Grok Build 现在争的是同一块 coding agent 市场，而一旦 xAI/SpaceX 体系真的更深整合 Cursor，竞争逻辑就会更明显地从“谁的模型强”转向“谁同时拥有算力、分发和开发者产品壳”。需要强调的是：限制接触和潜在并购进度属于媒体报道，不是 xAI 官方确认的交易落地事实。</p>
-                <a href="https://m.investing.com/news/stock-market-news/xai-tells-staff-to-limit-contact-with-cursor-employees-amid-potential-deal-4710270?ampMode=1" target="_blank" rel="noreferrer">查看 Bloomberg 报道转载</a>
-                <a href="https://www.bloomberg.com/news/articles/2026-04-21/spacex-says-has-agreement-to-acquire-cursor-for-60-billion" target="_blank" rel="noreferrer">查看 SpaceX/Cursor 早前交易背景</a>
+                <h3>Reuters 转述 Bloomberg：ByteDance 已与 Qualcomm 达成 AI 数据中心芯片合作，指向豆包 agent 基础设施继续外扩</h3>
+                <p>这条不是字节或高通官方公告，而是 <code>Reuters</code> 于 <code>2026-05-26</code> 转述 <code>Bloomberg</code> 的媒体报道。报道说，ByteDance 已与 Qualcomm 达成协议，采购数百万颗面向 AI 数据中心的 <code>ASIC</code> 芯片，用于支持其 AI agent 软件；并称 ByteDance 将成为 Qualcomm AI ASIC 的首批大客户之一。Reuters 同时强调，高通和字节都未立即置评，且路透无法独立核实这一说法。</p>
+                <p>即便仍属媒体口径，这条也值得放进首页。原因不是“又一单芯片订单”，而是它提示中国头部 AI 应用公司可能在继续扩张自有推理和 agent 基础设施，而且不只押注单一 GPU 供应链。对豆包、TikTok 及其内部 agent 体系来说，如果这条后续被官方确认，意味着字节的 AI 栈会进一步从模型和入口向底层算力形态延伸。</p>
+                <a href="https://kelo.com/2026/05/26/qualcomm-strikes-ai-chip-deal-with-tiktok-owner-bytedance-bloomberg-news-reports/" target="_blank" rel="noreferrer">查看 Reuters 报道转载</a>
               </article>
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
-              <p>今天最重要的结论是：前沿 AI 公司的竞争正在越来越少靠“今天又发了什么模型”，越来越多靠制度、目录和组织动作。Anthropic 一天内同时更新 RSP 和韩国市场组织，OpenAI 则继续把广告变成可执行的运营体系，Moonshot 进一步清空旧目录、把 K2.6 收束为当前主力。</p>
-              <p>第二个信号是 coding agent 赛道的结构还在收缩。Kimi 把旧 K2 API 下线，说明国内厂商开始更明确地收束到单一主力模型；xAI 与 Cursor 的媒体消息则提示，海外也在朝“模型 + 算力 + 开发者工具壳”一体化方向走。对后续几周的跟踪重点，不是泛泛地问“谁更强”，而是看谁能把这些组织动作真正转成稳定的开发者留存、企业收入和地区扩张。</p>
+              <p>今天最重要的结论是：过去 24 小时的主战场不在“新模型发布”，而在“谁把 AI 入口、交易闭环和可信分发做得更完整”。OpenAI 把图像 provenance 从底层标准推进到公众可用的验证入口，Google 则连续把 AI Search 和 Google Pay 往分发与成交基础设施上推进，说明头部公司正在争夺的不只是模型能力，而是模型之后那一整层产品和流量控制面。</p>
+              <p>第二个信号是，中国 AI 视频与 agent 基础设施正在分别进入更可量化阶段。Kling AI 已经能在财报里给出收入体量和产品框架，ByteDance 也出现了新的 ASIC 供应链报道。接下来更值得持续盯的，是谁能先把这些产品化和基础设施投入稳定转换成可持续收入，以及是否会带出下一轮视频模型、agent 平台和算力采购的军备升级。</p>
             </section>
 
             <div class="news-date-card">
