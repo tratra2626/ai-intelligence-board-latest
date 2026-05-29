@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-28";
+const verifiedAt = "2026-05-29";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -448,6 +448,20 @@ const events = [
     model: "Gemini 3.5 / 3.5 Flash",
     note: "Google 发布 Gemini 3.5 家族，并让 Gemini 3.5 Flash 当天在 Gemini API、Antigravity、Gemini app 与企业产品中可用。",
     source: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+  },
+  {
+    date: "2026-05-28",
+    company: "Anthropic",
+    model: "Claude Opus 4.8",
+    note: "Anthropic 升级 Opus 4.8，强调编码、agent、computer use 与 honesty 提升，且常规 API 定价保持不变。",
+    source: "https://www.anthropic.com/news/claude-opus-4-8",
+  },
+  {
+    date: "2026-05-28",
+    company: "xAI",
+    model: "grok-build-0.1",
+    note: "xAI 将 agentic coding 模型 grok-build-0.1 以公测形式开放到 API，强调 100+ tokens/s、MCP 支持与低价。",
+    source: "https://x.ai/news/grok-build-0-1",
   },
   {
     date: "2023-09-20",
@@ -1554,6 +1568,16 @@ const priceRows = [
   },
   {
     company: "Anthropic",
+    model: "Claude Opus 4.8",
+    date: "2026-05-28",
+    input: 5,
+    cached: 0.5,
+    output: 25,
+    note: "Anthropic 5 月 28 日发布的新 Opus 版本，官方说明常规 API 价格与 Opus 4.7 相同。",
+    source: "https://platform.claude.com/docs/en/about-claude/pricing",
+  },
+  {
+    company: "Anthropic",
     model: "Claude Opus 4.7",
     date: "2026-04-16",
     input: 5,
@@ -1771,6 +1795,16 @@ const priceRows = [
     output: 0.3,
     note: "Gemini 2.0 系列最低成本版本，Vertex AI 价格页仍列出。",
     source: "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+  },
+  {
+    company: "xAI",
+    model: "grok-build-0.1",
+    date: "2026-05-28",
+    input: 1,
+    cached: null,
+    output: 2,
+    note: "xAI 面向 agentic coding 的公测 API 模型；官方发布页给出每百万输入/输出 token 定价，未单列缓存价。",
+    source: "https://x.ai/news/grok-build-0-1",
   },
   {
     company: "DeepSeek",

@@ -137,6 +137,103 @@
         <div class="content-grid">
           <article class="feature-board news-board">
             <div class="news-date-card">
+              <span>每日重点新闻</span>
+              <strong>2026-05-29</strong>
+              <small>时间窗口：2026-05-28 10:13 至 2026-05-29 10:13 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时的主线重新回到“模型发布 + 企业落地”：<code>Anthropic</code> 同日发布 <code>Claude Opus 4.8</code> 并官宣新一轮超大额融资；<code>xAI</code> 把新的 coding 模型 <code>grok-build-0.1</code> 直接开放到 API；<code>Google</code> 和 <code>Mistral</code> 则分别把企业 agent 运维与 RAG 基础设施继续产品化。今天更值得记录的，不只是分数谁更高，而是谁在把 agent 工作流、价格锚和企业部署接口一起往前推。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">模型侧</span>
+                </div>
+                <h3>Anthropic 发布 Claude Opus 4.8，把编码、agent 协作和 honesty 提升做成同价升级</h3>
+                <p>Anthropic 于 <code>2026-05-28</code> 正式发布 <code>Claude Opus 4.8</code>。官方表述是“在 Opus 4.7 基础上做出更有效的协作者”，重点提升编码、agent 任务、computer use、复杂知识工作与判断质量，同时把更高 honesty 和更少 unsupported claims 单独拎了出来。官方页面还特别强调，它在 alignment 评估中的误导、deception 和 misuse 倾向低于 Opus 4.7，并接近更高安全口径的 <code>Claude Mythos Preview</code>。</p>
+                <p>这条更新值得写入站内数据，不只是因为又多了一个版本号，而是 Anthropic 开始把“更强”叙事从单纯 benchmark，转向“更像一个能共事、会主动指出不确定性的 agent”。对企业买方和 coding agent 用户来说，这种质量改进往往比单项跑分更重要，因为它直接关系到长程任务里是否会在错误前提上一路跑偏。官方同时写明常规 API 价格保持不变：输入 <code>$5/1M</code>、缓存命中输入 <code>$0.5/1M</code>、输出 <code>$25/1M</code>，这意味着 Anthropic 想把升级门槛压到最低。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="Anthropic Opus 4.8 与 xAI grok-build-0.1 官方发布信息对比图">
+                    <rect x="0" y="0" width="720" height="320" rx="18" fill="#f8f5ee"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">5 月 28 日两条模型发布</text>
+                    <text x="28" y="68" fill="#6f7478" font-size="14">自制对比图，基于 Anthropic 与 xAI 官方发布页</text>
+                    <rect x="28" y="96" width="304" height="188" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="52" y="126" fill="#6f7478" font-size="13">Anthropic</text>
+                    <text x="52" y="154" fill="#1f2528" font-size="22" font-weight="700">Claude Opus 4.8</text>
+                    <text x="52" y="186" fill="#1f2528" font-size="15">定位：高端编码 / agent / computer use</text>
+                    <text x="52" y="214" fill="#1f2528" font-size="15">变化：更强协作判断与 honesty</text>
+                    <text x="52" y="242" fill="#2e6f5d" font-size="18" font-weight="700">$5 / $25 每 1M tokens</text>
+                    <text x="52" y="268" fill="#6f7478" font-size="14">常规定价与 Opus 4.7 相同</text>
+                    <rect x="388" y="96" width="304" height="188" rx="14" fill="#ffffff" stroke="#d9d1c5"></rect>
+                    <text x="412" y="126" fill="#6f7478" font-size="13">xAI</text>
+                    <text x="412" y="154" fill="#1f2528" font-size="22" font-weight="700">grok-build-0.1</text>
+                    <text x="412" y="186" fill="#1f2528" font-size="15">定位：agentic coding / MCP / 调试</text>
+                    <text x="412" y="214" fill="#1f2528" font-size="15">速度：100+ tokens / second</text>
+                    <text x="412" y="242" fill="#246b7d" font-size="18" font-weight="700">$1 / $2 每 1M tokens</text>
+                    <text x="412" y="268" fill="#6f7478" font-size="14">API 公测，主打低价高吞吐</text>
+                  </svg>
+                  <figcaption>自制对比图，基于 Anthropic 与 xAI 官方发布页；用于概括两条新模型发布的定位、速度与定价差异。</figcaption>
+                </figure>
+                <a href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank" rel="noreferrer">查看 Anthropic 官方发布页</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">模型侧/商业化</span>
+                </div>
+                <h3>xAI 把 grok-build-0.1 直接开放到 API，agentic coding 模型开始打明确价格战</h3>
+                <p>xAI 于 <code>2026-05-28</code> 发布 <code>Grok Build 0.1 on API</code>。官方定义很直接：<code>grok-build-0.1</code> 是专门为 agentic coding 训练的模型，覆盖 web development、debugging 和 <code>MCP support</code>，并且就是 Grok Build CLI 背后的同款模型。页面给出的最硬指标是吞吐与价格：官方称模型可达到 <code>100+ tokens/second</code>，并按每百万输入 <code>$1</code>、输出 <code>$2</code> 计费。</p>
+                <p>这条消息的意义，不只是“xAI 也有 coding 模型”这么简单。它把此前更偏产品形态的 Grok Build，往标准 API 商品推进了一步。对开发者和平台方来说，<code>$1/$2</code> 这个定价会立刻进入横向比较，因为它远低于 Anthropic 新 Opus，也明显冲着高频 agent 工作负载去。官方还点名兼容 Grok Build、Cursor、Hermes Agent、OpenClaw、Kilo Code 和 OpenCode 这类 harness，本质是在抢“谁成为默认执行引擎”的位置。</p>
+                <a href="https://x.ai/news/grok-build-0-1" target="_blank" rel="noreferrer">查看 xAI 官方发布页</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">估值与融资</span>
+                </div>
+                <h3>Anthropic 官宣 Series H：融资 650 亿美元、投后估值 9650 亿美元，并同步披露 run-rate revenue 超 470 亿美元</h3>
+                <p>Anthropic 也在 <code>2026-05-28</code> 官宣了新的融资轮次。按官方发布，<code>Series H</code> 融资规模达到 <code>650 亿美元</code>，投后估值 <code>9650 亿美元</code>，由 Altimeter、Dragoneer、Greenoaks 和 Sequoia 等领投。更关键的是，Anthropic 这次没有只报估值，而是明确写出“本月稍早年化收入运行率已超过 <code>470 亿美元</code>”。</p>
+                <p>这让这笔融资的信号比常规 mega-round 更强。它说明 Anthropic 正在把 Claude 的企业部署、Claude Code、compute 扩张和安全研究，放进一套能自证商业化加速的资本叙事里。与前几周市场传闻不同，这次数字来自官方公告，因此可以直接作为站内“估值与融资”条目写入；但对读者更有价值的判断是：前沿模型公司的融资逻辑，已经越来越从“研究潜力”转向“收入兑现 + 算力扩张 + 产品分发”三者一起定价。</p>
+                <a href="https://www.anthropic.com/news/series-h" target="_blank" rel="noreferrer">查看 Anthropic 官方融资公告</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">产品侧</span>
+                </div>
+                <h3>Google 发布面向 Chrome Enterprise 的开源 MCP server，把浏览器安全运维正式变成 agent 工具链</h3>
+                <p>Google 在 <code>2026-05-28</code> 发布 <code>Bringing AI agents to Chrome Enterprise security management</code>，核心动作是上线一个开源 <code>MCP server</code>，把 Chrome Enterprise API 暴露为 agent 可调用的工具集合。官方给出的使用场景非常具体：自然语言检查环境健康、跨组织单元推 DLP 规则、审查最近事件并给出优化建议，甚至通过快捷命令直接做配置巡检和策略调整。</p>
+                <p>这件事的重要性在于，它把 MCP 从“开发者上下文协议”进一步推进到企业安全与 IT 管理场景。过去 agent 更多停留在代码、文档和办公协作层，而 Google 这次是把“浏览器安全配置、连接器、Safe Browsing、日志和组织策略”也接成可代理执行的操作面。对于看 AI 落地的人来说，这类更新的价值往往高于再多一个 demo，因为它更接近企业真正会采购、接入和审计的工作流。</p>
+                <a href="https://blog.google/security/bringing-ai-agents-to-chrome-enterprise-security-management/" target="_blank" rel="noreferrer">查看 Google 官方发布页</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">产品侧/开发者基础设施</span>
+                </div>
+                <h3>Mistral 发布 Search Toolkit 公测版，把 RAG 常见的 ingestion、retrieval、evaluation 三段式工具链收进一个开源框架</h3>
+                <p>Mistral 在 <code>2026-05-28</code> 发布 <code>Search Toolkit</code> 公测版。官方描述是一个面向生产环境搜索管线的可组合框架，直接把 <code>ingestion</code>、<code>retrieval</code> 和 <code>evaluation</code> 三层统一到同一个接口里，并强调它是开源的、可跑在 cloud、on-prem 和 edge。Mistral 的判断很明确：团队在做 RAG 时浪费的时间太多花在 plumbing，而不是提升搜索质量本身。</p>
+                <p>这条更新虽然不是新模型，但对今天的 AI 工具链很关键。RAG 和企业知识检索已经不再是“加一个向量库就完了”的问题，而是数据摄取、索引质量、评测闭环和部署位置一起决定成败。Mistral 把这些环节整成产品化框架，本质是在争“谁来做企业 AI 应用的默认中间层”。如果后续生态和文档跟上，它会比单次模型冲榜更有长期黏性。</p>
+                <a href="https://mistral.ai/news/search-toolkit" target="_blank" rel="noreferrer">查看 Mistral 官方发布页</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>今天的变化说明，头部公司正在把“agent 能力”拆成更清晰的商品层级：Anthropic 继续往高可靠高价值任务收口，xAI 则先用低价高吞吐抢 coding agent 的执行面；同一时间，Google 和 Mistral 在补企业真正会落地的运维和检索基础设施。</p>
+              <p>后续最值得跟踪两点：一是 <code>Claude Opus 4.8</code> 是否会带动 Anthropic 在 Claude Code、Bedrock、Vertex 等渠道同步强化默认推荐位；二是 <code>grok-build-0.1</code> 这种低价 coding 模型，会不会迫使更多厂商把 agent API 价格单独拉下来，而不再沿用通用大模型的高价区间。</p>
+            </section>
+
+            <div class="news-date-card">
               <span>今日重点新闻</span>
               <strong>2026-05-28</strong>
               <small>时间窗口：2026-05-27 10:00 至 2026-05-28 10:00 CST</small>
