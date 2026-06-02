@@ -1,4 +1,4 @@
-const verifiedAt = "2026-05-29";
+const verifiedAt = "2026-06-02";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -462,6 +462,13 @@ const events = [
     model: "grok-build-0.1",
     note: "xAI 将 agentic coding 模型 grok-build-0.1 以公测形式开放到 API，强调 100+ tokens/s、MCP 支持与低价。",
     source: "https://x.ai/news/grok-build-0-1",
+  },
+  {
+    date: "2026-06-01",
+    company: "MiniMax",
+    model: "MiniMax M3",
+    note: "MiniMax 发布 open-weight 模型 M3，主打 frontier coding、1M 上下文与原生多模态，官方称在 SWE-Bench Pro 等任务上达到前沿水平。",
+    source: "https://www.minimax.io/blog/minimax-m3",
   },
   {
     date: "2023-09-20",
@@ -974,6 +981,7 @@ const anthropicRevenueSeries = {
     { label: "2026-02", value: 14.0, short: "14", note: "2026-02 run-rate $14B（Anthropic Series G 官方）" },
     { label: "2026-03", value: 19.0, short: "19", note: "2026-03 run-rate $19B（Bloomberg / Axios 转述）" },
     { label: "2026-04", value: 30.0, short: "30+", note: "2026-04 run-rate 超过 $30B（Anthropic 官方）" },
+    { label: "2026-05", value: 47.0, short: "47+", note: "2026-05 run-rate 超过 $47B（Anthropic Series H 官方）" },
   ],
   target2025: [
     { label: "2025-12", value: 9.0, short: "9", note: "2025 年末 internal target（Reuters）" },
@@ -1149,6 +1157,16 @@ const anthropicFundingRows = [
     valuation: "$380B post-money",
     note: "官方披露；run-rate 达 $14B，刷新 AI 私募融资规模。",
     source: "https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation",
+    kind: "equity",
+  },
+  {
+    date: "2026-05-28",
+    type: "Series H",
+    amount: 65.0,
+    amountLabel: "$65B",
+    valuation: "$965B post-money",
+    note: "官方披露；run-rate 超过 $47B，并继续投入 Claude、compute 与安全研究。",
+    source: "https://www.anthropic.com/news/series-h",
     kind: "equity",
   },
 ];
