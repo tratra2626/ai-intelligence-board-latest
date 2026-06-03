@@ -775,6 +775,12 @@ const weeklyWindows = [
     start: "2026-05-20",
     end: "2026-05-27",
   },
+  {
+    label: "2026-05-28 至 2026-06-03",
+    note: "本周重点按 2026-05-28 至 2026-06-03 汇总；覆盖 OpenAI、Microsoft、Anthropic、Tencent 与 Google/Alphabet 这轮 agent、融资和安全主线。",
+    start: "2026-05-28",
+    end: "2026-06-03",
+  },
 ];
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
