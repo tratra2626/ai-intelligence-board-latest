@@ -1,10 +1,11 @@
-const verifiedAt = "2026-06-02";
+const verifiedAt = "2026-06-03";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
   Anthropic: "#9c6a22",
   xAI: "#1f2528",
   Google: "#315f8f",
+  Microsoft: "#256a7b",
   豆包: "#a5483f",
   千问: "#6a4aa0",
   腾讯: "#246b7d",
@@ -203,6 +204,13 @@ const events = [
     model: "Claude Opus 4 / Sonnet 4",
     note: "Claude 4 家族发布，重点面向编码、推理与 AI agents。",
     source: "https://www.anthropic.com/news/claude-4",
+  },
+  {
+    date: "2026-06-02",
+    company: "Microsoft",
+    model: "MAI-Thinking-1 / MAI-Code-1-Flash / MAI-Image-2.5",
+    note: "Microsoft Build 2026 发布七款自研 MAI 模型，覆盖 reasoning、coding、image、voice 与 transcription，MAI-Thinking-1 进入 Foundry 私有预览。",
+    source: "https://microsoft.ai/news/building-a-hillclimbing-machine-launching-seven-new-mai-models/",
   },
   {
     date: "2025-06-11",
