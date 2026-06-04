@@ -138,6 +138,136 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
+              <strong>2026-06-04</strong>
+              <small>时间窗口：2026-06-03 10:05 至 2026-06-04 10:05 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时的主线不是“又一家发了新底座模型”，而是 <code>agent 落地后的组织化交付、安全边界和资本强度</code>。<code>Anthropic</code> 一天内同时发布攻防研究和合作伙伴分层机制，前者强调 AI 已深入恶意网络活动后段，后者则说明企业部署 Claude 正在走向顾问、认证和公开案例驱动的渠道化；<code>GitHub</code> 把 VS Code 的 agent 工作台继续推向稳定开发流；<code>Alphabet</code> 则把原本 <code>800 亿美元</code> 的 AI 融资计划上修到 <code>847.5 亿美元</code>。另一个值得警惕的信号来自 <code>Meta</code>：Instagram 的 AI 支持机器人被社会工程利用，说明“把敏感操作交给 agent”正在从功能创新变成安全审计问题。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">安全 / Anthropic</span>
+                </div>
+                <h3>Anthropic 发布 AI 攻击者画像报告：过去一年封禁的 832 个恶意账号里，攻击重心正从钓鱼前段转向入侵后横向行动</h3>
+                <p><code>Anthropic</code> 于 <code>2026-06-03</code> 发布新的安全研究报告，基于 <code>2025-03</code> 到 <code>2026-03</code> 间因恶意网络活动被封禁的 <code>832</code> 个账号，映射到 <code>MITRE ATT&amp;CK</code> 框架，试图回答一个更实战的问题：AI 到底在真实攻击链条里扮演什么角色。官方给出的主结论不是“AI 让钓鱼邮件更像真的”，而是攻击活动正在往更深的后渗透阶段迁移。Anthropic 指出，样本中大量活动已不再停留在写诱饵、改文案，而是进入恶意软件处理、账户发现、横向移动等更接近实战入侵的环节。</p>
+                <p>这条对看板的重要性在于，它给“AI 安全风险”补上了运营级证据。过去很多公司谈 agent 风险时仍停留在抽象层面，但 Anthropic 这次用真实封禁样本说明，攻击者已经在把模型当成中间层工具来加速攻击流水线。更值得跟的是，官方还明确表示传统 <code>MITRE ATT&amp;CK</code> 对 agent 化攻击行为的描述还不够完备，这意味着接下来围绕 agent 权限、工具调用审计和企业隔离策略的需求只会继续上升。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="Anthropic AI 攻击画像报告概览">
+                    <rect x="0" y="0" width="720" height="320" rx="18" fill="#f6f1ea"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">Anthropic 2026-06-03 攻防报告</text>
+                    <text x="28" y="68" fill="#7a6241" font-size="14">自制比较图，基于 Anthropic 官方报告披露的核心样本与判断</text>
+                    <rect x="28" y="96" width="206" height="184" rx="14" fill="#ffffff" stroke="#decdb8"></rect>
+                    <text x="52" y="126" fill="#7a6241" font-size="13">样本范围</text>
+                    <text x="52" y="162" fill="#1f2528" font-size="38" font-weight="700">832</text>
+                    <text x="52" y="194" fill="#1f2528" font-size="16">个被封禁恶意账号</text>
+                    <text x="52" y="224" fill="#7a6241" font-size="14">覆盖 2025-03 至 2026-03</text>
+                    <rect x="257" y="96" width="206" height="184" rx="14" fill="#ffffff" stroke="#decdb8"></rect>
+                    <text x="281" y="126" fill="#7a6241" font-size="13">风险演进</text>
+                    <text x="281" y="162" fill="#1f2528" font-size="38" font-weight="700">33% → 56%</text>
+                    <text x="281" y="194" fill="#1f2528" font-size="16">中高风险占比抬升</text>
+                    <text x="281" y="224" fill="#7a6241" font-size="14">后半期明显高于前半期</text>
+                    <rect x="486" y="96" width="206" height="184" rx="14" fill="#ffffff" stroke="#decdb8"></rect>
+                    <text x="510" y="126" fill="#7a6241" font-size="13">官方判断</text>
+                    <text x="510" y="162" fill="#1f2528" font-size="22" font-weight="700">从前置诱导</text>
+                    <text x="510" y="194" fill="#1f2528" font-size="22" font-weight="700">转向后渗透行动</text>
+                    <text x="510" y="224" fill="#7a6241" font-size="14">MITRE 需补充 agent 行为刻画</text>
+                  </svg>
+                  <figcaption>自制比较图，基于 Anthropic 官方报告披露的样本规模、风险变化和结论，不是官方原图。</figcaption>
+                </figure>
+                <a href="https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack" target="_blank" rel="noreferrer">查看 Anthropic 官方报告</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">商业化 / Anthropic</span>
+                </div>
+                <h3>Anthropic 上线 Claude Partner Network 的 Services Track 与 Partner Hub，把企业部署 Claude 的渠道体系做成了可量化分层</h3>
+                <p><code>Anthropic</code> 同样在 <code>2026-06-03</code> 宣布，为 <code>Claude Partner Network</code> 增加 <code>Services Track</code> 和 <code>Claude Partner Hub</code>。官方披露，自 3 月启动该网络以来，已有超过 <code>40,000</code> 家机构申请加入，超过 <code>10,000</code> 名顾问拿到 Claude 认证；背后的伙伴训练、技术支持和联合营销预算规模为 <code>1 亿美元</code>。这次新增的分层机制把伙伴明确分成 <code>Select</code>、<code>Preferred</code>、<code>Global Premier</code> 三档，核心考核不再是“签没签框架协议”，而是活跃认证人数、已生产部署客户数和可公开客户案例数。</p>
+                <p>这条新闻的重要性不在产品功能，而在商业组织方式。OpenAI、Microsoft、Salesforce 过去都证明过，企业 AI 一旦进入预算和生产阶段，成交不只靠模型能力，还要靠顾问公司、集成商和可复制的方法论。Anthropic 现在把这件事制度化，说明 Claude 的增长逻辑正在从“前沿模型品牌”转向“渠道交付能力”。如果后续 OpenAI、Google 或字节也开始加码类似的 partner tier、认证和案例目录，企业 AI 市场会更像传统软件渠道战，而不是单纯模型竞赛。</p>
+                <a href="https://www.anthropic.com/news/services-track-partner-hub" target="_blank" rel="noreferrer">查看 Anthropic 官方公告</a>
+                <a href="https://claude.com/partners" target="_blank" rel="noreferrer">查看 Claude Partner Network 官方说明</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">产品侧 / GitHub Copilot</span>
+                </div>
+                <h3>GitHub 发布 6 月 3 日 VS Code Copilot 月度更新，Agents 窗口、远程 agent、BYOK 和终端风险分级一起成型</h3>
+                <p><code>GitHub</code> 于 <code>2026-06-03</code> 发布 <code>GitHub Copilot in Visual Studio Code, May releases</code>。这不是一次单点功能 patch，而是把过去一个月的 agent 工作流能力集中打包：<code>Agents window</code> 在 VS Code Stable 进入预览、支持并排多会话；<code>remote agents</code> 可以通过 <code>SSH</code> 或 <code>Dev Tunnels</code> 在远程机器持续运行；<code>BYOK</code> 扩展到 air-gapped 环境；终端确认新增 AI 生成的风险等级与简短安全解释；同时集成浏览器又增加设备模拟和截图附着到对话的能力。</p>
+                <p>从竞争角度看，这说明开发者 agent 产品正在快速收敛到一套共同形态：独立任务工作台、远程持续执行、模型来源可切换、工具调用更强、以及对长任务的状态管理。GitHub 的差异化并不只是“也有 agent”，而是它正在把 agent 会话、Git 工作流、模型选择和开发环境本身绑定成一个默认操作面。这会让纯聊天式 coding assistant 更难维持优势，也会继续抬高对 OpenAI Codex、Anthropic Claude Code 等产品的对位要求。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="GitHub Copilot VS Code 五月更新概览">
+                    <rect x="0" y="0" width="720" height="320" rx="18" fill="#eef3f8"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">GitHub Copilot VS Code：2026-06-03 更新主轴</text>
+                    <text x="28" y="68" fill="#49637a" font-size="14">自制比较图，基于 GitHub 6 月 3 日 changelog</text>
+                    <rect x="28" y="96" width="148" height="184" rx="14" fill="#ffffff" stroke="#cad8e4"></rect>
+                    <text x="50" y="130" fill="#49637a" font-size="13">工作台</text>
+                    <text x="50" y="164" fill="#1f2528" font-size="22" font-weight="700">Agents window</text>
+                    <text x="50" y="194" fill="#1f2528" font-size="15">Stable 预览</text>
+                    <text x="50" y="220" fill="#49637a" font-size="13">并排多会话</text>
+                    <rect x="198" y="96" width="148" height="184" rx="14" fill="#ffffff" stroke="#cad8e4"></rect>
+                    <text x="220" y="130" fill="#49637a" font-size="13">执行层</text>
+                    <text x="220" y="164" fill="#1f2528" font-size="22" font-weight="700">Remote agents</text>
+                    <text x="220" y="194" fill="#1f2528" font-size="15">SSH / Dev Tunnels</text>
+                    <text x="220" y="220" fill="#49637a" font-size="13">断线后持续运行</text>
+                    <rect x="368" y="96" width="148" height="184" rx="14" fill="#ffffff" stroke="#cad8e4"></rect>
+                    <text x="390" y="130" fill="#49637a" font-size="13">模型层</text>
+                    <text x="390" y="164" fill="#1f2528" font-size="22" font-weight="700">BYOK</text>
+                    <text x="390" y="194" fill="#1f2528" font-size="15">含 air-gapped</text>
+                    <text x="390" y="220" fill="#49637a" font-size="13">实用任务模型可配置</text>
+                    <rect x="538" y="96" width="148" height="184" rx="14" fill="#ffffff" stroke="#cad8e4"></rect>
+                    <text x="560" y="130" fill="#49637a" font-size="13">安全层</text>
+                    <text x="560" y="164" fill="#1f2528" font-size="22" font-weight="700">Risk labels</text>
+                    <text x="560" y="194" fill="#1f2528" font-size="15">终端确认分级</text>
+                    <text x="560" y="220" fill="#49637a" font-size="13">敏感输入留在终端</text>
+                  </svg>
+                  <figcaption>自制比较图，基于 GitHub 官方 changelog 总结 Agents 工作台、远程执行、BYOK 和终端安全更新。</figcaption>
+                </figure>
+                <a href="https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/" target="_blank" rel="noreferrer">查看 GitHub 官方 changelog</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">资本开支 / Alphabet</span>
+                </div>
+                <h3>Alphabet 把 AI 融资计划从 800 亿美元上修到 847.5 亿美元，说明算力建设已经逼到头部平台重写融资结构</h3>
+                <p><code>Alphabet</code> 6 月 1 日先发官方融资说明，6 月 3 日 <code>Reuters</code> 又跟进报道其已把股权融资规模上修到 <code>847.5 亿美元</code>。按官方 PDF，原始结构包含 <code>300 亿美元</code> 的承销公开发行、<code>400 亿美元</code> 的 <code>ATM</code> 计划，以及 <code>Berkshire Hathaway</code> 约 <code>100 亿美元</code> 的私募投资；Reuters 在 6 月 3 日披露的新进展则是承销部分进一步上修，整体规模从 <code>800 亿美元</code> 提高至 <code>847.5 亿美元</code>。Alphabet 自己给出的理由非常直接：企业和消费者对其 AI 方案的需求已超过当前可供给能力。</p>
+                <p>这条对 AI 看板的意义在于，它再次确认了 2026 年竞争的底层约束不是“有没有用户想用”，而是“谁有能力继续融资、建机房、买芯片、锁电力”。如果一家现金流本就极强的巨头仍需要把融资规模一路上调，说明 AI 基础设施周期比传统云建设更重资产、也更长。后面值得继续盯的不是单次融资 headline，而是 Google Cloud 积压订单、TPU 供给兑现、以及其他巨头是否跟进类似的资产负债表动作。</p>
+                <a href="https://s206.q4cdn.com/479360582/files/doc_news/2026/Jun/01/attachments/2026-June-Alphabet-Equity-Capital-Raise-Press-Release-PDF.pdf" target="_blank" rel="noreferrer">查看 Alphabet 官方融资说明 PDF</a>
+                <a href="https://www.investing.com/news/stock-market-news/alphabet-to-raise-8475-billion-in-upsized-equity-offering-to-fund-ai-ambitions-4724794" target="_blank" rel="noreferrer">查看 Reuters 6 月 3 日跟进报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">安全 / Meta</span>
+                </div>
+                <h3>Meta 的 AI 支持机器人被用来接管 Instagram 账号，敏感账号操作交给 agent 的安全边界被直接打穿</h3>
+                <p>围绕 <code>Meta</code> 的 AI 支持机器人，这个窗口内出现了一条很值得首页记录的反面样本。<code>TechCrunch</code> 在 <code>2026-06-03</code> 报道，Instagram 已开始通知被波及用户；同期 <code>Reuters</code> 分析指出，这一事件暴露的不是单个产品 bug，而是“把账户恢复等高敏感动作交给 AI 自动化系统”本身的结构性风险。根据多家报道和安全研究者披露，攻击者利用 Meta AI 支持流程中的薄弱验证逻辑，为目标账号更换邮箱并推动账户接管。</p>
+                <p>这条新闻对 agent 行业的指向性很强。2026 年大家都在强调 agent 能调工具、能代操作，但这次 Meta 事件提醒市场：一旦 agent 拿到高风险系统调用权，真正难的不是自然语言交互，而是权限分层、身份验证和人工兜底。对所有正在做客服 agent、IT 运维 agent、财务 agent 的平台来说，这都不是一家公司的公关事故，而是会反过来影响企业采购和内部审计的问题。</p>
+                <a href="https://techcrunch.com/2026/06/03/instagram-is-alerting-users-who-were-targeted-by-hackers-during-ai-chatbot-attacks/" target="_blank" rel="noreferrer">查看 TechCrunch 报道</a>
+                <a href="https://tech.yahoo.com/cybersecurity/articles/analysis-high-profile-meta-ai-100146275.html" target="_blank" rel="noreferrer">查看 Reuters 分析转载</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>第一，过去 24 小时没有足够可信的新前沿模型正式发布，这本身就是一个信号：当前竞争的焦点更偏向模型落地后的交付、渠道和安全，而不是每天都靠新 benchmark 争头条。</p>
+              <p>第二，<code>Anthropic</code> 一天内同时发安全研究和 partner 分层机制，说明它正把“前沿能力”往两端延展: 一端做高敏感场景的话语权，另一端做大企业的实施与认证网络。这种双线推进，比单一模型升级更接近成熟软件公司的打法。</p>
+              <p>第三，<code>Alphabet</code> 融资计划继续上修、<code>Meta</code> agent 安全事故继续发酵，分别对应 agent 时代最硬的两条约束：算力供给和权限治理。接下来值得盯的不是哪家 demo 更炫，而是谁能同时证明自己“供得上、控得住、卖得动”。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
               <strong>2026-06-03</strong>
               <small>时间窗口：2026-06-02 10:05 至 2026-06-03 10:05 CST</small>
             </div>
