@@ -138,6 +138,127 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
+              <strong>2026-06-05</strong>
+              <small>时间窗口：2026-06-04 10:02 至 2026-06-05 10:02 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有新的头部基础模型正式进入窗口，真正值得记录的是 <code>AI 产品开始从“会回答”转向“会记住、会协作、会控成本、会吞基础设施”</code>。<code>OpenAI</code> 把 ChatGPT 的 memory 升级成更强的 dreaming 架构，<code>Asana</code> 试图把人和 agent 放进同一套工作操作系统，<code>Ramp</code> 把 token 成本正式定义成企业第三类支出，<code>Glean</code> 继续把企业 AI 推向多模型编排，而 <code>Helion</code> 的新一轮融资则提醒市场：AI 供给侧的约束，最终还是会落到能源和算力建设上。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">产品侧 / OpenAI</span>
+                </div>
+                <h3>OpenAI 发布新的 ChatGPT memory 架构，把 dreaming 从后台补丁升级成可审阅、可纠正、会持续刷新的长期记忆层</h3>
+                <p><code>OpenAI</code> 于 <code>2026-06-04</code> 发布 <code>Dreaming: Better memory for a more helpful ChatGPT</code>。官方给出的主轴很明确：新的 memory 系统不再主要依赖用户显式说“记住这个”，而是用更强的 <code>dreaming</code> 架构在后台综合长期对话内容，去解决 memory 过去最典型的三个问题：<code>staleness</code>、<code>correctness</code> 和 <code>scalability</code>。对用户可见的变化，是新增一套 <code>memory summary</code> 视图，让你能直接看到模型现在“记得什么”、补充什么、删掉什么。</p>
+                <p>这条新闻对产品格局的重要性在于，memory 正在从“聊天的小增强项”变成 agent 产品的基础设施。只要模型开始承担长期项目、重复协作和持续偏好跟踪，记忆层就不再是锦上添花，而是决定能不能跨会话交付真实工作的底座。OpenAI 这次还明确写到，该能力先向美国 <code>Plus</code> 和 <code>Pro</code> 用户推出，后续再扩展到更多国家及 <code>Free</code> / <code>Go</code> 用户，也说明 memory 已被视作一条可分层经营的核心产品能力。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="OpenAI ChatGPT dreaming memory 更新概览">
+                    <rect x="0" y="0" width="720" height="320" rx="18" fill="#eef5f2"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">OpenAI 2026-06-04：Dreaming memory 更新</text>
+                    <text x="28" y="68" fill="#3b6d5b" font-size="14">自制概览图，基于 OpenAI 官方发布页与 memory summary 说明</text>
+                    <rect x="28" y="96" width="206" height="184" rx="14" fill="#ffffff" stroke="#c8ddd5"></rect>
+                    <text x="52" y="126" fill="#3b6d5b" font-size="13">要解决的问题</text>
+                    <text x="52" y="162" fill="#1f2528" font-size="24" font-weight="700">过期 / 错误 / 扩展性</text>
+                    <text x="52" y="198" fill="#1f2528" font-size="15">memory 不再只靠手动“记住”</text>
+                    <text x="52" y="224" fill="#3b6d5b" font-size="13">改为后台综合长期上下文</text>
+                    <rect x="257" y="96" width="206" height="184" rx="14" fill="#ffffff" stroke="#c8ddd5"></rect>
+                    <text x="281" y="126" fill="#3b6d5b" font-size="13">用户可见变化</text>
+                    <text x="281" y="162" fill="#1f2528" font-size="24" font-weight="700">Memory summary</text>
+                    <text x="281" y="198" fill="#1f2528" font-size="15">可查看 / 修正 / 删除记忆</text>
+                    <text x="281" y="224" fill="#3b6d5b" font-size="13">把记忆状态显式化</text>
+                    <rect x="486" y="96" width="206" height="184" rx="14" fill="#ffffff" stroke="#c8ddd5"></rect>
+                    <text x="510" y="126" fill="#3b6d5b" font-size="13">首发范围</text>
+                    <text x="510" y="162" fill="#1f2528" font-size="24" font-weight="700">US Plus / Pro</text>
+                    <text x="510" y="198" fill="#1f2528" font-size="15">后续扩到更多国家</text>
+                    <text x="510" y="224" fill="#3b6d5b" font-size="13">与 Free / Go 用户层级</text>
+                  </svg>
+                  <figcaption>自制概览图，基于 OpenAI 官方发布页中的 dreaming 架构说明和 memory summary 产品描述，不是官方原图。</figcaption>
+                </figure>
+                <a href="https://openai.com/index/chatgpt-memory-dreaming/" target="_blank" rel="noreferrer">查看 OpenAI 官方发布页</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">产品侧 / Asana</span>
+                </div>
+                <h3>Asana 发布 “human-agent teams” 操作系统，开始把 agent 当成组织中的正式协作者来设计权限、上下文和治理层</h3>
+                <p><code>Asana</code> 于 <code>2026-06-04</code> 在伦敦发布面向 <code>human-agent teams</code> 的新产品套件。官方把它定义为一套让 humans 和 AI agents 在同一份计划、同一份上下文和同一套治理规则里协作的工作操作系统，核心概念是 <code>Agentic Work Management</code>。新增内容包括面向个人的 <code>Asana Dash</code>、新一代行业化 <code>AI Teammates</code>，以及后续面向 IT、builder 和专业服务团队的专用应用。</p>
+                <p>值得首页记录的不是某个单点 agent 功能，而是 Asana 给出的组织化判断。它直接说今天 <code>75%</code> 的知识工作者已经在工作中使用 AI，但只有 <code>5%</code> 的公司拿到了有意义的生产率提升，并把原因归到四类问题：难以起步、agent 不是团队成员、agent 缺上下文、以及缺治理。这个表述很接近 2026 年企业 agent 的真实瓶颈，也意味着下一轮竞争会从“谁有 agent”转向“谁能把 agent 放进已有工作系统里并可审计地跑起来”。</p>
+                <a href="https://investors.asana.com/news-releases/news-release-details/asana-unveils-operating-system-human-agent-teams" target="_blank" rel="noreferrer">查看 Asana 官方发布</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">商业化 / Ramp</span>
+                </div>
+                <h3>Ramp 完成 7.5 亿美元融资并把 token 成本正式写成“企业第三类支出”，AI 成本管理开始从工程指标进入 CFO 视角</h3>
+                <p><code>Ramp</code> 于 <code>2026-06-04</code> 宣布完成 <code>7.5 亿美元</code> 新一轮融资，估值 <code>440 亿美元</code>。这条融资新闻之所以应进首页，不是因为又一家高估值公司加钱，而是 Ramp 在官方稿里非常明确地把 AI 成本管理写成新业务主线：过去企业支出主要围绕人力和供应商，如今“第三根支柱”已经变成按 token 付费的智能支出。官方还点名其增长已覆盖 <code>token spend management</code>，并把管理“businesses’ fastest-growing cost: tokens”写成新阶段重点。</p>
+                <p>这意味着 token 支出正在从工程团队的 API 监控表，升级成财务系统里的正式预算科目。Ramp 同时提到其与 Visa 的多年合作已深化到让 AI agents 在实时控制条件下执行企业支付，并列出采购 agent、会计 agent、AI token spend management 等最近发布项。对行业来说，这说明企业 AI 的下一轮产品机会不只是“再多接几个模型”，而是围绕预算、审批、总账和支付把 agent 成本纳入传统财务控制栈。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="Ramp AI token spend 融资与产品主线概览">
+                    <rect x="0" y="0" width="720" height="320" rx="18" fill="#f7f2e9"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">Ramp 2026-06-04：融资 + token 成本管理</text>
+                    <text x="28" y="68" fill="#8b6c34" font-size="14">自制概览图，基于 Ramp 官方融资稿</text>
+                    <rect x="28" y="96" width="180" height="184" rx="14" fill="#ffffff" stroke="#e0d4bd"></rect>
+                    <text x="50" y="126" fill="#8b6c34" font-size="13">融资规模</text>
+                    <text x="50" y="166" fill="#1f2528" font-size="34" font-weight="700">$750M</text>
+                    <text x="50" y="198" fill="#1f2528" font-size="16">Series F</text>
+                    <text x="50" y="224" fill="#8b6c34" font-size="13">估值 440 亿美元</text>
+                    <rect x="228" y="96" width="230" height="184" rx="14" fill="#ffffff" stroke="#e0d4bd"></rect>
+                    <text x="250" y="126" fill="#8b6c34" font-size="13">官方新定义</text>
+                    <text x="250" y="162" fill="#1f2528" font-size="24" font-weight="700">People / Vendors / Tokens</text>
+                    <text x="250" y="196" fill="#1f2528" font-size="15">把 token 成本写成第三类支出</text>
+                    <text x="250" y="222" fill="#8b6c34" font-size="13">从工程指标进入财务控制层</text>
+                    <rect x="478" y="96" width="214" height="184" rx="14" fill="#ffffff" stroke="#e0d4bd"></rect>
+                    <text x="500" y="126" fill="#8b6c34" font-size="13">近期产品</text>
+                    <text x="500" y="162" fill="#1f2528" font-size="18" font-weight="700">Token spend / Procurement</text>
+                    <text x="500" y="192" fill="#1f2528" font-size="18" font-weight="700">Accounting agents</text>
+                    <text x="500" y="222" fill="#8b6c34" font-size="13">并延伸到 AI agents 支付</text>
+                  </svg>
+                  <figcaption>自制概览图，基于 Ramp 官方融资新闻中的融资规模、token 成本定位和近期 agent 产品线信息，不是官方原图。</figcaption>
+                </figure>
+                <a href="https://www.prnewswire.com/news-releases/ramp-raises-series-f-at-44-billion-valuation-302791103.html" target="_blank" rel="noreferrer">查看 Ramp 官方融资稿</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">产品侧 / Glean</span>
+                </div>
+                <h3>Glean 接入 NVIDIA Nemotron 3 Ultra，企业 AI 平台对“多模型编排 + token 经济学”的表述越来越直接</h3>
+                <p><code>Glean</code> 于 <code>2026-06-04</code> 宣布支持 <code>NVIDIA Nemotron 3 Ultra</code>。官方给出的定位不是“又多一个模型可选”，而是面向企业 agentic work 的成本与性能折中方案。Glean 称该 open model 可提供 <code>91%</code> 的 frontier LLM completeness，同时保留 open model 的成本结构，并强调企业需要按任务匹配模型，而不是强行把所有工作都塞给单一模型族。</p>
+                <p>更关键的是它顺手把自己的模型策略讲得非常清楚：平台现在已支持 <code>30+</code> 模型，且会通过多模型协同来优化 token 经济学。官方还披露，内部的 <code>Glean Waldo</code> 搜索 agent 基于 <code>Nemotron 3 Nano</code> 后训练后，可实现 <code>50%</code> 更低延迟和 <code>25%</code> 更少 token。这个方向和 Ramp 那条新闻是呼应的: 企业 AI 采购逻辑正在从“买最强模型”转成“用不同模型拼出足够好的单位成本”。</p>
+                <a href="https://www.glean.com/press/glean-adds-support-for-nvidia-nemotron-3-ultra-expanding-model-choice-for-cost-effective-enterprise-ai" target="_blank" rel="noreferrer">查看 Glean 官方新闻稿</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">基础设施 / Helion</span>
+                </div>
+                <h3>Helion 新增 4.65 亿美元融资、估值 155 亿美元，AI 基础设施约束继续外溢到电力与能源建设</h3>
+                <p><code>TechCrunch</code> 于 <code>2026-06-04</code> 报道，得到 Sam Altman 支持的聚变公司 <code>Helion</code> 完成 <code>4.65 亿美元</code> 新融资，估值达到 <code>155 亿美元</code>。报道强调，这笔钱将用于推进 <code>Orion</code>，即 Helion 计划中的首座发电厂，并继续兑现其与 <code>Microsoft</code> 的供电协议目标，最快争取在 <code>2028</code> 年把聚变电力送上电网。</p>
+                <p>这条消息虽然不是模型或产品发布，但对 AI 看板很关键，因为它说明头部 AI 的供给问题已开始溢出到能源基础设施。只要云厂商和模型公司继续用更大规模的训练与推理集群竞赛，资本最终就会追到“谁来供电、谁能更快建成新电源”这一层。过去市场常把 AI 基础设施理解成 GPU 和数据中心；现在更接近的现实是，连发电能力本身都在被 AI 需求重新定价。</p>
+                <a href="https://techcrunch.com/2026/06/04/helion-the-sam-altman-backed-fusion-startup-raises-465m-to-build-a-power-plant-for-microsoft/" target="_blank" rel="noreferrer">查看 TechCrunch 报道</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>第一，过去 24 小时没有新的头部基础模型进入窗口，但这不代表节奏变慢；相反，竞争正明显转向 <code>memory / workflow / cost / infra</code> 这些更靠近真实部署和复购的层面。今天这几条新闻拼起来，能看到厂商开始争夺长期上下文、团队操作系统、财务控制权和模型组合权。</p>
+              <p>第二，企业 AI 的讨论语言正在从“能力上限”切向“单位成本和治理边界”。<code>Ramp</code> 把 token 变成正式支出类别，<code>Glean</code> 把多模型编排写成 token economics，<code>Asana</code> 把治理和上下文缺失定义成 agent 落地障碍，<code>Helion</code> 则提醒最底层的能源约束还在继续抬高行业门槛。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
               <strong>2026-06-04</strong>
               <small>时间窗口：2026-06-03 10:05 至 2026-06-04 10:05 CST</small>
             </div>
