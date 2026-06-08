@@ -138,6 +138,93 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
+              <strong>2026-06-08</strong>
+              <small>时间窗口：2026-06-07 10:00 至 2026-06-08 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有新的头部基础模型正式进入窗口，真正值得记的是 <code>agent 产品路线继续前移，而稳定性、治理和国家安全边界也更快跟上</code>。<code>OpenAI</code> 被 Reuters 报道正酝酿一次把 <code>ChatGPT + Codex + agents</code> 合并为 superapp 的大改版；白宫则把前沿模型的网络安全测试和国安场景部署同时往前推；<code>Anthropic</code> 的短时基础设施故障又让 <code>Notion</code> 这类上层应用被迫临时切走 Claude；另一边，<code>OpenAI</code> 面向 <code>Free</code> / <code>Go</code> 用户连续出现两次 Sunday incident，也说明消费侧分层供给在继续承压。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">产品侧 / OpenAI</span>
+                </div>
+                <h3>Reuters：OpenAI 正计划把 ChatGPT 改造成“superapp”，把 coding tools 与 AI agents 更紧地收进一个统一入口</h3>
+                <p>据 <code>Reuters</code> 于 <code>2026-06-07</code> 援引 <code>Financial Times</code> 报道，<code>OpenAI</code> 正筹备迄今幅度最大的一次 <code>ChatGPT</code> 产品重组，目标是把它推向一个包含 coding tools、AI agents 与更多企业入口的 <code>superapp</code>。需要先说清楚，这仍然是媒体报道而不是 OpenAI 当天的正式产品公告，Reuters 也明确写到其未能独立核实全部细节；但如果属实，它意味着 OpenAI 已经不满足于“最强聊天入口”，而是要把工作流、执行层和商业化转化统一到同一个主应用里。</p>
+                <p>这条新闻值得首页记录，不是因为它已经正式落地，而是因为它与过去几周 OpenAI 的公开动作是同方向的：一边是 <code>Codex</code> 往更完整的工作流和可交付界面延展，一边是 <code>ChatGPT</code> 的 memory、安全控制和 jobs/finance 等消费功能不断叠加。如果再往前一步把 coding、agents、consumer AI 和 enterprise surface 并到一个壳里，那 OpenAI 的核心竞争逻辑就会更像“超级工作入口”，而不只是一个模型前端。</p>
+                <a href="https://ca.finance.yahoo.com/news/openai-plans-chatgpt-superapp-overhaul-042143505.html" target="_blank" rel="noreferrer">查看 Reuters 报道转载</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">政策 / 国家安全</span>
+                </div>
+                <h3>白宫要求加速 AI 在国安场景中的部署，同时把最强模型的预发布网络安全测试更明确地前置</h3>
+                <p>据 <code>Reuters</code> 6 月 5 日报道并在本窗口内继续传播，美国白宫发布新的国家安全备忘录，要求加速 AI 在 intelligence 和 warfighting 场景中的使用，同时强调不得用于未授权或违法监控。更关键的是，Reuters 文中提到，政府本周稍早还表示将要求头部 AI 开发商在对外发布最强模型前，自愿提交其模型接受政府网络安全测试。也就是说，政策信号已经不只是“鼓励政府用 AI”，而是在把 frontier 模型的上线节奏、合规门槛和国安接口往同一个框架里压缩。</p>
+                <p>对产业影响来说，这会让头部实验室的产品化节奏进一步分层。消费和普通企业功能也许还能高频迭代，但只要模型能力接近战略敏感区间，发布流程就会更像一套联合法务、安全、政策和基础设施团队的重资产工程。对于同时面向政府合同和企业市场的公司，这意味着未来的核心壁垒不仅是模型能力，还包括谁能更稳定地穿过测试、审查和采购链条。</p>
+                <a href="https://www.streetinsider.com/Reuters/US%2Bsays%2Bit%2Bwill%2Bspeed%2Bdevelopment%2Band%2Buse%2Bof%2BAI%2Bfor%2Bnational%2Bsecurity/26611091.html" target="_blank" rel="noreferrer">查看 Reuters 报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">产品侧 / Anthropic 生态</span>
+                </div>
+                <h3>Anthropic 短时故障让 Notion 一度停用全部 Claude 模型，多模型路由和故障切换正在从“加分项”变成企业 AI 的默认要求</h3>
+                <p><code>TechCrunch</code> 于 <code>2026-06-07</code> 报道，<code>Notion</code> 在周末曾公开提示 <code>Anthropic</code> 的 <code>Opus 4.7</code> 和 <code>4.8</code> 出现 degraded performance，随后临时关闭了 <code>Notion AI</code> 中的全部 Anthropic 模型入口。大约十二小时后，Notion 恢复了访问；Anthropic 发言人对 TechCrunch 的表述是，一次“brief infrastructure issue”导致多个 Claude 模型短时间 elevated errors，问题随后已解决。这里没有新的模型、没有新的 benchmark，但它暴露的是更实际的一层：当上层产品把关键工作流绑在单一模型供应商上时，基础设施波动会直接反映到终端体验上。</p>
+                <p>这条新闻的看点在于，企业 AI 的“多模型编排”正在从成本优化工具，变成韧性工程。Notion 这类应用还有别的模型可切换，因此事故更多是服务降级；但如果产品逻辑、提示系统和工具调用深度依赖某一条模型链路，类似故障就会直接变成业务中断。对企业买家来说，这会继续推动对 fallback、routing、预算分层和供应商冗余的关注。</p>
+                <a href="https://techcrunch.com/2026/06/07/notion-restores-access-to-anthropic-after-service-disruption/" target="_blank" rel="noreferrer">查看 TechCrunch 报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">商业化 / OpenAI 稳定性</span>
+                </div>
+                <h3>OpenAI 在 Sunday evening 连续出现 Free / Go 两次用户侧故障，消费分层供给与稳定性压力仍在抬升</h3>
+                <p><code>OpenAI Status</code> 显示，在 <code>2026-06-07</code> 同一晚先后出现两次面向消费层的服务事件：一次是 <code>Free and Go users</code> 的可用性问题，另一次是更晚些时候的 <code>Go users</code> 单独故障，均影响 <code>ChatGPT</code>，随后官方标记为已恢复。单次 incident 本身未必值得大书特书，但把它放在最近几天连续出现的 Free / Go 可用性问题和账户访问异常里看，信号就比较清楚：OpenAI 仍在对不同层级用户做更细的容量和稳定性管理。</p>
+                <p>这条更像商业化和供给管理新闻，而不是单纯运维日志。随着 <code>Plus</code>、<code>Pro</code>、<code>Go</code>、<code>Free</code> 的产品分层越做越细，系统的真实挑战不只是“能不能跑”，而是“在不同价位与不同权限下，怎样维持可预期的质量和容量”。对用户来说，这会体现在 tier 之间的体验差异；对行业来说，这意味着 consumer AI 的价格体系越来越像一套容量分配体系。</p>
+                <figure class="news-media">
+                  <svg viewBox="0 0 720 320" role="img" aria-label="OpenAI 6月7日消费层服务事件时间线">
+                    <rect x="0" y="0" width="720" height="320" rx="18" fill="#eef5f2"></rect>
+                    <text x="28" y="42" fill="#1f2528" font-size="24" font-weight="700">OpenAI Status：2026-06-07 消费层连续 incident</text>
+                    <text x="28" y="68" fill="#3b6d5b" font-size="14">自制时间线，基于 OpenAI 官方状态页</text>
+                    <line x1="84" y1="180" x2="636" y2="180" stroke="#8cb7a7" stroke-width="4" stroke-linecap="round"></line>
+                    <circle cx="180" cy="180" r="12" fill="#2e6f5d"></circle>
+                    <circle cx="420" cy="180" r="12" fill="#2e6f5d"></circle>
+                    <text x="132" y="138" fill="#1f2528" font-size="18" font-weight="700">15:08 PT</text>
+                    <text x="96" y="212" fill="#1f2528" font-size="15">Free / Go users</text>
+                    <text x="92" y="236" fill="#577a6d" font-size="13">elevated errors，后续恢复</text>
+                    <text x="374" y="138" fill="#1f2528" font-size="18" font-weight="700">19:19 PT</text>
+                    <text x="362" y="212" fill="#1f2528" font-size="15">Go users only</text>
+                    <text x="326" y="236" fill="#577a6d" font-size="13">第二次 tier-specific incident</text>
+                    <rect x="552" y="116" width="116" height="96" rx="12" fill="#ffffff" stroke="#c8ddd5"></rect>
+                    <text x="574" y="146" fill="#577a6d" font-size="13">影响组件</text>
+                    <text x="574" y="178" fill="#1f2528" font-size="22" font-weight="700">ChatGPT</text>
+                    <text x="574" y="204" fill="#577a6d" font-size="13">官方均标记</text>
+                    <text x="574" y="226" fill="#577a6d" font-size="13">为已恢复</text>
+                  </svg>
+                  <figcaption>自制时间线，基于 OpenAI 官方状态页中的两次 Sunday incident 记录，不是官方原图。</figcaption>
+                </figure>
+                <a href="https://status.openai.com/incidents/01KTHA1XMAS77H4GMQBKSNPK71" target="_blank" rel="noreferrer">查看 Free / Go incident</a>
+                <a href="https://status.openai.com/incidents/01KTHRCXQCANBBY5JTGEQ1XTPK" target="_blank" rel="noreferrer">查看 Go-only incident</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>第一，这个窗口虽然没有新的大模型发布，但竞争并没有变慢，反而更像进入“应用形态和系统能力”的较量。<code>OpenAI</code> 被报道要把 ChatGPT 做成 superapp，本质上是把模型入口、agent、开发和商业化统一成一个操作系统式产品。</p>
+              <p>第二，白宫 memo 和 OpenAI/Anthropic 的连续 incident 放在一起看，会更清楚 2026 年的真实约束：一边是越强的模型越需要更重的测试、审查与责任链；另一边是越广泛的用户覆盖越要求更细的容量分层和更强的容灾能力。也就是说，行业接下来会更像基础设施与产品工程的复合竞争，而不只是 benchmark 竞赛。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
               <strong>2026-06-05</strong>
               <small>时间窗口：2026-06-04 10:02 至 2026-06-05 10:02 CST</small>
             </div>
