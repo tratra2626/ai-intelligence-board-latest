@@ -1,4 +1,4 @@
-const verifiedAt = "2026-06-09";
+const verifiedAt = "2026-06-10";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -477,6 +477,13 @@ const events = [
     model: "MiniMax M3",
     note: "MiniMax 发布 open-weight 模型 M3，主打 frontier coding、1M 上下文与原生多模态，官方称在 SWE-Bench Pro 等任务上达到前沿水平。",
     source: "https://www.minimax.io/blog/minimax-m3",
+  },
+  {
+    date: "2026-06-09",
+    company: "Anthropic",
+    model: "Claude Fable 5 / Claude Mythos 5",
+    note: "Anthropic 发布首个广泛可用的 Mythos-class 模型 Claude Fable 5，并以受限方式开放 Claude Mythos 5；两者默认支持 1M 上下文和 128K 输出。",
+    source: "https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5",
   },
   {
     date: "2023-09-20",
@@ -1594,6 +1601,26 @@ const priceRows = [
     output: 60,
     note: "早期高智能 GPT 模型，官方模型页仍列出 Chat Completions 可用价格。",
     source: "https://developers.openai.com/api/docs/models/gpt-4",
+  },
+  {
+    company: "Anthropic",
+    model: "Claude Fable 5",
+    date: "2026-06-09",
+    input: 10,
+    cached: 1,
+    output: 50,
+    note: "Anthropic 当前最强的广泛可用模型，默认 1M 上下文、128K 输出，并支持 refusal/fallback 机制。",
+    source: "https://platform.claude.com/docs/en/about-claude/pricing",
+  },
+  {
+    company: "Anthropic",
+    model: "Claude Mythos 5",
+    date: "2026-06-09",
+    input: 10,
+    cached: 1,
+    output: 50,
+    note: "与 Fable 5 同架构但不带安全分类器，仅对 Project Glasswing 批准客户限量开放。",
+    source: "https://platform.claude.com/docs/en/about-claude/pricing",
   },
   {
     company: "Anthropic",
