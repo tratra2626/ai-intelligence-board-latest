@@ -788,6 +788,12 @@ const weeklyWindows = [
     start: "2026-05-28",
     end: "2026-06-03",
   },
+  {
+    label: "2026-06-04 至 2026-06-11",
+    note: "本周重点按 2026-06-04 至 2026-06-11 汇总；先在这一周框里完成勾选，后续周报正文以这里的入选条目为准。",
+    start: "2026-06-04",
+    end: "2026-06-11",
+  },
 ];
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
