@@ -139,6 +139,106 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
+              <strong>2026-06-14</strong>
+              <small>时间窗口：2026-06-13 10:00 至 2026-06-14 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有确认到 <code>OpenAI / Anthropic / Google / xAI / DeepSeek / 豆包 / 千问 / 腾讯混元 / MiniMax / 智谱 / Kimi / 百度 / Meta</code> 这一层级的全新头部模型正式发布，也没有新的官方 API 定价页改动；但 <code>前沿模型上线后的政策回撤</code>、<code>受监管行业交付</code> 与 <code>agent 控制面治理</code> 明显继续升温。最值得记的是：<code>Anthropic</code> 对 <code>Fable 5 / Mythos 5</code> 的紧急下线争议还在发酵，同一天又继续把 Claude 深推到大型交付伙伴与公众治理叙事里；另一边，<code>OpenAI</code> 和 <code>GitHub</code> 都在把“会用模型”进一步推进成“组织如何稳定落地 workflow 与 review 控制”。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">模型治理 / Anthropic</span>
+                </div>
+                <h3>Anthropic 对 Fable 5 和 Mythos 5 的紧急下线继续发酵，前沿模型已经进入“发了也可能被撤回”的阶段</h3>
+                <p><code>Anthropic</code> 在 <code>2026-06-12</code> 的官方声明中写得非常直接：美国政府以国家安全和出口管制为由，下令暂停所有外国国民对 <code>Fable 5</code> 与 <code>Mythos 5</code> 的访问；为了合规，Anthropic 实际上只能把这两款模型对全部客户一并关闭。官方同时强调，政府并未在书面中给出具体技术细节，Anthropic 自己判断目前看到的只是针对少量已知漏洞的窄范围绕过，而不构成足以全面召回模型的普遍性证据。</p>
+                <p>这条新闻今天仍然必须放在第一位，因为它已经不只是一次安全争议，而是在改写 frontier model 的发布逻辑。过去大家默认“最强模型先上线，再慢慢补 guardrail”；现在市场第一次清楚看到，模型即便已经公开，也可能因政策判断被临时回撤。对接下来所有头部实验室的影响都很直接：更强模型不只要能发出来，还要能在更高政治与合规敏感度下持续留在线上。</p>
+                <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noreferrer">查看 Anthropic 官方声明</a>
+                <a href="https://www.wsj.com/tech/ai/amazon-ceos-talks-with-u-s-officials-triggered-crackdown-on-anthropic-models-dcc90578" target="_blank" rel="noreferrer">查看 WSJ 后续报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">企业落地 / Anthropic</span>
+                </div>
+                <h3>Anthropic 与 TCS 达成合作，把 Claude 推进到 56 个国家、5 万名员工和银行保险航司等高监管行业交付链路</h3>
+                <p><code>Anthropic</code> 于 <code>2026-06-12</code> 官方宣布与 <code>Tata Consultancy Services (TCS)</code> 合作。按公告，TCS 将为自有 <code>50,000</code> 名员工提供 Claude，并在 <code>56</code> 个国家面向金融服务、医疗、公共部门、航空、电信和医疗技术等受监管行业交付 Claude 驱动产品；同时，TCS 会加入 <code>Claude Partner Network</code>，并围绕理赔处理、贷款顾问、软件工程和 IT 运维构建专门实践。</p>
+                <p>这条合作的重要性在于，Anthropic 不是只再签一个“咨询伙伴”做售前演示，而是继续把 Claude 往可审计、可集成、可长期运维的行业系统里推进。对看板来说，这比单纯 seat 增长更关键，因为它说明 Claude 的收入故事正在进一步锚定大型 SI 与高监管场景，而不是只靠开发者或轻量知识工作流扩张。</p>
+                <figure class="news-media">
+                  <img src="https://www-cdn.anthropic.com/images/4zrzovbb/website/1576ae23eaf481f33bd36ab468171cc69d12361a-1000x1000.svg" alt="Anthropic 与 TCS 合作的官方公告配图" />
+                  <figcaption>官方产品配图：Anthropic 公告展示 TCS 合作，重点指向受监管行业的 Claude 交付与 Partner Network 扩展。</figcaption>
+                </figure>
+                <a href="https://www.anthropic.com/news/tcs-anthropic-partnership" target="_blank" rel="noreferrer">查看 Anthropic 官方公告</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">产品侧 / OpenAI</span>
+                </div>
+                <h3>OpenAI Academy 新增三门课程，把企业 AI 采用从 prompt 技巧推进到可复用 workflow 与 agent 协作训练</h3>
+                <p><code>OpenAI</code> 于 <code>2026-06-12</code> 发布 <code>OpenAI Academy</code> 新课程，新增 <code>AI Foundations</code>、<code>Applied AI Foundations</code> 和 <code>Agents and Workflows</code> 三门课。官方的课程路径很清楚：先让员工掌握 prompting、上下文提供与 output review 等基础，再把有效用法整理成结构化、可重复的 workflow，最后训练团队如何为 agent 提供边界、审阅结果并识别哪些环节必须保留人工判断。</p>
+                <p>这条更新值得进首页，因为它说明 OpenAI 正在把“企业采用”从买席位、上权限，进一步变成一套标准化培训与部署产品。真正的组织级采用，不取决于多少人会问模型问题，而取决于能否把成功用法沉淀成团队共同语言和长期流程。OpenAI 现在补的正是这段最难复制、也最容易影响续费与扩张的部分。</p>
+                <figure class="news-media">
+                  <img src="https://images.ctfassets.net/kftzwdyauwt9/2mmXo430NiaNqyi6YrRtnh/715ab11fa5003dd50acff55adcb4a5fd/Frame.png?fm=webp&amp;q=90&amp;w=3840" alt="OpenAI Academy 新课程页面官方配图" />
+                  <figcaption>官方产品截图：OpenAI Academy 新课程入口，强调从 AI 基础到可复用 workflow 与 agent 协作的组织学习路径。</figcaption>
+                </figure>
+                <a href="https://openai.com/index/academy-courses-applying-ai-at-work/" target="_blank" rel="noreferrer">查看 OpenAI 官方公告</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">治理与舆论 / Anthropic</span>
+                </div>
+                <h3>Anthropic 首次发布 5.2 万人级美国 AI 民意调查：64% 最担心岗位流失，71% 支持政府介入监管</h3>
+                <p><code>Anthropic</code> 同样在 <code>2026-06-12</code> 发布首期 <code>Anthropic Public Record</code>。官方称，这份在线调查覆盖 <code>51,993</code> 名美国受访者，最核心的结论包括：<code>64%</code> 把 AI 导致岗位流失列为主要担忧，<code>56%</code> 担心认知依赖，<code>52%</code> 担心错误信息，而 <code>71%</code> 认为政府应参与 AI 开发与监管；只有 <code>15%</code> 表示信任 AI 公司自行决定技术如何被开发和使用。</p>
+                <p>这不是模型或产品发布，但它对行业节奏非常重要。随着 Anthropic 和 OpenAI 一边强化企业与资本市场叙事，一边继续推进更强模型，真正的摩擦点越来越像“社会和监管是否愿意跟上”。Anthropic 这次主动做公众态度量化，本质上是在给自己正在推动的安全测试、透明度和政府权限框架补一层社会授权依据。</p>
+                <figure class="news-media">
+                  <img src="https://www-cdn.anthropic.com/images/4zrzovbb/website/723f3519ffdbeb2184e516e3ba2323d75acd22c5-2528x2840.png" alt="Anthropic Public Record 关于岗位流失担忧的官方图表" />
+                  <figcaption>官方调研图表：Anthropic Public Record 显示美国对 AI 导致岗位流失的担忧在各州普遍维持高位。</figcaption>
+                </figure>
+                <a href="https://www.anthropic.com/news/anthropic-public-record" target="_blank" rel="noreferrer">查看 Anthropic 官方调查</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">开发者生态 / GitHub</span>
+                </div>
+                <h3>GitHub 给 Copilot code review 补齐更多组织级控制：runner 可统一配置、路径可排除、自定义说明不再受 4000 字符限制</h3>
+                <p><code>GitHub</code> 于 <code>2026-06-12</code> 发布 <code>Copilot code review: New configurations and controls</code>。官方说明，Copilot code review 既然已经基于 GitHub Actions 的 agentic architecture 运行，组织管理员现在可以在组织层统一指定 runner 类型，并可锁定配置覆盖单仓库设置；同时，Copilot code review 开始遵守仓库、组织和企业级的内容排除规则，避免在 review 中读取特定文件或目录；此前 <code>copilot-instructions.md</code> 与 <code>*.instructions.md</code> 的 <code>4000</code> 字符限制也被移除。</p>
+                <p>这条更新的关键不在“Copilot 又多了几个设置项”，而在于 GitHub 正在把 agent review 真正做成企业可控的生产能力。谁能调 runner、哪些代码不能被读、团队能给 review agent 多长的流程说明，这些问题一旦进入大组织，就直接决定产品是否能通过内部治理门槛。换句话说，GitHub 正在补齐 agent 从 demo 到 org-wide default 所需的控制面。</p>
+                <a href="https://github.blog/changelog/2026-06-12-copilot-code-review-new-configurations-and-controls/" target="_blank" rel="noreferrer">查看 GitHub 官方更新</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">06</span>
+                  <span class="news-tag">监管后续 / 媒体</span>
+                </div>
+                <h3>WSJ：Anthropic 模型下线背后还牵出 Amazon 与白宫沟通，前沿模型治理正在从“原则争论”转向具体政商博弈</h3>
+                <p><code>华尔街日报</code> 于 <code>2026-06-13</code> 报道称，推动美国政府对 Anthropic 施压、要求处理 <code>Fable 5</code> 风险的过程，与 Amazon CEO Andy Jassy 和美国官员的沟通有关。按报道公开摘要，Amazon 研究人员向官员展示了可从 Fable 5 诱导出的潜在网络攻击相关信息，随后白宫官员讨论应对方式，并要求 Anthropic 修补漏洞或下线模型。</p>
+                <p>这里必须清楚区分：这部分属于媒体报道，不是 Amazon、白宫或 Anthropic 在同一页面上共同确认的正式事实。但它依然值得保留，因为它把“模型安全争议”进一步落到更现实的政商互动层面。接下来 frontier lab 的竞争，可能不只是 benchmark、产品与收入，还包括谁更能管理与云厂商、监管方及国家安全叙事之间的复杂关系。</p>
+                <a href="https://www.wsj.com/tech/ai/amazon-ceos-talks-with-u-s-officials-triggered-crackdown-on-anthropic-models-dcc90578" target="_blank" rel="noreferrer">查看 WSJ 报道</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>第一，这个窗口没有确认到新的头部 foundation model GA 或新的官方 API 价格调整，因此模型时间线、价格表和价格趋势图本轮不做无依据扩写；但竞争并没有降温，而是明显从“发没发布”转向“发出来以后能否稳住上线、能否穿过组织与政策门槛”。</p>
+              <p>第二，<code>Anthropic</code> 在同一天同时出现模型被回撤、签大型交付伙伴、发布公众态度调查三件事，说明 frontier lab 的现实议题已经被拉成一条完整链路：模型能力、安全叙事、行业交付和社会授权必须一起管理，任何一环出问题都可能反噬上线节奏。</p>
+              <p>第三，<code>OpenAI Academy</code> 与 <code>GitHub</code> 的 code review 控制面更新放在一起看，也很有代表性。头部平台都在补“组织怎么长期用起来”的最后一公里，这意味着后续真正的分水岭，不一定是谁先发下一个模型名，而是谁先把 workflow、权限、审计、培训和合规整成默认基础设施。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
               <strong>2026-06-13</strong>
               <small>时间窗口：2026-06-12 10:00 至 2026-06-13 10:00 CST</small>
             </div>
