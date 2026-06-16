@@ -139,83 +139,79 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
-              <strong>2026-06-15</strong>
-              <small>时间窗口：2026-06-14 10:00 至 2026-06-15 10:00 CST</small>
+              <strong>2026-06-16</strong>
+              <small>时间窗口：2026-06-15 10:00 至 2026-06-16 10:00 CST</small>
             </div>
 
             <div class="news-summary">
               <p class="eyebrow">Daily Highlights</p>
               <h2>每日重点新闻</h2>
-              <p>过去 24 小时没有确认到 <code>OpenAI / Anthropic / Google / xAI / DeepSeek / 豆包 / 千问 / 腾讯混元 / MiniMax / 智谱 / Kimi / 百度 / Meta</code> 这一层级的全新头部模型正式发布，也没有新的官方 API 定价页改动；但 <code>企业交付生态</code>、<code>ChatGPT 安全与 IPO 审查</code>、<code>frontier model 的出口管制外溢</code> 三条线同时抬头。最值得记的是：<code>OpenAI</code> 开始把咨询、集成和交付伙伴正式编进增长体系，而 <code>Anthropic</code> 的 <code>Fable 5 / Mythos 5</code> 下线事件已经从单点模型治理，迅速外扩到白宫关系修复、资本市场节奏和盟友国家的技术依赖讨论。</p>
+              <p>过去 24 小时没有确认到 <code>OpenAI / Anthropic / Google / xAI / DeepSeek / 豆包 / 千问 / 腾讯混元 / MiniMax / 智谱 / Kimi / 百度 / Meta</code> 这一层级的全新头部模型正式发布，也没有新的官方 API 定价页改动；但 <code>developer agent 控制面</code>、<code>frontier model 的政策可得性</code> 与 <code>AI 基础设施效率叙事</code> 三条线同时抬头。最值得记的是：<code>xAI</code> 开始把 Grok Build 从“单会话 coding agent”推向“多会话调度台 + 第三方终端分发”，而 <code>Anthropic</code> 的 <code>Fable 5 / Mythos 5</code> 事件继续从模型治理外溢成盟友国家的技术主权讨论。</p>
             </div>
 
             <div class="news-feed">
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">01</span>
-                  <span class="news-tag">企业交付 / OpenAI</span>
+                  <span class="news-tag">产品更新 / xAI</span>
                 </div>
-                <h3>OpenAI 正式推出 Partner Network：把 AI 采用从“买模型”推进到“找谁负责交付、治理和变更管理”</h3>
-                <p><code>OpenAI</code> 于 <code>2026-06-14</code> 官方发布 <code>OpenAI Partner Network</code>。按公告，OpenAI 将投入 <code>1.5 亿美元</code> 支持合作伙伴生态，面向全球伙伴开放 build、sell、deliver 三类协作，并计划在 <code>2026</code> 年底前培训 <code>30 万名</code> 认证顾问。体系内既有 <code>Select / Advanced / Elite</code> 分层，也预留了 <code>Codex</code>、<code>cybersecurity</code>、<code>agents</code> 等专项能力认证。</p>
-                <p>这条更新很重要，因为它说明 OpenAI 已经不再把企业增长只理解成 seat、token 和直销大客户，而是要把系统集成、咨询、变更管理和 forward deployed delivery 一并平台化。官方案例里已经点名 <code>Accenture</code>、<code>Bain</code>、<code>BCG</code>、<code>McKinsey</code>、<code>PwC</code> 等伙伴，并给出 <code>Paychex</code> 工资流程等待时间下降 <code>80%</code>、人工 effort 降低 <code>30%</code> 之类的交付结果，这说明 OpenAI 开始把“如何把模型真正嵌进流程”变成可规模复制的销售资产。</p>
-                <figure class="news-media">
-                  <img src="https://images.ctfassets.net/kftzwdyauwt9/U6bb3rlwvYyhf2q835WWx/d50f5492dded3c21aa6d69c07d3b2a44/Introducing_OAI_Partner_Network_artcard.png?fm=webp&amp;q=90&amp;w=3840" alt="OpenAI Partner Network 官方发布配图" />
-                  <figcaption>官方发布配图：OpenAI 宣布推出 Partner Network，把 build、sell、deliver 伙伴正式纳入企业 AI 交付体系。</figcaption>
-                </figure>
-                <a href="https://openai.com/index/introducing-openai-partner-network/" target="_blank" rel="noreferrer">查看 OpenAI 官方公告</a>
+                <h3>xAI 发布 Grok Build Agent Dashboard：把 coding agent 从单窗口扩展到“并行多会话调度台”</h3>
+                <p><code>xAI</code> 于 <code>2026-06-15</code> 官方发布 <code>Agent Dashboard in Grok Build</code>。按页面描述，用户现在可以在一个面板里同时看到多个 Grok Build 会话的状态，按是否等待输入、运行中或空闲排序，并直接在面板内预览输出、回复问题或发起新的 session；入口既支持 shell 中运行 <code>grok dashboard</code>，也支持在现有会话里通过 <code>/dashboard</code> 调起。</p>
+                <p>这条更新值得放在第一位，不是因为它推出了新模型，而是因为它把 agent 产品的核心竞争点从“单次回答质量”进一步推向“多任务并行调度能力”。对开发者来说，这相当于把 coding agent 从一个聊天框，改造成轻量级的任务控制台。谁先把 session 编排、阻塞处理和人工接管这层做顺，谁就更容易在真实软件工作流里吃下更长时长。</p>
+                <a href="https://x.ai/news/agent-dashboard" target="_blank" rel="noreferrer">查看 xAI 官方公告</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">02</span>
-                  <span class="news-tag">监管 / OpenAI</span>
+                  <span class="news-tag">分发渠道 / xAI</span>
                 </div>
-                <h3>AP：OpenAI 在 IPO 前夕遭到多州联合调查，焦点直指 ChatGPT 对未成年人和脆弱用户的潜在伤害</h3>
-                <p><code>Associated Press</code> 于 <code>2026-06-13 19:17 UTC</code> 报道，OpenAI 已收到来自多个州检察长办公室的传票，调查重点包括 <code>ChatGPT</code> 对青少年与脆弱用户的影响、健康与个人数据处理，以及产品是否在自伤或犯罪情境下提供了危险响应。OpenAI 对外回应称会“建设性配合”，并再次强调针对未成年人、处于困境用户和家长监护工具的防护措施。</p>
-                <p>这条消息必须进首页，因为它把 OpenAI 的竞争维度从模型能力、企业交付和 IPO 预期，直接拉回到产品责任。OpenAI 刚把 Partner Network 做成增长中台，另一边就要面对“这类 AI 是否已经足够安全可广泛进入家庭与年轻用户场景”的州级审查。对行业来说，这类 probe 比单一诉讼更值得看，因为它更接近系统性监管入口，后续可能影响产品提示词边界、未成年人默认设置和上市披露节奏。</p>
-                <a href="https://apnews.com/article/a95894407773307fae8ae3ce9742b586" target="_blank" rel="noreferrer">查看 AP 报道</a>
+                <h3>xAI 宣布 Grok 可直接接入 Warp，用已有订阅把 <code>grok-build-0.1</code> 带进第三方开发终端</h3>
+                <p><code>xAI</code> 同样在 <code>2026-06-15</code> 官方宣布，<code>Grok</code> 和 <code>X Premium</code> 用户现在可以在 <code>Warp</code> 里直接使用 Grok。按公告，用户在 Warp 的 <code>Agent &gt; Warp Agent</code> 设置页连接 <code>SuperGrok</code> 订阅后，即可切换到 <code>grok-build-0.1</code> 模型开始使用；xAI 还特别强调 Warp 是一个已被“近百万开发者”使用的 agentic terminal 环境。</p>
+                <p>这条消息的价值在于分发。过去头部模型公司主要争的是自家 Chat/App 和 API；现在 xAI 明显在押注“已有订阅能不能跨工具复用”。如果开发者不必新开账户、不必额外绑卡，就能在常用终端里直接调用 agent，模型公司的获客路径和留存逻辑都会更像浏览器插件和 IDE 生态，而不只是独立聊天产品。</p>
+                <a href="https://x.ai/news/grok-warp" target="_blank" rel="noreferrer">查看 xAI 官方公告</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">03</span>
-                  <span class="news-tag">白宫关系 / Anthropic</span>
+                  <span class="news-tag">政策博弈 / Anthropic</span>
                 </div>
-                <h3>Axios：Anthropic 已把高级技术人员送往华盛顿，试图修复 Mythos / Fable 争议后的白宫关系</h3>
-                <p><code>Axios</code> 于 <code>2026-06-14</code> 报道，Anthropic 已派出资深技术人员前往华盛顿，与白宫和相关官员沟通 <code>Mythos</code> / <code>Fable</code> 被要求下线后的技术与合规问题。报道强调，白宫方面对 Anthropic 在争议初期的应对并不满意，而 Anthropic 正试图以更高频、更加工程化的方式补交技术解释与修复方案。</p>
-                <p>这条跟进的意义在于，frontier model 的监管已经不再停留在公开原则和 blog post 表态，而是变成 lab 是否能实时组织工程、政策和高层关系资源的实战问题。谁能更快把技术问题翻译成政府可接受的风险处置语言，谁就更可能保住最强模型的在线时间和国际供给能力。</p>
-                <a href="https://www.axios.com/2026/06/14/anthropic-white-house-mythos-fable" target="_blank" rel="noreferrer">查看 Axios 报道</a>
+                <h3>Business Insider：Anthropic 已与特朗普政府官员会面，试图就 Fable 5 出口禁令达成停火</h3>
+                <p><code>Business Insider</code> 于 <code>2026-06-15</code> 报道，Anthropic 的代表已经与特朗普政府高级官员会面，试图缓和围绕 <code>Fable 5</code> 出口限制的冲突。报道指出，这轮沟通集中在 Anthropic 对网络安全防护措施的说明，以及白宫方面是否愿意重新评估当前限制；而导火索仍是美国政府对相关模型可能被绕过安全护栏的担忧。</p>
+                <p>这里要明确，会面细节和博弈过程属于媒体报道，不等于白宫或 Anthropic 的联合官方记录。但它仍然非常重要，因为这说明 frontier model 的“发布后可得性”已经不只由模型能力和安全报告决定，还可能被临时行政动作重写。对整个行业来说，这会抬高最强模型的合规与政策应对成本，也让国际客户重新评估美国模型供应的稳定性。</p>
+                <a href="https://www.businessinsider.com/anthropic-trump-officials-meeting-fable-export-ban-2026-6" target="_blank" rel="noreferrer">查看 Business Insider 报道</a>
                 <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noreferrer">查看 Anthropic 官方声明</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">04</span>
-                  <span class="news-tag">出口管制 / Anthropic</span>
+                  <span class="news-tag">地缘外溢 / 加拿大</span>
                 </div>
-                <h3>Business Insider：白宫对 Anthropic 施加出口管制前的 24 小时细节曝光，Amazon 输入与国家安全叙事被认为是关键推手</h3>
-                <p><code>Business Insider</code> 于 <code>2026-06-15 01:15 CST</code> 刊文回溯称，在白宫决定对 <code>Anthropic</code> 施加出口限制、迫使其关闭 <code>Fable 5</code> 与 <code>Mythos 5</code> 之前，特朗普政府高层、Anthropic CEO <code>Dario Amodei</code> 与外部技术意见在极短时间内完成密集沟通。报道还提到，政府方面拿到的风险信息部分与 <code>Amazon</code> 研究团队反馈有关，而 Anthropic 认为白宫没有充分提供细节，也没有给足修补时间。</p>
-                <p>这里要明确，这些过程细节属于媒体报道，不等于白宫、Amazon 和 Anthropic 的联合官方记录；但它依然很有价值，因为它揭示了前沿模型治理的真实决策机制。接下来真正影响模型可得性的，不只是 safety benchmark 或 red-team 分数，还包括云伙伴、政府技术顾问和国家安全官员如何共同定义“可接受风险”。</p>
-                <a href="https://www.businessinsider.com/why-white-house-ordered-export-controls-anthropic-mythos-fable-2026-6" target="_blank" rel="noreferrer">查看 Business Insider 报道</a>
+                <h3>AP：加拿大总理 Mark Carney 将 Anthropic 事件定性为“不能只依赖单一美国 AI 供应商”的现实警报</h3>
+                <p><code>Associated Press</code> 于 <code>2026-06-15</code> 报道，加拿大总理 <code>Mark Carney</code> 在 G7 峰会前表示，美国对 Anthropic 先进模型的限制再次证明，关键 AI 能力过度依赖少数美国供应商存在系统性风险。Carney 直接把这起事件作为推动加拿大技术和贸易多元化的论据，并点名 AI 将是本届 G7 的核心议题之一。</p>
+                <p>这条消息的关键不在于加拿大会不会马上长出自己的 frontier lab，而在于 Anthropic 事件已经从美国国内监管争议，外溢成盟友国家的技术主权讨论。一旦“供应会因政策突然中断”成为共识，海外政府和大型企业未来在采购模型、部署区域和本地化合作条款上，都会要求更高冗余和更强主控权。</p>
+                <a href="https://apnews.com/article/cb081633bb4fca6ac97dcdaea0354de7" target="_blank" rel="noreferrer">查看 AP 报道</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">05</span>
-                  <span class="news-tag">地缘外溢 / 加拿大</span>
+                  <span class="news-tag">基础设施 / Microsoft</span>
                 </div>
-                <h3>AP：加拿大总理 Mark Carney 把 Anthropic 事件定义为“单一美国 AI 供应依赖风险”的现实警报</h3>
-                <p><code>Associated Press</code> 于 <code>2026-06-15</code> 报道，加拿大总理 <code>Mark Carney</code> 在 G7 峰会前表示，美国对 Anthropic 先进模型的限制，再次说明关键 AI 能力过度依赖少数美国供应商的风险。Carney 直接把这次事件作为加拿大推进贸易和技术多元化的论据之一，并点名 AI 将是本届 G7 的关键议题。</p>
-                <p>这条消息的价值不在加拿大会不会立刻扶植出下一家 frontier lab，而在于 Anthropic 事件已经从美国国内监管问题，转化成盟友国家对算力、模型和技术主权的现实讨论。一旦这种情绪扩散，头部美国实验室未来在海外市场的商业模式、供给承诺和本地化合作要求都可能被重新定价。</p>
-                <a href="https://apnews.com/article/cb081633bb4fca6ac97dcdaea0354de7" target="_blank" rel="noreferrer">查看 AP 报道</a>
+                <h3>Microsoft 发布新研究口径：称大规模 AI 推理的能效可较旧测算提升 8 到 20 倍</h3>
+                <p><code>Microsoft</code> 于 <code>2026-06-15</code> 在官方云博客发布一篇基于 <code>Joule</code> 研究的解读文章，给出一组很适合产业侧跟踪的新口径：典型大模型查询的耗电量约为 <code>0.16</code> 到 <code>0.60 Wh</code>，耗水量约为 <code>0.0</code> 到 <code>0.067 mL</code>；官方称，相比过去文献和媒体常见测算，大规模生产环境下的实际能效可低 <code>4</code> 到 <code>20</code> 倍，并且在模型、serving 与硬件三层叠加后，近期开源和产品化路线还能带来 <code>8</code> 到 <code>20</code> 倍的进一步降耗空间。</p>
+                <p>这不是模型发布新闻，但它对商业化判断很重要。过去一年 AI 成本叙事经常被写成“越强越耗电、规模化就会压垮电网”；微软现在在做的，是把故事改写成“只要走对 routing、serving 和芯片路线，规模本身也能带来效率红利”。这会直接影响企业客户对 AI TCO、政策制定者对数据中心压力，以及各家云厂商未来在成本曲线上的话语权。</p>
+                <a href="https://www.microsoft.com/en-us/microsoft-cloud/blog/2026/06/15/scaling-ai-with-8-to-20x-energy-efficiency/" target="_blank" rel="noreferrer">查看 Microsoft 官方博客</a>
               </article>
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
-              <p>第一，这个窗口仍然没有确认到新的头部 foundation model GA 或新的官方 API 价格变更，因此模型时间线、价格表和价格趋势图本轮维持不动；真正变化的是竞争重心继续从“谁先发模型”转向“谁能把模型稳态交付进企业和跨境市场”。</p>
-              <p>第二，<code>OpenAI</code> 同一天既推出 Partner Network，又面对多州安全调查，说明头部实验室已经进入一体两面阶段：一边加速把 AI 编进企业生产体系，另一边也必须为未成年人、脆弱用户和默认交互后果承担更高责任。</p>
-              <p>第三，<code>Anthropic</code> 这条线的最新进展说明 frontier model 的政策变量正在外溢成资本市场和盟友国家议题。接下来最值得跟的是：模型会不会恢复、修补后能否重新对海外开放，以及更多国家会不会把“不能只依赖一家美国模型供应商”写进自己的 AI 产业政策。</p>
+              <p>第一，这个窗口仍然没有确认到新的头部 foundation model GA 或新的官方 API 价格变更，因此模型时间线、价格表和价格趋势图本轮维持不动；真正变化的是竞争重点继续从“谁又发了更强模型”转向“谁能把 agent 稳定嵌进开发工作流、并把供给稳定性交付给客户”。</p>
+              <p>第二，<code>xAI</code> 这两条连续更新说明 developer agent 的下一步竞争不只是模型强弱，而是控制面和分发面。多会话 dashboard 解决的是“怎么同时管一组 agent”，接入 Warp 解决的是“怎么在别人的终端里获客并留存”。</p>
+              <p>第三，<code>Anthropic</code> 这条线已经从单一模型安全事件外扩成政策与主权问题；<code>Microsoft</code> 则在把 AI 成本叙事往“可优化、可规模化”方向拉。接下来最值得跟的是：Fable / Mythos 是否恢复对外可用，以及更多云厂商会不会开始用可量化能效数据重写自己的 AI 基础设施销售话术。</p>
             </section>
 
             <div class="news-date-card">
