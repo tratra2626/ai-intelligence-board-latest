@@ -139,6 +139,84 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
+              <strong>2026-06-17</strong>
+              <small>时间窗口：2026-06-16 10:00 至 2026-06-17 10:00 CST</small>
+            </div>
+
+            <div class="news-summary">
+              <p class="eyebrow">Daily Highlights</p>
+              <h2>每日重点新闻</h2>
+              <p>过去 24 小时没有确认到 <code>OpenAI / Anthropic / Google / xAI / DeepSeek / 豆包 / 千问 / 腾讯混元 / MiniMax / 智谱 / Kimi / 百度 / Meta</code> 这一层级的全新头部模型正式发布，也没有新的官方 API 定价页改动；但 <code>预部署安全评估</code>、<code>frontier model 的跨境可得性</code> 与 <code>Gemini 向 Android / Pixel / XR 系统层继续下沉</code> 三条线同时变强。今天最值得记录的不是“谁又发了新模型”，而是强模型在正式上线前怎么测、上线后谁能用，以及手机和眼镜入口如何继续被 Gemini 接管。</p>
+            </div>
+
+            <div class="news-feed">
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">01</span>
+                  <span class="news-tag">安全评估 / OpenAI</span>
+                </div>
+                <h3>OpenAI 公布 <code>Deployment Simulation</code>：在模型上线前，用“真实部署上下文回放”预测风险行为</h3>
+                <p><code>OpenAI</code> 于 <code>2026-06-16</code> 发布研究文章 <code>Predicting model behavior before release by simulating deployment</code>。官方做法是把历史真实对话在去标识后重放给候选模型，用近似真实部署的上下文去估计新模型上线后的不良行为频率，而不是只依赖人工构造的红队题或静态 benchmark。OpenAI 称，这套方法已经用于多个 <code>GPT-5</code> 系列 Thinking 模型的预部署评估，并覆盖约 <code>130 万</code> 条去标识对话。</p>
+                <p>这条更新重要的地方，不是又多了一篇安全论文，而是头部实验室开始把“上线前怎么预估真实世界风险”产品化、流程化。随着模型越来越擅长识别自己正在被测试，传统 eval 的解释力在下降；而 deployment-like simulation 更像是在问一个更现实的问题：模型进到真实流量里后，到底会以多高频率暴露哪些问题。对后续所有 agent 和高能力模型发布，这都可能变成更核心的放行门槛。</p>
+                <a href="https://openai.com/index/deployment-simulation/" target="_blank" rel="noreferrer">查看 OpenAI 官方研究</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">02</span>
+                  <span class="news-tag">政策余波 / Anthropic</span>
+                </div>
+                <h3>Axios：Anthropic 最新模型的出口限制开始引发整个行业对“模型能否持续对外可用”的担忧</h3>
+                <p><code>Axios</code> 于 <code>2026-06-16</code> 跟进指出，美国政府要求暂停 <code>Anthropic Fable 5 / Mythos 5</code> 对外国用户访问的动作，已经不再只是 Anthropic 一家的麻烦，而是在冲击企业客户和海外政府对美国 frontier model 供给稳定性的判断。这个背景可以和 Anthropic <code>2026-06-12</code> 的官方声明一起看：官方确认收到出口管制指令后，必须对所有客户紧急关闭两款模型，并明确表示不同意把一个窄范围 jailbreak 发现直接上升到“商业模型召回”。</p>
+                <p>这条新闻的关键，在于行业开始第一次认真面对“最强模型上线后也可能被临时撤回”的现实。过去企业主要担心模型贵不贵、稳不稳、合不合规；现在还要多问一层：如果政治或安全判断突然变化，供应会不会被中断。对 OpenAI、Anthropic 这类头部厂商来说，下一阶段竞争不只是谁最强，也是谁能把跨境可得性、合规证据和客户预期一起管理住。</p>
+                <a href="https://www.axios.com/2026/06/16/ai-anthropic-export-controls" target="_blank" rel="noreferrer">查看 Axios 报道</a>
+                <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noreferrer">查看 Anthropic 官方声明</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">03</span>
+                  <span class="news-tag">地缘外溢 / 欧美</span>
+                </div>
+                <h3>FT：美国与欧洲开始讨论 advanced AI model 的“trusted partner”访问机制，Anthropic 事件已外溢成技术主权议题</h3>
+                <p><code>Financial Times</code> 于 <code>2026-06-16</code> 报道，在 G7 背景下，美国与欧洲官员开始讨论为先进 AI 模型建立一套“<code>trusted partner</code>”访问框架，以回应 Anthropic 事件暴露出的跨境使用不确定性。报道强调，欧洲方面担心美国可能把最强 AI 模型像其他战略技术一样当作地缘工具，而不仅是商业产品；OpenAI 和 Anthropic 高管也出现在相关讨论场景中。</p>
+                <p>这条消息目前主要来自媒体报道，不是正式制度落地，但信号很强：frontier model 已经被按“战略能力”而不是普通 SaaS 看待。对海外政府和大企业来说，接下来采购模型时要看的可能不只是能力、价格和 SLA，还包括模型提供方背后的国家政策风险，以及有没有可接受的盟友访问、区域部署和替代路线。</p>
+                <a href="https://www.ft.com/content/5962a34a-9b0a-4aac-bea7-60419f2c28c9" target="_blank" rel="noreferrer">查看 FT 报道</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">04</span>
+                  <span class="news-tag">系统层 / Google</span>
+                </div>
+                <h3>Google 正式推送 <code>Android 17</code>：把 Gemini 周边的多任务、表单理解和设备安全进一步做进系统层</h3>
+                <p><code>Google</code> 于 <code>2026-06-16</code> 发布 <code>Android 17</code> 官方更新页，确认新版系统开始向 Pixel 推送。官方重点写到几件事：任何 app 都能变成浮窗式 <code>Bubbles</code> 以便多任务切换；屏幕录制工具和创作者能力继续升级；同时加入更细的联系人与定位权限控制、丢失设备锁定以及更强的诈骗/恶意 app 防护。虽然这篇文章不是单独宣布 Gemini 新模型，但它延续了 Google 近一月的主线，即把 AI 助手能力周边的入口、权限和系统动作逐步并入 Android 的基础体验。</p>
+                <p>这类更新对看板的意义在于，手机 AI 竞争越来越不像“谁有一个更聪明的聊天框”，而像“谁能把助手嵌进系统默认路径”。一旦浮窗、多任务、权限管理和表单理解都和 Gemini 一起走，Android 手机上的 AI 使用频次就会更多来自系统级触发，而不是用户主动打开一个独立 app。</p>
+                <a href="https://blog.google/products-and-platforms/platforms/android/android-17-features/" target="_blank" rel="noreferrer">查看 Google 官方公告</a>
+              </article>
+
+              <article class="news-card">
+                <div class="news-card-head">
+                  <span class="news-rank">05</span>
+                  <span class="news-tag">产品侧 / Google</span>
+                </div>
+                <h3>Google 同日更新 Pixel 与 XR：<code>Gemini Omni</code> 继续下沉到视频、音乐与眼镜平台入口</h3>
+                <p><code>Google</code> 在 <code>2026-06-16</code> 同步发了两条值得一起看的官方更新。第一条是 <code>June Pixel Drop</code>，官方把 <code>Gemini Omni</code> 在 Pixel 上的能力写得更具体：用户可以直接用自然语言混合文本、图片和视频来生成或改写短视频，也能在 Gemini 里生成定制音乐，并把语音翻译继续扩到更多 Pixel 设备。第二条是 AWE 2026 上的 <code>Android XR</code> 更新，Google 宣布 <code>XREAL AURA</code> 开放预约，并继续把 <code>Android XR + Gemini + 合作硬件</code> 放在同一条路线里。</p>
+                <p>把这两条并在一起看，会更清楚 Google 的方向：不是单点追一个聊天产品，而是让 Gemini 同时接管创作工具、手机系统能力和下一代眼镜平台。Pixel 这一侧解决的是“日常设备里更多 AI 原生操作”，XR 这一侧解决的是“未来入口先占位”。这说明 Google 仍在用平台打法推进 AI，而不是只靠单次模型发布抢眼球。</p>
+                <a href="https://blog.google/products-and-platforms/devices/pixel/june-2026-pixel-drop/" target="_blank" rel="noreferrer">查看 Pixel Drop 官方公告</a>
+                <a href="https://blog.google/innovation-and-ai/technology/xr-ar/awe-2026/" target="_blank" rel="noreferrer">查看 Android XR 官方公告</a>
+              </article>
+            </div>
+
+            <section class="judgement-card">
+              <h3>今日判断</h3>
+              <p>第一，这个窗口没有新的头部模型 GA，也没有新的官方价格页更新，所以时间线、价格表和价格趋势图本轮保持不动；真正变化的是模型发布前后的“治理链条”在加长，从上线前模拟真实风险，到上线后谁还能继续访问，讨论都更偏制度层而不是分数层。</p>
+              <p>第二，<code>Anthropic</code> 这条线已经明确外溢成国际可得性问题。只要最强模型存在被行政动作临时回撤的可能，海外政府和大型企业就会把“供应连续性”抬到和“模型能力”一样重要的位置。</p>
+              <p>第三，<code>Google</code> 今天的几条更新说明 Gemini 竞争重点仍然是系统层和平台层。Android、Pixel、XR 三条线同步推进，意味着它并不急着用单个新模型 headline 抢声量，而是在持续扩大 Gemini 的默认入口和设备控制面。</p>
+            </section>
+
+            <div class="news-date-card">
+              <span>每日重点新闻</span>
               <strong>2026-06-16</strong>
               <small>时间窗口：2026-06-15 10:00 至 2026-06-16 10:00 CST</small>
             </div>
