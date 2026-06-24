@@ -139,104 +139,99 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
-              <strong>2026-06-23</strong>
-              <small>时间窗口：2026-06-22 10:21 至 2026-06-23 10:21 CST</small>
+              <strong>2026-06-24</strong>
+              <small>时间窗口：2026-06-23 10:27 至 2026-06-24 10:27 CST</small>
             </div>
 
             <div class="news-summary">
               <p class="eyebrow">Daily Highlights</p>
               <h2>每日重点新闻</h2>
-              <p>过去 24 小时没有确认到 <code>OpenAI / Anthropic / Google / xAI / DeepSeek / 豆包 / 千问 / 腾讯混元 / Meta / Mistral</code> 的新头部基础模型正式 GA，也没有新的官方 API 官价调整；但 <code>frontier AI</code> 在网络安全这条线上明显前推了一步。<code>OpenAI</code> 更新 <code>GPT-5.5-Cyber</code>、把 <code>Patch the Planet</code> 和 <code>Codex Security</code> 一起推向更完整的受控部署体系，而 <code>Five Eyes</code> 与 <code>微软/DeepSeek</code> 相关信号，则把“谁能安全、低成本地拿到强模型”抬成了今天真正值得记录的主线。</p>
+              <p>过去 24 小时没有确认到 <code>OpenAI / Anthropic / Google / xAI / DeepSeek / 豆包 / 千问 / 腾讯混元 / Meta / Mistral</code> 的新头部基础模型正式 GA，也没有新的官方 API 官价页更新；但 <code>enterprise agent</code>、<code>AI 科研协作</code>、<code>国家安全验证</code>、<code>顶级人才迁移</code> 和 <code>AI 资本加码</code> 这五条线同时推进。今天最值得记录的不是“谁又发了一个更大的模型”，而是强模型已经更深地嵌进团队协作、科研发现、安全体系和资本配置。</p>
             </div>
 
             <div class="news-feed">
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">01</span>
-                  <span class="news-tag">模型更新 / OpenAI</span>
+                  <span class="news-tag">产品更新 / Anthropic</span>
                 </div>
-                <h3>OpenAI 更新 <code>GPT-5.5-Cyber</code>，把网络安全专用模型继续推向“更强能力 + 更低拒答”的受控可用状态</h3>
-                <p><code>Axios</code> 于 <code>2026-06-22</code> 报道，<code>OpenAI</code> 正在更新仅向经审核安全公司和研究者开放的 <code>GPT-5.5-Cyber</code>。按报道转述的 OpenAI 说法，这次更新后的模型更适合大代码库深度分析、识别安全相关组件、验证疑似漏洞并生成和测试补丁，目标是让它更适合“高级且经授权的网络安全工作”，而不是泛化成公开可用的新通用模型。</p>
-                <p>这里最值得记的不是一个名字更新，而是 frontier model 已经开始被拆成更细的“高风险专用 SKU”。它说明头部实验室不再只讨论模型会不会有风险，而是在试图给高风险能力设计单独的访问制度、使用场景和企业落地路径。这会直接影响后续网络安全、生命科学等高敏感领域的产品形态。</p>
+                <h3>Anthropic 发布 <code>Claude Tag</code>，把团队协作型 agent 直接塞进 <code>Slack</code> 频道</h3>
+                <p><code>Anthropic</code> 于 <code>2026-06-23</code> 官方发布 <code>Claude Tag</code>。它先从 <code>Slack</code> 开始，让团队把 <code>@Claude</code> 当作频道成员来分派任务；管理员可以限定它能访问的频道、工具、数据源和代码库，而模型会在频道内持续累积上下文、异步执行任务，甚至在启用 ambient 行为后主动提醒未闭环事项。官方同时给出一个很强的内部使用信号：Anthropic 表示其产品团队 <code>65%</code> 的代码已经由内部版 <code>Claude Tag</code> 生成。</p>
+                <p>这条更新的关键不在于“Slack 里又多了个机器人”，而在于 agent 正从个人 chat 界面转向共享工作面。多人共用一个有记忆、可调用工具、能异步推进项目的模型，会把 AI 的计费与价值重心从单次问答，转到跨天持续执行的团队工作流。它也意味着 Anthropic 正在把 <code>Claude Code</code> 的能力继续产品化成组织级入口。</p>
                 <figure class="news-media">
-                  <svg viewBox="0 0 520 240" role="img" aria-label="GPT-5.5-Cyber 与相关网络安全基准对比图">
-                    <rect width="520" height="230" rx="18" fill="#f4efe7"></rect>
-                    <text x="28" y="42" font-size="22" font-weight="700" fill="#1f2528">OpenAI 今天强调的网络安全能力</text>
-                    <text x="28" y="70" font-size="14" fill="#5c5144">基于 Axios / Wired 转述的 OpenAI 基准数据自制</text>
-                    <text x="28" y="104" font-size="14" fill="#1f2528">CyberGym 基准</text>
-                    <rect x="28" y="114" width="374" height="24" rx="12" fill="#2e6f5d"></rect>
-                    <text x="412" y="131" font-size="14" fill="#1f2528">GPT-5.5-Cyber 新版 85.6%</text>
-                    <rect x="28" y="154" width="358" height="20" rx="10" fill="#9c6a22"></rect>
-                    <text x="396" y="168" font-size="14" fill="#1f2528">Anthropic Mythos 5 83.8%</text>
-                    <rect x="28" y="188" width="349" height="18" rx="9" fill="#315f8f"></rect>
-                    <text x="387" y="201" font-size="14" fill="#1f2528">旧版 GPT-5.5-Cyber 81.8%</text>
+                  <svg viewBox="0 0 520 248" role="img" aria-label="Claude Tag 官方关键信息整理图">
+                    <rect width="520" height="248" rx="18" fill="#f4efe7"></rect>
+                    <text x="28" y="42" font-size="22" font-weight="700" fill="#1f2528">Claude Tag 官方公告里的三个关键点</text>
+                    <text x="28" y="68" font-size="14" fill="#5c5144">基于 Anthropic 2026-06-23 官方产品公告自制</text>
+                    <rect x="28" y="92" width="146" height="62" rx="14" fill="#2e6f5d"></rect>
+                    <text x="45" y="122" font-size="16" font-weight="700" fill="#f7f3ec">Slack Beta</text>
+                    <text x="45" y="142" font-size="12" fill="#f7f3ec">先接入频道协作场景</text>
+                    <rect x="188" y="92" width="146" height="62" rx="14" fill="#9c6a22"></rect>
+                    <text x="205" y="122" font-size="16" font-weight="700" fill="#f7f3ec">Opus 4.8</text>
+                    <text x="205" y="142" font-size="12" fill="#f7f3ec">面向 Team / Enterprise</text>
+                    <rect x="348" y="92" width="144" height="62" rx="14" fill="#315f8f"></rect>
+                    <text x="365" y="122" font-size="16" font-weight="700" fill="#f7f3ec">异步与主动</text>
+                    <text x="365" y="142" font-size="12" fill="#f7f3ec">可持续跟进线程任务</text>
+                    <text x="28" y="186" font-size="14" fill="#1f2528">Anthropic 披露的内部使用强度</text>
+                    <rect x="28" y="198" width="320" height="20" rx="10" fill="#d9d2c5"></rect>
+                    <rect x="28" y="198" width="208" height="20" rx="10" fill="#2e6f5d"></rect>
+                    <text x="358" y="213" font-size="14" fill="#1f2528">产品团队代码 65% 由内部版 Claude Tag 生成</text>
                   </svg>
-                  <figcaption>自制比较图：基于 Axios 与 Wired 引述的 OpenAI 基准数字整理，不是官方原始 benchmark 截图。</figcaption>
+                  <figcaption>自制对比图：基于 Anthropic 官方产品公告整理，不是官方原始产品截图。</figcaption>
                 </figure>
-                <a href="https://www.axios.com/2026/06/22/openai-rolls-out-more-capable-version-of-cyber-model" target="_blank" rel="noreferrer">查看 Axios 报道</a>
+                <a href="https://www.anthropic.com/news/introducing-claude-tag" target="_blank" rel="noreferrer">查看 Anthropic 官方公告</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">02</span>
-                  <span class="news-tag">受控部署 / OpenAI</span>
+                  <span class="news-tag">科研应用 / OpenAI</span>
                 </div>
-                <h3><code>Daybreak Cyber Partner Program</code> 把高能力模型从“只能自用”推进到“可嵌进安全厂商交付链”</h3>
-                <p>同一轮更新里，<code>Axios</code> 提到 <code>OpenAI</code> 正推出 <code>OpenAI Daybreak Cyber Partner Program</code>，允许经过审核的安全厂商把 <code>GPT-5.5</code> 与 <code>Trusted Access for Cyber</code> 能力用进对客户交付的产品与服务，而不再局限于“只在自有或授权测试系统里使用”。这意味着 OpenAI 正把高风险模型从实验室验证，推进到真正可被第三方安全服务商商品化使用的阶段。</p>
-                <p>这个变化很关键，因为它让 frontier model 的商业边界首次更明确地穿过“安全厂商”这一层。若该模式跑通，未来真正付费和规模化消耗这类高能力模型的，不一定是终端企业安全团队，而可能是 MSSP、咨询与漏洞管理平台这类中间层服务商。</p>
-                <a href="https://www.axios.com/2026/06/22/openai-rolls-out-more-capable-version-of-cyber-model" target="_blank" rel="noreferrer">查看 Axios 报道</a>
+                <h3>OpenAI 用一篇官方案例把 <code>GPT-5 Pro</code> 往“科研协作者”位置再推了一步</h3>
+                <p><code>OpenAI</code> 于 <code>2026-06-23</code> 发布官方案例，称免疫学家 <code>Derya Unutmaz</code> 借助 <code>GPT-5 Pro</code> 重启了一项搁置三年的实验谜题。按文中说法，模型帮助其团队把 <code>deoxyglucose</code> 对 <code>T cells</code> 分化的异常现象，收敛到 <code>IL-2</code> 蛋白构建受干扰这一机制解释上；随后在另一项未公开结果的淋巴瘤相关实验里，模型还正确预测了 <code>CD8+</code> T 细胞杀伤能力增强的方向。</p>
+                <p>这不是新模型发布，也不是 benchmark 更新，但它是一类很强的产品信号：头部实验室正在用官方叙事把模型价值从“写代码、做办公”扩展到“帮助专家提出机制假设、缩短实验迭代”。如果这类案例持续增多，接下来大模型竞争就不只是比通用助手渗透率，还会比谁先形成高门槛科研场景中的可信工作流。</p>
+                <a href="https://openai.com/index/gpt-5-immunology-mystery/" target="_blank" rel="noreferrer">查看 OpenAI 官方案例</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">03</span>
-                  <span class="news-tag">开源安全 / OpenAI</span>
+                  <span class="news-tag">安全验证 / Anthropic</span>
                 </div>
-                <h3><code>Patch the Planet</code> 把“AI 帮你找漏洞”往“AI 帮开源社区把漏洞修完”推进</h3>
-                <p><code>Wired</code> 于 <code>2026-06-22</code> 报道，<code>OpenAI</code> 联合 <code>Trail of Bits</code>，并与 <code>HackerOne</code>、<code>Calif</code> 协作，启动了 <code>Patch the Planet</code>。项目已经让超过 <code>30</code> 个开源项目参与，官方与合作方称首周就找出数百个 bug，并产出数十个补丁。它不只是继续证明强模型能找漏洞，而是开始补足另一半现实问题: 开源维护者没有足够人力去消化 AI 时代涌来的安全报告。</p>
-                <p>这条新闻的重要性在于，它把“模型能力提升”转换成了更接近基础设施维护的服务形态。随着强模型让漏洞发现更廉价，开源世界真正稀缺的环节会变成验证、优先级判断和补丁落地。谁能把这条链条组织起来，谁就更可能在安全生态里拿到长期影响力，而不只是单次 benchmark 的领先。</p>
-                <a href="https://www.wired.com/story/openai-launches-full-scale-effort-to-patch-open-source-bugs-as-it-takes-on-anthropics-mythos" target="_blank" rel="noreferrer">查看 Wired 报道</a>
+                <h3>AP：Anthropic 的 <code>Mythos</code> 在美方测试中数小时内识别出涉密系统漏洞</h3>
+                <p><code>AP</code> 于 <code>2026-06-24</code> 报道，一位美国官员称，Anthropic 与美方情报机构通过 <code>Project Glasswing</code> 做安全测试时，<code>Mythos</code> 模型在数小时内识别出了高敏感政府系统中的部分漏洞。需要注意，这一表述来自匿名官员与参议院听证会转述，并非 Anthropic 当天直接发布的官方成果说明；<code>AP</code> 同时写到 <code>NSA</code> 与 Anthropic 发言人都拒绝置评。</p>
+                <p>即便如此，这条新闻仍然重要，因为它把“模型能不能用于国家级安全验证”从抽象讨论推到了更具体的实测语境。它同时也和 Anthropic 本月早些时候因 <code>Fable 5 / Mythos 5</code> 访问限制与美国政府的摩擦形成了鲜明对照：同一家公司一边被拿来测高敏系统，一边又被限制最强模型对外可得性，说明 frontier AI 的安全能力和分发边界正在被一起重写。</p>
+                <a href="https://apnews.com/article/anthropic-mythos-ai-classified-systems-vulnerabilities-testing-3e8762c0527c4d8ed657cbe48c84a718" target="_blank" rel="noreferrer">查看 AP 报道</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">04</span>
-                  <span class="news-tag">产品化 / Codex Security</span>
+                  <span class="news-tag">人才战 / Google vs OpenAI / Anthropic</span>
                 </div>
-                <h3><code>Codex Security</code> 以插件形态继续外放，OpenAI 透露已为安全扫描补贴到 <code>20 万亿 token</code></h3>
-                <p><code>Wired</code> 同日报道里提到，<code>OpenAI</code> 还把此前处于研究预览阶段的 <code>Codex Security</code> 扫描器做成 app plugin，并由 OpenAI 网络安全负责人透露，该工具面向开源与私有代码的使用补贴已达到 <code>20 万亿 token</code> 量级。这不是一个新的通用模型发布，但它是“把 agent 真正塞进软件安全工作流”的更具体证据。</p>
-                <p>相比单纯展示某模型会写代码，这件事更接近可计量的工作负载迁移。只要安全扫描、补丁建议和漏洞验证逐渐被插件化、工作流化，后续企业真正比较的就不只是哪个模型更聪明，而是谁能在 CI/CD、审计与安全平台里形成稳定的 token 消耗和复购入口。</p>
-                <a href="https://www.wired.com/story/openai-launches-full-scale-effort-to-patch-open-source-bugs-as-it-takes-on-anthropics-mythos" target="_blank" rel="noreferrer">查看 Wired 报道</a>
+                <h3>Google 再失两位 AI 明星研究者，OpenAI 与 Anthropic 把人才战推到“明星资产”阶段</h3>
+                <p><code>Business Insider</code> 与 <code>Axios</code> 在 <code>2026-06-23 / 2026-06-24</code> 的报道里集中呈现了一条很强的行业信号：<code>Noam Shazeer</code> 将离开 Google 加入 OpenAI，<code>John Jumper</code> 将离开 Google DeepMind 加入 Anthropic，而更早前 <code>Andrej Karpathy</code> 也已转向 Anthropic。按 <code>Business Insider</code> 报道，Alphabet 股价在两人离职消息后的首个交易日一度下跌约 <code>7%</code>，收盘跌约 <code>5%</code>。</p>
+                <p>这不是单纯的人事新闻。Transformer 架构共创者、AlphaFold 诺奖得主、OpenAI 联合创始人接连迁移，意味着顶级实验室的竞争焦点正越来越像体育联盟里的“巨星资产争夺”。对外部市场而言，研究人才本身已经被当作下一代模型路线、企业执行力和商业化速度的代理变量，这也是为什么人事异动会直接映射到市值波动。</p>
+                <a href="https://www.businessinsider.com/google-ai-talent-wars-anthropic-jumper-shazeer-karpathy-openai-2026-6" target="_blank" rel="noreferrer">查看 Business Insider 报道</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">05</span>
-                  <span class="news-tag">政策信号 / Five Eyes</span>
+                  <span class="news-tag">融资与资本 / MGX</span>
                 </div>
-                <h3>Five Eyes 罕见联动发出前沿 AI 网络安全警示: 时间线不是“几年”，而是“几个月”</h3>
-                <p><code>The Guardian</code> 与 <code>FT</code> 于 <code>2026-06-22</code> 报道，<code>Five Eyes</code> 情报联盟相关网络安全机构发出联合警示，认为 frontier AI 很可能在几个月内显著重塑攻防能力，并要求企业把 AI 视为核心网络安全与业务连续性议题，而不是单纯的技术实验。报道把这条警示与近期美国对 Anthropic 高能力模型的访问限制放在一起解读，说明政府部门已经把“最强模型如何对外可得”当成实际安全议题处理。</p>
-                <p>这条信号会直接影响企业采购和供应商策略。过去一年大家更多把安全讨论放在实验室自律和红队测试上；而现在，政府和关键基础设施部门已经开始把“模型分发边界”当成政策工具。这意味着强模型之后的竞争，会越来越依赖访问资格、国家关系与可信部署链条，而不只是公开榜单上的能力排序。</p>
-                <a href="https://www.theguardian.com/technology/2026/jun/22/anthropic-claude-fable-ai-model-artificial-intelligence-national-security" target="_blank" rel="noreferrer">查看 Guardian 报道</a>
-              </article>
-
-              <article class="news-card">
-                <div class="news-card-head">
-                  <span class="news-rank">06</span>
-                  <span class="news-tag">成本与供给 / 微软 + DeepSeek</span>
-                </div>
-                <h3>Axios：微软正评估把 Azure 托管版 <code>DeepSeek V4</code> 作为 <code>Copilot Cowork</code> 的低成本模型选项</h3>
-                <p><code>Axios</code> 于 <code>2026-06-22</code> 报道，微软正在考虑为 <code>Copilot Cowork</code> 提供 Azure 托管的 <code>DeepSeek V4</code> 版本，用来缓解 agent 工作流带来的高算力账单。需要明确的是，这是一则媒体报道中的“正在评估”信号，并非微软当天正式 GA 或官宣定价；但它很重要，因为它把闭源 frontier model 的成本压力，与中国开源权重模型的性价比优势，第一次放进了同一个大厂办公 agent 讨论框架里。</p>
-                <p>如果这条路径成真，企业侧的模型选择逻辑会进一步从“哪家最强”转向“哪家在合规托管条件下足够强且足够便宜”。这对 OpenAI、Anthropic 这类按高价值闭源路线前进的厂商是实打实的压力，也解释了为什么今天另一个主线会是 OpenAI 主动把高风险模型做成更细颗粒度、更高附加值的安全产品。</p>
-                <a href="https://www.axios.com/2026/06/22/open-source-ai-china-cost-risk-glm-deepseek" target="_blank" rel="noreferrer">查看 Axios 报道</a>
+                <h3>Axios：阿布扎比背景的 <code>MGX</code> 募到近 <code>500 亿美元</code>，继续加码基础模型赛道</h3>
+                <p><code>Axios</code> 于 <code>2026-06-23</code> 引述 <code>Bloomberg</code> 报道称，阿布扎比背景、已投资 <code>OpenAI</code> 与 <code>xAI</code> 的 <code>MGX</code> 募集了近 <code>500 亿美元</code>，将继续投向 AI 领域。Axios 同时指出，MGX 已经是 Anthropic 等基础模型公司的重要出资方之一，这次募资让它进一步坐实为全球最重磅的 AI 资本配置者之一。</p>
+                <p>这条资本新闻的意义在于，它说明“谁来为下一轮算力与模型扩张买单”这件事，正在越来越集中到少数超大体量的主权与准主权资金池。对于 OpenAI、Anthropic、xAI 以及潜在的新一轮模型创业公司而言，资金侧门槛并没有降低，反而进一步抬高到了全球资本网络竞争的层级。</p>
+                <a href="https://www.axios.com/2026/06/23/mgx-50-billion-ai-tech-abu-dhabi" target="_blank" rel="noreferrer">查看 Axios 报道</a>
               </article>
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
               <p>第一，这个窗口没有新的头部基础模型正式 GA，也没有新的官方 API 定价页更新，所以模型时间线和价格比较表维持不动，只更新新闻页和核验日期。</p>
-              <p>第二，今天最强的变化不是“又来了一个更大的通用模型”，而是高风险能力开始被做成受控分发的专用品类。<code>GPT-5.5-Cyber</code>、<code>Daybreak</code>、<code>Patch the Planet</code> 和 <code>Codex Security</code> 组合在一起，说明 OpenAI 正在卖“受控网络安全能力栈”，而不只是卖模型。</p>
-              <p>第三，另一条并行主线是成本和可得性。Five Eyes 的警示与微软评估 Azure 托管版 <code>DeepSeek V4</code> 的媒体信号放在一起看，说明未来企业对 frontier model 的真实选择标准，会同时包含能力、访问资格、托管路径和单位成本。</p>
+              <p>第二，今天最清晰的产品方向是“组织级 agent”而不是“更大模型”。<code>Claude Tag</code> 说明头部厂商开始把有记忆、能异步推进任务、可受控接工具的数据型 agent 做成团队协作入口。</p>
+              <p>第三，科研、安全与资本三条线同时抬高了强模型的门槛。<code>GPT-5 Pro</code> 被包装成科研协作者，<code>Mythos</code> 被放进高敏系统验证，<code>MGX</code> 则继续集中提供巨额资金，这三件事合在一起，比单个榜单胜负更能说明 2026 年中 AI 竞争正在往哪里走。</p>
             </section>
 
             <div class="news-date-card">
