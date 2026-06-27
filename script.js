@@ -1,4 +1,4 @@
-const verifiedAt = "2026-06-26";
+const verifiedAt = "2026-06-27";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -484,6 +484,13 @@ const events = [
     model: "Claude Fable 5 / Claude Mythos 5",
     note: "Anthropic 发布首个广泛可用的 Mythos-class 模型 Claude Fable 5，并以受限方式开放 Claude Mythos 5；两者默认支持 1M 上下文和 128K 输出。",
     source: "https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5",
+  },
+  {
+    date: "2026-06-26",
+    company: "OpenAI",
+    model: "GPT-5.6 Sol / Terra / Luna",
+    note: "OpenAI 启动 GPT-5.6 系列有限预览：Sol 为旗舰，Terra 主打日常工作性价比，Luna 面向更低成本与更高速度；官方称未来数周会扩大到 ChatGPT、Codex 与 API。",
+    source: "https://openai.com/index/previewing-gpt-5-6-sol/",
   },
   {
     date: "2023-09-20",
@@ -1368,6 +1375,36 @@ const stWeeklyData = {
 };
 
 const priceRows = [
+  {
+    company: "OpenAI",
+    model: "GPT-5.6 Sol",
+    date: "2026-06-26",
+    input: 5,
+    cached: 0.5,
+    output: 30,
+    note: "GPT-5.6 旗舰预览模型，支持 max reasoning 与 ultra 子代理模式；当前先向受信合作方开放 API 与 Codex。",
+    source: "https://openai.com/index/previewing-gpt-5-6-sol/",
+  },
+  {
+    company: "OpenAI",
+    model: "GPT-5.6 Terra",
+    date: "2026-06-26",
+    input: 2.5,
+    cached: 0.25,
+    output: 15,
+    note: "GPT-5.6 均衡版本，官方称性能与 GPT-5.5 相近但价格减半，定位日常专业工作负载。",
+    source: "https://openai.com/index/previewing-gpt-5-6-sol/",
+  },
+  {
+    company: "OpenAI",
+    model: "GPT-5.6 Luna",
+    date: "2026-06-26",
+    input: 1,
+    cached: 0.1,
+    output: 6,
+    note: "GPT-5.6 快速低成本版本，面向高吞吐与成本敏感任务；官方称为当前最低成本层。",
+    source: "https://openai.com/index/previewing-gpt-5-6-sol/",
+  },
   {
     company: "OpenAI",
     model: "GPT-5.5",
