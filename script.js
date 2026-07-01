@@ -1,4 +1,4 @@
-const verifiedAt = "2026-06-29";
+const verifiedAt = "2026-07-01";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -493,6 +493,13 @@ const events = [
     source: "https://openai.com/index/previewing-gpt-5-6-sol/",
   },
   {
+    date: "2026-06-30",
+    company: "Anthropic",
+    model: "Claude Sonnet 5",
+    note: "Anthropic 发布 Sonnet 5，并在官方价格页同步写入到 8 月 31 日的促销价；定位为更广可用的主力生产模型。",
+    source: "https://platform.claude.com/docs/en/about-claude/pricing",
+  },
+  {
     date: "2023-09-20",
     company: "OpenAI",
     model: "DALL-E 3",
@@ -800,6 +807,12 @@ const weeklyWindows = [
     note: "本周重点按 2026-06-04 至 2026-06-11 汇总；先在这一周框里完成勾选，后续周报正文以这里的入选条目为准。",
     start: "2026-06-04",
     end: "2026-06-11",
+  },
+  {
+    label: "2026-06-23 至 2026-07-01",
+    note: "本周重点按 2026-06-23 至 2026-07-01 汇总；覆盖 OpenAI GPT-5.6、Anthropic Sonnet 5 与 GitHub Copilot 这一轮模型、分发和治理更新。",
+    start: "2026-06-23",
+    end: "2026-07-01",
   },
 ];
 const commercialChartTooltip = document.createElement("article");
@@ -1644,6 +1657,16 @@ const priceRows = [
     output: 60,
     note: "早期高智能 GPT 模型，官方模型页仍列出 Chat Completions 可用价格。",
     source: "https://developers.openai.com/api/docs/models/gpt-4",
+  },
+  {
+    company: "Anthropic",
+    model: "Claude Sonnet 5",
+    date: "2026-06-30",
+    input: 2,
+    cached: 0.2,
+    output: 10,
+    note: "Anthropic 官方价格页给出到 2026-08-31 的促销价；2026-09-01 起恢复到输入 $3、缓存命中 $0.3、输出 $15。",
+    source: "https://platform.claude.com/docs/en/about-claude/pricing",
   },
   {
     company: "Anthropic",
