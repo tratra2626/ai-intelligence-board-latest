@@ -1,10 +1,11 @@
-const verifiedAt = "2026-07-06";
+const verifiedAt = "2026-07-08";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
   Anthropic: "#9c6a22",
   xAI: "#1f2528",
   Google: "#315f8f",
+  Meta: "#486a54",
   Microsoft: "#256a7b",
   豆包: "#a5483f",
   千问: "#6a4aa0",
@@ -491,6 +492,13 @@ const events = [
     model: "GPT-5.6 Sol / Terra / Luna",
     note: "OpenAI 启动 GPT-5.6 系列有限预览：Sol 为旗舰，Terra 主打日常工作性价比，Luna 面向更低成本与更高速度；官方称未来数周会扩大到 ChatGPT、Codex 与 API。",
     source: "https://openai.com/index/previewing-gpt-5-6-sol/",
+  },
+  {
+    date: "2026-07-07",
+    company: "Meta",
+    model: "Muse Image",
+    note: "Meta 发布首个由 Meta Superintelligence Labs 主导的原生图像生成模型 Muse Image，并同步预告视频模型 Muse Video；当前先接入 Meta AI、Instagram、WhatsApp 与 Edits 工作流。",
+    source: "https://ai.meta.com/blog/",
   },
   {
     date: "2026-06-30",
