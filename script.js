@@ -1,4 +1,4 @@
-const verifiedAt = "2026-07-08";
+const verifiedAt = "2026-07-09";
 
 const companyColors = {
   OpenAI: "#2e6f5d",
@@ -212,6 +212,21 @@ const events = [
     model: "MAI-Thinking-1 / MAI-Code-1-Flash / MAI-Image-2.5",
     note: "Microsoft Build 2026 发布七款自研 MAI 模型，覆盖 reasoning、coding、image、voice 与 transcription，MAI-Thinking-1 进入 Foundry 私有预览。",
     source: "https://microsoft.ai/news/building-a-hillclimbing-machine-launching-seven-new-mai-models/",
+  },
+  {
+    date: "2026-07-08",
+    company: "OpenAI",
+    model: "GPT-Live-1 / GPT-Live-1 mini",
+    type: "语音",
+    note: "OpenAI 发布新一代全双工语音模型 GPT-Live，开始驱动新的 ChatGPT Voice，并由 GPT-5.5 在后台处理更复杂任务。",
+    source: "https://openai.com/index/introducing-gpt-live/",
+  },
+  {
+    date: "2026-07-08",
+    company: "xAI",
+    model: "Grok 4.5",
+    note: "xAI 发布新旗舰 Grok 4.5，面向 coding、agentic tasks 与知识工作，并同步给出官方 API 价格。",
+    source: "https://x.ai/news/grok-4-5",
   },
   {
     date: "2025-06-11",
@@ -1925,6 +1940,16 @@ const priceRows = [
     output: 0.3,
     note: "Gemini 2.0 系列最低成本版本，Vertex AI 价格页仍列出。",
     source: "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+  },
+  {
+    company: "xAI",
+    model: "grok-4.5",
+    date: "2026-07-08",
+    input: 2,
+    cached: null,
+    output: 6,
+    note: "xAI 新旗舰文本模型，支持 low/medium/high reasoning effort；官方模型页列出输入/输出价，未给缓存价。",
+    source: "https://docs.x.ai/developers/grok-4-5",
   },
   {
     company: "xAI",

@@ -139,106 +139,99 @@
           <article class="feature-board news-board">
             <div class="news-date-card">
               <span>每日重点新闻</span>
-              <strong>2026-07-08</strong>
-              <small>时间窗口：2026-07-07 10:18 至 2026-07-08 10:18 CST</small>
+              <strong>2026-07-09</strong>
+              <small>时间窗口：2026-07-08 10:13 至 2026-07-09 10:13 CST</small>
             </div>
 
             <div class="news-summary">
               <p class="eyebrow">Daily Highlights</p>
               <h2>每日重点新闻</h2>
-              <p>过去 24 小时里，真正值得写进站内的一手增量主要集中在两个方向：一是 <code>Meta</code> 正式把 <code>Muse Image</code> 推上台面，并预告下一步的视频模型 <code>Muse Video</code>；二是 <code>Google</code> 把 <code>Gemini API</code> 的开发者抽象继续往 agent 平台推进，先后公开 <code>Interactions API</code> 与 <code>Managed Agents</code>。与此同时，<code>Reuters</code> 报道中国正评估限制先进模型对海外访问的口径，说明模型发布、访问地域和 API 商业化已经越来越被同一套政策边界绑定。今天的主线不是“又有一个新基础模型 API 官价可抄”，而是 <code>生成式产品形态开始前置到分发层</code>，而 <code>agent 平台能力</code> 与 <code>模型访问边界</code> 正在同步收紧和成型。</p>
+              <p>过去 24 小时里，真正需要把站内叙事和数据层一起更新的，是两条足够硬的一手官方信号：一是 <code>xAI</code> 在 <code>2026-07-08</code> 正式发布 <code>Grok 4.5</code>，给出官方 benchmark、API 官价和落地渠道；二是 <code>OpenAI</code> 同日推出新的语音模型家族 <code>GPT-Live</code>，并同步上线 product post 与 system card。除此之外，最值得放进今天判断区的，是 <code>OpenAI</code> 对 coding benchmark 的自我纠偏：官方研究明确表示 <code>SWE-Bench Pro</code> 约三成任务存在问题。今天的主线不是“模型再涨一点分”，而是 <code>frontier 模型开始把产品运行形态、成本与评测口径一起公开</code>。</p>
             </div>
 
             <div class="news-feed">
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">01</span>
-                  <span class="news-tag">模型侧 / Meta</span>
+                  <span class="news-tag">模型发布 / xAI</span>
                 </div>
-                <h3><code>Meta</code> 正式发布 <code>Muse Image</code>，并预告视频模型 <code>Muse Video</code>，把原生生成能力直接塞进 <code>Meta AI</code> 与 <code>Edits</code></h3>
-                <p><code>Meta</code> 于 <code>2026-07-07</code> 在官方 AI 博客发布 <code>Muse</code> 更新：<code>Muse Image</code> 已在美国和加拿大的 <code>Meta AI</code> App / Web 上线，同时接入 <code>Instagram</code>、<code>WhatsApp</code> 与创作者剪辑工具 <code>Edits</code>；<code>Muse Video</code> 则作为下一步能力预告，官方给出的定位是把文字、静帧和已有素材直接转成短视频片段。对这块看板来说，这属于窗口内少数明确的“主流平台原生模型分发”事件，因此我把 <code>Muse Image</code> 新增进了模型时间线。</p>
-                <p>它的重要性不在于 benchmark，而在于 <code>Meta</code> 终于把 “自家生成模型” 从实验室叙事切到高分发消费端入口：不是先卖 API，再等生态做产品，而是直接卡住社交和轻剪辑工作流。如果后续 <code>Muse Video</code> 也按这个节奏落地，短内容创作链路会进一步从外部工具回流到 <code>Instagram</code> 和 <code>Meta AI</code> 本体。</p>
+                <h3><code>xAI</code> 正式发布 <code>Grok 4.5</code>，把 coding、agentic tasks 和知识工作统一收口到新旗舰，并同步给出官方 benchmark</h3>
+                <p><code>xAI</code> 于 <code>2026-07-08</code> 发布官方公告与模型文档，正式上线 <code>Grok 4.5</code>。官方定位非常明确：这是当前最强的 <code>xAI</code> 文本模型，面向 coding、agentic workflows 与 knowledge work；同时强调在 <code>DeepSWE</code>、<code>Terminal Bench 2.1</code>、<code>SWE Marathon</code> 与 <code>SWE Bench Pro</code> 等工程任务上对标头部模型。因为这是窗口内明确的头部模型新发，我已经把 <code>Grok 4.5</code> 补进模型时间线。</p>
+                <p>这条新闻的关键不是“xAI 又发了一个更强的 Grok”，而是 <code>xAI</code> 开始按更成熟的 frontier 厂商方式交付：同一天同时给发布页、模型页、价格、可用范围和 benchmark 口径。需要注意的是，公告中的对比成绩主要来自官方自报，且竞品数字来自对方 system card 或 leaderboard，不应等同于统一第三方盲测。</p>
                 <figure class="news-media">
-                  <svg viewBox="0 0 560 260" role="img" aria-label="基于 Meta 官方发布整理的 Muse Image 与 Muse Video 分发节奏图">
-                    <rect width="560" height="260" rx="18" fill="#eef4f0"></rect>
-                    <text x="28" y="42" font-size="23" font-weight="700" fill="#1f2528">Muse 发布节奏</text>
-                    <text x="28" y="68" font-size="14" fill="#526257">基于 Meta 2026-07-07 官方说明自制，不是官方原始图表</text>
-                    <rect x="28" y="92" width="236" height="122" rx="14" fill="#ffffff" stroke="#8db39a"></rect>
-                    <text x="46" y="122" font-size="16" font-weight="700" fill="#1f2528">Muse Image</text>
-                    <text x="46" y="150" font-size="14" fill="#1f2528">已在 Meta AI App / Web 上线</text>
-                    <text x="46" y="174" font-size="14" fill="#1f2528">接入 Instagram / WhatsApp / Edits</text>
-                    <text x="46" y="198" font-size="14" fill="#1f2528">先覆盖美国、加拿大</text>
-                    <rect x="292" y="92" width="240" height="122" rx="14" fill="#f7fbf8" stroke="#c2d7c9"></rect>
-                    <text x="310" y="122" font-size="16" font-weight="700" fill="#1f2528">Muse Video</text>
-                    <text x="310" y="150" font-size="14" fill="#1f2528">官方已预告下一步视频生成</text>
-                    <text x="310" y="174" font-size="14" fill="#1f2528">支持文生视频与图生视频</text>
-                    <text x="310" y="198" font-size="14" fill="#1f2528">计划后续进入 Meta AI / Edits</text>
+                  <svg viewBox="0 0 560 260" role="img" aria-label="基于 xAI 官方发布整理的 Grok 4.5 benchmark 摘要图">
+                    <rect width="560" height="260" rx="18" fill="#f2f1ef"></rect>
+                    <text x="28" y="42" font-size="23" font-weight="700" fill="#1f2528">Grok 4.5 官方 benchmark 摘要</text>
+                    <text x="28" y="68" font-size="14" fill="#62676b">基于 xAI 2026-07-08 发布页自制，非官方原图</text>
+                    <text x="28" y="108" font-size="14" fill="#1f2528">DeepSWE 1.0</text>
+                    <rect x="150" y="93" width="248" height="18" rx="9" fill="#d8dadd"></rect>
+                    <rect x="150" y="93" width="154" height="18" rx="9" fill="#1f2528"></rect>
+                    <text x="412" y="108" font-size="14" fill="#1f2528">62.0%</text>
+                    <text x="28" y="148" font-size="14" fill="#1f2528">Terminal Bench 2.1</text>
+                    <rect x="150" y="133" width="248" height="18" rx="9" fill="#d8dadd"></rect>
+                    <rect x="150" y="133" width="207" height="18" rx="9" fill="#1f2528"></rect>
+                    <text x="412" y="148" font-size="14" fill="#1f2528">83.3%</text>
+                    <text x="28" y="188" font-size="14" fill="#1f2528">SWE Bench Pro</text>
+                    <rect x="150" y="173" width="248" height="18" rx="9" fill="#d8dadd"></rect>
+                    <rect x="150" y="173" width="160" height="18" rx="9" fill="#1f2528"></rect>
+                    <text x="412" y="188" font-size="14" fill="#1f2528">64.7%</text>
+                    <text x="28" y="228" font-size="13" fill="#62676b">注：对比对象成绩来自各家公开 system card / leaderboard，口径并非统一第三方盲测。</text>
                   </svg>
-                  <figcaption>自制比较图：基于 Meta 官方说明整理的 Muse Image / Muse Video 可用性与分发节奏。</figcaption>
+                  <figcaption>自制 benchmark 摘要图：基于 xAI 官方发布页披露的 Grok 4.5 工程任务成绩整理。</figcaption>
                 </figure>
-                <a href="https://ai.meta.com/blog/" target="_blank" rel="noreferrer">查看 Meta 官方 AI 博客</a>
+                <a href="https://x.ai/news/grok-4-5" target="_blank" rel="noreferrer">查看 xAI 官方发布页</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">02</span>
-                  <span class="news-tag">产品分发 / Meta</span>
+                  <span class="news-tag">定价与分发 / xAI</span>
                 </div>
-                <h3><code>The Verge</code>：<code>Muse Image</code> 的默认工作流会把公开 <code>Instagram</code> 内容带进提示词空间，Meta 把生成入口前置到了社交图谱本身</h3>
-                <p><code>The Verge</code> 于 <code>2026-07-07</code> 跟进 Meta 的官方发布指出，用户在生成图片时可以直接要求使用公开的 <code>Instagram</code> 账号照片作为素材参考，而内容创作者若不希望自己的公开照片被这种方式调用，需要单独关闭相应设置。也就是说，<code>Muse Image</code> 不是一个孤立的图像模型发布，而是一次和社交分发、内容供给、创作者权限同时绑定的产品更新。</p>
-                <p>这点对竞争格局很关键：<code>OpenAI</code>、<code>Google</code>、<code>xAI</code> 可以继续比模型能力，但 <code>Meta</code> 的护城河更像是“谁拥有可直接用于生成和传播的素材池”。如果公开内容默认能进入生成链路，Meta 在消费端的迭代速度可能会明显快于纯 API 公司。</p>
-                <a href="https://www.theverge.com/tech/962485/meta-muse-image-ai-model-instagram" target="_blank" rel="noreferrer">查看 The Verge 报道</a>
+                <h3><code>Grok 4.5</code> 同步给出官方 API 价格：输入 <code>$2</code> / 输出 <code>$6</code> 每百万 tokens，并写明 <code>Cursor</code>、<code>Grok Build</code> 与 Office 插件分发</h3>
+                <p><code>xAI</code> 的模型页直接列出 <code>Grok 4.5</code> 的官方 API 定价：每百万输入 tokens <code>$2.00</code>、输出 <code>$6.00</code>；支持 low / medium / high reasoning effort，并提供 function calling、web search、X search 与 code execution。分发侧则明确写到：<code>Grok 4.5</code> 已进入 <code>Grok Build</code> 默认模型、<code>Cursor</code> 全部套餐，以及 <code>Word</code> / <code>PowerPoint</code> / <code>Excel</code> 插件。</p>
+                <p>这意味着这次不是单纯的“实验新模型”，而是 <code>xAI</code> 把旗舰模型直接推向开发者、IDE 与办公软件三条入口。官方同时写明 <code>EU</code> 用户暂时无法在 API console 使用，预计 7 月中旬开放，所以它的全球商业化节奏仍带有明显区域限制。</p>
+                <a href="https://docs.x.ai/developers/grok-4-5" target="_blank" rel="noreferrer">查看 xAI 官方模型文档</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">03</span>
-                  <span class="news-tag">平台 / Google</span>
+                  <span class="news-tag">产品发布 / OpenAI</span>
                 </div>
-                <h3><code>Google</code> 把 <code>Interactions API</code> 推向正式可用，开始把 <code>Gemini</code> 的多轮状态管理从“自己拼 prompt”变成平台能力</h3>
-                <p><code>Google</code> 在官方开发者博客中宣布 <code>Interactions API</code> 正式可用。官方给出的重点不是单次调用性能，而是把会话状态、工具调用上下文、长流程多轮记忆和 token 利用效率统一收口到新的接口层。对开发者来说，这意味着围绕 <code>Gemini</code> 做 agent，不再只能依赖自建 memory 和 orchestration 逻辑。</p>
-                <p>这类更新虽然不属于新的基础模型发布时间线，也不会写进价格表，但它会直接影响产品速度。谁先把 “长对话 + 工具 + 状态” 这层平台化，谁就更容易把模型能力包装成稳定工作流，而不是一次性的 demo。</p>
-                <a href="https://blog.google/innovation-and-ai/technology/developers-tools/interactions-api-general-availability/" target="_blank" rel="noreferrer">查看 Google 官方开发者博客</a>
+                <h3><code>OpenAI</code> 推出 <code>GPT-Live</code> 语音模型家族，以 full-duplex 架构重写 <code>ChatGPT Voice</code>，并把 <code>GPT-5.5</code> 放到后台做深度任务</h3>
+                <p><code>OpenAI</code> 于 <code>2026-07-08</code> 发布 <code>GPT-Live</code> 产品公告，宣布开始向全球 ChatGPT 用户推出 <code>GPT-Live-1</code> 与 <code>GPT-Live-1 mini</code>。核心变化不是语音按钮换个名字，而是底层交互架构从“你说一句、我回一句”转成 <code>full-duplex</code>：模型可以边听边说、实时判断何时继续听、何时打断、何时调用工具。官方还明确写到，<code>GPT-Live</code> 遇到需要搜索、推理或 agentic work 的请求时，会把深度任务委托给后台 frontier 模型；在首发阶段，这个后台模型是 <code>GPT-5.5</code>。</p>
+                <p>这条更新值得上板，因为它不是单纯优化语音延迟，而是在把语音交互与 agent 路由合并成一条产品链路。对外表现是“更自然的 Voice”，对内实质是 <code>OpenAI</code> 开始把前台对话模型和后台推理模型拆层运行。</p>
+                <a href="https://openai.com/index/introducing-gpt-live/" target="_blank" rel="noreferrer">查看 OpenAI 官方产品公告</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">04</span>
-                  <span class="news-tag">Agent 平台 / Google</span>
+                  <span class="news-tag">安全与 rollout / OpenAI</span>
                 </div>
-                <h3><code>Google</code> 同步扩展 <code>Gemini API</code> 的 <code>Managed Agents</code>，把远程 <code>MCP</code>、鉴权会话和沙箱执行一起打包</h3>
-                <p>另一篇 Google 官方开发者更新宣布，<code>Managed Agents</code> 开始在 <code>Gemini API</code> 中扩展，当前重点能力包括：可复用的远程 <code>MCP</code> 连接、跨步骤保留的鉴权 session，以及在受控环境中的代码执行。官方还把它和 <code>Gemini 3.5 Pro / Flash</code> 的工具调用工作流绑定，明显是在往“模型即 agent runtime”这个方向推进。</p>
-                <p>这条信号值得上板，因为它不是单纯 SDK 封装，而是在正面回答企业开发者最痛的三件事：工具接入、身份保留、执行环境。谁把这三层做成托管平台，谁在 agent 落地里就更接近云厂商位置，而不只是模型供应商。</p>
-                <a href="https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/" target="_blank" rel="noreferrer">查看 Google 官方开发者博客</a>
+                <h3><code>GPT-Live</code> 同步上线 system card：付费用户默认 <code>GPT-Live-1</code>，免费用户默认 <code>mini</code>，并引入 voice-native 安全评测</h3>
+                <p><code>OpenAI</code> 在同一天公开了 <code>GPT-Live System Card</code>。文档写得很直白：付费用户默认语音模型是 <code>GPT-Live-1</code>，免费用户默认是 <code>GPT-Live-1 mini</code>；系统在对话进行中会持续检查输入和输出，一旦识别到风险内容，可以中断、改写、播报安全提示，必要时直接结束语音会话。相较普通文本模型，这里更关键的是它开始把“语音原生”作为独立安全评测维度来做。</p>
+                <p>另外，产品公告也写明了目前的边界：首发时 <code>GPT-Live</code> 还不支持 ChatGPT 里的视频或屏幕共享语音会话，API 也还只是“即将推出”。这说明 OpenAI 选择先把最核心的语音交互层稳定下来，再往更完整的实时多模态 agent 推进。</p>
+                <a href="https://deploymentsafety.openai.com/gpt-live" target="_blank" rel="noreferrer">查看 OpenAI 官方 system card</a>
               </article>
 
               <article class="news-card">
                 <div class="news-card-head">
                   <span class="news-rank">05</span>
-                  <span class="news-tag">监管 / 中国</span>
+                  <span class="news-tag">评测口径 / OpenAI</span>
                 </div>
-                <h3><code>Reuters</code>：中国正评估限制先进 AI 模型向海外访问，模型“是否能给境外用”开始变成独立政策变量</h3>
-                <p><code>Reuters</code> 于 <code>2026-07-07</code> 援引知情人士称，中国相关部门正在研究限制境外主体访问中国最先进 AI 模型的措施，讨论范围包括尚未发布模型的对外可得性以及云端/API 形式的海外触达。报道没有给出最终政策文本，因此这仍属于媒体报道，而不是已经生效的官方规则。</p>
-                <p>但对行业判断来说，这条足够重要。过去大家看模型竞争，常常只看“谁先发、谁更强、谁更便宜”；现在还必须加一层“谁能在哪些地区合法可用”。这会直接影响中国模型公司的国际化节奏，也会改变跨境 API 分发和海外收入兑现方式。</p>
-                <a href="https://timesofindia.indiatimes.com/business/international-business/china-weighs-curbs-on-overseas-access-to-their-advanced-ai-models-report/articleshow/132238110.cms" target="_blank" rel="noreferrer">查看 Reuters 报道转载</a>
-              </article>
-
-              <article class="news-card">
-                <div class="news-card-head">
-                  <span class="news-rank">06</span>
-                  <span class="news-tag">数据层 / 核验结果</span>
-                </div>
-                <h3>本轮仅新增 <code>Meta Muse Image</code> 时间线条目，价格表与价格趋势图维持不变</h3>
-                <p>我额外复核了 <code>OpenAI</code>、<code>Anthropic</code>、<code>Google</code>、<code>xAI</code>、<code>DeepSeek</code>、<code>豆包</code>、<code>阿里千问</code>、<code>腾讯混元</code>、<code>MiniMax</code>、<code>智谱</code>、<code>Kimi</code>、<code>Meta</code> 与 <code>Mistral</code> 的官方新闻页、模型页和价格页。窗口内唯一适合写入模型时间线的新条目，是 <code>Meta</code> 已正式上线的 <code>Muse Image</code>；没有新的头部基础模型 API 官价可安全写入站内价格数据层。</p>
-                <p>因此这次更新的原则是：对 <code>events</code> 做一次最小增量，把分发层变化写进首页叙事，但不为了追求“每天都更新价格图”去硬加并不存在的官价条目。这个看板长期可用的前提，就是数据层只跟一手确认事实走。</p>
+                <h3><code>OpenAI</code> 研究称 <code>SWE-Bench Pro</code> 约三成任务存在问题，并撤回此前对该 benchmark 的采用建议</h3>
+                <p><code>OpenAI</code> 同日发布研究文章，对当前最常被引用的 coding benchmark 之一 <code>SWE-Bench Pro</code> 做了系统审计。官方给出的结论相当重：agent pipeline 标出 <code>27.4%</code> 的任务存在破损，人类标注认为比例达到 <code>34.1%</code>，综合估计约 <code>30%</code> 任务有问题；问题类型包括 overly strict tests、underspecified prompts、low-coverage tests 与 misleading prompts。文章结尾还明确写出：基于这次发现，<code>OpenAI</code> 撤回此前建议社区采用 <code>SWE-Bench Pro</code> 的表述。</p>
+                <p>这条不是新模型，但对看板判断非常重要。过去几周各家 frontier 厂商都在用 coding / agent benchmark 做核心卖点；现在连基准本身都被官方点名存在大面积噪声，就意味着后续阅读 benchmark 海报时，必须把“口径可信度”单独拎出来看，而不能只比较分数高低。</p>
+                <a href="https://openai.com/index/separating-signal-from-noise-coding-evaluations/" target="_blank" rel="noreferrer">查看 OpenAI 官方研究</a>
               </article>
             </div>
 
             <section class="judgement-card">
               <h3>今日判断</h3>
-              <p>第一，<code>Meta</code> 这次不是发一个给开发者自己接的 API 模型，而是把生成能力直接塞进 <code>Meta AI</code>、<code>Instagram</code>、<code>WhatsApp</code> 和 <code>Edits</code>。这说明消费级生成式产品的竞争，正在从“模型更强”转到“谁掌握更大的分发面和内容供给入口”。</p>
-              <p>第二，<code>Google</code> 同步推进 <code>Interactions API</code> 和 <code>Managed Agents</code>，本质是在把 agent 的状态管理、工具接入和执行环境做成平台能力。对企业开发者来说，未来更难替代的可能不是单个模型，而是整套 agent runtime。</p>
-              <p>第三，<code>Reuters</code> 关于中国考虑限制先进模型海外访问的报道提醒了一件事：从现在起，模型可用地区、跨境 API 触达和监管口径，都会像价格与能力一样，成为看板必须长期跟踪的核心变量。</p>
+              <p>第一，<code>xAI</code> 这次把 <code>Grok 4.5</code> 的发布、文档、价格和分发一起交付，说明它正在从“话题型模型公司”转向“有稳定交付面的 frontier 供应商”。如果后续价格和区域可得性保持稳定，Grok 会更频繁进入企业真实选型池，而不只是社交平台话题。</p>
+              <p>第二，<code>OpenAI</code> 的重点已经不是再多一个语音开关，而是把前台交互模型与后台推理模型拆层运行。<code>GPT-Live</code> 把“自然对话”与“深度任务委托”绑成一个系统，这会成为实时 agent 产品的标准架构方向。</p>
+              <p>第三，<code>OpenAI</code> 亲自下场质疑 <code>SWE-Bench Pro</code>，说明接下来看 frontier 模型竞争，不能只盯 benchmark 分数本身。对这类看板来说，<code>benchmark 是否自报、是否统一口径、基准本身是否稳</code>，会和价格、上下文、可用区域一样重要。</p>
             </section>
 
             <div class="news-date-card">
