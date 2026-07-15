@@ -1,13 +1,11 @@
 {
+  "version": 1,
+  "updatedAt": "2026-07-15T10:30:00+08:00",
   "picks": [
-    "2026-07-01-anthropic-发布-claude-sonnet-5把-sonnet-档抬成新一代默认生产模型",
-    "2026-07-01-fable-5-将于-2026-07-01-全球恢复anthropic-同时把越狱严重度打分框架摆上台面",
-    "2026-07-01-claude-science-正式可用anthropic-开始把模型往科研工作台封装",
-    "2026-07-01-claude-sonnet-5-已在-github-copilot-ga覆盖-ideclicloud-agent-与移动端",
-    "2026-07-01-copilot-agent-进入-jetbrains-ai-assistant多步任务执行开始变成-ide-内置选项",
-    "2026-07-01-github-给-cost-center-加上-per-user-ai-credit-budget企业开始按人头而不是只按总池子管-ai-",
-    "2026-06-23-openai-更新-gpt-55-cyber把网络安全专用模型继续推向受控可用状态",
-    "2026-06-23-政策警示与低成本替代信号同时抬头frontier-ai-的真实竞争开始包含准入和单位成本"
-  ],
-  "updatedAt": "2026-07-01T12:25:00+08:00"
+    "2026-07-09-xai-正式发布-grok-45把-codingagentic-tasks-和知识工作统一收口到新旗舰并同步给出官方-benchmark",
+    "2026-07-09-grok-45-同步给出官方-api-价格输入-2--输出-6-每百万-tokens并写明-cursorgrok-build-与-offi",
+    "2026-07-09-openai-推出-gpt-live-语音模型家族以-full-duplex-架构重写-chatgpt-voice并把-gpt-55-放到",
+    "2026-07-09-gpt-live-同步上线-system-card付费用户默认-gpt-live-1免费用户默认-mini并引入-voice-native",
+    "2026-07-09-openai-研究称-swe-bench-pro-约三成任务存在问题并撤回此前对该-benchmark-的采用建议"
+  ]
 }

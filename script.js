@@ -837,6 +837,12 @@ const weeklyWindows = [
     start: "2026-06-23",
     end: "2026-07-01",
   },
+  {
+    label: "2026-07-08 至 2026-07-15",
+    note: "本周重点按 2026-07-08 至 2026-07-15 汇总；先把这一周已确认的模型、语音产品与评测口径变化收进周选，后续周报正文以这里的入选条目为准。",
+    start: "2026-07-08",
+    end: "2026-07-15",
+  },
 ];
 const commercialChartTooltip = document.createElement("article");
 commercialChartTooltip.className = "commercial-chart-tooltip";
